@@ -67,6 +67,12 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# History configuration
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt SHARE_HISTORY
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -74,6 +80,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
     git
+    autojump
     zsh-autosuggestions
     npm
     zsh-syntax-highlighting
@@ -84,13 +91,71 @@ plugins=(
     aws
     azure
     aliases
+    fzf
+    zsh-interactive-cd
+    colored-man-pages
+    command-not-found
+    dirhistory
+    extract
+    autojump
+    zsh-completions
 )
+
+# User configuration
+export EDITOR='zed'
+export VISUAL='zed'
+export PAGER='less'
+
+# Improved PATH configuration
+typeset -U path
+path=(~/.local/bin ~/go/bin $path)
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 source $ZSH/oh-my-zsh.sh
 
-# Set up fzf key bindings and fuzzy completion
-# source <(fzf --zsh)
+# FZF configurationautojump
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border --preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:500 {}'"
+
+# Aliases
+alias zshconfig="$EDITOR ~/.zshrc"
+alias ohmyzsh="$EDITOR ~/.oh-my-zsh"
+alias i3config="$EDITOR ~/.config/i3/config"
+alias picomconfig="$EDITOR ~/.config/picom/picom.conf"
+alias alacrittyconfig="$EDITOR ~/.config/alacritty/alacritty.yml"
+
+
+alias update=" sudo dpkg --configure -a && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt dist-upgrade -y"
+alias ls="exa --icons --group-directories-first"
+alias la="exa -la --icons --group-directories-first"
+alias tree="exa --tree --icons"
+alias cat="bat"
+alias top="htop"
+
+# Improved directory navigation
+setopt AUTO_PUSHD
+setopt PUSHD_IGNORE_DUPS
+setopt PUSHD_SILENT
+
+# Completion settings
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+
+# Load custom functions
+for function in ~/.zsh/functions/*; do
+  source $function
+done
+
+# Syntax highlighting configuration
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern cursor)
+ZSH_HIGHLIGHT_STYLES[cursor]='bold'
+
+# nvm (Node Version Manager) setup
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # User configuration
 
