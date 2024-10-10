@@ -149,6 +149,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+bindsym $mod+p exec --no-startup-id pavucontrol
 bindsym $mod+Shift+p exec --no-startup-id xfce4-screenshooter
 bindsym Ctrl+Print exec --no-startup-id xfce4-screenshooter
 bindsym Print exec --no-startup-id xfce4-screenshooter -f
@@ -201,8 +202,6 @@ bar {
 # Additional autostart applications
 exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
-# exec_always --no-startup-id discord --start-minimized
+exec_always --no-startup-id discord --start-minimized
 exec --no-startup-id pasystray
-exec --no-startup-id nm-applet 
-
 exec --no-startup-id dunst
