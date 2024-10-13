@@ -1,10 +1,16 @@
 # i3 config file (v4)
+# exec --no-startup-id xrandr --output HDMI-1 --auto --output eDP-1 --off
+# Automatically configure displays
+# exec --no-startup-id sh -c 'xrandr --output HDMI-1 --auto --primary --output eDP-1 --off || xrandr --output eDP-1 --auto --primary'
+
 
 set $mod Mod4
 # font pango:DinaRemasterII Medium 8
 font pango:FiraCode Nerd Font Mono 8
 
-# Autostart applications
+# Autostart applications no eDP-1
+
+
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
@@ -18,14 +24,6 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
-
-# Application shortcuts: Open the app in the current workspace
-bindsym $mod+Return exec --no-startup-id tilix --class=shortcut_tilix
-bindsym $mod+z exec --no-startup-id zen --class=shortcut_zen
-bindsym $mod+c exec --no-startup-id cursor --class=shortcut_cursor
-bindsym $mod+t exec --no-startup-id thunar --class=shortcut_thunar
-bindsym $mod+Shift+v exec --no-startup-id code --class=shortcut_code
-bindsym $mod+Shift+z exec --no-startup-id zed --class=shortcut_zed
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -95,6 +93,17 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
+
+# Application shortcuts:Open the app in the current workspace
+bindsym $mod+Shift+a exec alacritty
+bindsym $mod+Return exec tilix
+bindsym $mod+Shift+z exec zen
+bindsym $mod+c exec cursor
+bindsym $mod+Shift+t exec thunar
+bindsym $mod+Shift+v exec code
+bindsym $mod+Shift+n exec alacritty -e nnn
+bindsym $mod+Shift+m exec alacritty -e mc
+
 # Switch to workspace
 # TODO: Add workspace names to the numbers
 # Switch to workspace with names
@@ -148,7 +157,6 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
 bindsym $mod+p exec --no-startup-id pavucontrol
 bindsym $mod+Shift+p exec --no-startup-id xfce4-screenshooter
 bindsym Ctrl+Print exec --no-startup-id xfce4-screenshooter
@@ -161,13 +169,6 @@ gaps inner 5
 gaps outer 2
 for_window [class="^.*"] border pixel 2
 for_window [tiling] border pixel 0
-
-# Autostart applications in specific workspaces
-exec --no-startup-id i3-msg "workspace $ws1; exec zen"
-exec --no-startup-id i3-msg "workspace $ws2; exec cursor"
-exec --no-startup-id i3-msg "workspace $ws3; exec tilix"
-exec --no-startup-id i3-msg "workspace $ws4; exec thunar"
-exec --no-startup-id i3-msg "workspace $ws5; exec discord"
 
 # Nord theme colors for windows
 set $nord0  #2E3440
@@ -200,8 +201,18 @@ bar {
 }
 
 # Additional autostart applications
+# Start Alacritty in workspace 5: Communication on startup
+exec --no-startup-id i3-msg "workspace $ws5; exec discord"
+exec --no-startup-id i3-msg "workspace $ws4; exec alacritty -e mc"
+exec --no-startup-id i3-msg "workspace $ws4; exec alacritty -e nnn"
+exec --no-startup-id i3-msg "workspace $ws4; exec thunar"
+exec --no-startup-id i3-msg "workspace $ws3; exec tilix"
+exec --no-startup-id i3-msg "workspace $ws3; exec alacritty"
+exec --no-startup-id i3-msg "workspace $ws2; exec cursor"
+exec --no-startup-id i3-msg "workspace $ws1; exec zen"
+
 exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
-exec_always --no-startup-id discord --start-minimized
-exec --no-startup-id pasystray
+# exec_always --no-startup-id discord --start-minimized
+# exec --no-startup-id pasystray
 exec --no-startup-id dunst
