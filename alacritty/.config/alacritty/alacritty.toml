@@ -1,7 +1,16 @@
+# Automatically start tmux when opening Alacritty
+[env]
+TERM = "alacritty"
+
+# Specify the shell program to launch.
+[terminal]
+shell = { program = "/usr/bin/tmux", args = ["new-session", "-A", "-s", "default"] }
+
 # Window configuration.
 [window]
 opacity = 0.90
 decorations = "full"
+
 # Window dimensions defined with width and height.
 dimensions = { columns = 128, lines = 36 }
 
@@ -41,7 +50,7 @@ foreground = "0xD8DEE9"
 
 # Font configuration.
 [font]
-size = 8.0
+size = 7.5
 normal = { family = "FiraCode Nerd Font", style = "Regular" }
 bold = { family = "FiraCode Nerd Font", style = "Bold" }
 italic = { family = "FiraCode Nerd Font", style = "Italic" }

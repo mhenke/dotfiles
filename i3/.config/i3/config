@@ -93,9 +93,8 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-
 # Application shortcuts:Open the app in the current workspace
-bindsym $mod+Shift+a exec alacritty
+bindsym $mod+Shift+a workspace $ws3; exec alacritty
 bindsym $mod+Return exec tilix
 bindsym $mod+Shift+z exec zen
 bindsym $mod+c exec cursor
@@ -200,17 +199,17 @@ bar {
     }
 }
 
-# Additional autostart applications
-# Start Alacritty in workspace 5: Communication on startup
-exec --no-startup-id i3-msg "workspace $ws5; exec discord"
-exec --no-startup-id i3-msg "workspace $ws4; exec alacritty -e mc"
-exec --no-startup-id i3-msg "workspace $ws4; exec alacritty -e nnn"
-exec --no-startup-id i3-msg "workspace $ws4; exec thunar"
-exec --no-startup-id i3-msg "workspace $ws3; exec tilix"
-exec --no-startup-id i3-msg "workspace $ws3; exec alacritty"
-exec --no-startup-id i3-msg "workspace $ws2; exec cursor"
+# Additional autostart applications in specific workspaces
 exec --no-startup-id i3-msg "workspace $ws1; exec zen"
+exec --no-startup-id i3-msg "workspace $ws4; exec tilix -e mc; exec tilix -e nnn; exec thunar"
+exec --no-startup-id i3-msg "workspace $ws3; exec atilix -e alacritty; exec tilix"
+exec --no-startup-id i3-msg "workspace $ws2; exec cursor"
+exec --no-startup-id i3-msg "workspace $ws5; exec discord"
 
+# Focus on workspace 1 when logging in
+exec --no-startup-id i3-msg "workspace $ws1"
+
+# Additional autostart applications
 exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 # exec_always --no-startup-id discord --start-minimized
