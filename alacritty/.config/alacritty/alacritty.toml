@@ -1,11 +1,3 @@
-# Automatically start tmux when opening Alacritty
-[env]
-TERM = "alacritty"
-
-# Specify the shell program to launch.
-[terminal]
-shell = { program = "/usr/bin/tmux", args = ["new-session", "-A", "-s", "default"] }
-
 # Window configuration.
 [window]
 opacity = 0.90

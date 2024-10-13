@@ -3,14 +3,11 @@
 # Automatically configure displays
 # exec --no-startup-id sh -c 'xrandr --output HDMI-1 --auto --primary --output eDP-1 --off || xrandr --output eDP-1 --auto --primary'
 
-
 set $mod Mod4
 # font pango:DinaRemasterII Medium 8
 font pango:FiraCode Nerd Font Mono 8
 
 # Autostart applications no eDP-1
-
-
 exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
@@ -93,19 +90,7 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-# Application shortcuts:Open the app in the current workspace
-bindsym $mod+Shift+a workspace $ws3; exec alacritty
-bindsym $mod+Return exec tilix
-bindsym $mod+Shift+z exec zen
-bindsym $mod+c exec cursor
-bindsym $mod+Shift+t exec thunar
-bindsym $mod+Shift+v exec code
-bindsym $mod+Shift+n exec alacritty -e nnn
-bindsym $mod+Shift+m exec alacritty -e mc
-
 # Switch to workspace
-# TODO: Add workspace names to the numbers
-# Switch to workspace with names
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -156,12 +141,22 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+# Custom shortcuts
 bindsym $mod+p exec --no-startup-id pavucontrol
 bindsym $mod+Shift+p exec --no-startup-id xfce4-screenshooter
 bindsym Ctrl+Print exec --no-startup-id xfce4-screenshooter
 bindsym Print exec --no-startup-id xfce4-screenshooter -f
 bindsym Shift+Print exec --no-startup-id xfce4-screenshooter -r
 bindsym Ctrl+Shift+Print exec --no-startup-id xfce4-screenshooter -w
+bindsym $mod+Shift+a exec alacritty
+bindsym $mod+Return exec tilix
+bindsym $mod+Shift+z exec zen
+bindsym $mod+c exec cursor
+bindsym $mod+Shift+t exec thunar
+bindsym $mod+Shift+v exec code
+bindsym $mod+Shift+n exec alacritty -e nnn
+bindsym $mod+Shift+m exec alacritty -e mc
 
 # Gaps and borders
 gaps inner 5
@@ -201,10 +196,11 @@ bar {
 
 # Additional autostart applications in specific workspaces
 exec --no-startup-id i3-msg "workspace $ws1; exec zen"
-exec --no-startup-id i3-msg "workspace $ws4; exec tilix -e mc; exec tilix -e nnn; exec thunar"
-exec --no-startup-id i3-msg "workspace $ws3; exec atilix -e alacritty; exec tilix"
-exec --no-startup-id i3-msg "workspace $ws2; exec cursor"
-exec --no-startup-id i3-msg "workspace $ws5; exec discord"
+exec --no-startup-id i3-msg "workspace $ws2; exec zed"
+exec --no-startup-id i3-msg "workspace $ws3; exec alacritty"
+exec --no-startup-id i3-msg "workspace $ws4; exec alacritty -e mc; exec alacritty -e nnn; exec thunar"
+
+# exec --no-startup-id i3-msg "workspace $ws5; exec discord"
 
 # Focus on workspace 1 when logging in
 exec --no-startup-id i3-msg "workspace $ws1"
@@ -213,5 +209,4 @@ exec --no-startup-id i3-msg "workspace $ws1"
 exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id picom --config ~/.config/picom/picom.conf
 # exec_always --no-startup-id discord --start-minimized
-# exec --no-startup-id pasystray
 exec --no-startup-id dunst
