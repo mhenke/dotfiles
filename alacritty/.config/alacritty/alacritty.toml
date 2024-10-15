@@ -84,11 +84,6 @@ save_to_clipboard     = true
 
 [mouse]
 hide_when_typing      = true
-bindings = [
-  { mouse = "Middle", action = "PasteSelection" },
-]
-[[hints.enabled]]
-mouse.enabled = true
 
 [keyboard]
 bindings = [
