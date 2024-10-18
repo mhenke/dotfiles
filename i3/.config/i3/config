@@ -23,7 +23,21 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Window management keybindings
 floating_modifier $mod
 bindsym $mod+Shift+q kill
-bindsym $mod+d exec --no-startup-id dmenu_run
+# bindsym $mod+d exec --no-startup-id dmenu_run
+
+# Bind rofi
+# Launch Rofi application launcher
+bindsym $mod+d exec --no-startup-id rofi -show drun -icon-theme "Papirus-Dark"
+
+# Launch Rofi window switcher
+bindsym $mod+Shift+d exec --no-startup-id rofi -show window
+
+# Rofi power menu (logout from here)
+bindsym $mod+Escape exec --no-startup-id rofi -modi 'Powermenu:~/.config/rofi/scripts/powermenu.sh' -show Powermenu -icon-theme "Papirus-Dark"
+
+# Optionally, launch Rofi SSH menu
+bindsym $mod+Shift+Escape exec --no-startup-id rofi -show ssh -icon-theme "Papirus-Dark"
+
 
 # Focus and movement keybindings
 bindsym $mod+j focus left
@@ -70,7 +84,7 @@ set $ws9 "9"
 set $ws10 "10"
 
 # Application shortcuts
-bindsym $mod+Return exec tilix
+bindsym $mod+Return exec alacritty
 bindsym $mod+c exec cursor
 bindsym $mod+Shift+v exec code
 bindsym $mod+Shift+n exec alacritty -e nnn
@@ -177,7 +191,7 @@ exec --no-startup-id dunst
 # Workspace-specific autostart (apps open initially in separate windows)
 exec --no-startup-id i3-msg 'workspace $ws1; exec zen'
 exec --no-startup-id i3-msg 'workspace $ws2; exec cursor'
-exec --no-startup-id i3-msg 'workspace $ws3; exec tilix'
+exec --no-startup-id i3-msg 'workspace $ws3; exec alacritty'
 exec --no-startup-id i3-msg 'workspace $ws4; exec thunar'
 #start discord in specific workspace and minimized
 exec --no-startup-id i3-msg 'workspace $ws5; exec discord --start-minimized'
