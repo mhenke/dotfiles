@@ -84,11 +84,11 @@ set $ws9 "9"
 set $ws10 "10"
 
 # Application shortcuts
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec tilix --window-style=borderless
 bindsym $mod+c exec cursor
 bindsym $mod+Shift+v exec code
-bindsym $mod+Shift+n exec alacritty -e nnn
-bindsym $mod+Shift+m exec alacritty -e mc
+bindsym $mod+Shift+n exec tilix --window-style=borderless -e nnn
+bindsym $mod+Shift+m exec tilix --window-style=borderless -e mc
 
 # Workspace switching
 bindsym $mod+1 workspace $ws1
@@ -169,19 +169,21 @@ client.focused_inactive $nord3  $nord3  $nord4  $nord3  $nord3
 client.unfocused        $nord1  $nord1  $nord4  $nord1  $nord1
 client.urgent           $nord11 $nord11 $nord6  $nord11 $nord11
 
+exec_always --no-startup-id ~/.config/polybar/launch.sh
+
 # i3bar configuration
-bar {
-    status_command i3status
-    colors {
-        background $nord0
-        statusline $nord4
-        separator  $nord3
-        focused_workspace  $nord8  $nord0 $nord8
-        active_workspace   $nord9  $nord1 $nord9
-        inactive_workspace $nord3  $nord0 $nord3
-        urgent_workspace   $nord11 $nord1 $nord11
-    }
-}
+# bar {
+#     status_command i3status
+#     colors {
+#         background $nord0
+#         statusline $nord4
+#         separator  $nord3
+#         focused_workspace  $nord8  $nord0 $nord8
+#         active_workspace   $nord9  $nord1 $nord9
+#         inactive_workspace $nord3  $nord0 $nord3
+#         urgent_workspace   $nord11 $nord1 $nord11
+#     }
+# }
 
 # Autostart applications
 exec --no-startup-id nitrogen --restore
@@ -191,7 +193,7 @@ exec --no-startup-id dunst
 # Workspace-specific autostart (apps open initially in separate windows)
 exec --no-startup-id i3-msg 'workspace $ws1; exec zen'
 exec --no-startup-id i3-msg 'workspace $ws2; exec cursor'
-exec --no-startup-id i3-msg 'workspace $ws3; exec alacritty'
+exec --no-startup-id i3-msg 'workspace $ws3; exec tilix --window-style=borderless'
 exec --no-startup-id i3-msg 'workspace $ws4; exec thunar'
 #start discord in specific workspace and minimized
 exec --no-startup-id i3-msg 'workspace $ws5; exec discord --start-minimized'
