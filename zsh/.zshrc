@@ -73,6 +73,16 @@ HISTSIZE=10000
 SAVEHIST=10000
 setopt SHARE_HISTORY
 
+# Manage duplicates
+setopt append_history     # Append to the history file instead of overwriting it
+setopt HIST_IGNORE_DUPS   # Ignore duplicate commands
+setopt HIST_IGNORE_ALL_DUPS # Remove older duplicates
+setopt HIST_EXPIRE_DUPS_FIRST # Remove duplicates first when space is needed
+setopt HIST_SAVE_NO_DUPS  # Prevent saving duplicate commands
+
+# Optional: Ignore specific commands (like 'cd')
+HIST_IGNORE="cd"
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
