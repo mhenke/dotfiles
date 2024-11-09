@@ -77,7 +77,7 @@ set $ws2 "2: Code"
 set $ws3 "3: Terminal"
 set $ws4 "4: File Manager"
 set $ws5 "5: Communication"
-set $ws6 "6"
+set $ws6 "6: Docker"
 set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
@@ -147,9 +147,9 @@ bindsym Shift+Print exec --no-startup-id xfce4-screenshooter -r
 bindsym Ctrl+Shift+Print exec --no-startup-id xfce4-screenshooter -w
 
 # Gaps and borders
-gaps inner 5
-gaps outer 2
-for_window [class="^.*"] border pixel 2
+gaps inner 4
+gaps outer 1
+for_window [class="^.*"] border pixel 1
 for_window [tiling] border pixel 0
 
 # Nord theme colors
@@ -197,6 +197,7 @@ exec --no-startup-id i3-msg 'workspace $ws3; exec tilix --window-style=borderles
 exec --no-startup-id i3-msg 'workspace $ws4; exec thunar'
 #start discord in specific workspace and minimized
 exec --no-startup-id i3-msg 'workspace $ws5; exec discord --start-minimized'
+exec --no-startup-id i3-msg 'workspace $ws6; exec docker"
 
 # Focus on workspace 1 when logging in
 exec --no-startup-id i3-msg 'workspace $ws1'
