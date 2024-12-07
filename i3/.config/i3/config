@@ -11,7 +11,7 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
-exec --no-startup-id ~/.config/i3/monitor-setup.sh
+# exec --no-startup-id ~/.config/i3/monitor-setup.sh
 
 # Volume controls
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -85,7 +85,7 @@ set $ws10 "10"
 
 # Application shortcuts
 bindsym $mod+Return exec tilix --window-style=borderless
-bindsym $mod+c exec cursor
+bindsym $mod+Shift+c exec cursor
 bindsym $mod+Shift+v exec code
 bindsym $mod+Shift+n exec tilix --window-style=borderless -e nnn
 bindsym $mod+Shift+m exec tilix --window-style=borderless -e mc
@@ -115,7 +115,7 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # Reload, restart, and exit
-bindsym $mod+Shift+c reload
+bindsym $mod+Ctrl+d reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Do you really want to exit i3?' -B 'Yes, exit i3' 'i3-msg exit'"
 
@@ -187,17 +187,11 @@ exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # Autostart applications
 exec --no-startup-id nitrogen --restore
-exec --no-startup-id picom --config ~/.config/picom/picom.conf
-exec --no-startup-id dunst
+exec --no-startup-id "picom --config ~/.config/picom/picom.conf -b 2> ~/.picom.log"
+exec --no-startup-id "dunst 2> ~/.dunst.log"
 
 # Workspace-specific autostart (apps open initially in separate windows)
-exec --no-startup-id i3-msg 'workspace $ws1; exec zen'
-exec --no-startup-id i3-msg 'workspace $ws2; exec cursor'
-exec --no-startup-id i3-msg 'workspace $ws3; exec tilix --window-style=borderless'
-exec --no-startup-id i3-msg 'workspace $ws4; exec thunar'
-#start discord in specific workspace and minimized
-exec --no-startup-id i3-msg 'workspace $ws5; exec discord --start-minimized'
-exec --no-startup-id i3-msg 'workspace $ws6; exec docker"
+exec --no-startup-id i3-msg 'workspace $ws1; exec zen; workspace $ws2; exec code; workspace $ws3; exec tilix --window-style=borderless; workspace $ws4; exec thunar; workspace $ws5; exec discord --start-minimized; workspace $ws1'
 
 # Focus on workspace 1 when logging in
 exec --no-startup-id i3-msg 'workspace $ws1'
@@ -206,4 +200,3 @@ exec --no-startup-id i3-msg 'workspace $ws1'
 bindsym $mod+Shift+a exec alacritty
 bindsym $mod+Shift+z exec zen
 bindsym $mod+Shift+t exec thunar
-bindsym $mod+Shift+f exec zed
