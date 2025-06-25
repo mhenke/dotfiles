@@ -2,12 +2,11 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Theme
-ZSH_THEME="af-magic" # set by `omz`
+# Theme - af-magic (clean, fast, with git info)  
+ZSH_THEME="af-magic"
 
-# ZSH_THEME="avit"          # Simple, elegant No
-# ZSH_THEME="cloud"         # Minimal cloud-like -- Maybe
-# ZSH_THEME="fino"          # Clean two-line prompt -- Maybe
+# Show computer name prominently (add after oh-my-zsh loads)
+PROMPT='%{$FG[032]%}%m%{$reset_color%} ${PROMPT}'
 
 # Update behavior
 zstyle ':omz:update' mode auto

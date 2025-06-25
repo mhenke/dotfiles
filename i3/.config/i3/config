@@ -139,7 +139,8 @@ bindsym Print exec --no-startup-id xfce4-screenshooter -f
 bindsym Shift+Print exec --no-startup-id xfce4-screenshooter -r
 bindsym Ctrl+Shift+Print exec --no-startup-id xfce4-screenshooter -w
 
-# WINDOW RULES - Dialog and popup windows should float
+# CONSERVATIVE DIALOG WINDOW RULES - Specific patterns only
+# Basic dialog types (safe, specific)
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [window_role="dialog"] floating enable
@@ -147,62 +148,58 @@ for_window [window_role="Preferences"] floating enable
 for_window [window_type="dialog"] floating enable
 for_window [window_type="splash"] floating enable
 
-# Common dialog window classes
-for_window [class="Pavucontrol"] floating enable
+# File chooser dialogs (specific patterns only)
+for_window [window_role="GtkFileChooserDialog"] floating enable
+for_window [title="^Open File$"] floating enable
+for_window [title="^Save File$"] floating enable
+for_window [title="^Save As$"] floating enable
+for_window [title="^Save as$"] floating enable
+for_window [title="^Choose Files$"] floating enable
+for_window [title="^Select Folder$"] floating enable
+for_window [title="^Select File$"] floating enable
+
+# Specific application dialogs (safe)
+for_window [class="firefox" window_role="Organizer"] floating enable
+for_window [class="firefox" window_role="About"] floating enable
+for_window [class="Code" title="^Save$"] floating enable
+for_window [class="Code" title="^Save As$"] floating enable
+for_window [class="Code" title="Quick Open"] floating enable
+for_window [class="Code" title="Preferences"] floating enable
+for_window [class="Thunar" title="File Operation Progress"] floating enable
+
+# System dialogs (specific classes)
+for_window [class="Zenity"] floating enable
+for_window [class="Yad"] floating enable
 for_window [class="Xfce4-screenshooter"] floating enable
+for_window [class="Pavucontrol"] floating enable
 for_window [class="Arandr"] floating enable
 for_window [class="Lxappearance"] floating enable
 for_window [class="Nitrogen"] floating enable
 for_window [class="Blueman-manager"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
 
-# File chooser dialogs
-for_window [window_role="GtkFileChooserDialog"] floating enable
-for_window [title="Open File"] floating enable
-for_window [title="Save File"] floating enable
-for_window [title="Save As"] floating enable
-for_window [title="Choose Files"] floating enable
+# Error/warning dialogs (exact titles only)
+for_window [title="^Error$"] floating enable
+for_window [title="^Warning$"] floating enable
+for_window [title="^Information$"] floating enable
+for_window [title="^Question$"] floating enable
 
-# Application-specific dialogs
-for_window [class="firefox" window_role="Organizer"] floating enable
-for_window [class="firefox" window_role="About"] floating enable
-for_window [class="Code" title="Quick Open"] floating enable
-for_window [class="Code" title="Preferences"] floating enable
-for_window [class="Thunar" title="File Operation Progress"] floating enable
-
-# Generic dialog patterns
-for_window [title="(?i).*preferences.*"] floating enable
-for_window [title="(?i).*settings.*"] floating enable
-for_window [title="(?i).*properties.*"] floating enable
-for_window [title="(?i).*about.*"] floating enable
-
-# Position and size floating windows properly
+# Position floating windows properly
 for_window [floating] move position center
 
-# Special handling for small dialogs
-for_window [window_role="pop-up"] move position center
-for_window [window_role="pop-up"] resize set 600 400
+# Reasonable default sizes for dialogs
+for_window [window_role="dialog"] resize set 600 400
+for_window [window_role="GtkFileChooserDialog"] resize set 800 600
 
-# Error/warning dialogs
-for_window [class="Zenity"] floating enable
-for_window [class="Yad"] floating enable
-for_window [title="Error"] floating enable
-for_window [title="Warning"] floating enable
-
-# Development tool dialogs
-for_window [class="cursor" window_role="dialog"] floating enable
-for_window [class="jetbrains-.*" window_role="dialog"] floating enable
-
-# Fix for i3-nagbar and similar
+# i3 specific
 for_window [class="i3-nagbar"] floating enable
-for_window [class="dmenu"] floating enable
-for_window [class="rofi"] floating enable
 
 # WORKSPACE ASSIGNMENTS - Proper way to assign apps to workspaces
 assign [class="Zen-alpha"] $ws1
 assign [class="firefox"] $ws1
 assign [class="Code"] $ws2
 assign [class="cursor"] $ws2
+assign [class="Tilix"] $ws3
 assign [class="Thunar"] $ws4
 assign [class="discord"] $ws5
 assign [class="TelegramDesktop"] $ws5
@@ -230,8 +227,8 @@ client.focused_inactive $nord3  $nord3  $nord4  $nord3  $nord3
 client.unfocused        $nord1  $nord1  $nord4  $nord1  $nord1
 client.urgent           $nord11 $nord11 $nord6  $nord11 $nord11
 
-# Launch polybar
-exec_always --no-startup-id ~/.config/polybar/launch.sh
+# Launch polybar (only on startup, not on reload)
+exec --no-startup-id ~/.config/polybar/launch.sh
 
 # Autostart applications
 exec --no-startup-id nitrogen --restore
