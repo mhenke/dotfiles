@@ -11,8 +11,6 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
 
-# exec --no-startup-id ~/.config/i3/monitor-setup.sh
-
 # Volume controls
 set $refresh_i3status killall -SIGUSR1 i3status
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
@@ -23,21 +21,16 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Window management keybindings
 floating_modifier $mod
 bindsym $mod+Shift+q kill
-# bindsym $mod+d exec --no-startup-id dmenu_run
 
 # Bind rofi
-# Launch Rofi application launcher
 bindsym $mod+d exec --no-startup-id rofi -show drun -icon-theme "Papirus-Dark"
-
-# Launch Rofi window switcher
 bindsym $mod+Shift+d exec --no-startup-id rofi -show window
-
-# Rofi power menu (logout from here)
 bindsym $mod+Escape exec --no-startup-id rofi -modi 'Powermenu:~/.config/rofi/scripts/powermenu.sh' -show Powermenu -icon-theme "Papirus-Dark"
-
-# Optionally, launch Rofi SSH menu
 bindsym $mod+Shift+Escape exec --no-startup-id rofi -show ssh -icon-theme "Papirus-Dark"
 
+# Shutdown and Restart
+bindsym $mod+Shift+Ctrl+r exec "i3-nagbar -t warning -m 'Reboot system?' -B 'Yes' 'systemctl reboot'"
+bindsym $mod+Shift+Ctrl+s exec "i3-nagbar -t warning -m 'Shutdown system?' -B 'Yes' 'systemctl poweroff'"
 
 # Focus and movement keybindings
 bindsym $mod+j focus left
@@ -67,7 +60,7 @@ bindsym $mod+f fullscreen toggle
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
-bindsym $mod+Shift+space floating togglealac
+bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 bindsym $mod+a focus parent
 
@@ -78,7 +71,7 @@ set $ws3 "3: Terminal"
 set $ws4 "4: File Manager"
 set $ws5 "5: Communication"
 set $ws6 "6: Docker"
-set $ws7 "7"
+set $ws7 "7: Oscar"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
@@ -146,6 +139,74 @@ bindsym Print exec --no-startup-id xfce4-screenshooter -f
 bindsym Shift+Print exec --no-startup-id xfce4-screenshooter -r
 bindsym Ctrl+Shift+Print exec --no-startup-id xfce4-screenshooter -w
 
+# WINDOW RULES - Dialog and popup windows should float
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="splash"] floating enable
+
+# Common dialog window classes
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Xfce4-screenshooter"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [class="Nitrogen"] floating enable
+for_window [class="Blueman-manager"] floating enable
+for_window [class="Nm-connection-editor"] floating enable
+
+# File chooser dialogs
+for_window [window_role="GtkFileChooserDialog"] floating enable
+for_window [title="Open File"] floating enable
+for_window [title="Save File"] floating enable
+for_window [title="Save As"] floating enable
+for_window [title="Choose Files"] floating enable
+
+# Application-specific dialogs
+for_window [class="firefox" window_role="Organizer"] floating enable
+for_window [class="firefox" window_role="About"] floating enable
+for_window [class="Code" title="Quick Open"] floating enable
+for_window [class="Code" title="Preferences"] floating enable
+for_window [class="Thunar" title="File Operation Progress"] floating enable
+
+# Generic dialog patterns
+for_window [title="(?i).*preferences.*"] floating enable
+for_window [title="(?i).*settings.*"] floating enable
+for_window [title="(?i).*properties.*"] floating enable
+for_window [title="(?i).*about.*"] floating enable
+
+# Position and size floating windows properly
+for_window [floating] move position center
+
+# Special handling for small dialogs
+for_window [window_role="pop-up"] move position center
+for_window [window_role="pop-up"] resize set 600 400
+
+# Error/warning dialogs
+for_window [class="Zenity"] floating enable
+for_window [class="Yad"] floating enable
+for_window [title="Error"] floating enable
+for_window [title="Warning"] floating enable
+
+# Development tool dialogs
+for_window [class="cursor" window_role="dialog"] floating enable
+for_window [class="jetbrains-.*" window_role="dialog"] floating enable
+
+# Fix for i3-nagbar and similar
+for_window [class="i3-nagbar"] floating enable
+for_window [class="dmenu"] floating enable
+for_window [class="rofi"] floating enable
+
+# WORKSPACE ASSIGNMENTS - Proper way to assign apps to workspaces
+assign [class="Zen-alpha"] $ws1
+assign [class="firefox"] $ws1
+assign [class="Code"] $ws2
+assign [class="cursor"] $ws2
+assign [class="Thunar"] $ws4
+assign [class="discord"] $ws5
+assign [class="TelegramDesktop"] $ws5
+
 # Gaps and borders
 gaps inner 4
 gaps outer 1
@@ -169,34 +230,27 @@ client.focused_inactive $nord3  $nord3  $nord4  $nord3  $nord3
 client.unfocused        $nord1  $nord1  $nord4  $nord1  $nord1
 client.urgent           $nord11 $nord11 $nord6  $nord11 $nord11
 
+# Launch polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
-
-# i3bar configuration
-# bar {
-#     status_command i3status
-#     colors {
-#         background $nord0
-#         statusline $nord4
-#         separator  $nord3
-#         focused_workspace  $nord8  $nord0 $nord8
-#         active_workspace   $nord9  $nord1 $nord9
-#         inactive_workspace $nord3  $nord0 $nord3
-#         urgent_workspace   $nord11 $nord1 $nord11
-#     }
-# }
 
 # Autostart applications
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id "picom --config ~/.config/picom/picom.conf -b 2> ~/.picom.log"
 exec --no-startup-id "dunst 2> ~/.dunst.log"
 
-# Workspace-specific autostart (apps open initially in separate windows)
-exec --no-startup-id i3-msg 'workspace $ws1; exec zen; workspace $ws2; exec code; workspace $ws3; exec tilix --window-style=borderless; workspace $ws4; exec thunar; workspace $ws5; exec discord --start-minimized; workspace $ws1'
+# IMPROVED AUTOSTART - Launch apps with delays for proper workspace assignment
+exec --no-startup-id "sleep 2 && zen"
+exec --no-startup-id "sleep 3 && code"
+exec --no-startup-id "sleep 1 && tilix --window-style=borderless"
+exec --no-startup-id "sleep 4 && thunar"
+exec --no-startup-id "sleep 5 && discord --start-minimized"
 
 # Focus on workspace 1 when logging in
-exec --no-startup-id i3-msg 'workspace $ws1'
+exec --no-startup-id sleep 6 && i3-msg workspace $ws1
 
 # Application shortcuts (open apps in the current workspace when using shortcuts)
-bindsym $mod+Shift+a exec alacritty
-bindsym $mod+Shift+z exec zen
-bindsym $mod+Shift+t exec thunar
+bindsym $mod+Shift+a exec aide
+bindsym $mod+Shift+z exec zed
+bindsym $mod+Shift+b exec zen
+bindsym $mod+Shift+f exec thunar
+bindsym $mod+Shift+o exec OSCAR
