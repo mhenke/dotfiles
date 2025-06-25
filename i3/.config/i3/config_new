@@ -1,0 +1,65 @@
+# Add these window rules to fix dialog window issues
+# Place these BEFORE your existing for_window rules
+
+# Dialog and popup windows should float
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [window_role="Preferences"] floating enable
+for_window [window_type="dialog"] floating enable
+for_window [window_type="splash"] floating enable
+
+# Common dialog window classes
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Xfce4-screenshooter"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [class="Nitrogen"] floating enable
+for_window [class="Blueman-manager"] floating enable
+for_window [class="Nm-connection-editor"] floating enable
+
+# File chooser dialogs
+for_window [window_role="GtkFileChooserDialog"] floating enable
+for_window [title="Open File"] floating enable
+for_window [title="Save File"] floating enable
+for_window [title="Save As"] floating enable
+for_window [title="Choose Files"] floating enable
+
+# Application-specific dialogs
+for_window [class="firefox" window_role="Organizer"] floating enable
+for_window [class="firefox" window_role="About"] floating enable
+for_window [class="Code" title="Quick Open"] floating enable
+for_window [class="Code" title="Preferences"] floating enable
+for_window [class="Thunar" title="File Operation Progress"] floating enable
+
+# Generic dialog patterns (be careful with these - test thoroughly)
+for_window [title="(?i).*preferences.*"] floating enable
+for_window [title="(?i).*settings.*"] floating enable
+for_window [title="(?i).*properties.*"] floating enable
+for_window [title="(?i).*about.*"] floating enable
+
+# Position and size floating windows properly
+for_window [floating] move position center
+for_window [floating] resize set 800 600
+
+# Alternative: More conservative approach - only center without resizing
+# for_window [floating] move position center
+
+# Special handling for small dialogs
+for_window [window_role="pop-up"] move position center
+for_window [window_role="pop-up"] resize set 600 400
+
+# Error/warning dialogs
+for_window [class="Zenity"] floating enable
+for_window [class="Yad"] floating enable
+for_window [title="Error"] floating enable
+for_window [title="Warning"] floating enable
+
+# Development tool dialogs
+for_window [class="cursor" window_role="dialog"] floating enable
+for_window [class="jetbrains-.*" window_role="dialog"] floating enable
+
+# Fix for i3-nagbar and similar
+for_window [class="i3-nagbar"] floating enable
+for_window [class="dmenu"] floating enable
+for_window [class="rofi"] floating enable
