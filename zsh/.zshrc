@@ -2,8 +2,12 @@
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
-# Theme - robbyrussell is fast and clean
+# Theme
 ZSH_THEME="af-magic" # set by `omz`
+
+# ZSH_THEME="avit"          # Simple, elegant No
+# ZSH_THEME="cloud"         # Minimal cloud-like -- Maybe
+# ZSH_THEME="fino"          # Clean two-line prompt -- Maybe
 
 # Update behavior
 zstyle ':omz:update' mode auto
