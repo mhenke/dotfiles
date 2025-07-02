@@ -194,15 +194,16 @@ for_window [window_role="GtkFileChooserDialog"] resize set 800 600
 # i3 specific
 for_window [class="i3-nagbar"] floating enable
 
-# WORKSPACE ASSIGNMENTS - Proper way to assign apps to workspaces
-assign [class="Zen-alpha"] $ws1
-assign [class="firefox"] $ws1
-assign [class="Code"] $ws2
-assign [class="cursor"] $ws2
-assign [class="Tilix"] $ws3
-assign [class="Thunar"] $ws4
-assign [class="discord"] $ws5
-assign [class="TelegramDesktop"] $ws5
+# SIMPLE STARTUP WORKSPACE ASSIGNMENT
+# Launch apps directly in their target workspaces
+exec --no-startup-id i3-msg "workspace $ws1; exec zen"
+exec --no-startup-id i3-msg "workspace $ws2; exec code --name=code-startup"
+exec --no-startup-id i3-msg "workspace $ws3; exec tilix --window-style=borderless"
+exec --no-startup-id i3-msg "workspace $ws4; exec thunar"
+exec --no-startup-id i3-msg "workspace $ws5; exec discord --start-minimized"
+
+# Special rule to ensure startup VS Code goes to workspace 2
+for_window [instance="code-startup"] move to workspace $ws2
 
 # Gaps and borders
 gaps inner 4
@@ -236,11 +237,6 @@ exec --no-startup-id "picom --config ~/.config/picom/picom.conf -b 2> ~/.picom.l
 exec --no-startup-id "dunst 2> ~/.dunst.log"
 
 # IMPROVED AUTOSTART - Launch apps with delays for proper workspace assignment
-exec --no-startup-id "sleep 2 && zen"
-exec --no-startup-id "sleep 3 && code"
-exec --no-startup-id "sleep 1 && tilix --window-style=borderless"
-exec --no-startup-id "sleep 4 && thunar"
-exec --no-startup-id "sleep 5 && discord --start-minimized"
 
 # Focus on workspace 1 when logging in
 exec --no-startup-id sleep 6 && i3-msg workspace $ws1
