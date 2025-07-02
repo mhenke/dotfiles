@@ -111,40 +111,7 @@ fi
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 ZSH_HIGHLIGHT_STYLES[cursor]='bold'
 
-# NVM setup (lazy loading for MAJOR performance improvement)
+# NVM setup (always load for immediate access to global packages)
 export NVM_DIR="$HOME/.nvm"
-
-# Lazy load nvm, node, npm, and npx
-nvm() {
-    unset -f nvm node npm npx
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    nvm "$@"
-}
-
-node() {
-    unset -f nvm node npm npx
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    node "$@"
-}
-
-npm() {
-    unset -f nvm node npm npx
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    npm "$@"
-}
-
-npx() {
-    unset -f nvm node npm npx
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-    npx "$@"
-}
-
-# Only load nvm immediately if .nvmrc exists in current directory
-if [[ -f .nvmrc ]]; then
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-fi
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
