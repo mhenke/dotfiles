@@ -71,6 +71,14 @@ alias i3config="$EDITOR ~/.config/i3/config"
 alias picomconfig="$EDITOR ~/.config/picom/picom.conf"
 alias alacrittyconfig="$EDITOR ~/.config/alacritty/alacritty.yml"
 
+# GitHub CLI aliases
+alias ghpr='gh pr list'
+alias ghco='gh copilot'
+alias ghce='gh copilot explain'
+alias ghcs='gh copilot suggest'
+alias ghci='gh copilot'
+alias ghcopilot='gh copilot'
+
 # System
 alias update="sudo dpkg --configure -a && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y"
 
