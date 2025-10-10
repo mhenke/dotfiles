@@ -1,0 +1,212 @@
+╔══════════════════════════════════════════════════════════════╗
+║           ACTION CHECKLIST - COMPLETE THESE NOW              ║
+╔══════════════════════════════════════════════════════════════╗
+
+📋 IMMEDIATE ACTIONS (On Current Laptop):
+
+□ 1. Review what was created:
+     cd ~/dotfiles
+     ls -la
+     cat README.md
+
+□ 2. Run verification script:
+     cd ~/dotfiles
+     ./verify-setup.sh
+
+□ 3. Commit all changes to Git:
+     cd ~/dotfiles
+     git add .
+     git status
+     git commit -F COMMIT-MESSAGE.txt
+     git push origin master
+
+□ 4. Verify GitHub has the changes:
+     - Visit your GitHub repo in browser
+     - Check that all new files are visible
+     - Verify bootstrap.sh and scripts/ directory exist
+
+□ 5. Create a local backup (optional but recommended):
+     cd ~
+     tar -czf dotfiles-backup-$(date +%Y%m%d).tar.gz dotfiles/
+     # Copy to USB drive or external storage
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📦 BEFORE GETTING NEW LAPTOP:
+
+□ 6. Export critical data:
+     □ SSH keys (copy ~/.ssh to USB - NOT in git!)
+     □ AWS credentials (copy ~/.aws to USB - NOT in git!)
+     □ Browser bookmarks
+     □ Projects: tar -czf projects.tar.gz ~/Projects
+
+□ 7. Document any manual system tweaks:
+     - Custom PPAs
+     - System modifications
+     - Cron jobs: crontab -l > ~/cron-backup.txt
+
+□ 8. Note credentials you'll need:
+     □ Bitwarden master password
+     □ GitHub account
+     □ ProtonVPN login
+     □ Discord login
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🆕 ON NEW LAPTOP (After Linux Mint Install):
+
+□ 9. Initial system setup:
+     sudo apt update && sudo apt upgrade -y
+     sudo apt install git curl wget -y
+
+□ 10. Clone dotfiles:
+      cd ~
+      git clone https://github.com/YOUR-USERNAME/dotfiles.git
+      cd dotfiles
+
+□ 11. Run bootstrap (takes 20-30 minutes):
+      ./bootstrap.sh
+      # Get coffee ☕
+
+□ 12. Reboot:
+      sudo reboot
+
+□ 13. Select i3 session:
+      - At login screen, click session selector
+      - Choose "i3"
+      - Login
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+⚙️  POST-INSTALLATION CONFIGURATION:
+
+□ 14. Authenticate services:
+      □ GitHub: gh auth login
+      □ Bitwarden: Open and login
+      □ Discord: Open and login
+      □ VSCode: Sign in (settings will sync)
+
+□ 15. Restore sensitive data:
+      □ SSH keys:
+        cp -r /usb-backup/.ssh ~/
+        chmod 700 ~/.ssh
+        chmod 600 ~/.ssh/id_*
+      
+      □ AWS credentials:
+        cp -r /usb-backup/.aws ~/
+        chmod 600 ~/.aws/credentials
+
+□ 16. Transfer projects:
+      tar -xzf projects.tar.gz -C ~/
+
+□ 17. Configure displays (if using external monitor):
+      # Use one of the aliases:
+      sceptre    # External only
+      laptop     # Laptop only
+      dual       # Both screens
+
+□ 18. Test everything:
+      □ Open terminal (Mod+Enter)
+      □ Test rofi launcher (Mod+d)
+      □ Check polybar displays
+      □ Open VSCode - verify extensions
+      □ Run: node --version, npm --version
+      □ Run: ruby --version, jekyll --version
+      □ Run: python3 --version, aws --version
+      □ Run: gh --version
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+✅ VERIFICATION (On New Laptop):
+
+Run these to confirm everything works:
+
+□ 19. Test development environment:
+      cd ~/dotfiles
+      node --version          # Should work
+      npm --version           # Should work
+      ruby --version          # Should work
+      jekyll --version        # Should work
+      python3 --version       # Should work
+      aws --version           # Should work
+      gh --version            # Should work
+      code --version          # Should work
+
+□ 20. Test shell and aliases:
+      # Should show zsh with af-magic theme
+      echo $SHELL
+      
+      # Test aliases
+      ghpr       # Should show gh pr list
+      update     # Should start system update
+      
+      # Test zsh plugins
+      # Type 'git s' and press → (should autocomplete)
+      # Press Ctrl+R (should show fzf history search)
+
+□ 21. Test i3 functionality:
+      # Test keybindings
+      Mod+Enter          # Opens terminal
+      Mod+d              # Opens rofi
+      Mod+Shift+q        # Closes window
+      Mod+1,2,3...       # Switch workspaces
+      
+      # Check polybar is visible
+      # Check picom transparency works
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📝 OPTIONAL (After Migration Complete):
+
+□ 22. Update dotfiles on old laptop:
+      cd ~/dotfiles
+      git pull
+      
+□ 23. Document any issues encountered:
+      # Add to MIGRATION.md for future reference
+
+□ 24. Update package lists periodically:
+      cd ~/dotfiles
+      ./scripts/backup-system.sh
+      git add packages/
+      git commit -m "Update package lists"
+      git push
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🎯 SUCCESS CRITERIA:
+
+Migration is complete when:
+✓ i3 loads and all keybindings work
+✓ Terminal (tilix) opens and shows zsh with theme
+✓ All dev tools work (node, npm, ruby, python, aws, gh)
+✓ VSCode opens with all extensions
+✓ Can access GitHub, Bitwarden, Discord
+✓ Projects directory is accessible
+✓ Custom aliases work (ghpr, update, sceptre, etc.)
+✓ Display configuration is correct
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+📚 REFERENCE DOCUMENTS:
+
+While working through this checklist, refer to:
+  • README.md - Overview and quick start
+  • MIGRATION.md - Detailed migration guide
+  • QUICKREF.md - Commands and shortcuts
+  • SETUP-COMPLETE.md - Summary and details
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+🆘 TROUBLESHOOTING:
+
+If something goes wrong:
+  1. Check ~/dotfiles/MIGRATION.md troubleshooting section
+  2. Run scripts individually from ~/dotfiles/scripts/
+  3. Check logs: cat ~/.config/polybar/polybar.log
+  4. Restart services: Mod+Shift+r (reload i3)
+  5. Verify with: cd ~/dotfiles && ./verify-setup.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Good luck with your migration! 🚀
