@@ -1,0 +1,8 @@
+name
+dependencies
+@anthropic-ai/claude-code
+version
+overridden
+@github/copilot
+version
+overridden

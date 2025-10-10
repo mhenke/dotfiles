@@ -1,0 +1,88 @@
+/* nordic.rasi */
+
+/* General settings */
+configuration {
+    font: "FiraCode Nerd Font 12";
+    show-icons: true;
+    lines: 10;
+    width: 30%;
+    spacing: 2;
+    hide-scrollbar: true;
+    fixed-num-lines: true;
+}
+
+/* Window configuration */
+* {
+    background: #2E3440; /* Dark background */
+    foreground: #D8DEE9; /* Light foreground */
+    border-color: #4C566A; /* Border color */
+    border-radius: 8px; /* Rounded corners */
+    border: 2px; /* Border thickness */
+    padding: 8px; /* Inner padding */
+}
+
+/* Rofi menu */
+window {
+    background-color: #2E3440; /* Same as general background */
+    border-radius: 8px;
+    padding: 10px;
+    border: 2px solid; /* Border color */
+}
+
+/* List view configuration */
+listview {
+    fixed-height: 0;
+    spacing: 4px; /* Compact spacing */
+    scrollbar: false; /* Hide scrollbar */
+}
+
+/* Entry box */
+inputbar {
+    text-color: #81A1C1; /* Light blue text */
+    background-color: #3B4252; /* Dark input background */
+    padding: 5px;
+    border-radius: 5px; /* Rounded corners */
+}
+
+entry {
+    placeholder: "Type to search...";
+    text-color: #ECEFF4; /* Light grey text */
+    padding: 5px;
+    background-color: #434C5E; /* Slightly lighter background */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Highlighted entries */
+element {
+    background-color: #434C5E; /* Highlighted background */
+    text-color: #ECEFF4; /* Highlighted text color */
+    padding: 5px; /* Padding for highlighted entries */
+}
+
+element selected {
+    background-color: #81A1C1; /* Selected entry background */
+    text-color: #2E3440; /* Selected entry text color */
+    border-radius: 5px; /* Rounded corners for selected entry */
+}
+
+/* Scrollbar */
+scrollbar {
+    background-color: #4C566A; /* Scrollbar background */
+    border-radius: 5px; /* Rounded corners */
+}
+
+scrollbar-thumb {
+    background-color: #81A1C1; /* Scrollbar thumb color */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Prompt */
+prompt {
+    text-color: #81A1C1; /* Prompt text color */
+}
+
+/* Message text */
+message {
+    text-color: #88C0D0; /* Message text color */
+}
+

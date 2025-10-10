@@ -1,0 +1,45 @@
+# Dotfiles .gitignore
+
+# Backup files
+*.backup
+*.backup-*
+*.bck
+*.old
+*~
+
+# Log files
+*.log
+
+# Compiled files
+*.zwc
+*.pyc
+__pycache__/
+
+# Package manager locks (not needed in dotfiles)
+package-lock.json
+yarn.lock
+Gemfile.lock
+
+# Temporary files
+.DS_Store
+.thumbs.db
+
+# System files
+.directory
+
+# Personal/sensitive
+.ssh/
+*.pem
+*.key
+*_history
+.aws/credentials
+.gnupg/
+
+# Cache directories
+cache/
+.cache/
+
+# Keep packages directory structure
+packages/*
+!packages/*.txt
+!packages/README.md
