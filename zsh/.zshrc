@@ -79,6 +79,16 @@ alias ghcs='gh copilot suggest'
 alias ghci='gh copilot'
 alias ghcopilot='gh copilot'
 
+# Monitor aliases
+# Switch to external monitor (ultrawide)
+alias sceptre='xrandr --output eDP-1 --off --output HDMI-1 --mode 3440x1440 --rate 50.00 --primary'
+
+# Switch back to laptop screen
+alias laptop='xrandr --output HDMI-1 --off --output eDP-1 --mode 1366x768 --primary'
+
+# Both screens - external above and to the left of laptop, external is primary
+alias dual='xrandr --output eDP-1 --mode 1366x768 --output HDMI-1 --mode 3440x1440 --rate 50.00 --above eDP-1 --left-of eDP-1 --primary'
+
 # System
 alias update="sudo dpkg --configure -a && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y"
 
@@ -123,3 +133,5 @@ ZSH_HIGHLIGHT_STYLES[cursor]='bold'
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+export PATH="$HOME/.local/bin:$PATH"
+export PATH=~/.npm-global/bin:$PATH
