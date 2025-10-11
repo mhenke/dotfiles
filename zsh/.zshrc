@@ -26,15 +26,14 @@ setopt HIST_IGNORE_SPACE
 # Terminal
 export TERMINAL=tilix
 
-# FINAL OPTIMIZED PLUGINS (10 plugins, excellent performance)
+# OPTIMIZED PLUGINS (9 plugins, excellent performance)
 plugins=(
-    git                     # Essential for git workflows
-    aliases                 # Git shortcuts like grhh, ga, etc.
+    git                     # Essential for git workflows (ga, gco, gst, etc.)
+    aliases                 # Show available aliases
     z                       # Smart directory jumping
     zsh-autosuggestions    # Command suggestions
     zsh-syntax-highlighting # Syntax coloring (keep last for performance)
     npm                     # Node development shortcuts
-    docker-compose         # Container development shortcuts
     aws                     # AWS CLI shortcuts
     fzf                     # Fuzzy finding
     you-should-use         # Shows available aliases
@@ -69,7 +68,6 @@ fi
 alias zshconfig="$EDITOR ~/.zshrc"
 alias i3config="$EDITOR ~/.config/i3/config"
 alias picomconfig="$EDITOR ~/.config/picom/picom.conf"
-alias alacrittyconfig="$EDITOR ~/.config/alacritty/alacritty.yml"
 
 # GitHub CLI aliases
 alias ghpr='gh pr list'

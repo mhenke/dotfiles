@@ -1,0 +1,116 @@
+# Ultra-Minimal Package List for i3 Setup
+# Only the absolute essentials - ~50 packages
+# All bloat removed: no XFCE, LibreOffice, international fonts, printer drivers, etc.
+
+# =============================================================================
+# CORE i3 WINDOW MANAGER STACK (15 packages)
+# =============================================================================
+i3
+i3-wm
+i3status
+i3lock
+polybar
+rofi
+picom
+dunst
+feh
+arandr
+lxappearance
+scrot
+maim
+xclip
+xdotool
+
+# =============================================================================
+# TERMINAL & SHELL (5 packages)
+# =============================================================================
+tilix
+zsh
+fonts-powerline
+fonts-font-awesome
+fonts-firacode
+
+# =============================================================================
+# SYSTEM UTILITIES (15 packages)
+# =============================================================================
+htop
+neofetch
+tree
+jq
+ripgrep
+fd-find
+fzf
+stow
+curl
+wget
+git
+build-essential
+unzip
+zip
+p7zip-full
+
+# =============================================================================
+# DEVELOPMENT TOOLS (8 packages)
+# =============================================================================
+python3
+python3-pip
+python3-venv
+ruby
+ruby-dev
+libssl-dev
+libreadline-dev
+zlib1g-dev
+
+# =============================================================================
+# MEDIA & AUDIO (4 packages)
+# =============================================================================
+pavucontrol
+pulseaudio
+playerctl
+fonts-noto-color-emoji
+
+# =============================================================================
+# TEXT EDITORS (1 package)
+# =============================================================================
+xed
+
+# =============================================================================
+# ESSENTIAL LIBRARIES (keep these)
+# =============================================================================
+# These will be auto-installed as dependencies, but good to know:
+# libgtk-3-0 (GTK apps)
+# libnotify4 (notifications)
+# gir1.2-gtk-3.0 (GTK bindings)
+# gir1.2-notify-0.7 (notification bindings)
+
+# =============================================================================
+# INSTALL VIA OTHER METHODS (NOT APT):
+# =============================================================================
+# Node.js → nvm (https://github.com/nvm-sh/nvm)
+# VSCode → Download .deb from https://code.visualstudio.com
+# Discord → Download .deb from https://discord.com
+# Bitwarden → Download .deb from https://bitwarden.com
+# Proton VPN → Official PPA or .deb
+# AWS CLI → pip install awscli OR official installer
+# GitHub CLI (gh) → Official PPA
+# Kodi → Official PPA
+
+# =============================================================================
+# TOTAL: ~49 essential packages (removed vim, sway, nitrogen, etc.)
+# Excluded: ~400+ bloat packages
+# Disk space saved: ~1.5 GB
+# Install time: ~10 minutes (vs ~25 minutes with bloat)
+# =============================================================================
+
+# =============================================================================
+# CUSTOMIZATIONS TO TRANSFER (via stow):
+# =============================================================================
+# - i3 window manager config
+# - polybar status bar config
+# - picom compositor config
+# - rofi launcher config
+# - dunst notification config
+# - tilix terminal config
+# - zsh shell config + oh-my-zsh plugins (git aliases live here!)
+# - gtk themes and settings
+# - xed text editor settings
