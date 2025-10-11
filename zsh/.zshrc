@@ -127,9 +127,8 @@ fi
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 ZSH_HIGHLIGHT_STYLES[cursor]='bold'
 
-# NVM setup (always load for immediate access to global packages)
+# NVM setup (manages node, npm, and global packages automatically)
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-export PATH="$HOME/.local/bin:$PATH"
-export PATH=~/.npm-global/bin:$PATH
+# Note: nvm manages npm global packages automatically, no need for ~/.npm-global
