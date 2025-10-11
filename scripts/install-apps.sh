@@ -77,9 +77,10 @@ fi
 # Install ProtonVPN
 log_info "Installing ProtonVPN..."
 if ! command -v protonvpn &> /dev/null && ! dpkg -l | grep -q proton-vpn-gtk-app; then
-    # Add ProtonVPN repository
-    wget -O- https://repo.protonvpn.com/debian/dists/stable/main/binary-all/Release.key | gpg --dearmor | sudo tee /usr/share/keyrings/protonvpn-stable-archive-keyring.gpg > /dev/null
-    echo "deb [signed-by=/usr/share/keyrings/protonvpn-stable-archive-keyring.gpg] https://repo.protonvpn.com/debian stable main" | sudo tee /etc/apt/sources.list.d/protonvpn.list > /dev/null
+    # Add ProtonVPN repository (updated method)
+    wget https://repo2.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-3_all.deb -O /tmp/protonvpn-release.deb
+    sudo dpkg -i /tmp/protonvpn-release.deb || sudo apt install -f -y
+    rm /tmp/protonvpn-release.deb
 
     sudo apt update
     sudo apt install -y proton-vpn-gnome-desktop
