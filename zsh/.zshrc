@@ -126,9 +126,3 @@ fi
 # SYNTAX HIGHLIGHTING CONFIGURATION
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 ZSH_HIGHLIGHT_STYLES[cursor]='bold'
-
-# NVM setup (manages node, npm, and global packages automatically)
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
-# Note: nvm manages npm global packages automatically, no need for ~/.npm-global
