@@ -2,7 +2,7 @@
 #
 # install-dev-tools.sh - Install development tools
 #
-# Verifies Node.js installation, installs AWS CLI, and related tools
+# Installs Node.js/npm (if missing), AWS CLI, and related tools
 #
 
 set -e
@@ -17,13 +17,17 @@ log_info() { echo -e "${BLUE}[INFO]${NC} $1"; }
 log_success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 
-# Verify Node.js installation
-log_info "Verifying Node.js installation..."
+# Install Node.js and npm
+log_info "Checking Node.js installation..."
 if command -v node &> /dev/null && command -v npm &> /dev/null; then
     log_success "Node.js found: $(node --version)"
     log_success "npm found: $(npm --version)"
 else
-    log_warn "Node.js or npm not found. Please install via system package manager (e.g., apt install nodejs npm)"
+    log_info "Installing Node.js and npm..."
+    sudo apt update
+    sudo apt install -y nodejs npm
+    log_success "Node.js installed: $(node --version)"
+    log_success "npm installed: $(npm --version)"
 fi
 
 # Install global npm packages

@@ -32,7 +32,7 @@ cd ~/dotfiles
 ### Development Tools
 - **VSCode** - Code editor
 - **git** + **gh** - Version control and GitHub CLI
-- **Node.js** (via nvm) + npm
+- **Node.js** (via apt) + npm
 - **Python3** + pip
 - **Ruby** + Jekyll
 - **AWS CLI**

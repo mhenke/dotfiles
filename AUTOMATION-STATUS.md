@@ -14,8 +14,8 @@
 ### 💻 Development Tools
 | Tool | Status | Method | Script |
 |------|--------|--------|--------|
-| **Node.js** | ✅ Automated | nvm (LTS) | install-dev-tools.sh |
-| **npm** | ✅ Automated | Comes with Node | install-dev-tools.sh |
+| **Node.js** | ✅ Automated | apt package | install-dev-tools.sh |
+| **npm** | ✅ Automated | apt package | install-dev-tools.sh |
 | **AWS CLI v2** | ✅ Automated | Official installer | install-dev-tools.sh |
 | **GitHub CLI (gh)** | ✅ Automated | Official repo | install-dev-tools.sh |
 | **Ruby** | ✅ Automated | apt package | install-packages.sh |
@@ -86,7 +86,6 @@
 | **Dotfiles symlinks** | ✅ Automated | GNU Stow | setup-stow.sh |
 | **Default shell to zsh** | ✅ Automated | chsh | bootstrap.sh |
 | **npm global directory** | ✅ Automated | npm config | install-dev-tools.sh |
-| **nvm default node** | ✅ Automated | nvm alias | install-dev-tools.sh |
 
 ---
 
