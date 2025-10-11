@@ -1,0 +1,22 @@
+# Current Global NPM Packages (Auto-generated)
+# Note: Claude Code and GitHub Copilot are version overrides in package.json
+
+@anthropic-ai/claude-code
+@github/copilot
+
+# Common useful global packages you may want:
+# npm
+# pnpm
+# yarn
+# typescript
+# ts-node
+# nodemon
+# pm2
+# prettier
+# eslint
+# @angular/cli
+# @vue/cli
+# create-react-app
+# serverless
+# netlify-cli
+# vercel

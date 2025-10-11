@@ -86,16 +86,18 @@ sudo apt install -y \
     fonts-noto-color-emoji \
     fonts-firacode
 
-# Install packages from apt-manual.txt if it exists
+# Install packages from apt-ultra-minimal.txt (minimal i3 setup, all bloat removed)
 PACKAGES_DIR="$(dirname "$0")/../packages"
-if [[ -f "$PACKAGES_DIR/apt-manual.txt" ]]; then
-    log_info "Installing packages from apt-manual.txt..."
-    # Filter out already installed and non-existent packages
-    while IFS= read -r package; do
+if [[ -f "$PACKAGES_DIR/apt-ultra-minimal.txt" ]]; then
+    log_info "Installing packages from apt-ultra-minimal.txt (ultra-minimal, no bloat)..."
+    # Filter out comments, empty lines, already installed and non-existent packages
+    grep -v "^#" "$PACKAGES_DIR/apt-ultra-minimal.txt" | grep -v "^$" | while IFS= read -r package; do
         if ! dpkg -l | grep -q "^ii  $package "; then
             sudo apt install -y "$package" 2>/dev/null || log_info "Skipping $package (not available)"
+        else
+            log_info "$package already installed"
         fi
-    done < "$PACKAGES_DIR/apt-manual.txt"
+    done
 fi
 
 log_info "Cleaning up..."

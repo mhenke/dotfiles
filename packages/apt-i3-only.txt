@@ -1,0 +1,66 @@
+# Essential packages for i3 + development setup
+# This is a curated list of must-have packages (XFCE and unused items removed)
+
+# Window Manager & Compositor
+i3
+i3-wm
+i3status
+i3lock
+polybar
+rofi
+picom
+dunst
+feh
+
+# Terminal & Shell
+tilix
+zsh
+fonts-powerline
+fonts-font-awesome
+fonts-firacode
+
+# System Utilities
+htop
+neofetch
+tree
+jq
+ripgrep
+fd-find
+fzf
+stow
+curl
+wget
+git
+build-essential
+
+# Development Tools
+python3
+python3-pip
+python3-venv
+ruby
+ruby-dev
+libssl-dev
+libreadline-dev
+zlib1g-dev
+
+# Media & Audio
+pavucontrol
+pulseaudio
+playerctl
+fonts-noto-color-emoji
+
+# Display & Screenshots
+arandr
+lxappearance
+scrot
+maim
+xclip
+xdotool
+
+# Archive Tools
+unzip
+zip
+p7zip-full
+
+# Text Editors
+xed

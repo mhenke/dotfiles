@@ -43,3 +43,4 @@ cache/
 packages/*
 !packages/*.txt
 !packages/README.md
+*.log

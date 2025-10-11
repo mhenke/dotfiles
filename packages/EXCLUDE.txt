@@ -1,0 +1,476 @@
+# Packages to EXCLUDE from installation
+# Comprehensive bloat list for minimal i3-only installation
+# Estimated: 400+ packages excluded, ~1.5GB saved
+
+# =============================================================================
+# XFCE Desktop Environment (YOU USE i3, NOT XFCE)
+# =============================================================================
+xfce4-*
+xfwm4
+xfdesktop4
+xfdesktop4-data
+xfconf
+thunar
+thunar-*
+libxfce4*
+gir1.2-xfconf-0
+gir1.2-xapp-1.0
+mint-info-xfce
+mint-meta-xfce
+
+# =============================================================================
+# LIBREOFFICE SUITE (162 packages - only if you don't use it)
+# =============================================================================
+libreoffice-*
+uno-libs-private
+ure
+ure-java
+libreoffice
+libuno-*
+
+# LibreOffice help files (23 packages)
+libreoffice-help-*
+
+# LibreOffice localizations (10 packages)
+libreoffice-l10n-*
+
+# LibreOffice dictionaries and hyphenation (106 packages)
+hunspell-*
+hyphen-*
+mythes-*
+aspell-*
+ispell
+wamerican
+wbrazilian
+wbritish
+wfrench
+witalian
+wngerman
+wogerman
+wportuguese
+wspanish
+wswiss
+
+# Keep ONLY: aspell-en, hunspell-en-us (if you need spellcheck)
+
+# =============================================================================
+# INTERNATIONAL FONTS (102 packages - you only need English)
+# =============================================================================
+# Bengali
+fonts-beng
+fonts-beng-extra
+fonts-lohit-beng-assamese
+fonts-lohit-beng-bengali
+
+# Devanagari (Hindi)
+fonts-deva
+fonts-deva-extra
+fonts-lohit-deva
+fonts-samyak-deva
+fonts-gargi
+fonts-nakula
+fonts-sahadeva
+
+# Gujarati
+fonts-gujr
+fonts-gujr-extra
+fonts-lohit-gujr
+fonts-samyak-gujr
+
+# Gurmukhi (Punjabi)
+fonts-guru
+fonts-guru-extra
+fonts-lohit-guru
+
+# Kannada
+fonts-knda
+fonts-lohit-knda
+fonts-navilu
+
+# Malayalam
+fonts-mlym
+fonts-lohit-mlym
+fonts-samyak-mlym
+fonts-smc-*
+
+# Oriya
+fonts-orya
+fonts-orya-extra
+fonts-lohit-orya
+fonts-pagul
+fonts-sarai
+
+# Tamil
+fonts-taml
+fonts-lohit-taml
+fonts-lohit-taml-classical
+fonts-samyak-taml
+
+# Telugu
+fonts-telu
+fonts-telu-extra
+fonts-lohit-telu
+fonts-teluguvijayam
+
+# Thai (20 packages!)
+fonts-thai-tlwg
+fonts-tlwg-*
+
+# Tibetan
+fonts-tibetan-machine
+
+# Khmer
+fonts-khmeros-core
+
+# Lao
+fonts-lao
+
+# Sinhala
+fonts-lklug-sinhala
+
+# Chinese/Japanese/Korean
+fonts-wqy-zenhei
+fonts-ipafont-gothic
+fonts-noto-cjk
+
+# Arabic
+fonts-kacst
+fonts-kacst-one
+
+# Other international
+fonts-sil-abyssinica
+fonts-sil-padauk
+fonts-indic
+
+# KEEP ONLY:
+# fonts-powerline, fonts-firacode, fonts-font-awesome
+# fonts-noto-color-emoji, fonts-liberation, fonts-dejavu-core
+
+# =============================================================================
+# GOBJECT INTROSPECTION LIBRARIES (~40 packages)
+# =============================================================================
+# Remove most gir1.2-* packages except essential ones
+gir1.2-accountsservice-1.0
+gir1.2-appstream-1.0
+gir1.2-appstreamglib-1.0
+gir1.2-ayatanaappindicator3-0.1
+gir1.2-caribou-1.0
+gir1.2-clutter-1.0
+gir1.2-cogl-1.0
+gir1.2-coglpango-1.0
+gir1.2-dbusmenu-glib-0.4
+gir1.2-dee-1.0
+gir1.2-flatpak-1.0
+gir1.2-gmenu-3.0
+gir1.2-gspell-1
+gir1.2-gtksource-3.0
+gir1.2-gtksource-4
+gir1.2-gtop-2.0
+gir1.2-handy-1
+gir1.2-ibus-1.0
+gir1.2-javascriptcoregtk-4.0
+gir1.2-nm-1.0
+gir1.2-nma-1.0
+gir1.2-packagekitglib-1.0
+gir1.2-peas-1.0
+gir1.2-polkit-1.0
+gir1.2-rb-3.0
+gir1.2-soup-2.4
+gir1.2-timezonemap-1.0
+gir1.2-udisks-2.0
+gir1.2-webkit2-4.0
+gir1.2-wnck-3.0
+gir1.2-xkl-1.0
+gir1.2-xviewer-3.0
+
+# KEEP: gir1.2-gtk-3.0, gir1.2-notify-0.7 (needed for GTK apps and dunst)
+
+# =============================================================================
+# PRINTING & SCANNING (30 packages - only if you have printer/scanner)
+# =============================================================================
+# CUPS printing system
+cups
+cups-daemon
+cups-client
+cups-browsed
+cups-filters
+cups-filters-core-drivers
+cups-ipp-utils
+cups-pk-helper
+cups-ppdc
+cups-server-common
+cups-bsd
+cups-common
+cups-core-drivers
+system-config-printer
+system-config-printer-common
+system-config-printer-udev
+
+# Printer drivers (remove all unless you need specific one)
+printer-driver-brlaser
+printer-driver-c2esp
+printer-driver-foo2zjs
+printer-driver-foo2zjs-common
+printer-driver-gutenprint
+printer-driver-hpcups
+printer-driver-m2300w
+printer-driver-min12xxw
+printer-driver-pnm2ppa
+printer-driver-postscript-hp
+printer-driver-ptouch
+printer-driver-pxljr
+printer-driver-sag-gdi
+printer-driver-splix
+
+# HP printer support
+hplip
+hplip-data
+
+# Scanner support
+sane
+sane-utils
+sane-airscan
+sane-common
+libsane1
+libsane-common
+libsane-hpaio
+simple-scan
+
+# =============================================================================
+# DEFAULT MINT APPLICATIONS (18 packages you don't use)
+# =============================================================================
+# Media apps
+rhythmbox
+rhythmbox-data
+rhythmbox-plugins
+rhythmbox-plugin-tray-icon
+celluloid
+hypnotix
+
+# Communication
+hexchat
+hexchat-common
+transmission-gtk
+transmission-common
+
+# Graphics/viewers
+drawing
+pix
+pix-data
+pix-dbg
+
+# File management
+warpinator
+baobab
+
+# CD/DVD
+brasero-common
+
+# =============================================================================
+# ACCESSIBILITY TOOLS (6 packages - unless you need them)
+# =============================================================================
+orca
+onboard
+onboard-common
+caribou
+mousetweaks
+brltty
+
+# =============================================================================
+# GNOME APPLICATIONS (6 packages - you use i3, not GNOME)
+# =============================================================================
+gnome-calculator
+gnome-disk-utility
+gnome-system-monitor
+gnome-logs
+gnome-shell
+gnome-shell-extension-appindicator
+yelp
+yelp-xsl
+
+# =============================================================================
+# MINT BRANDING/THEMES (15 packages - mostly decorative)
+# =============================================================================
+mint-backgrounds-vanessa
+mint-backgrounds-vera
+mint-backgrounds-victoria
+mint-backgrounds-virginia
+mint-artwork
+mint-cursor-themes
+mint-l-icons
+mint-l-theme
+mint-themes
+mint-x-icons
+mint-y-icons
+
+# KEEP: mint-common, mint-meta-codecs, mint-mirrors
+
+# =============================================================================
+# BROWSERS & EMAIL (you use VSCode/default browser)
+# =============================================================================
+firefox
+firefox-locale-en
+chromium-browser
+thunderbird
+thunderbird-*
+
+# =============================================================================
+# WINDOW MANAGERS/COMPOSITORS YOU DON'T USE
+# =============================================================================
+nitrogen
+compton
+compiz
+compiz-*
+metacity
+metacity-common
+libmetacity3
+gnome-shell
+light-locker
+light-locker-settings
+
+# =============================================================================
+# WAYLAND (you use X11 with i3)
+# =============================================================================
+sway
+swaybg
+swayidle
+swaylock
+waybar
+grim
+slurp
+wl-clipboard
+foot
+wayland-*
+
+# =============================================================================
+# TERMINAL EMULATORS YOU DON'T USE
+# =============================================================================
+alacritty
+foot
+xterm
+
+# =============================================================================
+# DEVELOPMENT TOOLS YOU DON'T USE
+# =============================================================================
+maven
+golang-go
+docker-ce
+docker-ce-cli
+docker-compose
+docker-compose-plugin
+docker-desktop
+containerd.io
+
+# =============================================================================
+# LANGUAGE PACKS (non-English)
+# =============================================================================
+# If you only need English, remove:
+language-pack-gnome-*
+# KEEP ONLY: language-pack-en, language-pack-en-base
+
+# =============================================================================
+# UBUNTU BLOAT & TELEMETRY
+# =============================================================================
+# Error reporting and telemetry
+apport
+apport-gtk
+python3-apport
+whoopsie
+kerneloops
+popularity-contest
+ubuntu-report
+
+# Ubuntu Advantage (Ubuntu Pro)
+ubuntu-advantage-tools
+ubuntu-advantage-desktop-daemon
+
+# Software Center / App Store components
+app-install-data
+aptdaemon
+aptdaemon-data
+packagekit
+packagekit-tools
+gnome-software
+gnome-software-common
+mintinstall
+webapp-manager
+
+# Snap package system (bloated, use apt/deb instead)
+snapd
+snap-confine
+squashfs-tools
+
+# Flatpak (if you don't use it)
+flatpak
+xdg-desktop-portal
+xdg-desktop-portal-gtk
+xdg-desktop-portal-xapp
+
+# Desktop integration services (mostly for GNOME)
+accountsservice
+colord
+colord-data
+rtkit
+geoclue-2.0
+
+# PolicyKit/Polkit (some needed, but check if you use GUI auth)
+# policykit-1 (KEEP - needed for sudo GUI prompts)
+# polkitd (KEEP - needed)
+policykit-1-gnome (only if using GNOME)
+policykit-desktop-privileges
+
+# Power/disk management (some needed for laptops)
+# upower (KEEP for laptop - battery management)
+# udisks2 (KEEP - auto-mounting drives)
+
+# Update managers (use command line instead)
+update-manager
+update-manager-core
+update-notifier
+update-notifier-common
+unattended-upgrades (if you prefer manual updates)
+
+# Ubuntu minimal bloat
+ubuntu-dbgsym-keyring (debug symbols - not needed)
+ubuntu-system-adjustments
+
+# Mint specific app managers
+mintinstall
+mintupdate (use apt update/upgrade instead)
+mintsources
+mintreport
+
+# =============================================================================
+# ADDITIONAL BLOAT
+# =============================================================================
+# Game support (if not gaming)
+gamemode
+gamemode-daemon
+
+# Multiple PDF viewers (pick one - xreader is lightest)
+okular
+evince
+
+# Old/unused
+rdate
+
+# Bluetooth (if you don't use it)
+# blueman
+# bluetooth
+# bluez
+# bluez-cups
+# bluez-obexd
+
+# Network Manager applet alternatives (keep nm-applet for WiFi GUI)
+# network-manager-gnome (KEEP for WiFi management in i3)
+
+# Mobile broadband (if you don't have 3G/4G modem)
+modemmanager
+mobile-broadband-provider-info
+
+# =============================================================================
+# SUMMARY
+# =============================================================================
+# Total excluded: ~450 packages
+# Disk space saved: ~1.7 GB
+# Install time saved: ~20 minutes

@@ -174,7 +174,6 @@ for_window [class="Xfce4-screenshooter"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Arandr"] floating enable
 for_window [class="Lxappearance"] floating enable
-for_window [class="Nitrogen"] floating enable
 for_window [class="Blueman-manager"] floating enable
 for_window [class="Nm-connection-editor"] floating enable
 
@@ -232,7 +231,8 @@ client.urgent           $nord11 $nord11 $nord6  $nord11 $nord11
 exec --no-startup-id ~/.config/polybar/launch.sh
 
 # Autostart applications
-exec --no-startup-id nitrogen --restore
+# Wallpaper is handled by feh (installed in apt packages)
+exec --no-startup-id feh --bg-scale ~/.wallpaper.jpg || feh --bg-fill /usr/share/backgrounds/linuxmint/default_background.jpg
 exec --no-startup-id "picom --config ~/.config/picom/picom.conf -b 2> ~/.picom.log"
 exec --no-startup-id "dunst 2> ~/.dunst.log"
 
