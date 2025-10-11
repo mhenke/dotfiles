@@ -1,8 +1,53 @@
-name
-dependencies
+# Global NPM Packages
+# Install with: xargs npm install -g < npm-global.txt
+
+# AI Development Tools
 @anthropic-ai/claude-code
-version
-overridden
 @github/copilot
-version
-overridden
+
+# Package Managers
+npm
+pnpm
+yarn
+
+# TypeScript Development
+typescript
+ts-node
+tsx
+
+# Development Servers & Watchers
+nodemon
+pm2
+live-server
+
+# Code Quality & Formatting
+prettier
+eslint
+jshint
+
+# Build Tools & Bundlers
+webpack
+webpack-cli
+vite
+
+# Framework CLIs
+@angular/cli
+@vue/cli
+create-react-app
+create-next-app
+
+# Serverless & Deployment
+serverless
+netlify-cli
+vercel
+
+# Testing
+jest
+mocha
+cypress
+
+# Utilities
+http-server
+json-server
+localtunnel
+ngrok
