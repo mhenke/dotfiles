@@ -48,49 +48,104 @@ cd "$DOTFILES_DIR"
 log_info "Starting bootstrap process..."
 log_info "Dotfiles directory: $DOTFILES_DIR"
 
-# Confirmation prompt
+# Display installation steps
 echo ""
-echo "This script will:"
-echo "  1. Update system packages"
-echo "  2. Install i3, polybar, rofi, picom, dunst, tilix, zsh"
-echo "  3. Install development tools (Node.js, Ruby, Python, AWS CLI)"
-echo "  4. Install applications (VSCode, Bitwarden, Discord, Kodi, ProtonVPN)"
-echo "  5. Set up zsh with oh-my-zsh"
-echo "  6. Symlink dotfiles with GNU Stow"
-echo "  7. Restore VSCode extensions"
+echo "Available installation steps:"
+echo "  1. Install system packages (i3, polybar, rofi, picom, dunst, tilix, zsh)"
+echo "  2. Install development tools (Node.js, Ruby, Python, AWS CLI, GitHub CLI)"
+echo "  3. Install applications (VSCode, Bitwarden, Discord, Kodi, ProtonVPN, Zen Browser)"
+echo "  4. Setup dotfiles with GNU Stow"
+echo "  5. Configure zsh as default shell"
 echo ""
-read -p "Continue? (y/N) " -n 1 -r
+echo "Options:"
+echo "  y/Y     - Run all steps"
+echo "  n/N     - Cancel"
+echo "  1-5     - Start from specific step"
+echo "  1,3,5   - Run specific steps only"
+echo ""
+read -p "Choose option (y/n/1-5): " REPLY
 echo
-if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-    log_info "Bootstrap cancelled."
-    exit 0
-fi
+
+# Parse user input
+START_STEP=1
+RUN_ALL=true
+SPECIFIC_STEPS=()
+
+case "$REPLY" in
+    [Yy]*)
+        log_info "Running all steps..."
+        START_STEP=1
+        RUN_ALL=true
+        ;;
+    [Nn]*)
+        log_info "Bootstrap cancelled."
+        exit 0
+        ;;
+    *,*)
+        # Comma-separated specific steps (e.g., "1,3,5")
+        IFS=',' read -ra SPECIFIC_STEPS <<< "$REPLY"
+        RUN_ALL=false
+        log_info "Running specific steps: ${SPECIFIC_STEPS[*]}"
+        ;;
+    [1-5])
+        # Single number - start from that step
+        START_STEP=$REPLY
+        RUN_ALL=true
+        log_info "Starting from step $START_STEP..."
+        ;;
+    *)
+        log_error "Invalid option. Please use y/n or 1-5"
+        exit 1
+        ;;
+esac
+
+# Function to check if step should run
+should_run_step() {
+    local step=$1
+    if [[ "$RUN_ALL" = true && $step -ge $START_STEP ]]; then
+        return 0
+    elif [[ " ${SPECIFIC_STEPS[@]} " =~ " $step " ]]; then
+        return 0
+    else
+        return 1
+    fi
+}
 
 # Run installation scripts
-log_info "Step 1/5: Installing system packages..."
-bash "$DOTFILES_DIR/scripts/install-packages.sh"
-log_success "System packages installed"
+if should_run_step 1; then
+    log_info "Step 1/5: Installing system packages..."
+    bash "$DOTFILES_DIR/scripts/install-packages.sh"
+    log_success "System packages installed"
+fi
 
-log_info "Step 2/5: Installing development tools..."
-bash "$DOTFILES_DIR/scripts/install-dev-tools.sh"
-log_success "Development tools installed"
+if should_run_step 2; then
+    log_info "Step 2/5: Installing development tools..."
+    bash "$DOTFILES_DIR/scripts/install-dev-tools.sh"
+    log_success "Development tools installed"
+fi
 
-log_info "Step 3/5: Installing applications..."
-bash "$DOTFILES_DIR/scripts/install-apps.sh"
-log_success "Applications installed"
+if should_run_step 3; then
+    log_info "Step 3/5: Installing applications..."
+    bash "$DOTFILES_DIR/scripts/install-apps.sh"
+    log_success "Applications installed"
+fi
 
-log_info "Step 4/5: Setting up dotfiles with GNU Stow..."
-bash "$DOTFILES_DIR/scripts/setup-stow.sh"
-log_success "Dotfiles configured"
+if should_run_step 4; then
+    log_info "Step 4/5: Setting up dotfiles with GNU Stow..."
+    bash "$DOTFILES_DIR/scripts/setup-stow.sh"
+    log_success "Dotfiles configured"
+fi
 
-log_info "Step 5/5: Configuring zsh and shell..."
-# Set zsh as default shell if not already
-if [[ "$SHELL" != */zsh ]]; then
-    log_info "Setting zsh as default shell..."
-    chsh -s $(which zsh)
-    log_success "Default shell changed to zsh (requires logout to take effect)"
-else
-    log_info "zsh is already the default shell"
+if should_run_step 5; then
+    log_info "Step 5/5: Configuring zsh and shell..."
+    # Set zsh as default shell if not already
+    if [[ "$SHELL" != */zsh ]]; then
+        log_info "Setting zsh as default shell..."
+        chsh -s $(which zsh)
+        log_success "Default shell changed to zsh (requires logout to take effect)"
+    else
+        log_info "zsh is already the default shell"
+    fi
 fi
 
 # Final messages

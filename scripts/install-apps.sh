@@ -88,6 +88,54 @@ else
     log_info "ProtonVPN already installed"
 fi
 
+# Install Zen Browser
+log_info "Installing Zen Browser..."
+if ! command -v zen &> /dev/null; then
+    # Create directories
+    sudo mkdir -p /opt/AppImages
+    mkdir -p ~/.local/share/applications
+
+    # Download latest Zen Browser AppImage
+    log_info "Downloading Zen Browser AppImage..."
+    wget --show-progress https://github.com/zen-browser/desktop/releases/latest/download/zen-specific.AppImage -O /tmp/zen-specific.AppImage
+
+    # Move to /opt and make executable
+    sudo mv /tmp/zen-specific.AppImage /opt/AppImages/zen-specific.AppImage
+    sudo chmod +x /opt/AppImages/zen-specific.AppImage
+
+    # Create symlink for easy command-line access
+    sudo ln -sf /opt/AppImages/zen-specific.AppImage /usr/local/bin/zen
+
+    # Download icon (optional, but good for menu)
+    wget -q https://raw.githubusercontent.com/zen-browser/desktop/main/src/browser/branding/official/default256.png -O /tmp/zen-icon.png 2>/dev/null || true
+    if [ -f /tmp/zen-icon.png ]; then
+        sudo mv /tmp/zen-icon.png /opt/AppImages/zen-browser-icon.png
+    fi
+
+    # Create desktop entry for application menu
+    cat > ~/.local/share/applications/zen-browser.desktop << EOF
+[Desktop Entry]
+Version=1.0
+Name=Zen Browser
+Comment=Experience tranquillity while browsing the web
+GenericName=Web Browser
+Keywords=Internet;WWW;Browser;Web;
+Exec=/opt/AppImages/zen-specific.AppImage
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=/opt/AppImages/zen-browser-icon.png
+Categories=Network;WebBrowser;
+MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
+StartupNotify=true
+EOF
+
+    log_success "Zen Browser installed"
+    log_info "You can launch Zen from the menu (Internet -> Zen Browser) or run 'zen' in terminal"
+else
+    log_info "Zen Browser already installed"
+fi
+
 log_success "Applications installed successfully!"
 echo ""
 echo "Manual setup required (authentication only):"
@@ -95,4 +143,5 @@ echo "  - Bitwarden: Sign in to your account"
 echo "  - Discord: Sign in to your account"
 echo "  - ProtonVPN: Sign in to your ProtonVPN account"
 echo "  - VSCode: Sign in to sync settings (Extensions auto-installed)"
+echo "  - Zen Browser: Sign in to Firefox Account for sync"
 echo "  - GitHub CLI: Run 'gh auth login'"
