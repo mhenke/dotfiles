@@ -38,10 +38,11 @@ else
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 fi
 
-# Set up npm global directory (to avoid sudo)
-log_info "Configuring npm global directory..."
-mkdir -p "$HOME/.npm-global"
-npm config set prefix "$HOME/.npm-global"
+# NOTE: Don't set npm prefix when using nvm - it conflicts!
+# nvm manages node/npm versions and global packages automatically
+# If you see "prefix setting is incompatible with nvm", remove it:
+# npm config delete prefix
+log_info "Skipping npm prefix config (nvm manages this)"
 
 # Install global npm packages
 PACKAGES_DIR="$(dirname "$0")/../packages"
