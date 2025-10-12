@@ -23,7 +23,9 @@ log_error() { echo -e "${RED}[ERROR]${NC} $1"; }
 log_warn "This script will backup and remove existing config directories"
 log_warn "that conflict with GNU Stow."
 echo ""
-log_info "Directories that will be backed up and removed:"
+log_info "Files and directories that will be backed up and removed:"
+echo "  - ~/.zshrc"
+echo "  - ~/.gitconfig"
 echo "  - ~/.config/i3"
 echo "  - ~/.config/polybar"
 echo "  - ~/.config/picom"
@@ -34,8 +36,7 @@ echo "  - ~/.config/gtk-4.0"
 echo "  - ~/.config/xed"
 echo "  - ~/.config/htop"
 echo "  - ~/.config/mc"
-echo "  - ~/.zshrc"
-echo "  - ~/.gitconfig"
+echo "  - ~/.config/tilix"
 echo ""
 log_warn "Backups will be created with timestamp: .backup-YYYYMMDD-HHMMSS"
 echo ""
@@ -64,10 +65,10 @@ backup_and_remove() {
     fi
 }
 
-log_info "Backing up and removing conflicting directories..."
+log_info "Backing up and removing conflicting files and directories..."
 echo ""
 
-# Backup individual files
+# Backup individual files in home directory
 backup_and_remove "$HOME/.zshrc"
 backup_and_remove "$HOME/.gitconfig"
 
@@ -82,6 +83,7 @@ backup_and_remove "$HOME/.config/gtk-4.0"
 backup_and_remove "$HOME/.config/xed"
 backup_and_remove "$HOME/.config/htop"
 backup_and_remove "$HOME/.config/mc"
+backup_and_remove "$HOME/.config/tilix"
 
 echo ""
 log_success "Cleanup complete!"
