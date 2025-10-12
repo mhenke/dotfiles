@@ -34,6 +34,8 @@ PACKAGES=(
     "git"
     "gtk"
     "xed"
+    "htop"
+    "mc"
 )
 
 # Backup existing configs that would conflict
