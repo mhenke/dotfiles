@@ -60,7 +60,7 @@ case "$INSTALL_METHOD" in
         ;;
     bun)
         log_info "Installing Bun and packages..."
-        bash "$( dirname "${BASH_SOURCE[0]}" )/install-bun.sh"
+        bash "$( dirname "${BASH_SOURCE[0]}" )/install-bun.sh" --auto-install
         ;;
     *)
         log_info "Skipping additional packages - you can install later"
