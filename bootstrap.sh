@@ -5,7 +5,7 @@
 # This script sets up a fresh Linux Mint installation with:
 # - i3wm, polybar, rofi, picom, dunst
 # - Development tools (node, npm, ruby, python, aws)
-# - Applications (VSCode, Bitwarden, Discord, Kodi, ProtonVPN, Zen Browser, OSCAR)
+# - Applications (VSCode, Bitwarden, Discord, Kodi, ProtonVPN, Zen Browser, OSCAR, Obsidian, Notion)
 # - Dotfiles via GNU Stow
 #
 
@@ -53,7 +53,7 @@ echo ""
 echo "Available installation steps:"
 echo "  1. Install system packages (i3, polybar, rofi, picom, dunst, tilix, zsh)"
 echo "  2. Install development tools (Node.js, Ruby, Python, AWS CLI, GitHub CLI)"
-echo "  3. Install applications (VSCode, Bitwarden, Discord, Kodi, ProtonVPN, Zen Browser, OSCAR)"
+echo "  3. Install applications (VSCode, Bitwarden, Discord, Kodi, ProtonVPN, Zen Browser, OSCAR, Obsidian, Notion)"
 echo "  4. Install themes (Nordic, Papirus icons, Bibata cursor)"
 echo "  5. Setup dotfiles with GNU Stow"
 echo "  6. Configure zsh as default shell"
