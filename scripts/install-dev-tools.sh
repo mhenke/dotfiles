@@ -17,13 +17,39 @@ log_info() { echo -e "${BLUE}[INFO]${NC} $1"; }
 log_success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 
-# Verify Node.js installation
-log_info "Verifying Node.js installation..."
-if command -v node &> /dev/null && command -v npm &> /dev/null; then
-    log_success "Node.js found: $(node --version)"
-    log_success "npm found: $(npm --version)"
+# Install nvm (Node Version Manager)
+log_info "Installing nvm (Node Version Manager)..."
+if [[ ! -d "$HOME/.nvm" ]]; then
+    curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh | bash
+    log_success "nvm installed"
+
+    # Load nvm for this session
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+    # Install latest LTS version of Node.js
+    log_info "Installing Node.js LTS..."
+    nvm install --lts
+    nvm use --lts
+    nvm alias default 'lts/*'
+    log_success "Node.js LTS installed: $(node --version)"
+    log_success "npm installed: $(npm --version)"
 else
-    log_warn "Node.js or npm not found. Please install via system package manager (e.g., apt install nodejs npm)"
+    log_info "nvm already installed"
+    # Load nvm for this session
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+
+    if command -v node &> /dev/null; then
+        log_success "Node.js found: $(node --version)"
+        log_success "npm found: $(npm --version)"
+    else
+        log_info "Installing Node.js LTS..."
+        nvm install --lts
+        nvm use --lts
+        nvm alias default 'lts/*'
+        log_success "Node.js LTS installed: $(node --version)"
+    fi
 fi
 
 # Install global npm packages

@@ -135,6 +135,11 @@ if should_run_step 4; then
     log_info "Step 4/6: Installing themes..."
     bash "$DOTFILES_DIR/scripts/install-themes.sh"
     log_success "Themes installed"
+
+    # Apply dark mode settings
+    log_info "Applying dark mode settings..."
+    bash "$DOTFILES_DIR/scripts/apply-dark-mode.sh"
+    log_success "Dark mode applied"
 fi
 
 if should_run_step 5; then
