@@ -45,17 +45,30 @@ fi
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-# Ask about global package installation
-echo ""
-log_info "Bun can install global packages from npm-global.txt"
-echo ""
-log_warn "Known compatibility issues:"
-echo "  ⚠ @anthropic-ai/claude-code has bugs with Bun (crashes, permission issues)"
-echo ""
-read -p "Install global packages with Bun? (y/N) " -n 1 -r
-echo
+# Check if we should auto-install packages (when called from another script)
+AUTO_INSTALL="${1:-}"
 
-if [[ $REPLY =~ ^[Yy]$ ]]; then
+# Ask about global package installation (unless auto-installing)
+if [[ "$AUTO_INSTALL" == "--auto-install" ]]; then
+    log_info "Auto-installing global packages with Bun..."
+    INSTALL_PACKAGES="yes"
+else
+    echo ""
+    log_info "Bun can install global packages from npm-global.txt"
+    echo ""
+    log_warn "Known compatibility issues:"
+    echo "  ⚠ @anthropic-ai/claude-code has bugs with Bun (crashes, permission issues)"
+    echo ""
+    read -p "Install global packages with Bun? (y/N) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        INSTALL_PACKAGES="yes"
+    else
+        INSTALL_PACKAGES="no"
+    fi
+fi
+
+if [[ "$INSTALL_PACKAGES" == "yes" ]]; then
     PACKAGES_DIR="$(dirname "$0")/../packages"
 
     if [[ -f "$PACKAGES_DIR/npm-global.txt" ]]; then
