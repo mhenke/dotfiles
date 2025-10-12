@@ -1,66 +1,37 @@
-# VSCode Extensions
-# Install with: cat vscode-extensions.txt | xargs -L 1 code --install-extension
-# Or automatically via scripts/install-apps.sh
-
-# Angular Development
 1tontech.angular-material
-cyrilletuzi.angular-schematics
-
-# AI & Code Assistance
-anthropic.claude-code
-github.copilot
-github.copilot-chat
-
-# AWS
 amazonwebservices.aws-toolkit-vscode
-
-# IntelliSense & Autocomplete
+anthropic.claude-code
 christian-kohler.npm-intellisense
 christian-kohler.path-intellisense
-visualstudioexptteam.intellicode-api-usage-examples
-visualstudioexptteam.vscodeintellicode
-visualstudioexptteam.vscodeintellicode-completions
-
-# Code Quality & Linting
+cyrilletuzi.angular-schematics
 dbaeumer.vscode-eslint
-redhat.vscode-yaml
-
-# Git & Version Control
 eamodio.gitlens
+esbenp.prettier-vscode
+fabiospampinato.vscode-terminals
 github.codespaces
+github.copilot
+github.copilot-chat
 github.remotehub
 github.vscode-github-actions
 github.vscode-pull-request-github
-ms-vscode.azure-repos
-ms-vscode.remote-repositories
-
-# Formatting & Beautification
-esbenp.prettier-vscode
-
-# Python Development
+ibm.output-colorizer
+ms-azuretools.vscode-containers
 ms-python.debugpy
 ms-python.python
 ms-python.vscode-pylance
 ms-python.vscode-python-envs
-
-# Containers & Remote Development
-ms-azuretools.vscode-containers
 ms-vscode-remote.remote-containers
-
-# UI & Visualization
-ibm.output-colorizer
+ms-vscode.azure-repos
+ms-vscode.live-server
+ms-vscode.remote-repositories
+natqe.reload
 naumovs.color-highlight
 oderwat.indent-rainbow
-vincaslt.highlight-matching-tag
-
-# Web Development
-svelte.svelte-vscode
-ms-vscode.live-server
-
-# Utilities
-fabiospampinato.vscode-terminals
-natqe.reload
 pmneo.tsimporter
-
-# Themes
+redhat.vscode-yaml
+svelte.svelte-vscode
+vincaslt.highlight-matching-tag
+visualstudioexptteam.intellicode-api-usage-examples
+visualstudioexptteam.vscodeintellicode
+visualstudioexptteam.vscodeintellicode-completions
 wesbos.theme-cobalt2

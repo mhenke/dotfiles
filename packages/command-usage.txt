@@ -1,9 +1,9 @@
-    342 git
+    347 git
     236 \
-    203 cd
+    206 cd
     198 -
     161 npm
-    116 ls
+    117 ls
     104 npx
      98 gh
      85 bundle
@@ -22,11 +22,11 @@
      22 if
      22 gco
      21 clear
+     20 claude
      20 ###
      18 sed
      17 echo
      17 curl
-     17 claude
      17 aws
      16 which
      14 wc
@@ -37,7 +37,9 @@
      12 mv
      12 head
      11 npmR
+     11 gst
      11 "
+     10 gl
      10 for
       9 nvm
       9 h
@@ -45,6 +47,4 @@
       8 with
       8 pkill
       8 mkdir
-      8 gl
       8 ga
-      7 internally
