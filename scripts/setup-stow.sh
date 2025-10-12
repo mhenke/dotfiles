@@ -114,39 +114,56 @@ else
 fi
 
 # Stow each package
+log_info "Stowing packages..."
+echo ""
+
+ALREADY_LINKED=0
+NEWLY_LINKED=0
+FAILED=0
+
 for package in "${PACKAGES[@]}"; do
     if [[ -d "$DOTFILES_DIR/$package" ]]; then
-        log_info "Stowing $package..."
-
-        # Try to stow, capture output
-        if stow_output=$(stow -v -t "$HOME" -d "$DOTFILES_DIR" "$package" 2>&1); then
-            log_success "$package linked"
-        else
-            # Check if it's just already linked
-            if echo "$stow_output" | grep -q "already stowed\|existing target is"; then
-                log_info "$package already linked"
+        # Try to stow, capture output (use -R to restow if already linked)
+        if stow_output=$(stow -R -v -t "$HOME" -d "$DOTFILES_DIR" "$package" 2>&1); then
+            # Check if output indicates it was already stowed
+            if echo "$stow_output" | grep -q "UNLINK:\|LINK:"; then
+                # Something was changed (restowed)
+                log_success "✓ $package"
+                ((NEWLY_LINKED++))
             else
-                log_warn "Failed to stow $package:"
-                echo "$stow_output" | sed 's/^/  /'
+                # Nothing changed - already perfectly stowed
+                log_info "⊙ $package (already linked)"
+                ((ALREADY_LINKED++))
+            fi
+        else
+            # Real error occurred
+            log_warn "✗ $package (failed)"
+            ((FAILED++))
+            echo "$stow_output" | sed 's/^/    /' | head -5
 
-                # Offer to use --adopt to resolve conflicts
-                echo ""
-                log_warn "Conflicts detected. Options:"
-                echo "  1. Backup conflicting files manually and re-run"
-                echo "  2. Use 'stow --adopt' to adopt existing files into dotfiles"
-                echo "  3. Use 'stow --override' to force overwrite (not recommended)"
-                echo ""
-                read -p "Continue with remaining packages? (y/N) " -n 1 -r
-                echo
-                if [[ ! $REPLY =~ ^[Yy]$ ]]; then
-                    exit 1
-                fi
+            # Check for common errors
+            if echo "$stow_output" | grep -q "existing target is"; then
+                echo "    → Conflict: existing files not owned by stow"
+                echo "    → Run: ./scripts/clean-for-stow.sh"
             fi
         fi
     else
         log_warn "Package directory not found: $package"
+        ((FAILED++))
     fi
 done
+
+echo ""
+echo "Summary:"
+echo "  ✓ Linked:   $NEWLY_LINKED"
+echo "  ⊙ Skipped:  $ALREADY_LINKED (already linked)"
+echo "  ✗ Failed:   $FAILED"
+echo ""
+
+if [[ $FAILED -gt 0 ]]; then
+    log_warn "Some packages failed to stow"
+    log_info "Check conflicts and re-run if needed"
+fi
 
 # Handle tilix separately (uses dconf)
 if [[ -f "$DOTFILES_DIR/tilix/tilix.dconf" ]]; then
@@ -173,14 +190,19 @@ if [[ -d "$HOME/.config/rofi" ]]; then
     log_success "Rofi scripts made executable"
 fi
 
-log_success "Dotfiles setup complete!"
+if [[ $FAILED -eq 0 ]]; then
+    log_success "Dotfiles setup complete!"
+else
+    log_warn "Dotfiles setup completed with errors"
+fi
+
 echo ""
-echo "Your config files are now symlinked:"
+echo "Stowed packages:"
 for package in "${PACKAGES[@]}"; do
     echo "  - $package"
 done
 echo ""
-echo "To update configs in the future:"
+log_info "To update configs in the future:"
 echo "  1. Edit files in ~/dotfiles/"
 echo "  2. Commit and push changes"
-echo "  3. On other machines, pull and run: stow -R -t ~ <package>"
+echo "  3. On other machines: git pull && stow -R -t ~ <package>"
