@@ -1,13 +1,54 @@
-name
-dependencies
-bun
-version
-overridden
-corepack
-version
-overridden
-version
-overridden
+# Global NPM Packages
+# Install with: npm install -g <package>
+# Or with Bun: bun install -g <package>
+
+# AI Development Tools (install with npm for stability)
+@anthropic-ai/claude-code
+@github/copilot
+
+# Package Managers
+npm
 pnpm
-version
-overridden
+yarn
+
+# TypeScript Development
+typescript
+ts-node
+tsx
+
+# Development Servers & Watchers
+nodemon
+pm2
+live-server
+
+# Code Quality & Formatting
+prettier
+eslint
+jshint
+
+# Build Tools & Bundlers
+webpack
+webpack-cli
+vite
+
+# Framework CLIs
+@angular/cli
+@vue/cli
+create-react-app
+create-next-app
+
+# Serverless & Deployment
+serverless
+netlify-cli
+vercel
+
+# Testing
+jest
+mocha
+cypress
+
+# Utilities
+http-server
+json-server
+localtunnel
+ngrok
