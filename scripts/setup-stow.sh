@@ -47,24 +47,70 @@ backup_if_exists() {
     fi
 }
 
+# Backup entire directory if it exists and is not a symlink
+backup_dir_if_exists() {
+    local dir="$1"
+    if [[ -d "$dir" && ! -L "$dir" ]]; then
+        # Check if directory has any content
+        if [[ -n "$(ls -A "$dir" 2>/dev/null)" ]]; then
+            log_warn "Backing up existing directory: $dir"
+            mv "$dir" "${dir}.backup-$(date +%Y%m%d-%H%M%S)"
+        else
+            # Empty directory, just remove it
+            rmdir "$dir" 2>/dev/null || true
+        fi
+    fi
+}
+
 # Backup potential conflicts
-log_info "Checking for conflicting files..."
-backup_if_exists "$HOME/.config/i3/config"
-backup_if_exists "$HOME/.config/polybar/config.ini"
-backup_if_exists "$HOME/.config/picom/picom.conf"
-backup_if_exists "$HOME/.config/dunst/dunstrc"
-backup_if_exists "$HOME/.config/rofi/config.rasi"
+log_info "Checking for conflicting files and directories..."
+
+# Backup individual files
 backup_if_exists "$HOME/.zshrc"
 backup_if_exists "$HOME/.gitconfig"
-backup_if_exists "$HOME/.config/gtk-3.0/settings.ini"
-backup_if_exists "$HOME/.config/xed/preferences/xed"
+
+# Backup config directories that Stow will manage
+backup_dir_if_exists "$HOME/.config/i3"
+backup_dir_if_exists "$HOME/.config/polybar"
+backup_dir_if_exists "$HOME/.config/picom"
+backup_dir_if_exists "$HOME/.config/dunst"
+backup_dir_if_exists "$HOME/.config/rofi"
+backup_dir_if_exists "$HOME/.config/gtk-3.0"
+backup_dir_if_exists "$HOME/.config/gtk-4.0"
+backup_dir_if_exists "$HOME/.config/xed"
+backup_dir_if_exists "$HOME/.config/htop"
+backup_dir_if_exists "$HOME/.config/mc"
 
 # Stow each package
 for package in "${PACKAGES[@]}"; do
     if [[ -d "$DOTFILES_DIR/$package" ]]; then
         log_info "Stowing $package..."
-        stow -t "$HOME" -d "$DOTFILES_DIR" "$package" 2>&1 || log_warn "Failed to stow $package (may already be linked)"
-        log_success "$package linked"
+
+        # Try to stow, capture output
+        if stow_output=$(stow -v -t "$HOME" -d "$DOTFILES_DIR" "$package" 2>&1); then
+            log_success "$package linked"
+        else
+            # Check if it's just already linked
+            if echo "$stow_output" | grep -q "already stowed\|existing target is"; then
+                log_info "$package already linked"
+            else
+                log_warn "Failed to stow $package:"
+                echo "$stow_output" | sed 's/^/  /'
+
+                # Offer to use --adopt to resolve conflicts
+                echo ""
+                log_warn "Conflicts detected. Options:"
+                echo "  1. Backup conflicting files manually and re-run"
+                echo "  2. Use 'stow --adopt' to adopt existing files into dotfiles"
+                echo "  3. Use 'stow --override' to force overwrite (not recommended)"
+                echo ""
+                read -p "Continue with remaining packages? (y/N) " -n 1 -r
+                echo
+                if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+                    exit 1
+                fi
+            fi
+        fi
     else
         log_warn "Package directory not found: $package"
     fi
