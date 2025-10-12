@@ -63,6 +63,11 @@ if [ -f ~/.fzf.zsh ]; then
     export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
 fi
 
+# NVM configuration (Node Version Manager)
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # Load nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # Load nvm bash_completion
+
 # ALIASES (organized and optimized)
 # Config editing
 alias zshconfig="$EDITOR ~/.zshrc"
@@ -76,6 +81,10 @@ alias ghce='gh copilot explain'
 alias ghcs='gh copilot suggest'
 alias ghci='gh copilot'
 alias ghcopilot='gh copilot'
+
+# Claude Code CLI
+alias claude='npx -y @anthropic-ai/claude-code'
+alias copilot='gh copilot'
 
 # Monitor aliases
 # Switch to external monitor (ultrawide)
