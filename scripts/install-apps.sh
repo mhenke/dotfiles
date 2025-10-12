@@ -17,19 +17,46 @@ log_info() { echo -e "${BLUE}[INFO]${NC} $1"; }
 log_success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 
+# Install VSCode (with optional purge for clean reinstall)
+log_info "Checking Visual Studio Code installation..."
+
+# Ask if user wants to purge existing VSCode installation
+if command -v code &> /dev/null; then
+    log_warn "VSCode is already installed"
+    read -p "Do you want to purge and reinstall VSCode? (y/N) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        log_info "Purging existing VSCode installation..."
+
+        # Uninstall all extensions
+        log_info "Removing all VSCode extensions..."
+        code --list-extensions | xargs -L 1 code --uninstall-extension 2>/dev/null || true
+
+        # Remove VSCode package
+        sudo apt remove --purge -y code 2>/dev/null || true
+
+        # Remove VSCode user data and config
+        log_info "Removing VSCode user data..."
+        rm -rf ~/.config/Code
+        rm -rf ~/.vscode
+
+        log_success "VSCode purged successfully"
+    else
+        log_info "Keeping existing VSCode installation"
+    fi
+fi
+
 # Install VSCode
-log_info "Installing Visual Studio Code..."
 if ! command -v code &> /dev/null; then
+    log_info "Installing Visual Studio Code..."
     wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
     sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
     sudo sh -c 'echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" > /etc/apt/sources.list.d/vscode.list'
     rm -f packages.microsoft.gpg
-    
+
     sudo apt update
     sudo apt install code -y
     log_success "VSCode installed"
-else
-    log_info "VSCode already installed"
 fi
 
 # Restore VSCode extensions
