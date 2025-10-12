@@ -117,6 +117,27 @@ else
     log_info "OSCAR already installed"
 fi
 
+# Install Obsidian (Knowledge Base / Note Taking)
+log_info "Installing Obsidian..."
+if ! flatpak list | grep -q md.obsidian.Obsidian; then
+    flatpak install -y flathub md.obsidian.Obsidian
+    log_success "Obsidian installed"
+    log_info "You can launch Obsidian from the menu (Office -> Obsidian)"
+else
+    log_info "Obsidian already installed"
+fi
+
+# Install Notion (via Cohesion - unofficial wrapper)
+log_info "Installing Notion (Cohesion wrapper)..."
+if ! flatpak list | grep -q io.github.brunofin.Cohesion; then
+    flatpak install -y flathub io.github.brunofin.Cohesion
+    log_success "Notion (Cohesion) installed"
+    log_info "You can launch Notion from the menu (Office -> Cohesion)"
+    log_warn "Note: Cohesion is an unofficial Notion wrapper, not affiliated with Notion Inc."
+else
+    log_info "Notion (Cohesion) already installed"
+fi
+
 log_success "Applications installed successfully!"
 echo ""
 echo "Manual setup required (authentication only):"
@@ -125,4 +146,6 @@ echo "  - Discord: Sign in to your account"
 echo "  - ProtonVPN: Sign in to your ProtonVPN account"
 echo "  - VSCode: Sign in to sync settings (Extensions auto-installed)"
 echo "  - Zen Browser: Sign in to Firefox Account for sync"
+echo "  - Notion (Cohesion): Sign in to your Notion account"
+echo "  - Obsidian: Optional - sign in for sync across devices"
 echo "  - GitHub CLI: Run 'gh auth login'"

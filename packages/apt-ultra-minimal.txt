@@ -31,7 +31,7 @@ fonts-font-awesome
 fonts-firacode
 
 # =============================================================================
-# SYSTEM UTILITIES (16 packages)
+# SYSTEM UTILITIES (17 packages)
 # =============================================================================
 htop
 neofetch
@@ -49,6 +49,7 @@ unzip
 zip
 p7zip-full
 flatpak
+mc
 
 # =============================================================================
 # DEVELOPMENT TOOLS (8 packages)
@@ -97,7 +98,7 @@ xed
 # Kodi → Official PPA
 
 # =============================================================================
-# TOTAL: ~50 essential packages (removed vim, sway, nitrogen, etc.)
+# TOTAL: ~51 essential packages (removed vim, sway, nitrogen, etc.)
 # Excluded: ~400+ bloat packages
 # Disk space saved: ~1.5 GB
 # Install time: ~10 minutes (vs ~25 minutes with bloat)
