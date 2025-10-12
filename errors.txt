@@ -1,31 +1,23 @@
-update alias is not present along with node, npm, copilot, claude
+SUCCESS] Themes installed successfully!
 
-[SUCCESS] Bootstrap complete!
+Installed themes:
+  - Nordic GTK theme (dark blue/gray)
+  - Papirus-Dark icon theme
+  - Bibata Modern Classic cursor
 
-Next steps:
-  1. Logout and log back in (to apply shell changes)
-  2. Select 'i3' session at login screen
-  3. Login to services:
-     - GitHub: gh auth login
-     - Bitwarden
-     - Discord
-     - Proton VPN
-  4. Copy SSH keys: cp -r /backup/.ssh ~/ && chmod 700 ~/.ssh
-  5. Sync VSCode settings (should auto-sync if signed in)
+Theme settings have been applied via gsettings.
+You may need to logout/login or restart apps to see changes.
 
-Monitor aliases: 'sceptre', 'laptop', 'dual'
+To manually apply in other applications:
+  - xed: Preferences -> Theme -> Nordic
+  - VSCode: Already using Nordic via extensions
+  - Tilix: Already using Nord color scheme
+[SUCCESS] Themes installed
+[INFO] Applying dark mode settings...
+[INFO] Applying dark mode settings...
 
-[INFO] Enjoy your new system! 🚀
----------------------------------------------------------------------------------------------------------------------------------------------------------------
-~/dotfiles (master*) » claude                                                                                                              mhenke@mhenke-N159B
-zsh: command not found: claude
----------------------------------------------------------------------------------------------------------------------------------------------------------------
-~/dotfiles (master*) » copilot                                                                                                       127 ↵ mhenke@mhenke-N159B
-zsh: command not found: copilot
----------------------------------------------------------------------------------------------------------------------------------------------------------------
-~/dotfiles (master*) » npm                                                                                                           127 ↵ mhenke@mhenke-N159B
-zsh: command not found: npm
----------------------------------------------------------------------------------------------------------------------------------------------------------------
-~/dotfiles (master*) » node                                                                                                          127 ↵ mhenke@mhenke-N159B
-zsh: command not found: node
+[INFO] Setting GTK theme to Nordic...
+[SUCCESS] GTK theme set to Nordic
+[INFO] Setting color scheme to dark...
+No such key “color-scheme”
 
