@@ -39,24 +39,30 @@ All of these packages work fine with `bun install -g`:
 - yarn, pnpm
 - Most other npm packages
 
-### ⚠️ **Known Issues:**
+### ⚠️ **Use npm for CLI Tools:**
 
 #### **@anthropic-ai/claude-code** (⚠️ USE NPM)
-- **Status**: Has bugs with Bun
+- **Status**: Has documented bugs with Bun
 - **Issues**:
   - Crashes on Windows (Bun v1.2.17+)
   - Permission errors on macOS
   - Update failures when BUN_INSTALL env var is set
-- **Solution**: Install with npm instead
+- **Solution**: Install with npm
   ```bash
   npm install -g @anthropic-ai/claude-code
   ```
 
-#### **@github/copilot** (✅ SHOULD WORK)
-- **Status**: No known issues
-- **Safe to install with Bun**:
+#### **@github/copilot** (⚠️ USE NPM - RECOMMENDED)
+- **Status**: No documented issues, but not officially supported
+- **Reason to use npm**:
+  - Only npm installation is documented by GitHub
+  - CLI tool requires stable authentication
+  - May use native Node.js modules
+  - Low install frequency (speed doesn't matter)
+  - High breakage cost (breaks your workflow)
+- **Recommended**: Install with npm for stability
   ```bash
-  bun install -g @github/copilot
+  npm install -g @github/copilot
   ```
 
 ## Installation Guide
@@ -69,12 +75,11 @@ Use Bun for everything except problematic packages:
 # 1. Install Bun
 curl -fsSL https://bun.sh/install | bash
 
-# 2. Install most packages with Bun
+# 2. Install most packages with Bun (fast!)
 bun install -g typescript webpack vite prettier eslint
-bun install -g @github/copilot
 
-# 3. Install problematic packages with npm
-npm install -g @anthropic-ai/claude-code
+# 3. Install CLI tools with npm (stable)
+npm install -g @anthropic-ai/claude-code @github/copilot
 ```
 
 ### Option 2: Hybrid (Bun + npm)
@@ -249,17 +254,17 @@ bun install:  ~15 seconds (8× faster)
 
 Our curated list has 54 global packages:
 
-**Bun-Compatible** (53 packages):
+**Bun-Compatible** (52 packages):
 - All TypeScript tools
 - All build tools (webpack, vite)
 - All framework CLIs (Angular, Vue, React, Next.js)
 - All testing tools (jest, mocha, cypress)
 - All formatters/linters (prettier, eslint)
 - All deployment tools (serverless, netlify, vercel)
-- @github/copilot ✅
 
-**npm-Only** (1 package):
-- @anthropic-ai/claude-code ⚠️
+**npm-Only** (2 packages - CLI tools):
+- @anthropic-ai/claude-code ⚠️ (documented bugs with Bun)
+- @github/copilot ⚠️ (stability over speed for CLI tools)
 
 ## Why Not nvm?
 
@@ -289,8 +294,8 @@ If a package doesn't work with Bun, you can always fall back to npm without rein
 **YES, use Bun!** With this strategy:
 
 1. ✅ Install Bun via `./scripts/install-bun.sh`
-2. ✅ Use Bun for 98% of packages (fast installs)
-3. ✅ Use npm only for @anthropic-ai/claude-code
+2. ✅ Use Bun for 96% of packages (fast installs)
+3. ✅ Use npm for CLI tools (claude, copilot)
 4. ✅ Keep npm installed as fallback (no harm)
 5. ✅ Enjoy 7× faster package installs
 
@@ -314,17 +319,17 @@ bun run <script>               # Run package.json script
 bun <file>.ts                  # Execute TypeScript file
 bun pm ls -g                   # List global packages
 
-# Special cases
-npm install -g @anthropic-ai/claude-code  # Use npm for Claude
+# CLI tools - use npm for stability
+npm install -g @anthropic-ai/claude-code @github/copilot
 ```
 
 ## Summary
 
 - ✅ **Use Bun** for speed and modern features
-- ✅ **Keep npm** as fallback for problematic packages
+- ✅ **Keep npm** as fallback for CLI tools
 - ✅ **No nvm needed** - Bun handles runtime
-- ⚠️ **Use npm** for @anthropic-ai/claude-code specifically
-- 🚀 **Enjoy** 7× faster installs
+- ⚠️ **Use npm** for CLI tools (claude, copilot) for stability
+- 🚀 **Enjoy** 7× faster installs for everything else
 
 ---
 
