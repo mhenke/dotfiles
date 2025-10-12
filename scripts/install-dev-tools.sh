@@ -100,6 +100,11 @@ if [[ ! -d "$ZSH_CUSTOM/plugins/zsh-completions" ]]; then
     log_success "zsh-completions installed"
 fi
 
+if [[ ! -d "$ZSH_CUSTOM/plugins/you-should-use" ]]; then
+    git clone https://github.com/MichaelAquilina/zsh-you-should-use "$ZSH_CUSTOM/plugins/you-should-use"
+    log_success "you-should-use installed"
+fi
+
 # Install fzf
 log_info "Installing fzf..."
 if [[ ! -d "$HOME/.fzf" ]]; then

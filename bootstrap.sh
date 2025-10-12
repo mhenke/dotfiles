@@ -54,16 +54,17 @@ echo "Available installation steps:"
 echo "  1. Install system packages (i3, polybar, rofi, picom, dunst, tilix, zsh)"
 echo "  2. Install development tools (Node.js, Ruby, Python, AWS CLI, GitHub CLI)"
 echo "  3. Install applications (VSCode, Bitwarden, Discord, Kodi, ProtonVPN, Zen Browser, OSCAR)"
-echo "  4. Setup dotfiles with GNU Stow"
-echo "  5. Configure zsh as default shell"
+echo "  4. Install themes (Nordic, Papirus icons, Bibata cursor)"
+echo "  5. Setup dotfiles with GNU Stow"
+echo "  6. Configure zsh as default shell"
 echo ""
 echo "Options:"
 echo "  y/Y     - Run all steps"
 echo "  n/N     - Cancel"
-echo "  1-5     - Start from specific step"
+echo "  1-6     - Start from specific step"
 echo "  1,3,5   - Run specific steps only"
 echo ""
-read -p "Choose option (y/n/1-5): " REPLY
+read -p "Choose option (y/n/1-6): " REPLY
 echo
 
 # Parse user input
@@ -87,14 +88,14 @@ case "$REPLY" in
         RUN_ALL=false
         log_info "Running specific steps: ${SPECIFIC_STEPS[*]}"
         ;;
-    [1-5])
+    [1-6])
         # Single number - start from that step
         START_STEP=$REPLY
         RUN_ALL=true
         log_info "Starting from step $START_STEP..."
         ;;
     *)
-        log_error "Invalid option. Please use y/n or 1-5"
+        log_error "Invalid option. Please use y/n or 1-6"
         exit 1
         ;;
 esac
@@ -113,31 +114,37 @@ should_run_step() {
 
 # Run installation scripts
 if should_run_step 1; then
-    log_info "Step 1/5: Installing system packages..."
+    log_info "Step 1/6: Installing system packages..."
     bash "$DOTFILES_DIR/scripts/install-packages.sh"
     log_success "System packages installed"
 fi
 
 if should_run_step 2; then
-    log_info "Step 2/5: Installing development tools..."
+    log_info "Step 2/6: Installing development tools..."
     bash "$DOTFILES_DIR/scripts/install-dev-tools.sh"
     log_success "Development tools installed"
 fi
 
 if should_run_step 3; then
-    log_info "Step 3/5: Installing applications..."
+    log_info "Step 3/6: Installing applications..."
     bash "$DOTFILES_DIR/scripts/install-apps.sh"
     log_success "Applications installed"
 fi
 
 if should_run_step 4; then
-    log_info "Step 4/5: Setting up dotfiles with GNU Stow..."
+    log_info "Step 4/6: Installing themes..."
+    bash "$DOTFILES_DIR/scripts/install-themes.sh"
+    log_success "Themes installed"
+fi
+
+if should_run_step 5; then
+    log_info "Step 5/6: Setting up dotfiles with GNU Stow..."
     bash "$DOTFILES_DIR/scripts/setup-stow.sh"
     log_success "Dotfiles configured"
 fi
 
-if should_run_step 5; then
-    log_info "Step 5/5: Configuring zsh and shell..."
+if should_run_step 6; then
+    log_info "Step 6/6: Configuring zsh and shell..."
     # Set zsh as default shell if not already
     if [[ "$SHELL" != */zsh ]]; then
         log_info "Setting zsh as default shell..."
