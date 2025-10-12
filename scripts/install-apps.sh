@@ -137,6 +137,23 @@ else
     log_info "Zen Browser already installed"
 fi
 
+# Install OSCAR (CPAP Analysis Software)
+log_info "Installing OSCAR CPAP Analysis Software..."
+if ! dpkg -l | grep -q oscar; then
+    # Download OSCAR for Ubuntu 24.04
+    log_info "Downloading OSCAR v1.6.1 for Ubuntu 24.04..."
+    wget https://www.apneaboard.com/OSCAR/1.6.1/oscar_1.6.1-Ubuntu24_amd64.deb -O /tmp/oscar.deb
+
+    # Install OSCAR
+    sudo dpkg -i /tmp/oscar.deb || sudo apt install -f -y
+    rm /tmp/oscar.deb
+
+    log_success "OSCAR installed"
+    log_info "You can launch OSCAR from the menu (Applications -> OSCAR)"
+else
+    log_info "OSCAR already installed"
+fi
+
 log_success "Applications installed successfully!"
 echo ""
 echo "Manual setup required (authentication only):"
