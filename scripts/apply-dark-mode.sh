@@ -26,21 +26,79 @@ log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 log_info "Applying dark mode settings..."
 echo ""
 
-# Apply GTK dark theme (Nordic)
+# Detect desktop environment
+DE=""
+if [[ "$XDG_CURRENT_DESKTOP" == *"XFCE"* ]]; then
+    DE="XFCE"
+    log_info "Detected: XFCE desktop environment"
+elif [[ "$XDG_CURRENT_DESKTOP" == *"Cinnamon"* ]]; then
+    DE="Cinnamon"
+    log_info "Detected: Cinnamon desktop environment"
+elif [[ "$XDG_CURRENT_DESKTOP" == *"MATE"* ]]; then
+    DE="MATE"
+    log_info "Detected: MATE desktop environment"
+else
+    DE="Unknown"
+    log_warn "Unknown desktop environment: $XDG_CURRENT_DESKTOP"
+fi
+
+# Apply GTK dark theme (Nordic) based on desktop environment
 log_info "Setting GTK theme to Nordic..."
 if [[ -d "$HOME/.themes/Nordic" ]]; then
-    gsettings set org.cinnamon.desktop.interface gtk-theme "Nordic"
+    case "$DE" in
+        XFCE)
+            # XFCE uses xfconf-query
+            if command -v xfconf-query &> /dev/null; then
+                xfconf-query -c xsettings -p /Net/ThemeName -s "Nordic" 2>/dev/null || true
+                xfconf-query -c xsettings -p /Net/IconThemeName -s "Papirus-Dark" 2>/dev/null || true
+                xfconf-query -c xfwm4 -p /general/theme -s "Nordic" 2>/dev/null || true
+                log_success "GTK theme set to Nordic (XFCE)"
+            else
+                log_warn "xfconf-query not found, theme will be set via GTK config files only"
+            fi
+            ;;
+        Cinnamon)
+            gsettings set org.cinnamon.desktop.interface gtk-theme "Nordic" 2>/dev/null || true
+            gsettings set org.cinnamon.desktop.interface icon-theme "Papirus-Dark" 2>/dev/null || true
+            log_success "GTK theme set to Nordic (Cinnamon)"
+            ;;
+        MATE)
+            gsettings set org.mate.interface gtk-theme "Nordic" 2>/dev/null || true
+            gsettings set org.mate.interface icon-theme "Papirus-Dark" 2>/dev/null || true
+            log_success "GTK theme set to Nordic (MATE)"
+            ;;
+        *)
+            log_warn "Unknown DE - theme will be set via GTK config files only"
+            ;;
+    esac
+
+    # Also set via gsettings for GNOME apps
     gsettings set org.gnome.desktop.interface gtk-theme "Nordic" 2>/dev/null || true
-    gsettings set org.cinnamon.desktop.interface icon-theme "Papirus-Dark"
     gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark" 2>/dev/null || true
-    log_success "GTK theme set to Nordic"
 else
     log_warn "Nordic theme not found - run scripts/install-themes.sh first"
 fi
 
-# Apply dark color scheme preference
+# Apply dark color scheme preference (XFCE 4.18+ and others)
 log_info "Setting color scheme to dark..."
-gsettings set org.cinnamon.desktop.interface color-scheme 'prefer-dark'
+case "$DE" in
+    XFCE)
+        # XFCE 4.18+ has dark mode preference
+        if command -v xfconf-query &> /dev/null; then
+            xfconf-query -c xsettings -p /Net/ThemeName -s "Nordic" 2>/dev/null || true
+            # Some XFCE versions support prefer-dark
+            xfconf-query -c xsettings -p /Gtk/PreferDarkTheme -t bool -s true 2>/dev/null || log_info "Dark theme preference set via GTK config"
+        fi
+        ;;
+    Cinnamon)
+        gsettings set org.cinnamon.desktop.interface color-scheme 'prefer-dark' 2>/dev/null || true
+        ;;
+    MATE)
+        gsettings set org.mate.interface gtk-color-scheme 'prefer-dark' 2>/dev/null || true
+        ;;
+esac
+
+# Also try GNOME settings
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark' 2>/dev/null || true
 log_success "Color scheme set to dark"
 
