@@ -74,17 +74,26 @@ fi
 
 # Install ProtonVPN
 log_info "Installing ProtonVPN..."
-if ! command -v protonvpn &> /dev/null && ! dpkg -l | grep -q proton-vpn-gtk-app; then
-    # Clean up any duplicate repository configurations
+if ! command -v protonvpn &> /dev/null && ! dpkg -l | grep -q proton-vpn-gnome-desktop; then
+    # Clean up any old repository configurations
     sudo rm -f /etc/apt/sources.list.d/protonvpn.list
+    sudo rm -f /etc/apt/sources.list.d/protonvpn-stable.list
 
-    # Add ProtonVPN repository (updated method)
-    wget -q https://repo2.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-3_all.deb -O /tmp/protonvpn-release.deb
-    sudo dpkg -i /tmp/protonvpn-release.deb || sudo apt install -f -y
+    # Download the official ProtonVPN repository package (version 1.0.8)
+    log_info "Downloading ProtonVPN repository package..."
+    wget -q https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb -O /tmp/protonvpn-release.deb
+
+    # Install the repository package
+    sudo dpkg -i /tmp/protonvpn-release.deb
     rm /tmp/protonvpn-release.deb
 
+    # Update package lists and install ProtonVPN
     sudo apt update
     sudo apt install -y proton-vpn-gnome-desktop
+
+    # Optional: Install system tray support
+    sudo apt install -y libayatana-appindicator3-1 gir1.2-ayatanaappindicator3-0.1 gnome-shell-extension-appindicator 2>/dev/null || true
+
     log_success "ProtonVPN installed"
 else
     log_info "ProtonVPN already installed"
