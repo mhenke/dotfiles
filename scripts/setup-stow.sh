@@ -65,21 +65,53 @@ backup_dir_if_exists() {
 # Backup potential conflicts
 log_info "Checking for conflicting files and directories..."
 
-# Backup individual files
-backup_if_exists "$HOME/.zshrc"
-backup_if_exists "$HOME/.gitconfig"
+# Check if there are conflicts
+CONFLICTS_FOUND=false
+CONFLICTING_DIRS=()
 
-# Backup config directories that Stow will manage
-backup_dir_if_exists "$HOME/.config/i3"
-backup_dir_if_exists "$HOME/.config/polybar"
-backup_dir_if_exists "$HOME/.config/picom"
-backup_dir_if_exists "$HOME/.config/dunst"
-backup_dir_if_exists "$HOME/.config/rofi"
-backup_dir_if_exists "$HOME/.config/gtk-3.0"
-backup_dir_if_exists "$HOME/.config/gtk-4.0"
-backup_dir_if_exists "$HOME/.config/xed"
-backup_dir_if_exists "$HOME/.config/htop"
-backup_dir_if_exists "$HOME/.config/mc"
+check_conflict() {
+    local path="$1"
+    if [[ -e "$path" && ! -L "$path" ]]; then
+        CONFLICTS_FOUND=true
+        CONFLICTING_DIRS+=("$path")
+    fi
+}
+
+# Check for conflicts
+check_conflict "$HOME/.zshrc"
+check_conflict "$HOME/.gitconfig"
+check_conflict "$HOME/.config/i3"
+check_conflict "$HOME/.config/polybar"
+check_conflict "$HOME/.config/picom"
+check_conflict "$HOME/.config/dunst"
+check_conflict "$HOME/.config/rofi"
+check_conflict "$HOME/.config/gtk-3.0"
+check_conflict "$HOME/.config/gtk-4.0"
+check_conflict "$HOME/.config/xed"
+check_conflict "$HOME/.config/htop"
+check_conflict "$HOME/.config/mc"
+
+if [[ "$CONFLICTS_FOUND" == true ]]; then
+    log_warn "Found ${#CONFLICTING_DIRS[@]} conflicting directories/files:"
+    for dir in "${CONFLICTING_DIRS[@]}"; do
+        echo "  - $dir"
+    done
+    echo ""
+    log_warn "These need to be backed up and removed before Stow can create symlinks"
+    echo ""
+    read -p "Automatically backup and remove these? (y/N) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        log_info "Backing up and removing conflicts..."
+        bash "$DOTFILES_DIR/scripts/clean-for-stow.sh" <<< "y"
+    else
+        log_error "Cannot proceed with conflicting directories"
+        log_info "Run manually: ./scripts/clean-for-stow.sh"
+        exit 1
+    fi
+else
+    log_success "No conflicts found"
+fi
 
 # Stow each package
 for package in "${PACKAGES[@]}"; do
