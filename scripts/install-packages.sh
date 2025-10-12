@@ -100,6 +100,19 @@ if [[ -f "$PACKAGES_DIR/apt-ultra-minimal.txt" ]]; then
     done
 fi
 
+# Setup Flatpak and Flathub
+log_info "Setting up Flatpak and Flathub repository..."
+if command -v flatpak &> /dev/null; then
+    # Add Flathub repository if not already added
+    flatpak remote-list | grep -q flathub || flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    log_success "Flatpak and Flathub configured"
+else
+    log_info "Installing Flatpak..."
+    sudo apt install -y flatpak
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    log_success "Flatpak installed and Flathub added"
+fi
+
 log_info "Cleaning up..."
 sudo apt autoremove -y
 sudo apt autoclean

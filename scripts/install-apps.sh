@@ -45,10 +45,8 @@ fi
 
 # Install Bitwarden
 log_info "Installing Bitwarden..."
-if ! command -v bitwarden &> /dev/null; then
-    wget "https://vault.bitwarden.com/download/?app=desktop&platform=linux" -O /tmp/bitwarden.deb
-    sudo dpkg -i /tmp/bitwarden.deb || sudo apt install -f -y
-    rm /tmp/bitwarden.deb
+if ! flatpak list | grep -q com.bitwarden.desktop; then
+    flatpak install -y flathub com.bitwarden.desktop
     log_success "Bitwarden installed"
 else
     log_info "Bitwarden already installed"
@@ -77,8 +75,11 @@ fi
 # Install ProtonVPN
 log_info "Installing ProtonVPN..."
 if ! command -v protonvpn &> /dev/null && ! dpkg -l | grep -q proton-vpn-gtk-app; then
+    # Clean up any duplicate repository configurations
+    sudo rm -f /etc/apt/sources.list.d/protonvpn.list
+
     # Add ProtonVPN repository (updated method)
-    wget https://repo2.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-3_all.deb -O /tmp/protonvpn-release.deb
+    wget -q https://repo2.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.3-3_all.deb -O /tmp/protonvpn-release.deb
     sudo dpkg -i /tmp/protonvpn-release.deb || sudo apt install -f -y
     rm /tmp/protonvpn-release.deb
 
@@ -91,48 +92,10 @@ fi
 
 # Install Zen Browser
 log_info "Installing Zen Browser..."
-if ! command -v zen &> /dev/null; then
-    # Create directories
-    sudo mkdir -p /opt/AppImages
-    mkdir -p ~/.local/share/applications
-
-    # Download latest Zen Browser AppImage
-    log_info "Downloading Zen Browser AppImage..."
-    wget --show-progress https://github.com/zen-browser/desktop/releases/latest/download/zen-specific.AppImage -O /tmp/zen-specific.AppImage
-
-    # Move to /opt and make executable
-    sudo mv /tmp/zen-specific.AppImage /opt/AppImages/zen-specific.AppImage
-    sudo chmod +x /opt/AppImages/zen-specific.AppImage
-
-    # Create symlink for easy command-line access
-    sudo ln -sf /opt/AppImages/zen-specific.AppImage /usr/local/bin/zen
-
-    # Download icon (optional, but good for menu)
-    wget -q https://raw.githubusercontent.com/zen-browser/desktop/main/src/browser/branding/official/default256.png -O /tmp/zen-icon.png 2>/dev/null || true
-    if [ -f /tmp/zen-icon.png ]; then
-        sudo mv /tmp/zen-icon.png /opt/AppImages/zen-browser-icon.png
-    fi
-
-    # Create desktop entry for application menu
-    cat > ~/.local/share/applications/zen-browser.desktop << EOF
-[Desktop Entry]
-Version=1.0
-Name=Zen Browser
-Comment=Experience tranquillity while browsing the web
-GenericName=Web Browser
-Keywords=Internet;WWW;Browser;Web;
-Exec=/opt/AppImages/zen-specific.AppImage
-Terminal=false
-X-MultipleArgs=false
-Type=Application
-Icon=/opt/AppImages/zen-browser-icon.png
-Categories=Network;WebBrowser;
-MimeType=text/html;text/xml;application/xhtml+xml;x-scheme-handler/http;x-scheme-handler/https;
-StartupNotify=true
-EOF
-
+if ! flatpak list | grep -q app.zen_browser.zen; then
+    flatpak install -y flathub app.zen_browser.zen
     log_success "Zen Browser installed"
-    log_info "You can launch Zen from the menu (Internet -> Zen Browser) or run 'zen' in terminal"
+    log_info "You can launch Zen from the menu (Internet -> Zen Browser)"
 else
     log_info "Zen Browser already installed"
 fi
