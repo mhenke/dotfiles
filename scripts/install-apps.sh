@@ -59,15 +59,25 @@ if ! command -v code &> /dev/null; then
     log_success "VSCode installed"
 fi
 
-# Restore VSCode extensions
+# Install VSCode extensions
 PACKAGES_DIR="$(dirname "$0")/../packages"
 if [[ -f "$PACKAGES_DIR/vscode-extensions.txt" ]]; then
-    log_info "Installing VSCode extensions..."
-    while IFS= read -r extension; do
-        [[ -z "$extension" || "$extension" =~ ^# ]] && continue
-        code --install-extension "$extension" --force 2>/dev/null || log_warn "Failed to install $extension"
-    done < "$PACKAGES_DIR/vscode-extensions.txt"
-    log_success "VSCode extensions installed"
+    EXTENSION_COUNT=$(grep -v '^#' "$PACKAGES_DIR/vscode-extensions.txt" | grep -v '^$' | wc -l)
+    log_info "Found $EXTENSION_COUNT VSCode extensions to install"
+
+    echo ""
+    read -p "Install VSCode extensions now? (y/N) " -n 1 -r
+    echo
+    if [[ $REPLY =~ ^[Yy]$ ]]; then
+        log_info "Installing VSCode extensions..."
+        bash "$( dirname "${BASH_SOURCE[0]}" )/install-vscode-extensions.sh"
+    else
+        log_info "Skipping VSCode extensions"
+        log_info "You can install later with: ./scripts/install-vscode-extensions.sh"
+    fi
+else
+    log_warn "VSCode extensions list not found: $PACKAGES_DIR/vscode-extensions.txt"
+    log_info "Export from old machine with: ./scripts/export-vscode-extensions.sh"
 fi
 
 # Install Bitwarden
