@@ -104,8 +104,19 @@ log_success "Color scheme set to dark"
 
 # Apply dark theme to GTK applications via settings.ini
 log_info "Configuring GTK settings..."
-mkdir -p "$HOME/.config/gtk-3.0"
-cat > "$HOME/.config/gtk-3.0/settings.ini" << EOF
+
+# Ensure .config directory exists first
+mkdir -p "$HOME/.config"
+
+# Create GTK-3.0 directory
+if ! mkdir -p "$HOME/.config/gtk-3.0" 2>/dev/null; then
+    log_warn "Could not create $HOME/.config/gtk-3.0 directory"
+    log_warn "Checking permissions..."
+    ls -ld "$HOME/.config" 2>/dev/null || log_warn "$HOME/.config does not exist"
+fi
+
+# Write settings.ini
+cat > "$HOME/.config/gtk-3.0/settings.ini" << 'EOF'
 [Settings]
 gtk-application-prefer-dark-theme=1
 gtk-theme-name=Nordic
@@ -125,8 +136,10 @@ gtk-xft-hintstyle=hintmedium
 gtk-xft-rgba=rgb
 EOF
 
-mkdir -p "$HOME/.config/gtk-4.0"
-cat > "$HOME/.config/gtk-4.0/settings.ini" << EOF
+# Create GTK-4.0 directory
+mkdir -p "$HOME/.config/gtk-4.0" 2>/dev/null || log_warn "Could not create $HOME/.config/gtk-4.0 directory"
+
+cat > "$HOME/.config/gtk-4.0/settings.ini" << 'EOF'
 [Settings]
 gtk-application-prefer-dark-theme=1
 gtk-theme-name=Nordic
@@ -137,8 +150,11 @@ log_success "GTK settings configured"
 
 # Apply dark theme to Qt applications
 log_info "Configuring Qt dark theme..."
-mkdir -p "$HOME/.config/qt5ct"
-cat > "$HOME/.config/qt5ct/qt5ct.conf" << EOF
+
+# Create Qt5ct directory
+mkdir -p "$HOME/.config/qt5ct" 2>/dev/null || log_warn "Could not create $HOME/.config/qt5ct directory"
+
+cat > "$HOME/.config/qt5ct/qt5ct.conf" << 'EOF'
 [Appearance]
 color_scheme_path=/usr/share/qt5ct/colors/darker.conf
 custom_palette=true
@@ -175,8 +191,10 @@ if [[ -f "$VSCODE_SETTINGS" ]]; then
     # VSCode settings are managed by sync, but ensure dark theme
     log_info "VSCode settings found - dark theme should sync automatically"
 elif command -v code &> /dev/null; then
-    mkdir -p "$HOME/.config/Code/User"
-    cat > "$VSCODE_SETTINGS" << EOF
+    # Create VSCode settings directory
+    mkdir -p "$HOME/.config/Code/User" 2>/dev/null || log_warn "Could not create VSCode settings directory"
+
+    cat > "$VSCODE_SETTINGS" << 'EOF'
 {
     "workbench.colorTheme": "Nord",
     "window.titleBarStyle": "custom",
