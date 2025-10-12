@@ -90,6 +90,7 @@ check_conflict "$HOME/.config/gtk-4.0"
 check_conflict "$HOME/.config/xed"
 check_conflict "$HOME/.config/htop"
 check_conflict "$HOME/.config/mc"
+check_conflict "$HOME/.config/tilix"
 
 if [[ "$CONFLICTS_FOUND" == true ]]; then
     log_warn "Found ${#CONFLICTING_DIRS[@]} conflicting directories/files:"
