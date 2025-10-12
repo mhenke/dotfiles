@@ -82,9 +82,10 @@ alias ghcs='gh copilot suggest'
 alias ghci='gh copilot'
 alias ghcopilot='gh copilot'
 
-# Claude Code CLI
-alias claude='npx -y @anthropic-ai/claude-code'
-alias copilot='gh copilot'
+# Note: 'claude' and 'copilot' are installed as global npm packages
+# See packages/npm-global.txt:
+#   - @anthropic-ai/claude-code (provides 'claude' command)
+#   - @github/copilot (provides 'copilot' command)
 
 # Monitor aliases
 # Switch to external monitor (ultrawide)
