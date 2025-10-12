@@ -66,10 +66,10 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
             # Skip comments and empty lines
             [[ -z "$package" || "$package" =~ ^# ]] && continue
 
-            # Skip problematic packages
-            if [[ "$package" == "@anthropic-ai/claude-code" ]]; then
-                log_warn "Skipping $package (known Bun compatibility issues)"
-                log_info "  Install manually with: npm install -g $package"
+            # Skip CLI tools that should use npm (authentication, native modules)
+            if [[ "$package" == "@anthropic-ai/claude-code" ]] || [[ "$package" == "@github/copilot" ]]; then
+                log_warn "Skipping $package (CLI tool - use npm for stability)"
+                log_info "  Install with: npm install -g $package"
                 continue
             fi
 
@@ -107,9 +107,12 @@ echo "  • 7× faster than npm install"
 echo "  • 4× faster than pnpm install"
 echo "  • 17× faster than yarn install"
 echo ""
-log_warn "Known Issues:"
-echo "  ⚠ @anthropic-ai/claude-code: Use npm instead"
-echo "    npm install -g @anthropic-ai/claude-code"
+log_warn "CLI Tools - Use npm for stability:"
+echo "  ⚠ @anthropic-ai/claude-code"
+echo "  ⚠ @github/copilot"
+echo ""
+echo "Install with:"
+echo "  npm install -g @anthropic-ai/claude-code @github/copilot"
 echo ""
 log_info "Bun is installed to: $BUN_INSTALL"
 log_info "Add to PATH in ~/.zshrc if not already present"
