@@ -54,8 +54,8 @@ echo "Available installation steps:"
 echo "  1. Install system packages (i3, polybar, rofi, picom, dunst, tilix, zsh)"
 echo "  2. Install development tools (Node.js, Ruby, Python, AWS CLI, GitHub CLI)"
 echo "  3. Install applications (VSCode, Bitwarden, Discord, Kodi, ProtonVPN, Zen Browser, OSCAR, Obsidian, Notion)"
-echo "  4. Install themes (Nordic, Papirus icons, Bibata cursor)"
-echo "  5. Setup dotfiles with GNU Stow"
+echo "  4. Setup dotfiles with GNU Stow"
+echo "  5. Install themes and apply dark mode (Nordic, Papirus icons, Bibata cursor)"
 echo "  6. Configure zsh as default shell"
 echo ""
 echo "Options:"
@@ -132,7 +132,13 @@ if should_run_step 3; then
 fi
 
 if should_run_step 4; then
-    log_info "Step 4/6: Installing themes..."
+    log_info "Step 4/6: Setting up dotfiles with GNU Stow..."
+    bash "$DOTFILES_DIR/scripts/setup-stow.sh"
+    log_success "Dotfiles configured"
+fi
+
+if should_run_step 5; then
+    log_info "Step 5/6: Installing themes..."
     bash "$DOTFILES_DIR/scripts/install-themes.sh"
     log_success "Themes installed"
 
@@ -140,12 +146,6 @@ if should_run_step 4; then
     log_info "Applying dark mode settings..."
     bash "$DOTFILES_DIR/scripts/apply-dark-mode.sh"
     log_success "Dark mode applied"
-fi
-
-if should_run_step 5; then
-    log_info "Step 5/6: Setting up dotfiles with GNU Stow..."
-    bash "$DOTFILES_DIR/scripts/setup-stow.sh"
-    log_success "Dotfiles configured"
 fi
 
 if should_run_step 6; then
