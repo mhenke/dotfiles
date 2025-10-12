@@ -17,30 +17,57 @@ log_info() { echo -e "${BLUE}[INFO]${NC} $1"; }
 log_success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 
-# Verify Node.js installation
-log_info "Checking for Node.js..."
+# Install Node.js and npm
+log_info "Installing Node.js and npm..."
 if command -v node &> /dev/null && command -v npm &> /dev/null; then
-    log_success "Node.js found: $(node --version)"
-    log_success "npm found: $(npm --version)"
+    log_success "Node.js already installed: $(node --version)"
+    log_success "npm already installed: $(npm --version)"
 else
-    log_warn "Node.js not found!"
-    log_info "Please install Node.js manually:"
-    log_info "  Option 1 (Recommended): Install from https://nodejs.org/"
-    log_info "  Option 2: Use system package manager: sudo apt install nodejs npm"
-    log_info "  Option 3: Use Bun as Node.js replacement (see docs)"
-    exit 1
+    log_info "Installing Node.js via apt..."
+    sudo apt update
+    sudo apt install -y nodejs npm
+    log_success "Node.js installed: $(node --version)"
+    log_success "npm installed: $(npm --version)"
 fi
 
-# Install global npm packages
+# Install CLI tools with npm (for stability)
 PACKAGES_DIR="$(dirname "$0")/../packages"
-if [[ -f "$PACKAGES_DIR/npm-global.txt" ]]; then
-    log_info "Installing global npm packages..."
-    while IFS= read -r package; do
-        [[ -z "$package" || "$package" =~ ^# ]] && continue
-        npm install -g "$package" 2>/dev/null || log_warn "Failed to install $package"
-    done < "$PACKAGES_DIR/npm-global.txt"
-    log_success "Global npm packages installed"
-fi
+log_info "Installing CLI tools with npm (claude, copilot)..."
+npm install -g @anthropic-ai/claude-code @github/copilot 2>/dev/null || log_warn "Failed to install some CLI tools"
+log_success "CLI tools installed with npm"
+
+# Optionally install other packages with Bun (faster) or npm
+echo ""
+log_info "For remaining packages, you can:"
+log_info "  Option 1 (Recommended): Install Bun, then run ./scripts/install-bun.sh"
+log_info "  Option 2: Install all with npm from packages/npm-global.txt"
+echo ""
+read -p "Install remaining packages now? (npm/bun/skip) [skip]: " -r INSTALL_METHOD
+
+case "$INSTALL_METHOD" in
+    npm)
+        log_info "Installing all packages with npm..."
+        if [[ -f "$PACKAGES_DIR/npm-global.txt" ]]; then
+            while IFS= read -r package; do
+                [[ -z "$package" || "$package" =~ ^# ]] && continue
+                # Skip CLI tools (already installed)
+                [[ "$package" == "@anthropic-ai/claude-code" ]] && continue
+                [[ "$package" == "@github/copilot" ]] && continue
+                npm install -g "$package" 2>/dev/null || log_warn "Failed to install $package"
+            done < "$PACKAGES_DIR/npm-global.txt"
+            log_success "All packages installed with npm"
+        fi
+        ;;
+    bun)
+        log_info "Installing Bun and packages..."
+        bash "$( dirname "${BASH_SOURCE[0]}" )/install-bun.sh"
+        ;;
+    *)
+        log_info "Skipping additional packages - you can install later"
+        log_info "  npm: npm install -g <package>"
+        log_info "  Bun: ./scripts/install-bun.sh"
+        ;;
+esac
 
 # Install Jekyll and Bundler
 log_info "Installing Jekyll and Bundler..."
