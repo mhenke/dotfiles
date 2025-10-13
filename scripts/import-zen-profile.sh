@@ -148,6 +148,11 @@ trap "rm -rf '$TMP_DIR'" EXIT
 
 log_info "Decrypting backup..."
 echo ""
+
+# Extract just the base filename without extensions
+ARCHIVE_NAME="${ENCRYPTED_FILE%.gpg}"
+ARCHIVE_NAME="$(basename "$ARCHIVE_NAME")"
+
 gpg --decrypt --output "$TMP_DIR/$ARCHIVE_NAME" "$ENCRYPTED_FILE"
 
 if [[ $? -ne 0 ]]; then
