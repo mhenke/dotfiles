@@ -5,7 +5,8 @@
 # Reads packages/vscode-extensions.txt and installs all extensions
 #
 
-set -e
+# Note: Not using 'set -e' because extension installs may fail
+# and we want to continue with remaining extensions
 
 # Colors
 GREEN='\033[0;32m'
@@ -75,11 +76,15 @@ while IFS= read -r extension; do
 
     # Install extension
     log_info "Installing: $extension"
-    if code --install-extension "$extension" --force &>/dev/null; then
+
+    # Capture output for debugging but don't show unless it fails
+    if install_output=$(code --install-extension "$extension" --force 2>&1); then
         log_success "✓ $extension"
         ((SUCCESS++))
     else
         log_warn "✗ $extension (failed)"
+        # Show error details
+        echo "$install_output" | grep -i "error\|fail" | head -3 | sed 's/^/    /'
         ((FAILED++))
     fi
 done < "$EXTENSIONS_FILE"
