@@ -126,10 +126,9 @@ FAILED=0
 for package in "${PACKAGES[@]}"; do
     if [[ -d "$DOTFILES_DIR/$package" ]]; then
         # Try to stow, capture output
-        # --no-folding: Only symlink files, not directories (fixes i3 config issues)
         # -R: Restow (recreate symlinks)
         # -v: Verbose
-        if stow_output=$(stow --no-folding -R -v -t "$HOME" -d "$DOTFILES_DIR" "$package" 2>&1); then
+        if stow_output=$(stow -R -v -t "$HOME" -d "$DOTFILES_DIR" "$package" 2>&1); then
             # Check if output indicates it was already stowed
             if echo "$stow_output" | grep -q "UNLINK:\|LINK:"; then
                 # Something was changed (restowed)

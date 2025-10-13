@@ -32,11 +32,11 @@ echo ""
 
 # Detect what conflicts exist by doing a dry run
 log_info "Checking for conflicts..."
-CONFLICTS=$(stow --no-folding -n -v -t "$HOME" -d "$DOTFILES_DIR" */ 2>&1 | grep "existing target" | wc -l)
+CONFLICTS=$(stow -n -v -t "$HOME" -d "$DOTFILES_DIR" */ 2>&1 | grep "existing target" | wc -l)
 
 if [[ $CONFLICTS -gt 0 ]]; then
     log_warn "Found $CONFLICTS conflicting files/directories:"
-    stow --no-folding -n -v -t "$HOME" -d "$DOTFILES_DIR" */ 2>&1 | grep "existing target" | sed 's/^/  /'
+    stow -n -v -t "$HOME" -d "$DOTFILES_DIR" */ 2>&1 | grep "existing target" | sed 's/^/  /'
     echo ""
 else
     log_success "No conflicts found - ready to stow!"
@@ -84,7 +84,7 @@ while IFS= read -r line; do
             ((BACKED_UP++))
         fi
     fi
-done < <(stow --no-folding -n -v -t "$HOME" -d "$DOTFILES_DIR" */ 2>&1)
+done < <(stow -n -v -t "$HOME" -d "$DOTFILES_DIR" */ 2>&1)
 
 if [[ $BACKED_UP -gt 0 ]]; then
     log_success "Backed up $BACKED_UP items to: $BACKUP_DIR"
@@ -117,8 +117,7 @@ FAILED=0
 
 for package in "${PACKAGES[@]}"; do
     if [[ -d "$DOTFILES_DIR/$package" ]]; then
-        # --no-folding: Only symlink files, not directories (fixes i3 config issues)
-        if stow --no-folding -v -t "$HOME" -d "$DOTFILES_DIR" "$package" 2>/dev/null; then
+        if stow -v -t "$HOME" -d "$DOTFILES_DIR" "$package" 2>/dev/null; then
             log_success "✓ $package"
             ((SUCCESS++))
         else

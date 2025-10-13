@@ -192,20 +192,18 @@ dotfiles/
 
 This repo uses [GNU Stow](https://www.gnu.org/software/stow/) for managing symlinks.
 
-**Important:** Always use `--no-folding` flag to ensure individual files are symlinked, not entire directories. This prevents issues with programs like i3 that don't work with symlinked directories.
-
 ```bash
-# Install a package (creates symlinks to files, not directories)
-stow --no-folding -t ~ i3
+# Install a package (creates symlinks)
+stow -t ~ i3
 
 # Remove a package (removes symlinks)
-stow --no-folding -D -t ~ i3
+stow -D -t ~ i3
 
 # Restow a package (update symlinks)
-stow --no-folding -R -t ~ i3
+stow -R -t ~ i3
 
 # Install all packages
-stow --no-folding -t ~ */
+stow -t ~ */
 ```
 
 ## Customization
@@ -250,7 +248,7 @@ Based on shell history analysis:
 If stow reports conflicts, backup the conflicting files:
 ```bash
 mv ~/.config/i3/config ~/.config/i3/config.backup
-stow --no-folding -t ~ i3
+stow -t ~ i3
 ```
 
 Or use our automated script:
@@ -291,7 +289,7 @@ On the new machine:
 ```bash
 cd ~/dotfiles
 git pull
-stow --no-folding -R -t ~ */  # Restow all packages
+stow -R -t ~ */  # Restow all packages
 ```
 
 ## License
