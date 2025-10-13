@@ -17,33 +17,67 @@ log_info() { echo -e "${BLUE}[INFO]${NC} $1"; }
 log_success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 
-# Install VSCode (with optional purge for clean reinstall)
-log_info "Checking Visual Studio Code installation..."
+# ============================================================================
+# INTERACTIVE PROMPTS - Ask all questions upfront
+# ============================================================================
 
-# Ask if user wants to purge existing VSCode installation
+log_info "Step 3/6: Installing Applications"
+echo ""
+log_info "This step will install: VSCode, Bitwarden, Discord, Kodi, ProtonVPN, Zen Browser, OSCAR, Obsidian, Notion"
+echo ""
+
+# Check VSCode status and ask questions
+VSCODE_PURGE="n"
+VSCODE_INSTALL_EXTENSIONS="n"
+EXTENSION_COUNT=0
+
 if command -v code &> /dev/null; then
     log_warn "VSCode is already installed"
     read -p "Do you want to purge and reinstall VSCode? (y/N) " -n 1 -r
     echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        log_info "Purging existing VSCode installation..."
+    VSCODE_PURGE=$REPLY
+fi
 
-        # Uninstall all extensions
-        log_info "Removing all VSCode extensions..."
-        code --list-extensions | xargs -L 1 code --uninstall-extension 2>/dev/null || true
+# Count extensions
+PACKAGES_DIR="$(dirname "$0")/../packages"
+if [[ -f "$PACKAGES_DIR/vscode-extensions.txt" ]]; then
+    EXTENSION_COUNT=$(grep -v '^#' "$PACKAGES_DIR/vscode-extensions.txt" | grep -v '^$' | wc -l)
+    log_info "Found $EXTENSION_COUNT VSCode extensions to install"
+    read -p "Install all $EXTENSION_COUNT VSCode extensions? (y/N) " -n 1 -r
+    echo
+    VSCODE_INSTALL_EXTENSIONS=$REPLY
+else
+    log_warn "VSCode extensions list not found"
+fi
 
-        # Remove VSCode package
-        sudo apt remove --purge -y code 2>/dev/null || true
+echo ""
+log_info "Starting installation with your preferences..."
+echo ""
 
-        # Remove VSCode user data and config
-        log_info "Removing VSCode user data..."
-        rm -rf ~/.config/Code
-        rm -rf ~/.vscode
+# ============================================================================
+# INSTALLATION - No more prompts from here
+# ============================================================================
 
-        log_success "VSCode purged successfully"
-    else
-        log_info "Keeping existing VSCode installation"
-    fi
+# Install VSCode (with optional purge for clean reinstall)
+log_info "Checking Visual Studio Code installation..."
+
+# Purge if requested
+if [[ $VSCODE_PURGE =~ ^[Yy]$ ]]; then
+    log_info "Purging existing VSCode installation..."
+
+    # Uninstall all extensions
+    log_info "Removing all VSCode extensions..."
+    code --list-extensions | xargs -L 1 code --uninstall-extension 2>/dev/null || true
+
+    # Remove VSCode package
+    sudo apt remove --purge -y code 2>/dev/null || true
+
+    # Remove VSCode user data and config
+    log_info "Removing VSCode user data..."
+    rm -rf ~/.config/Code
+    rm -rf ~/.vscode
+
+    log_success "VSCode purged successfully"
 fi
 
 # Install VSCode
@@ -59,25 +93,14 @@ if ! command -v code &> /dev/null; then
     log_success "VSCode installed"
 fi
 
-# Install VSCode extensions
-PACKAGES_DIR="$(dirname "$0")/../packages"
-if [[ -f "$PACKAGES_DIR/vscode-extensions.txt" ]]; then
-    EXTENSION_COUNT=$(grep -v '^#' "$PACKAGES_DIR/vscode-extensions.txt" | grep -v '^$' | wc -l)
-    log_info "Found $EXTENSION_COUNT VSCode extensions to install"
-
-    echo ""
-    read -p "Install VSCode extensions now? (y/N) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        log_info "Installing VSCode extensions..."
-        bash "$( dirname "${BASH_SOURCE[0]}" )/install-vscode-extensions.sh"
-    else
-        log_info "Skipping VSCode extensions"
-        log_info "You can install later with: ./scripts/install-vscode-extensions.sh"
-    fi
+# Install VSCode extensions (using answer from upfront prompt)
+if [[ $VSCODE_INSTALL_EXTENSIONS =~ ^[Yy]$ ]]; then
+    log_info "Installing $EXTENSION_COUNT VSCode extensions..."
+    # Pass 'y' automatically to skip the prompt in install-vscode-extensions.sh
+    bash "$( dirname "${BASH_SOURCE[0]}" )/install-vscode-extensions.sh" <<< "y"
 else
-    log_warn "VSCode extensions list not found: $PACKAGES_DIR/vscode-extensions.txt"
-    log_info "Export from old machine with: ./scripts/export-vscode-extensions.sh"
+    log_info "Skipping VSCode extensions"
+    log_info "You can install later with: ./scripts/install-vscode-extensions.sh"
 fi
 
 # Install Bitwarden

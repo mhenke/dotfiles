@@ -12,8 +12,8 @@ sudo apt install -y git gh
 # Authenticate with GitHub
 gh auth login
 
-# 1. Clone this repo
-git clone https://github.com/mhenke/dotfiles.git ~/dotfiles
+# 1. Clone this repo (using gh for authentication)
+gh repo clone mhenke/dotfiles ~/dotfiles
 cd ~/dotfiles
 
 # 2. Run bootstrap script (installs everything)

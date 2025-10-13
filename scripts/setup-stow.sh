@@ -5,7 +5,8 @@
 # Creates symlinks for all configuration files
 #
 
-set -e
+# Note: Not using 'set -e' because we handle errors explicitly
+# and want to continue stowing all packages even if some fail
 
 # Colors
 GREEN='\033[0;32m'
