@@ -33,8 +33,20 @@ fi
 # Install CLI tools with npm (for stability)
 PACKAGES_DIR="$(dirname "$0")/../packages"
 log_info "Installing CLI tools with npm (claude, copilot)..."
-npm install -g @anthropic-ai/claude-code @github/copilot 2>/dev/null || log_warn "Failed to install some CLI tools"
-log_success "CLI tools installed with npm"
+
+# Install claude
+if npm install -g @anthropic-ai/claude-code 2>&1 | grep -v "npm WARN"; then
+    log_success "Claude Code installed"
+else
+    log_warn "Failed to install Claude Code"
+fi
+
+# Install copilot
+if npm install -g @github/copilot 2>&1 | grep -v "npm WARN"; then
+    log_success "GitHub Copilot installed"
+else
+    log_warn "Failed to install GitHub Copilot"
+fi
 
 # Optionally install other packages with Bun (faster) or npm
 echo ""

@@ -5,8 +5,15 @@ Automated setup for migrating Linux Mint XFCE with i3wm to a new machine.
 ## Quick Start (New Machine)
 
 ```bash
+# 0. Prerequisites (required first!)
+sudo apt update
+sudo apt install -y git gh
+
+# Authenticate with GitHub
+gh auth login
+
 # 1. Clone this repo
-git clone https://github.com/yourusername/dotfiles.git ~/dotfiles
+git clone https://github.com/mhenke/dotfiles.git ~/dotfiles
 cd ~/dotfiles
 
 # 2. Run bootstrap script (installs everything)
@@ -30,19 +37,51 @@ cd ~/dotfiles
 - **zsh plugins** - autosuggestions, syntax highlighting, z, fzf, etc.
 
 ### Development Tools
-- **VSCode** - Code editor
+- **VSCode** - Code editor with automated extension installation
 - **git** + **gh** - Version control and GitHub CLI
-- **Node.js** (via nvm) + npm
+- **Node.js** + **npm** - JavaScript runtime and package manager
+- **Bun** - Fast JavaScript runtime (7× faster than npm)
+- **Claude Code** + **GitHub Copilot** - AI coding assistants
 - **Python3** + pip
 - **Ruby** + Jekyll
-- **AWS CLI**
+- **AWS CLI v2**
 
 ### Applications
 - **Bitwarden** - Password manager
 - **Discord** - Communication
 - **Kodi** - Media center
-- **Proton VPN** - VPN client
+- **Proton VPN** - VPN client (CLI, no GNOME bloat)
+- **Zen Browser** - Firefox-based browser (Flatpak)
+- **OSCAR** - CPAP analysis software
+- **Obsidian** - Note-taking and knowledge base
+- **Notion** (via Cohesion) - Productivity workspace
 - **xed** - Text editor
+
+### Themes & Appearance
+- **Nordic** - Dark GTK theme (blue/gray palette)
+- **Papirus-Dark** - Icon theme
+- **Bibata-Modern-Classic** - Cursor theme
+- **Nord** - Terminal color scheme
+- **Auto dark mode** - System-wide dark theme application (XFCE/Cinnamon/MATE support)
+
+## Recent Improvements
+
+### New Features (2025-10)
+- ✨ **Automated VSCode extension management** - 37 extensions auto-installed
+- ✨ **Bun integration** - 7× faster package installation for 52/54 packages
+- ✨ **First-time stow helper** - Automatic conflict detection and backup
+- ✨ **Dark mode automation** - Desktop environment detection (XFCE/Cinnamon/MATE)
+- ✨ **Backup/export scripts** - Configs, Zen Browser profile, personal data
+- ✨ **Import scripts** - Automated restoration on new laptop
+- ✨ **Bootstrap order fix** - Stow runs before themes to avoid conflicts
+
+### Migration Tools
+- `export-configs.sh` - Backup SSH, GPG, AWS credentials (GPG encrypted)
+- `export-zen-profile.sh` - Export Zen Browser (detects Flatpak/AppImage/deb)
+- `export-personal-data.sh` - Backup Documents, Desktop, Kodi, themes
+- `export-vscode-extensions.sh` - Export VSCode extension list
+- `first-time-stow.sh` - Clean first-time setup for new machines
+- `clean-for-stow.sh` - Fix "existing target not owned by stow" errors
 
 ## Manual Setup Steps
 
