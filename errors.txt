@@ -1,23 +1,72 @@
-SUCCESS] Themes installed successfully!
+1) warning with some cli tools but then seems ok later
+Processing triggers for man-db (2.12.0-4build2) ...
+[SUCCESS] Node.js installed: v18.19.1
+[SUCCESS] npm installed: 9.2.0
+[INFO] Installing CLI tools with npm (claude, copilot)...
+[WARN] Failed to install some CLI tools
+[SUCCESS] CLI tools installed with npm
 
-Installed themes:
-  - Nordic GTK theme (dark blue/gray)
-  - Papirus-Dark icon theme
-  - Bibata Modern Classic cursor
+[INFO] For remaining packages, you can:
+[INFO]   Option 1 (Recommended): Install Bun, then run ./scripts/install-bun.sh
+[INFO]   Option 2: Install all with npm from packages/npm-global.txt
 
-Theme settings have been applied via gsettings.
-You may need to logout/login or restart apps to see changes.
+Install remaining packages now? (npm/bun/skip) [skip]: bun
+[INFO] Installing Bun and packages...
+[INFO] Bun Installation Script
 
-To manually apply in other applications:
-  - xed: Preferences -> Theme -> Nordic
-  - VSCode: Already using Nordic via extensions
-  - Tilix: Already using Nord color scheme
-[SUCCESS] Themes installed
-[INFO] Applying dark mode settings...
-[INFO] Applying dark mode settings...
+[SUCCESS] Bun installation complete!
 
-[INFO] Setting GTK theme to Nordic...
-[SUCCESS] GTK theme set to Nordic
-[INFO] Setting color scheme to dark...
-No such key “color-scheme”
+════════════════════════════════════════════════════
+Quick Start:
+════════════════════════════════════════════════════
+  • Install package:    bun install <package>
+  • Install globally:   bun install -g <package>
+  • Run script:         bun run <script>
+  • Execute file:       bun <file>.ts
+
+Speed comparison to npm:
+  • 7× faster than npm install
+  • 4× faster than pnpm install
+  • 17× faster than yarn install
+
+[WARN] CLI Tools - Use npm for stability:
+  ⚠ @anthropic-ai/claude-code
+  ⚠ @github/copilot
+
+Install with:
+  npm install -g @anthropic-ai/claude-code @github/copilot
+
+[INFO] Bun is installed to: /home/mhenke/.bun
+[INFO] Add to PATH in ~/.zshrc if not already present
+
+
+
+
+2) update readme.md 
+ - update with refactoring
+ - add first step is to sudo apt install git gh
+ - then autehnicate/login on github.com and through gh cli
+
+
+3) install stops stop after installing one extentsion
+etting up code (1.105.0-1759933565) ...
+Processing triggers for gnome-menus (3.36.0-1.1ubuntu3) ...
+Processing triggers for shared-mime-info (2.4-4) ...
+Processing triggers for mailcap (3.70+nmu1ubuntu1) ...
+Processing triggers for desktop-file-utils (0.27-2build1) ...
+[SUCCESS] VSCode installed
+[INFO] Found 37 VSCode extensions to install
+
+Install VSCode extensions now? (y/N) y
+[INFO] Installing VSCode extensions...
+[INFO] Installing VSCode extensions...
+[INFO] Found 37 extensions to install
+
+Install all 37 extensions? (y/N) y
+
+[INFO] Installing extensions...
+[INFO] Installing: 1tontech.angular-material
+[SUCCESS] ✓ 1tontech.angular-material
+
+4) we need to have git config included in our migration
 
