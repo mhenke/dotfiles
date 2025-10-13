@@ -1,75 +1,18 @@
-1) ask qestions for step 3 at begining of step 3: vs code extention install now, install all xx extensions, and install vs code
+1) ✅ FIXED: Ask questions for step 3 at beginning of step 3
+   - Moved all VSCode prompts (purge, extension install) to start of script
+   - User makes all decisions upfront before installation begins
+   - No interruptions during installation process
+   - Commit: ac0d5a2
 
-2) this should use gh to clone repo
-# 1. Clone this repo
-git clone https://github.com/mhenke/dotfiles.git ~/dotfiles
-cd ~/dotfiles
+2) ✅ FIXED: Use gh to clone repo instead of git
+   - Updated README.md to use 'gh repo clone mhenke/dotfiles'
+   - Simpler command that uses gh authentication
+   - Commit: ac0d5a2
 
-3.Step for just stopped
+3) ✅ FIXED: Step 4 stow just stopped after first package
+   - Removed 'set -e' from setup-stow.sh
+   - Script now continues through all packages even if one fails
+   - Errors handled explicitly in the loop
+   - Commit: ac0d5a2
 
-[SUCCESS] Applications installed
-[INFO] Step 4/6: Setting up dotfiles with GNU Stow...
-[INFO] Setting up dotfiles with GNU Stow...
-[INFO] Dotfiles directory: /home/mhenke/dotfiles
-[INFO] Checking for conflicting files and directories...
-[WARN] Found 3 conflicting directories/files:
-  - /home/mhenke/.zshrc
-  - /home/mhenke/.gitconfig
-  - /home/mhenke/.config/gtk-3.0
-
-[WARN] These need to be backed up and removed before Stow can create symlinks
-
-Automatically backup and remove these? (y/N) y
-[INFO] Backing up and removing conflicts...
-[WARN] This script will backup and remove existing config directories
-[WARN] that conflict with GNU Stow.
-
-[INFO] Files and directories that will be backed up and removed:
-  - ~/.zshrc
-  - ~/.gitconfig
-  - ~/.config/i3
-  - ~/.config/polybar
-  - ~/.config/picom
-  - ~/.config/dunst
-  - ~/.config/rofi
-  - ~/.config/gtk-3.0
-  - ~/.config/gtk-4.0
-  - ~/.config/xed
-  - ~/.config/htop
-  - ~/.config/mc
-  - ~/.config/tilix
-
-[WARN] Backups will be created with timestamp: .backup-YYYYMMDD-HHMMSS
-
-
-[INFO] Backing up and removing conflicting files and directories...
-
-[INFO] Backing up: /home/mhenke/.zshrc
-[SUCCESS] Backed up: .zshrc
-[INFO] Backing up: /home/mhenke/.gitconfig
-[SUCCESS] Backed up: .gitconfig
-[INFO] Skipping i3 (does not exist)
-[INFO] Skipping polybar (does not exist)
-[INFO] Skipping picom (does not exist)
-[INFO] Skipping dunst (does not exist)
-[INFO] Skipping rofi (does not exist)
-[INFO] Backing up: /home/mhenke/.config/gtk-3.0
-[SUCCESS] Backed up: gtk-3.0
-[INFO] Skipping gtk-4.0 (does not exist)
-[INFO] Skipping xed (does not exist)
-[INFO] Skipping htop (does not exist)
-[INFO] Skipping mc (does not exist)
-[INFO] Skipping tilix (does not exist)
-
-[SUCCESS] Cleanup complete!
-
-[INFO] Backups created with timestamp: 20251013-083546
-[INFO] You can now run: ./scripts/setup-stow.sh
-
-[WARN] To restore backups if needed:
-  mv ~/.config/i3.backup-20251013-083546 ~/.config/i3
-  (repeat for other directories)
-[INFO] Stowing packages...
-
-[SUCCESS] ✓ i3
-
+All current errors resolved! ✅
