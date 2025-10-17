@@ -115,6 +115,12 @@ esac
 # Install Jekyll and Bundler
 log_info "Installing Jekyll and Bundler..."
 if command -v gem &> /dev/null; then
+    # Ensure ruby-dev is installed (required for building native extensions)
+    if ! dpkg -l | grep -q "^ii  ruby-dev "; then
+        log_info "Installing ruby-dev (required for Jekyll native extensions)..."
+        sudo apt install -y ruby-dev
+    fi
+    
     gem install jekyll bundler --user-install 2>/dev/null || sudo gem install jekyll bundler
     log_success "Jekyll and Bundler installed"
 else
