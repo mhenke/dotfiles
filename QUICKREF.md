@@ -232,12 +232,11 @@ gru                # git reset --
 
 ## Development Tools
 
-### Node.js (via nvm)
+### Node.js 22 (via NodeSource)
 ```bash
-nvm install --lts        # Install latest LTS
-nvm use --lts            # Use LTS version
-nvm alias default lts/*  # Set LTS as default
-node --version           # Check version
+# Node.js 22 is automatically installed via NodeSource repository
+# during bootstrap (install-dev-tools.sh)
+node --version           # Check version (should show v22.x.x)
 npm --version            # Check npm version
 ```
 
