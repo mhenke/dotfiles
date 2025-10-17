@@ -17,15 +17,19 @@ log_info() { echo -e "${BLUE}[INFO]${NC} $1"; }
 log_success() { echo -e "${GREEN}[SUCCESS]${NC} $1"; }
 log_warn() { echo -e "${YELLOW}[WARN]${NC} $1"; }
 
-# Install Node.js and npm
-log_info "Installing Node.js and npm..."
-if command -v node &> /dev/null && command -v npm &> /dev/null; then
-    log_success "Node.js already installed: $(node --version)"
+# Install Node.js 22 and npm via NodeSource
+log_info "Installing Node.js 22 and npm via NodeSource..."
+if command -v node &> /dev/null && [[ "$(node --version)" == v22.* ]]; then
+    log_success "Node.js 22 already installed: $(node --version)"
     log_success "npm already installed: $(npm --version)"
 else
-    log_info "Installing Node.js via apt..."
-    sudo apt update
-    sudo apt install -y nodejs npm
+    log_info "Adding NodeSource Node.js 22 repository..."
+    # Prerequisites (curl, build-essential) are installed in install-packages.sh
+    curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+    
+    log_info "Installing Node.js 22 and npm..."
+    sudo apt install -y nodejs
+    
     log_success "Node.js installed: $(node --version)"
     log_success "npm installed: $(npm --version)"
 fi

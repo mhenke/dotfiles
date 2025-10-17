@@ -4,7 +4,7 @@
 # 
 # This script sets up a fresh Linux Mint installation with:
 # - i3wm, polybar, rofi, picom, dunst
-# - Development tools (node, npm, ruby, python, aws)
+# - Development tools (Node.js 22, npm, ruby, python, aws)
 # - Applications (VSCode, Bitwarden, Discord, Kodi, ProtonVPN, Zen Browser, OSCAR, Obsidian, Notion)
 # - Dotfiles via GNU Stow
 #

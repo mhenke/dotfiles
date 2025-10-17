@@ -39,7 +39,7 @@ cd ~/dotfiles
 ### Development Tools
 - **VSCode** - Code editor with automated extension installation
 - **git** + **gh** - Version control and GitHub CLI
-- **Node.js** + **npm** - JavaScript runtime and package manager
+- **Node.js 22** + **npm** - JavaScript runtime and package manager (via NodeSource repository)
 - **Bun** - Fast JavaScript runtime (7× faster than npm)
 - **Claude Code** + **GitHub Copilot** - AI coding assistants
 - **Python3** + pip
