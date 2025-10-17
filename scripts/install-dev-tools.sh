@@ -35,14 +35,14 @@ PACKAGES_DIR="$(dirname "$0")/../packages"
 log_info "Installing CLI tools with npm (claude, copilot)..."
 
 # Install claude
-if npm install -g @anthropic-ai/claude-code 2>&1 | grep -v "npm WARN"; then
+if sudo npm install -g @anthropic-ai/claude-code 2>&1 | grep -v "npm WARN"; then
     log_success "Claude Code installed"
 else
     log_warn "Failed to install Claude Code"
 fi
 
 # Install copilot
-if npm install -g @github/copilot 2>&1 | grep -v "npm WARN"; then
+if sudo npm install -g @github/copilot 2>&1 | grep -v "npm WARN"; then
     log_success "GitHub Copilot installed"
 else
     log_warn "Failed to install GitHub Copilot"
@@ -65,7 +65,7 @@ case "$INSTALL_METHOD" in
                 # Skip CLI tools (already installed)
                 [[ "$package" == "@anthropic-ai/claude-code" ]] && continue
                 [[ "$package" == "@github/copilot" ]] && continue
-                npm install -g "$package" 2>/dev/null || log_warn "Failed to install $package"
+                sudo npm install -g "$package" 2>/dev/null || log_warn "Failed to install $package"
             done < "$PACKAGES_DIR/npm-global.txt"
             log_success "All packages installed with npm"
         fi
