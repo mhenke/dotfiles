@@ -30,6 +30,33 @@ else
     log_success "npm installed: $(npm --version)"
 fi
 
+# Configure npm to use user-owned global directory (avoids permission issues)
+log_info "Configuring npm global directory..."
+NPM_GLOBAL_DIR="$HOME/.npm-global"
+if [[ ! -d "$NPM_GLOBAL_DIR" ]]; then
+    mkdir -p "$NPM_GLOBAL_DIR"
+    log_info "Created $NPM_GLOBAL_DIR"
+fi
+
+# Set npm prefix to user directory
+npm config set prefix "$NPM_GLOBAL_DIR"
+log_success "npm prefix configured to $NPM_GLOBAL_DIR"
+
+# Add to PATH for current session
+export PATH="$NPM_GLOBAL_DIR/bin:$PATH"
+
+# Add to shell configs for future sessions
+for rcfile in "$HOME/.bashrc" "$HOME/.zshrc"; do
+    if [[ -f "$rcfile" ]]; then
+        if ! grep -q "\.npm-global/bin" "$rcfile"; then
+            echo '' >> "$rcfile"
+            echo '# npm global packages' >> "$rcfile"
+            echo 'export PATH=~/.npm-global/bin:$PATH' >> "$rcfile"
+            log_info "Added npm global path to $rcfile"
+        fi
+    fi
+done
+
 # Install CLI tools with npm (for stability)
 PACKAGES_DIR="$(dirname "$0")/../packages"
 log_info "Installing CLI tools with npm (claude, copilot)..."
