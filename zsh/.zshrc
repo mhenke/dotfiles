@@ -51,6 +51,7 @@ export PAGER='less'
 # OPTIMIZED PATH CONFIGURATION (consolidated, no duplicates)
 typeset -U path
 path=(
+    ~/.npm-global/bin
     ~/.console-ninja/.bin
     ~/.local/bin
     ~/go/bin
