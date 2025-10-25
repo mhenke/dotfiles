@@ -1,46 +1,30 @@
-# Dotfiles .gitignore
+# History files
+*_history
+*.history
+.history
 
-# Backup files
-*.backup
-*.backup-*
-*.bck
-*.old
-*~
+# Cache directories
+cache/
+Cache/
+*cache*
 
 # Log files
 *.log
 
-# Compiled files
-*.zwc
-*.pyc
-__pycache__/
+# Fish shell
+fish_variables
 
-# Package manager locks (not needed in dotfiles)
-package-lock.json
-yarn.lock
-Gemfile.lock
+# Zsh
+.zsh_history
+.zsh_sessions/
+.zcompdump*
+
+# Git configs with potential tokens
+.gitconfig
+config.yml
 
 # Temporary files
-.DS_Store
-.thumbs.db
-
-# System files
-.directory
-
-# Personal/sensitive
-.ssh/
-*.pem
-*.key
-*_history
-.aws/credentials
-.gnupg/
-
-# Cache directories
-cache/
-.cache/
-
-# Keep packages directory structure
-packages/*
-!packages/*.txt
-!packages/README.md
-*.log
+*.tmp
+*.temp
+*.swp
+*~
