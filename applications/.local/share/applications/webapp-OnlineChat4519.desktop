@@ -1,0 +1,21 @@
+[Desktop Entry]
+Version=1.0
+Exec=mintchat
+Terminal=false
+X-MultipleArgs=false
+Type=Application
+Icon=mintchat
+Categories=GTK;Network;
+MimeType=text/html;text/xml;application/xhtml_xml;
+StartupWMClass=WebApp-OnlineChat4519
+StartupNotify=true
+X-WebApp-Browser=Firefox
+X-WebApp-URL=https://www.linuxmint.com/matrix.php
+X-WebApp-CustomParameters=
+X-WebApp-Navbar=false
+X-WebApp-PrivateWindow=false
+X-WebApp-Isolated=true
+Name=Matrix
+Comment=Online Chat
+Comment[es]=Chat en línea
+Comment[fr]=Discussions en ligne

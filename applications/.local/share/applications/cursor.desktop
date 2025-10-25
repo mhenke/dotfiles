@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Cursor
+Comment=AI-powered code editor
+Exec=/home/mhenke/Downloads/Cursor.AppImage
+Icon=/home/mhenke/.local/share/icons/hicolor/256x256/apps/cursor.png
+Terminal=false
+Type=Application
+Categories=Development;IDE;TextEditor;
+StartupWMClass=Cursor
+StartupNotify=true

@@ -28,3 +28,21 @@ config.yml
 *.temp
 *.swp
 *~
+.claude/
+
+# Large dev tool caches (don't stow)
+Cursor/
+Code/
+Windsurf/
+cursor/
+code/
+windsurf/
+
+# AWS credentials (CRITICAL - never commit)
+credentials
+*credentials*
+sso/
+cli/
+
+# GitHub tokens
+hosts.yml
