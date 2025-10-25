@@ -1,134 +1,63 @@
-# Optimized .zshrc for better performance
-# Path to your oh-my-zsh installation.
+# If you come from bash you might have to change your $PATH.
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+
+# Add npm global packages to PATH
+export PATH="$HOME/.npm-global/bin:$PATH"
+
 export ZSH="$HOME/.oh-my-zsh"
 
-# Theme - af-magic (clean, fast, with git info)  
-ZSH_THEME="af-magic"
+ZSH_THEME="agnosterzak"
 
-# Show computer name prominently (add after oh-my-zsh loads)
-PROMPT='%{$FG[032]%}%m%{$reset_color%} ${PROMPT}'
-
-# Update behavior
-zstyle ':omz:update' mode auto
-
-# History configuration (optimized)
-HISTFILE=~/.zsh_history
-HISTSIZE=50000
-SAVEHIST=50000
-setopt SHARE_HISTORY
-setopt APPEND_HISTORY
-setopt HIST_IGNORE_DUPS
-setopt HIST_IGNORE_ALL_DUPS
-setopt HIST_EXPIRE_DUPS_FIRST
-setopt HIST_SAVE_NO_DUPS
-setopt HIST_IGNORE_SPACE
-
-# Terminal
-export TERMINAL=tilix
-
-# OPTIMIZED PLUGINS (9 plugins, excellent performance)
-plugins=(
-    git                     # Essential for git workflows (ga, gco, gst, etc.)
-    aliases                 # Show available aliases
-    z                       # Smart directory jumping
-    zsh-autosuggestions    # Command suggestions
-    zsh-syntax-highlighting # Syntax coloring (keep last for performance)
-    npm                     # Node development shortcuts
-    aws                     # AWS CLI shortcuts
-    fzf                     # Fuzzy finding
-    you-should-use         # Shows available aliases
+plugins=( 
+    git
+    zsh-autosuggestions
+    zsh-syntax-highlighting
 )
 
-# Load oh-my-zsh
-fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 source $ZSH/oh-my-zsh.sh
 
-# USER CONFIGURATION
-export EDITOR='zed'
-export VISUAL='zed'
-export PAGER='less'
 
-# OPTIMIZED PATH CONFIGURATION (consolidated, no duplicates)
-typeset -U path
-path=(
-    ~/.npm-global/bin
-    ~/.console-ninja/.bin
-    ~/.local/bin
-    ~/go/bin
-    $path
-)
+# Display Pokemon-colorscripts
+# Project page: https://gitlab.com/phoneybadger/pokemon-colorscripts#on-other-distros-and-macos
+#pokemon-colorscripts --no-title -s -r #without fastfetch
+pokemon-colorscripts --no-title -s -r | fastfetch -c $HOME/.config/fastfetch/config-pokemon.jsonc --logo-type file-raw --logo-height 10 --logo-width 5 --logo -
 
-# FZF configuration (optimized)
-if [ -f ~/.fzf.zsh ]; then
-    source ~/.fzf.zsh
-    export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
-fi
+# fastfetch. Will be disabled if above colorscript was chosen to install
+#fastfetch -c $HOME/.config/fastfetch/config-compact.jsonc
 
-# ALIASES (organized and optimized)
-# Config editing
-alias zshconfig="$EDITOR ~/.zshrc"
-alias i3config="$EDITOR ~/.config/i3/config"
-alias picomconfig="$EDITOR ~/.config/picom/picom.conf"
+# Set-up icons for files/directories in terminal using lsd
+alias ls='lsd'
+alias l='ls -l'
+alias la='ls -a'
+alias lla='ls -la'
+alias lt='ls --tree'
 
-# GitHub CLI aliases
-alias ghpr='gh pr list'
-alias ghco='gh copilot'
-alias ghce='gh copilot explain'
-alias ghcs='gh copilot suggest'
-alias ghci='gh copilot'
-alias ghcopilot='gh copilot'
-
-# Note: 'claude' and 'copilot' are installed as global npm packages
-# See packages/npm-global.txt:
-#   - @anthropic-ai/claude-code (provides 'claude' command)
-#   - @github/copilot (provides 'copilot' command)
-
-# Monitor aliases
-# Switch to external monitor (ultrawide)
-alias sceptre='xrandr --output eDP-1 --off --output HDMI-1 --mode 3440x1440 --rate 50.00 --primary'
-
-# Switch back to laptop screen
-alias laptop='xrandr --output HDMI-1 --off --output eDP-1 --mode 1366x768 --primary'
-
-# Both screens - external above and to the left of laptop, external is primary
-alias dual='xrandr --output eDP-1 --mode 1366x768 --output HDMI-1 --mode 3440x1440 --rate 50.00 --above eDP-1 --left-of eDP-1 --primary'
-
-# System
+# System update alias
 alias update="sudo dpkg --configure -a && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y"
 
-# Better defaults (check if commands exist first)
-if command -v exa >/dev/null 2>&1; then
-    alias ls="exa --icons --group-directories-first"
-    alias la="exa -la --icons --group-directories-first"
-    alias tree="exa --tree --icons"
+export PATH=$HOME/.local/bin:$PATH
+
+. "$HOME/.local/bin/env"
+
+# Fix Tilix VTE configuration for directory inheritance
+# Must be sourced AFTER Oh-My-Zsh to ensure precmd_functions works
+if [[ -n "$TILIX_ID" ]] || [[ -n "$VTE_VERSION" ]]; then
+    if [[ -f /etc/profile.d/vte.sh ]]; then
+        source /etc/profile.d/vte.sh
+    elif [[ -f /etc/profile.d/vte-2.91.sh ]]; then
+        source /etc/profile.d/vte-2.91.sh
+    fi
 fi
 
-if command -v bat >/dev/null 2>&1; then
-    alias cat="bat"
-fi
+# bun completions
+[ -s "/home/mhenke/.bun/_bun" ] && source "/home/mhenke/.bun/_bun"
 
-if command -v htop >/dev/null 2>&1; then
-    alias top="htop"
-fi
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
-# DIRECTORY NAVIGATION
-setopt AUTO_PUSHD
-setopt PUSHD_IGNORE_DUPS
-setopt PUSHD_SILENT
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-# COMPLETION SETTINGS (optimized)
-zstyle ':completion:*' menu select
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
-zstyle ':completion:*' use-cache yes
-zstyle ':completion:*' cache-path ~/.zsh/cache
-
-# Load custom functions safely
-if [[ -d ~/.zsh/functions ]]; then
-    for function in ~/.zsh/functions/*; do
-        [[ -r "$function" ]] && source "$function"
-    done
-fi
-
-# SYNTAX HIGHLIGHTING CONFIGURATION
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
-ZSH_HIGHLIGHT_STYLES[cursor]='bold'
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"

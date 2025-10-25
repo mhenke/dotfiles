@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>edit-copy</icon>
+	<name>Copy Image to Clipboard</name>
+	<submenu></submenu>
+	<unique-id>1760812598246500-6</unique-id>
+	<command>sh -c &apos;case "%f" in *.jpg|*.JPG|*.jpeg|*.JPEG) xclip -selection clipboard -t image/jpeg -i &lt; "%f" ;; *.png|*.PNG) xclip -selection clipboard -t image/png -i &lt; "%f" ;; esac&apos;</command>
+	<description>Copy image data to clipboard for pasting in applications</description>
+	<range></range>
+	<patterns>*.png;*.PNG;*.jpg;*.JPG;*.jpeg;*.JPEG</patterns>
+	<image-files/>
+</action>
+<action>
+	<icon>Terminal</icon>
+	<name>Open in Terminal</name>
+	<submenu></submenu>
+	<unique-id>1760812598246105-1</unique-id>
+	<command>tilix --working-directory=%f</command>
+	<description>Open terminal in the selected folder</description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>folder</icon>
+	<name>Open as Root</name>
+	<submenu></submenu>
+	<unique-id>1760812598246189-2</unique-id>
+	<command>pkexec thunar %F</command>
+	<description>Open the folder with administration privileges</description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon>emblem-symbolic-link</icon>
+	<name>Create a Link</name>
+	<submenu></submenu>
+	<unique-id>1760812598246274-3</unique-id>
+	<command>ln -s %f  &apos;Link to %n&apos;</command>
+	<description>Create a symbolic link for each selected item</description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+	<other-files/>
+</action>
+<action>
+	<icon>application-certificate</icon>
+	<name>Verify</name>
+	<submenu></submenu>
+	<unique-id>1760812598246300-4</unique-id>
+	<command>mint-iso-verify %f</command>
+	<description>Verify the authenticity and integrity of the image</description>
+	<range></range>
+	<patterns>*.iso;*.ISO</patterns>
+	<audio-files/>
+	<image-files/>
+	<other-files/>
+	<text-files/>
+	<video-files/>
+</action>
+<action>
+	<icon>gtk-find</icon>
+	<name>Search</name>
+	<submenu></submenu>
+	<unique-id>1760812598246392-5</unique-id>
+	<command>catfish %f</command>
+	<description>Search for Files</description>
+	<range></range>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+</actions>
