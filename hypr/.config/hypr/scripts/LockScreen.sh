@@ -4,4 +4,4 @@
 # For Hyprlock
 #pidof hyprlock || hyprlock -q 
 
-loginctl lock-session
+pidof hyprlock || hyprlock -q
