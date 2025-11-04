@@ -1,17 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <actions>
 <action>
-	<icon>edit-copy</icon>
-	<name>Copy Image to Clipboard</name>
-	<submenu></submenu>
-	<unique-id>1760812598246500-6</unique-id>
-	<command>sh -c &apos;case "%f" in *.jpg|*.JPG|*.jpeg|*.JPEG) xclip -selection clipboard -t image/jpeg -i &lt; "%f" ;; *.png|*.PNG) xclip -selection clipboard -t image/png -i &lt; "%f" ;; esac&apos;</command>
-	<description>Copy image data to clipboard for pasting in applications</description>
-	<range></range>
-	<patterns>*.png;*.PNG;*.jpg;*.JPG;*.jpeg;*.JPEG</patterns>
-	<image-files/>
-</action>
-<action>
 	<icon>Terminal</icon>
 	<name>Open in Terminal</name>
 	<submenu></submenu>
