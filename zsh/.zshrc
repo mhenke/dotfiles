@@ -10,6 +10,15 @@ ZSH_THEME="agnosterzak"
 
 plugins=( 
     git
+    npm
+    docker
+    node
+    fzf
+    alias-finder
+    z
+    pip
+    pipenv
+    virtualenv
     zsh-autosuggestions
     zsh-syntax-highlighting
 )
@@ -34,6 +43,13 @@ alias lt='ls --tree'
 
 # System update alias
 alias update="sudo dpkg --configure -a && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y"
+
+# Claude Code clipboard workaround - converts clipboard images to file paths
+alias cpaste='~/bin/clip2path'
+
+# Monitor switching commands
+alias monitor-switch='~/.config/hypr/scripts/monitor-switch.sh'
+alias monitor-profiles='~/.config/hypr/scripts/MonitorProfiles.sh'
 
 export PATH=$HOME/.local/bin:$PATH
 
