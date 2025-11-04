@@ -3,6 +3,6 @@
   "snap-threshold": 10,
   "indicator-timeout": 500,
   "custom-mode": [],
-  "use-desc": false,
+  "use-desc": true,
   "confirm-timeout": 10
 }
