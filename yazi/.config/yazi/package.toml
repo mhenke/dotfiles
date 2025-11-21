@@ -1,0 +1,27 @@
+[plugin]
+deps = []
+
+[[flavor.deps]]
+use = "BennyOe/tokyo-night"
+rev = "5f56364"
+hash = "c0bf69ad2c44005892d586e9693993c6"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-mocha"
+rev = "f6b425a"
+hash = "14b111562c00eb1917fe3ca3ae9bb771"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-latte"
+rev = "f6b425a"
+hash = "31f2ba594080bfc2a68d054101cdc5f1"
+
+[[flavor.deps]]
+use = "Chromium-3-Oxide/everforest-medium"
+rev = "0158f0f"
+hash = "dbbbfe681e156c28303efb1f44b6cbc4"
+
+[[flavor.deps]]
+use = "yazi-rs/flavors:catppuccin-frappe"
+rev = "f6b425a"
+hash = "2af5f0305730530f23e61ccaba119efe"
