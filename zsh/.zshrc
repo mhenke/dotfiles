@@ -6,7 +6,14 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="agnosterzak"
+ZSH_THEME="bira"
+
+# 
+# af-magic
+# agnoster *
+# bira **
+# agnosterzak
+#
 
 plugins=( 
     git

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Yazi
+Comment=Blazing fast terminal file manager
+Exec=ghostty -e yazi
+Icon=system-file-manager
+Terminal=false
+Type=Application
+Categories=System;FileTools;FileManager;
+Keywords=file;manager;browser;explorer;terminal;
+StartupNotify=true
