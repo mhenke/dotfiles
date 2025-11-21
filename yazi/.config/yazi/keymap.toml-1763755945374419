@@ -1,7 +1,7 @@
 # Yazi Keymap Configuration (v0.3.x)
 # Managed via stow from ~/dotfiles/yazi
 
-[mgr]
+[manager]
 prepend_keymap = [
     # Quick access directories
     { on = ["g", "h"], run = "cd ~", desc = "Go to home" },
