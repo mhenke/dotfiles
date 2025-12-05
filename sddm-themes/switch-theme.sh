@@ -5,7 +5,13 @@
 #
 
 THEME_DIR="/usr/share/sddm/themes/simple-sddm"
-DOTFILES_DIR="$HOME/dotfiles/sddm-themes/simple-sddm"
+# Get the actual user's home directory (works with sudo)
+if [ -n "$SUDO_USER" ]; then
+    USER_HOME=$(getent passwd "$SUDO_USER" | cut -d: -f6)
+else
+    USER_HOME="$HOME"
+fi
+DOTFILES_DIR="$USER_HOME/dotfiles/sddm-themes/simple-sddm"
 CONFIGS_DIR="$DOTFILES_DIR/configs"
 BACKGROUNDS_DIR="$DOTFILES_DIR/Backgrounds"
 
