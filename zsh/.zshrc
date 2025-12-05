@@ -1,5 +1,5 @@
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Add npm global packages to PATH
 export PATH="$HOME/.npm-global/bin:$PATH"
@@ -84,3 +84,6 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # bun
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# Ollama model aliases
+source ~/.ollama-aliases
