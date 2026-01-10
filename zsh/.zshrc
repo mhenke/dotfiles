@@ -32,6 +32,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+eval "$(zoxide init zsh)"
 
 # Display Pokemon-colorscripts
 # Project page: https://gitlab.com/phoneybadger/pokemon-colorscripts#on-other-distros-and-macos
@@ -87,3 +88,13 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Ollama model aliases
 source ~/.ollama-aliases
+
+# Yazi shell wrapper for zoxide integration
+function y() {
+    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+    yazi "$@" --cwd-file="$tmp"
+    if cwd="$(command cat -- "$tmp")" && [ -n "$cwd" ] && [ "$cwd" != "$PWD" ]; then
+        builtin cd -- "$cwd"
+    fi
+    rm -f -- "$tmp"
+}
