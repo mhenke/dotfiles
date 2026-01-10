@@ -30,3 +30,11 @@ palette = 15=#ffffff
 
 # Window opacity
 background-opacity = 0.7
+
+# Vim-style split creation
+keybind = shift+ctrl+h=new_split:left
+keybind = shift+ctrl+j=new_split:down
+keybind = shift+ctrl+k=new_split:up
+keybind = shift+ctrl+l=new_split:right
+
+# Custom keybinding to close split pane with Ctrl+Q

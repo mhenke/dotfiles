@@ -13,3 +13,11 @@ linemode = "size"
 [preview]
 max_width = 1200
 max_height = 1800
+
+[plugin]
+prepend_previewers = [
+  { mime = "application/*zip", run = "archive" },
+  { mime = "application/x-tar", run = "archive" },
+  { mime = "application/x-7z-compressed", run = "archive" },
+  { mime = "application/x-rar", run = "archive" },
+]
