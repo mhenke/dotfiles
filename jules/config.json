@@ -1,0 +1,5 @@
+{
+  "default_repo": "<your-github-repo>",
+  "parallel_tasks": 3,
+  "theme": "dark"
+}

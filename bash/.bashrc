@@ -122,3 +122,4 @@ export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 
 . "$HOME/.local/bin/env"
+export BROWSER=zen-browser
