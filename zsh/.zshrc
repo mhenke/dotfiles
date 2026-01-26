@@ -98,3 +98,5 @@ function y() {
     fi
     rm -f -- "$tmp"
 }
+alias killag='/home/mhenke/kill_antigravity.sh'
+alias captive-portal='hotspot-login'
