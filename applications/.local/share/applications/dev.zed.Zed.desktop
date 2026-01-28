@@ -4,10 +4,10 @@ Type=Application
 Name=Zed
 GenericName=Text Editor
 Comment=A high-performance, multiplayer code editor.
-TryExec=/home/mhenke/.local/zed.app/bin/zed
+TryExec=zed
 StartupNotify=true
-Exec=/home/mhenke/.local/zed.app/bin/zed %U
-Icon=/home/mhenke/.local/zed.app/share/icons/hicolor/512x512/apps/zed.png
+Exec=zed %U
+Icon=zed
 Categories=Utility;TextEditor;Development;IDE;
 Keywords=zed;
 # To add Zed to "Open Folder With..." context menu, add `inode/directory` to the MimeType field (semicolon separated)
@@ -17,5 +17,5 @@ MimeType=text/plain;application/x-zerosize;x-scheme-handler/zed;
 Actions=NewWorkspace;
 
 [Desktop Action NewWorkspace]
-Exec=/home/mhenke/.local/zed.app/bin/zed --new %U
+Exec=zed --new %U
 Name=Open a new workspace
