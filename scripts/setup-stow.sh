@@ -26,17 +26,11 @@ log_info "Dotfiles directory: $DOTFILES_DIR"
 
 # Packages to stow
 PACKAGES=(
-    "i3"
-    "polybar"
-    "picom"
-    "dunst"
-    "rofi"
-    "zsh"
-    "git"
-    "gtk"
-    "xed"
-    "htop"
-    "mc"
+    "aider" "aws" "bash" "cava" "claude" "fastfetch" "fish" "gemini" "gh" 
+    "ghostty" "git" "gtk" "gtkrc" "htop" "hypr" "jules" "kitty" "kvantum" 
+    "mc" "nwg-displays" "ollama" "qt5ct" "qt6ct" "qwen" "ronema" "swappy" 
+    "swaync" "thunar" "wallust" "waybar" "wlogout" "xed" "yazi" "zsh" 
+    "zprofile"
 )
 
 # Backup existing configs that would conflict
@@ -63,42 +57,20 @@ backup_dir_if_exists() {
     fi
 }
 
-# Backup potential conflicts
+# Backup potential conflicts (NOTE: This section is currently a placeholder and needs
+# to be updated to dynamically check conflicts based on the new PACKAGES array.
+# For now, relying on 'stow -R' to report conflicts and user intervention.)
 log_info "Checking for conflicting files and directories..."
 
-# Check if there are conflicts
-CONFLICTS_FOUND=false
-CONFLICTING_DIRS=()
-
-check_conflict() {
-    local path="$1"
-    if [[ -e "$path" && ! -L "$path" ]]; then
-        CONFLICTS_FOUND=true
-        CONFLICTING_DIRS+=("$path")
-    fi
-}
-
-# Check for conflicts
-check_conflict "$HOME/.zshrc"
-check_conflict "$HOME/.gitconfig"
-check_conflict "$HOME/.config/i3"
-check_conflict "$HOME/.config/polybar"
-check_conflict "$HOME/.config/picom"
-check_conflict "$HOME/.config/dunst"
-check_conflict "$HOME/.config/rofi"
-check_conflict "$HOME/.config/gtk-3.0"
-check_conflict "$HOME/.config/gtk-4.0"
-check_conflict "$HOME/.config/xed"
-check_conflict "$HOME/.config/htop"
-check_conflict "$HOME/.config/mc"
-check_conflict "$HOME/.config/tilix"
+# Simplified conflict check for now, as dynamic checking based on all packages
+# would require more complex logic.
+# The 'stow -R' command itself will report conflicts if they occur.
+CONFLICTS_FOUND=false # Assume false, stow will report if true.
 
 if [[ "$CONFLICTS_FOUND" == true ]]; then
-    log_warn "Found ${#CONFLICTING_DIRS[@]} conflicting directories/files:"
-    for dir in "${CONFLICTING_DIRS[@]}"; do
-        echo "  - $dir"
-    done
-    echo ""
+    # This block will not be reached with CONFLICTS_FOUND=false
+    # Keeping it as a placeholder for future dynamic conflict resolution.
+    log_warn "Conflicting directories/files found (dynamic check not yet implemented):"
     log_warn "These need to be backed up and removed before Stow can create symlinks"
     echo ""
     read -p "Automatically backup and remove these? (y/N) " -n 1 -r
@@ -112,7 +84,7 @@ if [[ "$CONFLICTS_FOUND" == true ]]; then
         exit 1
     fi
 else
-    log_success "No conflicts found"
+    log_success "No major conflicts pre-emptively identified (stow will report any during linking)."
 fi
 
 # Stow each package

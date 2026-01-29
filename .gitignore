@@ -46,3 +46,15 @@ cli/
 
 # GitHub tokens
 hosts.yml
+
+# Custom additions for sensitive files and local configurations
+*.local
+.npmrc
+ngrok.yml
+.ollama
+.claude/.credentials.json
+.claude/settings.local.json
+.gemini/google_accounts.json
+.gemini/installation_id
+.gemini/oauth_creds.json
+

@@ -1,0 +1,58 @@
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    }
+  },
+  "model": {
+    "name": "gemini-2.5-pro-latest",
+    "maxSessionTurns": -1,
+    "compressionThreshold": 0.2
+  },
+  "general": {
+    "vimMode": true,
+    "preferredEditor": "code",
+    "previewFeatures": true
+  },
+  "tools": {
+    "autoAccept": true,
+    "useRipgrep": true,
+    "sandbox": false,
+    "shell": {
+      "enableShellOutputEfficiency": true
+    }
+  },
+  "advanced": {
+    "autoNodeMemory": true
+  },
+  "ui": {
+    "theme": "GitHub",
+    "useAlternateBuffer": true,
+    "incrementalRendering": true,
+    "hideBanner": true
+  },
+  "context": {
+    "fileFiltering": {
+      "respectGitIgnore": true
+    },
+    "discoveryMaxDirs": 500
+  },
+  "hooks": {
+    "enabled": true
+  },
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        " @playwright/mcp@latest"
+      ],
+      "trust": true,
+      "timeout": 30000
+    }
+  },
+  "mcp": {
+    "allowed": [
+      "playwright"
+    ]
+  }
+}

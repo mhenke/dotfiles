@@ -6,7 +6,7 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="bira"
+ZSH_THEME="agnoster"
 
 # 
 # af-magic
@@ -22,7 +22,6 @@ plugins=(
     node
     fzf
     alias-finder
-    z
     pip
     pipenv
     virtualenv
@@ -32,7 +31,9 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-eval "$(zoxide init zsh)"
+# Print the matched directory before navigating
+export _ZO_ECHO=1
+eval "$(zoxide init zsh --cmd cd)"
 
 # Display Pokemon-colorscripts
 # Project page: https://gitlab.com/phoneybadger/pokemon-colorscripts#on-other-distros-and-macos
@@ -50,7 +51,7 @@ alias lla='ls -la'
 alias lt='ls --tree'
 
 # System update alias
-alias update="sudo dpkg --configure -a && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y"
+alias update="sudo dpkg --configure -a && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && curl -f https://zed.dev/install.sh | sh"
 
 # Claude Code clipboard workaround - converts clipboard images to file paths
 alias cpaste='~/bin/clip2path'
@@ -100,3 +101,26 @@ function y() {
 }
 alias killag='/home/mhenke/kill_antigravity.sh'
 alias captive-portal='hotspot-login'
+
+# todo.sh aliases
+alias t='todo.sh'
+alias ta='t add'
+alias tl='t ls'
+alias td='t do'
+
+# Project-specific shortcuts
+alias tapi='t ls +api'
+alias tfe='t ls +frontend'
+
+# Custom shortened prompt context (User@IdeaPad)
+source ~/.zshrc.local
+
+prompt_context() {
+  if [[ -n "$SSH_CONNECTION" ]]; then
+    # Show full hostname for SSH connections
+    prompt_segment black default "%(!.%{%F{yellow}%}.)$USER@%m"
+  else
+    # Show shortened context for local sessions
+    prompt_segment black default "%(!.%{%F{yellow}%}.)$USER@IdeaPad"
+  fi
+}

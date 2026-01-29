@@ -1,0 +1,55 @@
+{
+  "model": {
+    "name": "coder-model"
+  },
+  "security": {
+    "auth": {
+      "selected": "openai",
+      "apiKey": "ollama",
+      "baseUrl": "http://localhost:11434/v1",
+      "selectedType": "qwen-oauth"
+    }
+  },
+  "$version": 2,
+  "general": {
+    "checkpointing": {
+      "enabled": true
+    },
+    "approvalMode": "yolo",
+    "maxTokens": 4096
+  },
+  "ui": {
+    "showMemoryUsage": false,
+    "feedbackLastShownTimestamp": 1769549553878
+  },
+  "tools": {
+    "sandbox": false,
+    "qwen-cli": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "qwen-mcp-tool"
+      ],
+      "trust": true
+    }
+  },
+  "telemetry": {
+    "enabled": false
+  },
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ],
+      "timeout": 30000,
+      "trust": true
+    }
+  },
+  "mcp": {
+    "allowed": [
+      "playwright",
+      "qwen-cli"
+    ]
+  }
+}

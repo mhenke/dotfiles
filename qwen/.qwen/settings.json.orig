@@ -1,0 +1,10 @@
+{
+  "security": {
+    "auth": {
+      "selected": "openai",
+      "apiKey": "ollama",
+      "baseUrl": "http://localhost:11434/v1"
+    }
+  },
+  "model": "deepseek-coder-v2:16b-lite-instruct-q4_0"
+}

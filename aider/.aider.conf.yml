@@ -1,0 +1,40 @@
+# Aider Configuration for Local Ollama Models
+# Location: ~/.aider.conf.yml
+# Documentation: https://aider.chat/docs/config.html
+
+# Default model - Qwen2.5-Coder 7B (Fast & Smart!)
+model: ollama/qwen2.5-coder:7b
+
+# Weak model for simpler tasks (faster)
+weak-model: ollama/qwen2.5-coder:3b
+
+# Edit format - how aider makes changes
+# Options: diff, whole, udiff, diff-fenced
+edit-format: diff
+
+# Git integration
+auto-commits: true
+dirty-commits: true
+auto-lint: true
+
+# Output preferences
+pretty: true
+stream: true
+dark-mode: true
+
+# Show git diffs when reviewing changes
+show-diffs: true
+
+# Map settings (code context)
+map-tokens: 2048
+map-refresh: auto
+
+# Chat history
+restore-chat-history: true
+
+# Don't show model warnings for local models
+show-model-warnings: false
+
+# Ollama connection (default is localhost:11434)
+# If your Ollama runs elsewhere, uncomment and modify:
+# openai-api-base: http://localhost:11434/v1
