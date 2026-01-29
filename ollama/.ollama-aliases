@@ -1,0 +1,20 @@
+# Ollama Model Aliases for Coding Workflow
+# Source this in your ~/.zshrc: source ~/.ollama-aliases
+
+# PRIMARY: Deep refactoring, multi-file reasoning, complex architecture
+alias brain="ollama run qwen3-coder:latest"
+
+# FAST: Quick iterations, good code quality, faster responses
+alias fast="ollama run deepseek-coder-v2:16b-lite-instruct-q4_0"
+
+# QUICK: Simple functions, snippets, boilerplate
+alias quick="ollama run codellama:latest"
+
+# ANALYSIS: Massive context digestion (256K tokens), long documents, large codebases
+alias analysis="ollama run ministral-3:14b"
+
+# Usage examples:
+# brain <<< "Refactor the authentication system to use JWT tokens"
+# fast <<< "Write unit tests for the User model"
+# quick <<< "Generate a Python function to merge sorted lists"
+# analysis <<< "Summarize this entire 50-file repository and identify architectural issues"
