@@ -5,8 +5,8 @@
     }
   },
   "model": {
-    "name": "gemini-2.5-pro-latest",
-    "maxSessionTurns": -1,
+    "name": "gemini-2.5-pro",
+    "maxSessionTurns": 40,
     "compressionThreshold": 0.2
   },
   "general": {
@@ -15,9 +15,9 @@
     "previewFeatures": true
   },
   "tools": {
-    "autoAccept": true,
+    "autoAccept": false,
     "useRipgrep": true,
-    "sandbox": false,
+    "sandbox": "docker",
     "shell": {
       "enableShellOutputEfficiency": true
     }
@@ -44,7 +44,7 @@
     "playwright": {
       "command": "npx",
       "args": [
-        " @playwright/mcp@latest"
+        "@playwright/mcp@latest"
       ],
       "trust": true,
       "timeout": 30000
