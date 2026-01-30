@@ -17,8 +17,8 @@ These perspectives add ambiguity, unpredictability, and richer world-building to
 - **AI Alignment as Technical vs. Social Problem:** Disagreement on whether AI issues are technical (protocols, expert systems) or social/cultural (mainframe folklore, admin traditions).
 
 These tensions are recognized as characteristic of cyberpunk and 2015-era AI discourse, offering opportunities for richer design and narrative depth if leveraged appropriately.
-- My preferred Gemini CLI model is gemini-2.5-pro or a preview model, with session turns limited to 40. Preview features should be enabled.
-- My Gemini CLI settings should include vimMode: true, preferredEditor: 'code', and a GitHub theme.
+- My preferred Gemini CLI model is gemini-2.5-pro or a preview model. Preview features should be enabled.
+- My Gemini CLI settings should include preferredEditor: 'code', and a GitHub theme.
 - For tool usage in Gemini CLI, I prefer autoAccept: false, sandboxing enabled (docker or podman), and ripgrep for searches. Specific git commands can be allowed.
 - My Gemini CLI context should be optimized by using GEMINI.md, respecting .gitignore, and including specific directories like ../shared-libs when relevant.
 - I prefer Gemini CLI UI settings suitable for Hyprland, including useAlternateBuffer: true, incrementalRendering: true, and hideBanner: true.
