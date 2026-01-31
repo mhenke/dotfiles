@@ -51,7 +51,7 @@ alias lla='ls -la'
 alias lt='ls --tree'
 
 # System update alias
-alias update="sudo dpkg --configure -a && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && curl -f https://zed.dev/install.sh | sh"
+alias update="sudo dpkg --configure -a && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && echo 'Updating Zed...' && curl -f https://zed.dev/install.sh | sh && echo 'Updating ollama...' && curl -fsSL https://ollama.com/install.sh | sh && echo 'Updating claude-desktop-debian...' && (cd /home/mhenke/claude-desktop-debian && git pull) && echo 'Updating Claude Code CLI...' && npm install -g @anthropic-ai/claude-code"
 
 # Claude Code clipboard workaround - converts clipboard images to file paths
 alias cpaste='~/bin/clip2path'
