@@ -132,20 +132,19 @@ else
     log_info "Kodi already installed"
 fi
 
-# Install ProtonVPN (CLI version - minimal, no GNOME bloat)
-log_info "Installing ProtonVPN CLI..."
-if ! command -v protonvpn-cli &> /dev/null; then
-    log_info "Installing OpenVPN for ProtonVPN..."
+# Install ProtonVPN GUI (via Flatpak)
+log_info "Installing ProtonVPN GUI..."
+if ! flatpak list | grep -q com.protonvpn.www; then
+    log_info "Installing OpenVPN components (required for ProtonVPN)..."
     sudo apt install -y openvpn network-manager-openvpn network-manager-openvpn-gnome
-
-    log_success "OpenVPN installed for ProtonVPN"
-    log_warn "ProtonVPN GUI not installed (avoids 350MB GNOME bloat)"
-    log_info "To use ProtonVPN:"
-    log_info "  1. Download .ovpn files from https://account.protonvpn.com/downloads"
-    log_info "  2. Import in Network Manager: nmcli connection import type openvpn file your-config.ovpn"
-    log_info "  3. Or use ProtonVPN Flatpak: flatpak install flathub com.protonvpn.www"
+    
+    log_info "Installing ProtonVPN GUI via Flatpak..."
+    flatpak install -y flathub com.protonvpn.www
+    
+    log_success "ProtonVPN GUI installed"
+    log_info "You can launch ProtonVPN from the menu (Internet -> ProtonVPN)"
 else
-    log_info "ProtonVPN already configured"
+    log_info "ProtonVPN GUI already installed"
 fi
 
 # Install Zen Browser
