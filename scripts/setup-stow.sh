@@ -26,9 +26,7 @@ log_info "Dotfiles directory: $DOTFILES_DIR"
 
 # Packages to stow
 PACKAGES=(
-    "aider" "aws" "bash" "cava" "claude" "fastfetch" "fish" "gemini" "gh" 
     "ghostty" "git" "gtk" "gtkrc" "htop" "hypr" "jules" "kitty" "kvantum" 
-    "mc" "nwg-displays" "ollama" "qt5ct" "qt6ct" "qwen" "ronema" "swappy" 
     "swaync" "thunar" "wallust" "waybar" "wlogout" "xed" "yazi" "zsh" 
     "zprofile"
 )
