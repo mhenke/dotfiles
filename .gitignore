@@ -60,3 +60,5 @@ ngrok.yml
 
 .gemini
 .qwen
+.aider.conf.yml
+.claude
