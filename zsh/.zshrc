@@ -6,14 +6,16 @@ export PATH="$HOME/.npm-global/bin:$PATH"
 
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="agnoster"
+ZSH_THEME="simple"
 
-# 
+# themes
 # af-magic
 # agnoster *
 # bira **
-# agnosterzak
-#
+# agnoster
+# eastwood
+# simple
+# minimal
 
 plugins=( 
     git
