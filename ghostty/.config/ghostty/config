@@ -18,8 +18,8 @@ palette = 3=#f1fa8c
 palette = 4=#bd93f9
 palette = 5=#ff79c6
 palette = 6=#8be9fd
-palette = 7=#bbbbbb
-palette = 8=#555555
+palette = 7=#ffffff
+palette = 8=#d0d0d0
 palette = 9=#ff5555
 palette = 10=#50fa7b
 palette = 11=#f1fa8c
@@ -29,7 +29,7 @@ palette = 14=#8be9fd
 palette = 15=#ffffff
 
 # Window opacity
-background-opacity = 0.7
+background-opacity = 0.75
 
 # Vim-style split creation
 keybind = shift+ctrl+h=new_split:left
@@ -38,3 +38,9 @@ keybind = shift+ctrl+k=new_split:up
 keybind = shift+ctrl+l=new_split:right
 
 # Custom keybinding to close split pane with Ctrl+Q
+
+# Clipboard Configuration (Wayland optimized)
+# Force Wayland clipboard backend for reliability
+clipboard-paste-protection = true
+# Use PRIMARY selection for middle-click and CLIPBOARD for Ctrl+Shift+V
+copy-on-select = clipboard

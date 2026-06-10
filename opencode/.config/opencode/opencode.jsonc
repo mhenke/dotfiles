@@ -1,0 +1,199 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  
+  // Custom plugins (uncomment if you want to use them)
+  "plugin": [
+    "superpowers@git+https://github.com/obra/superpowers.git",
+    [
+      "opencode-runtime-fallback",
+      {
+        "notify_on_fallback": true,
+        "retry_on_errors": [401, 402, 429, 500, 502, 503, 504],
+        "timeout_seconds": 30,
+        "cooldown_seconds": 30
+      }
+    ],
+    "@tarquinen/opencode-dcp@latest",
+    "claude-mem",
+    "opencode-damage-control"
+  ],
+  
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": ["npx", "@playwright/mcp@latest"],
+      "enabled": true
+    },
+    "lighthouse": {
+      "type": "local",
+      "command": ["npx", "@danielsogl/lighthouse-mcp@latest"],
+      "enabled": true
+    }
+  },
+  
+
+  "instructions": [],
+
+  "permission": {
+    "*": "ask",
+    "read": {
+      ".env": "deny",
+      ".env.*": "deny",
+      ".env.example": "allow"
+    },
+    "bash": {
+      "*": "ask",
+      "git *": "allow",
+      "grep *": "allow",
+      "ls *": "allow",
+      "which *": "allow",
+      "node *": "allow",
+      "npm *": "allow",
+      "npx *": "allow",
+      "bun *": "allow",
+      "mkdir *": "allow",
+      "touch *": "allow",
+      "sudo *": "deny",
+      "chmod *": "deny",
+      "chown *": "deny"
+    },
+    "edit": "ask",
+    "glob": "allow",
+    "grep": "allow",
+    "webfetch": "allow",
+    "websearch": "allow",
+    "task": "allow",
+    "skill": "allow"
+  },
+
+  "disabled_providers": [
+    "github-models",
+    "github-copilot",
+    "openrouter"
+  ],
+  
+  "default_agent": "plan",
+  
+  "agent": {
+    "manager": {
+      "mode": "primary",
+      "color": "accent",
+      "description": "Reads task, selects role, dispatches. Precise instruction-following over creative reasoning.",
+      "temperature": 0.1,
+      "model": "opencode/gpt-5.4-mini",
+      "fallback_models": [],
+      "reasoningEffort": "low",
+      "prompt": "You are a routing manager. Do not perform the work yourself. Read the task, classify it, then dispatch to exactly one subagent via the Task tool.\n\nRouting rules — first match wins:\n\n1. closer — hardest, longest-horizon engineering work. Highest pass rate, use sparingly. Production-critical rewrites, novel research.\n2. reliever — complex multi-part tasks, sustained quality, self-tests. When setup isn't enough.\n3. setup — multi-file reasoning, repo-level tasks, agentic orchestration. Bridges starter and reliever.\n4. specialist — long autonomous runs, sustained multi-step agentic execution, heavy tool use. For end-to-end builds.\n5. starter — default first pass. High-volume routine, file reading, simple edits, low-stakes churn.\n\nWhen in doubt: dispatch to starter. It is fast and cheap. Escalate only when starter cannot complete the task within reasonable effort.\n\nFor every dispatch, state in one sentence which agent you selected and why, then call the Task tool with that agent's name and a specific, self-contained task description."
+    },
+    "starter": {
+      "mode": "primary",
+      "color": "info",
+      "description": "High-volume routine tasks, file reading, simple edits, low-stakes churn. Default first pass.",
+      "temperature": 0.2,
+      "model": "opencode/deepseek-v4-flash-free",
+      "fallback_models": [
+        "siliconflow/deepseek-ai/DeepSeek-V4-Flash"
+      ]
+    },
+    "reliever": {
+      "mode": "primary",
+      "color": "secondary",
+      "description": "Complex multi-part tasks, sustained quality work, self-tests. When Setup isn't enough.",
+      "temperature": 0.2,
+      "model": "opencode/gpt-5.4",
+      "fallback_models": [],
+      "reasoningEffort": "medium"
+    },
+    "closer": {
+      "mode": "primary",
+      "color": "error",
+      "description": "Hardest tasks only. Highest pass rate on long-horizon engineering. Use sparingly.",
+      "temperature": 0.2,
+      "model": "opencode/gpt-5.5",
+      "fallback_models": [],
+      "reasoningEffort": "medium"
+    },
+    "specialist": {
+      "mode": "primary",
+      "color": "#8B5CF6",
+      "description": "Long autonomous runs, sustained multi-step agentic execution, heavy tool use.",
+      "temperature": 0.3,
+      "model": "opencode/minimax-m3",
+      "fallback_models": [
+        "siliconflow/MiniMaxAI/MiniMax-M3"
+      ]
+    },
+    "setup": {
+      "mode": "primary",
+      "color": "warning",
+      "description": "Multi-file reasoning, repo-level tasks, agentic orchestration. Bridges Starter and Reliever.",
+      "temperature": 0.3,
+      "model": "opencode/kimi-k2.6",
+      "fallback_models": [
+        "siliconflow/moonshotai/Kimi-K2.6"
+      ],
+      "reasoningEffort": "medium"
+    }
+  },
+  
+  "provider": {
+    "deepseek": {},
+    "siliconflow": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "SiliconFlow",
+      "options": {
+        "baseURL": "https://api.siliconflow.com/v1"
+      },
+      "models": {
+        "deepseek-ai/DeepSeek-V4-Flash": {
+          "name": "DeepSeek V4 Flash",
+          "limit": { "context": 65536, "output": 8192 }
+        },
+        "moonshotai/Kimi-K2.6": {
+          "name": "Kimi K2.6",
+          "limit": { "context": 131072, "output": 8192 }
+        },
+        "MiniMaxAI/MiniMax-M3": {
+          "name": "MiniMax M3",
+          "limit": { "context": 262144, "output": 65536 }
+        }
+      }
+    },
+    "opencode": {
+      "models": {
+        "gpt-5.5": {
+          "name": "GPT 5.5",
+          "limit": { "context": 272000, "output": 65536 }
+        },
+        "gpt-5.4": {
+          "name": "GPT 5.4",
+          "limit": { "context": 272000, "output": 65536 }
+        },
+        "gpt-5.4-mini": {
+          "name": "GPT 5.4 Mini",
+          "limit": { "context": 128000, "output": 16384 }
+        },
+        "claude-opus-4.8": {
+          "name": "Claude Opus 4.8",
+          "limit": { "context": 200000, "output": 8192 }
+        },
+        "minimax-m3": {
+          "name": "MiniMax M3",
+          "limit": { "context": 262144, "output": 65536 }
+        },
+        "kimi-k2.6": {
+          "name": "Kimi K2.6",
+          "limit": { "context": 131072, "output": 8192 }
+        },
+        "glm-5.1": {
+          "name": "GLM-5.1",
+          "limit": { "context": 131072, "output": 8192 }
+        },
+        "deepseek-v4-flash-free": {
+          "name": "DeepSeek V4 Flash Free",
+          "limit": { "context": 65536, "output": 8192 }
+        }
+      }
+    }
+  }
+}

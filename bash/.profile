@@ -28,3 +28,7 @@ fi
 . "$HOME/.cargo/env"
 
 . "$HOME/.local/bin/env"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/mhenke/.local/bin:$PATH"

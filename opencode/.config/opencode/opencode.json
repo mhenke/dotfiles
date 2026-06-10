@@ -1,0 +1,27 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "plugin": [
+    "oh-my-opencode-slim"
+  ],
+  "default_agent": "plan",
+  "agent": {
+    "orchestrator": {
+      "permission": {
+        "edit": "deny",
+        "glob": "deny",
+        "grep": "deny",
+        "read": "deny",
+        "webfetch": "deny",
+        "websearch": "deny",
+        "list": "deny"
+      }
+    },
+    "explore": {
+      "disable": true
+    },
+    "general": {
+      "disable": true
+    }
+  },
+  "lsp": true
+}

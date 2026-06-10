@@ -1,0 +1,15 @@
+# =============================================================================
+# Zsh Local Configuration — Template
+# =============================================================================
+# Copy this file to ~/.zshrc.local and fill in your actual values.
+#   cp ~/.zshrc.local.example ~/.zshrc.local
+# This file is gitignored (*.local) and never committed.
+# =============================================================================
+
+# API Keys
+# export SILICONFLOW_API_KEY="your-siliconflow-key-here"
+# export EXA_API_KEY="your-exa-key-here"
+
+# GitHub — dynamic, uses gh CLI
+# export GITHUB_TOKEN=$(gh auth token)
+# export GITHUB_PERSONAL_ACCESS_TOKEN=$GITHUB_TOKEN

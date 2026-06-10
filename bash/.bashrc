@@ -123,3 +123,9 @@ export PATH="$HOME/.local/bin:$PATH"
 
 . "$HOME/.local/bin/env"
 export BROWSER=zen-browser
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/mhenke/.local/bin:$PATH"
+export EDITOR=mousepad
+export VISUAL=mousepad

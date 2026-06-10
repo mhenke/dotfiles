@@ -135,3 +135,13 @@ prompt_context() {
 }
 # Turso
 export PATH="$PATH:/home/mhenke/.turso"
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/mhenke/.local/bin:$PATH"
+export EDITOR=mousepad
+export VISUAL=mousepad
