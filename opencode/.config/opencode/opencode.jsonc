@@ -75,69 +75,33 @@
   "default_agent": "plan",
   
   "agent": {
-    "manager": {
-      "mode": "primary",
-      "color": "accent",
-      "description": "Reads task, selects role, dispatches. Precise instruction-following over creative reasoning.",
-      "temperature": 0.1,
-      "model": "opencode/gpt-5.4-mini",
-      "fallback_models": [],
-      "reasoningEffort": "low",
-      "prompt": "You are a routing manager. Do not perform the work yourself. Read the task, classify it, then dispatch to exactly one subagent via the Task tool.\n\nRouting rules — first match wins:\n\n1. closer — hardest, longest-horizon engineering work. Highest pass rate, use sparingly. Production-critical rewrites, novel research.\n2. reliever — complex multi-part tasks, sustained quality, self-tests. When setup isn't enough.\n3. setup — multi-file reasoning, repo-level tasks, agentic orchestration. Bridges starter and reliever.\n4. specialist — long autonomous runs, sustained multi-step agentic execution, heavy tool use. For end-to-end builds.\n5. starter — default first pass. High-volume routine, file reading, simple edits, low-stakes churn.\n\nWhen in doubt: dispatch to starter. It is fast and cheap. Escalate only when starter cannot complete the task within reasonable effort.\n\nFor every dispatch, state in one sentence which agent you selected and why, then call the Task tool with that agent's name and a specific, self-contained task description."
-    },
-    "starter": {
-      "mode": "primary",
-      "color": "info",
-      "description": "High-volume routine tasks, file reading, simple edits, low-stakes churn. Default first pass.",
-      "temperature": 0.2,
-      "model": "opencode/deepseek-v4-flash-free",
-      "fallback_models": [
-        "siliconflow/deepseek-ai/DeepSeek-V4-Flash"
-      ]
-    },
-    "reliever": {
-      "mode": "primary",
-      "color": "secondary",
-      "description": "Complex multi-part tasks, sustained quality work, self-tests. When Setup isn't enough.",
-      "temperature": 0.2,
-      "model": "opencode/gpt-5.4",
-      "fallback_models": [],
-      "reasoningEffort": "medium"
-    },
-    "closer": {
-      "mode": "primary",
-      "color": "error",
-      "description": "Hardest tasks only. Highest pass rate on long-horizon engineering. Use sparingly.",
-      "temperature": 0.2,
-      "model": "opencode/gpt-5.5",
-      "fallback_models": [],
-      "reasoningEffort": "medium"
-    },
-    "specialist": {
-      "mode": "primary",
-      "color": "#8B5CF6",
-      "description": "Long autonomous runs, sustained multi-step agentic execution, heavy tool use.",
-      "temperature": 0.3,
-      "model": "opencode/minimax-m3",
-      "fallback_models": [
-        "siliconflow/MiniMaxAI/MiniMax-M3"
-      ]
-    },
-    "setup": {
-      "mode": "primary",
-      "color": "warning",
-      "description": "Multi-file reasoning, repo-level tasks, agentic orchestration. Bridges Starter and Reliever.",
-      "temperature": 0.3,
-      "model": "opencode/kimi-k2.6",
-      "fallback_models": [
-        "siliconflow/moonshotai/Kimi-K2.6"
-      ],
-      "reasoningEffort": "medium"
-    }
+    "ask": { "disable": true },
+    "architect": { "disable": true }
   },
   
   "provider": {
     "deepseek": {},
+    "ollama": {
+      "name": "Ollama",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://localhost:11434"
+      },
+      "models": {
+        "qwen3.6:35b-a3b": {
+          "name": "Qwen 3.6 (35b-A3B)",
+          "limit": { "context": 262144, "output": 65536 }
+        },
+        "gemma4:12b": {
+          "name": "Gemma 4 (12b)",
+          "limit": { "context": 262144, "output": 8192 }
+        },
+        "gemma4:latest": {
+          "name": "Gemma 4 (latest)",
+          "limit": { "context": 32000, "output": 8192 }
+        }
+      }
+    },
     "siliconflow": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "SiliconFlow",

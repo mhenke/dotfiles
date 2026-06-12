@@ -2,6 +2,7 @@
   "$schema": "https://unpkg.com/oh-my-opencode-slim@1.1.1/oh-my-opencode-slim.schema.json",
   "preset": "opencode-go",
   "autoUpdate": true,
+  "setDefaultAgent": false,
   "scoringEngineVersion": "v2",
   "fallback": {
     "chains": {
@@ -149,11 +150,12 @@
           "variant": "medium"
         },
         "beta": {
-          "model": "opencode-go/qwen3.7-max"
+          "model": "opencode-go/qwen3.7-plus",
+          "variant": "medium"
         },
         "gamma": {
-          "model": "opencode-go/kimi-k2.6",
-          "variant": "medium"
+          "model": "opencode-go/deepseek-v4-flash",
+          "variant": "high"
         }
       },
       "opencode-zen": {
