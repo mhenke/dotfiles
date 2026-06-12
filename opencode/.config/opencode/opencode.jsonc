@@ -79,7 +79,7 @@
     "ask": { "disable": true },
     "architect": { "disable": true },
     "alpha": { "disable": true },
-    "councillor": { "disable": true }
+    "council": { "disable": true }
   },
   
   "provider": {
