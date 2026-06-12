@@ -15,7 +15,8 @@
     ],
     "@tarquinen/opencode-dcp@latest",
     "claude-mem",
-    "opencode-damage-control"
+    "opencode-damage-control",
+    "oh-my-opencode-slim",
   ],
   
   "mcp": {
@@ -85,7 +86,7 @@
       "name": "Ollama",
       "npm": "@ai-sdk/openai-compatible",
       "options": {
-        "baseURL": "http://localhost:11434"
+        "baseURL": "http://localhost:11434/v1"
       },
       "models": {
         "qwen3.6:35b-a3b": {
