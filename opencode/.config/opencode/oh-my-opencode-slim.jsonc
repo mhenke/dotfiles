@@ -173,7 +173,7 @@
     },
     "councillor_execution_mode": "parallel"
   },
-  "disabled_agents": ["alpha"],
+  "disabled_agents": [],
   "websearch": {
     "provider": "exa"
   },
