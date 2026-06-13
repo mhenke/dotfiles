@@ -145,3 +145,7 @@ source <(ng completion script)
 export PATH="/home/mhenke/.local/bin:$PATH"
 export EDITOR=mousepad
 export VISUAL=mousepad
+
+# >>> oh-my-opencode-slim background subagents >>>
+export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
+# <<< oh-my-opencode-slim background subagents <<<

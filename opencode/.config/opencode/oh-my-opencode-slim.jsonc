@@ -1,6 +1,6 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@1.1.1/oh-my-opencode-slim.schema.json",
-  "preset": "opencode-go",
+  "preset": "opencode-zen",
   "autoUpdate": true,
   "setDefaultAgent": false,
   "scoringEngineVersion": "v2",
@@ -8,7 +8,8 @@
     "chains": {
       "oracle": [
         "deepseek/deepseek-v4-pro",
-        "siliconflow/deepseek-ai/deepseek-v4-pro"
+        "siliconflow/deepseek-ai/deepseek-v4-pro",
+        "opencode-go/deepseek-v4-pro"
       ],
       "designer": [
         "opencode/kimi-k2.6"

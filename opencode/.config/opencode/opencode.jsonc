@@ -79,7 +79,6 @@
     "ask": { "disable": true },
     "architect": { "disable": true },
     "alpha": { "disable": true },
-    "council": { "disable": true }
   },
   
   "provider": {
