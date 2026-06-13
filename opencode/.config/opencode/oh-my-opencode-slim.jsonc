@@ -1,5 +1,5 @@
 {
-  "$schema": "https://unpkg.com/oh-my-opencode-slim@1.1.1/oh-my-opencode-slim.schema.json",
+  "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "preset": "opencode-zen",
   "autoUpdate": true,
   "setDefaultAgent": false,
@@ -29,6 +29,14 @@
         "opencode/deepseek-v4-flash-free",
         "deepseek/deepseek-v4-flash",
         "siliconflow/deepseek-ai/DeepSeek-V4-Flash"
+      ],
+      "librarian": [
+        "opencode/mimo-v2.5-free",
+        "siliconflow/MiniMaxAI/MiniMax-M3"
+      ],
+      "observer": [
+        "opencode/mimo-v2.5-free",
+        "siliconflow/MiniMaxAI/MiniMax-M3"
       ]
     }
   },
@@ -152,18 +160,6 @@
   },
   "council": {
     "presets": {
-      "default": {
-        "alpha": {
-          "model": "opencode/deepseek-v4-flash",
-          "variant": "high"
-        },
-        "beta": {
-          "model": "opencode/nemotron-3-ultra-free"
-        },
-        "gamma": {
-          "model": "opencode/mimo-v2.5-free"
-        }
-      },
       "opencode-zen": {
         "alpha": {
           "model": "opencode/deepseek-v4-flash",
