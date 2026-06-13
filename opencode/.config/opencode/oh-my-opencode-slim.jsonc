@@ -6,6 +6,11 @@
   "scoringEngineVersion": "v2",
   "fallback": {
     "chains": {
+      "orchestrator": [
+        "opencode/deepseek-v4-flash-free",
+        "deepseek/deepseek-v4-flash",
+        "siliconflow/deepseek-ai/DeepSeek-V4-Flash"
+      ],
       "oracle": [
         "deepseek/deepseek-v4-pro",
         "siliconflow/deepseek-ai/deepseek-v4-pro",
@@ -43,7 +48,7 @@
   "presets": {
     "opencode-zen": {
       "orchestrator": {
-        "model": "opencode/gpt-5.4-mini",
+        "model": "opencode/deepseek-v4-flash-free",
         "variant": "medium",
         "skills": [
           "*"
