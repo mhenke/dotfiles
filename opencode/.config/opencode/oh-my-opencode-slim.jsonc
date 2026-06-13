@@ -9,19 +9,26 @@
       "oracle": [
         "deepseek/deepseek-v4-pro",
         "siliconflow/deepseek-ai/deepseek-v4-pro",
-        "opencode-go/deepseek-v4-pro"
+        "opencode/deepseek-v4-pro"
       ],
       "designer": [
+        "siliconflow/moonshotai/Kimi-K2.6",
         "opencode/kimi-k2.6"
       ],
-      "alpha": [
-        "opencode/kimi-k2.6"
+      "explorer": [
+        "opencode/deepseek-v4-flash-free",
+        "deepseek/deepseek-v4-flash",
+        "siliconflow/deepseek-ai/DeepSeek-V4-Flash"
       ],
       "council": [
-        "siliconflow/deepseek-ai/deepseek-v4-flash"
+        "opencode/deepseek-v4-flash-free",
+        "deepseek/deepseek-v4-flash",
+        "siliconflow/deepseek-ai/DeepSeek-V4-Flash"
       ],
       "fixer": [
-        "siliconflow/deepseek-ai/deepseek-v4-flash"
+        "opencode/deepseek-v4-flash-free",
+        "deepseek/deepseek-v4-flash",
+        "siliconflow/deepseek-ai/DeepSeek-V4-Flash"
       ]
     }
   },
@@ -147,16 +154,14 @@
     "presets": {
       "default": {
         "alpha": {
-          "model": "opencode-go/kimi-k2.6",
-          "variant": "medium"
+          "model": "opencode/deepseek-v4-flash",
+          "variant": "high"
         },
         "beta": {
-          "model": "opencode-go/qwen3.7-plus",
-          "variant": "medium"
+          "model": "opencode/nemotron-3-ultra-free"
         },
         "gamma": {
-          "model": "opencode-go/deepseek-v4-flash",
-          "variant": "high"
+          "model": "opencode/mimo-v2.5-free"
         }
       },
       "opencode-zen": {
@@ -170,8 +175,23 @@
         "gamma": {
           "model": "opencode/mimo-v2.5-free"
         }
+      },
+      "opencode-go": {
+        "alpha": {
+          "model": "opencode-go/kimi-k2.6",
+          "variant": "medium"
+        },
+        "beta": {
+          "model": "opencode-go/qwen3.7-plus",
+          "variant": "medium"
+        },
+        "gamma": {
+          "model": "opencode-go/deepseek-v4-flash",
+          "variant": "high"
+        }
       }
     },
+    "default_preset": "opencode-zen",
     "councillor_execution_mode": "parallel"
   },
   "disabled_agents": [],
