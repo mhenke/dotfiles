@@ -1,8 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "plugin": [
-    "oh-my-opencode-slim",
-    "./plugins/claude-mem.js"
+    "./plugins/claude-mem.js",
+    "oh-my-opencode-slim"
   ],
   "mcp": {
     "playwright": {
@@ -60,9 +60,19 @@
   ],
   "default_agent": "plan",
   "agent": {
-    "build": {},
-    "plan": {},
+    "build": {
+      "disable": false
+    },
+    "plan": {
+      "disable": false
+    },
     "alpha": {
+      "disable": true
+    },
+    "explore": {
+      "disable": true
+    },
+    "general": {
       "disable": true
     }
   },
