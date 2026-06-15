@@ -1,79 +1,27 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
-  "preset": "opencode-zen",
+  "preset": "opencode-go",
   "autoUpdate": true,
-  "setDefaultAgent": false,
+  "setDefaultAgent": true,
   "scoringEngineVersion": "v2",
-  "fallback": {
-    "chains": {
-      "orchestrator": [
-        "opencode/deepseek-v4-flash-free",
-        "deepseek/deepseek-v4-flash",
-        "siliconflow/deepseek-ai/DeepSeek-V4-Flash"
-      ],
-      "oracle": [
-        "deepseek/deepseek-v4-pro",
-        "siliconflow/deepseek-ai/deepseek-v4-pro",
-        "opencode/deepseek-v4-pro"
-      ],
-      "designer": [
-        "siliconflow/moonshotai/Kimi-K2.6",
-        "opencode/kimi-k2.6"
-      ],
-      "explorer": [
-        "opencode/deepseek-v4-flash-free",
-        "deepseek/deepseek-v4-flash",
-        "siliconflow/deepseek-ai/DeepSeek-V4-Flash"
-      ],
-      "council": [
-        "opencode/deepseek-v4-flash-free",
-        "deepseek/deepseek-v4-flash",
-        "siliconflow/deepseek-ai/DeepSeek-V4-Flash"
-      ],
-      "fixer": [
-        "opencode/deepseek-v4-flash-free",
-        "deepseek/deepseek-v4-flash",
-        "siliconflow/deepseek-ai/DeepSeek-V4-Flash"
-      ],
-      "librarian": [
-        "opencode/mimo-v2.5-free",
-        "siliconflow/MiniMaxAI/MiniMax-M3"
-      ],
-      "observer": [
-        "opencode/mimo-v2.5-free",
-        "siliconflow/MiniMaxAI/MiniMax-M3"
-      ]
-    }
-  },
   "presets": {
     "opencode-zen": {
       "orchestrator": {
         "model": "opencode/deepseek-v4-flash-free",
         "variant": "medium",
-        "skills": [
-          "*"
-        ],
-        "mcps": [
-          "*",
-          "!context7"
-        ]
+        "skills": ["*"],
+        "mcps": ["*", "!context7"]
       },
       "oracle": {
-        "model": "deepseek/deepseek-v4-pro",
+        "model": "opencode/deepseek-v4-pro",
         "variant": "max",
-        "skills": [
-          "simplify"
-        ],
+        "skills": ["simplify"],
         "mcps": []
       },
       "librarian": {
         "model": "opencode/mimo-v2.5-free",
         "skills": [],
-        "mcps": [
-          "websearch",
-          "context7",
-          "grep_app"
-        ]
+        "mcps": ["websearch", "context7", "grep_app"]
       },
       "explorer": {
         "model": "opencode/deepseek-v4-flash-free",
@@ -81,7 +29,7 @@
         "mcps": []
       },
       "designer": {
-        "model": "siliconflow/moonshotai/Kimi-K2.6",
+        "model": "opencode/kimi-k2.6",
         "variant": "medium",
         "skills": [],
         "mcps": []
@@ -106,57 +54,82 @@
     },
     "opencode-go": {
       "orchestrator": {
-        "model": "opencode-go/glm-5.1",
-        "skills": [
-          "*"
+        "model": [
+          "opencode-go/glm-5.1",
+          "siliconflow/THUDM/GLM-Z1-5.1",
+          "opencode/deepseek-v4-flash-free"
         ],
-        "mcps": [
-          "*",
-          "!context7"
-        ]
+        "skills": ["*"],
+        "mcps": ["*", "!context7"]
       },
       "oracle": {
-        "model": "opencode-go/deepseek-v4-pro",
-        "variant": "max",
-        "skills": [
-          "simplify"
+        "model": [
+          "opencode-go/deepseek-v4-pro",
+          "siliconflow/deepseek-ai/DeepSeek-V4-Pro",
+          "deepseek/deepseek-v4-pro",
+          "opencode/deepseek-v4-pro"
         ],
+        "variant": "max",
+        "skills": ["simplify"],
         "mcps": []
       },
       "council": {
-        "model": "opencode-go/deepseek-v4-pro",
+        "model": [
+          "opencode-go/deepseek-v4-pro",
+          "siliconflow/deepseek-ai/DeepSeek-V4-Pro",
+          "deepseek/deepseek-v4-pro",
+          "opencode/deepseek-v4-flash"
+        ],
         "variant": "high",
         "skills": [],
         "mcps": []
       },
       "librarian": {
-        "model": "opencode-go/minimax-m2.7",
+        "model": [
+          "opencode-go/minimax-m2.7",
+          "siliconflow/MiniMaxAI/MiniMax-M3",
+          "opencode/mimo-v2.5-free"
+        ],
         "skills": [],
-        "mcps": [
-          "websearch",
-          "context7",
-          "grep_app"
-        ]
+        "mcps": ["websearch", "context7", "grep_app"]
       },
       "explorer": {
-        "model": "opencode-go/minimax-m2.7",
+        "model": [
+          "opencode-go/minimax-m2.7",
+          "siliconflow/deepseek-ai/DeepSeek-V4-Flash",
+          "deepseek/deepseek-v4-flash",
+          "opencode/deepseek-v4-flash-free"
+        ],
         "skills": [],
         "mcps": []
       },
       "designer": {
-        "model": "opencode-go/kimi-k2.6",
+        "model": [
+          "opencode-go/kimi-k2.6",
+          "siliconflow/moonshotai/Kimi-K2.6",
+          "opencode/kimi-k2.6"
+        ],
         "variant": "medium",
         "skills": [],
         "mcps": []
       },
       "fixer": {
-        "model": "opencode-go/deepseek-v4-flash",
+        "model": [
+          "opencode-go/deepseek-v4-flash",
+          "siliconflow/deepseek-ai/DeepSeek-V4-Flash",
+          "deepseek/deepseek-v4-flash",
+          "opencode/deepseek-v4-flash-free"
+        ],
         "variant": "high",
         "skills": [],
         "mcps": []
       },
       "observer": {
-        "model": "opencode-go/kimi-k2.6",
+        "model": [
+          "opencode-go/kimi-k2.6",
+          "siliconflow/MiniMaxAI/MiniMax-M3",
+          "opencode/mimo-v2.5-free"
+        ],
         "variant": "medium",
         "skills": [],
         "mcps": []
@@ -167,11 +140,11 @@
     "presets": {
       "opencode-zen": {
         "alpha": {
-          "model": "opencode/deepseek-v4-flash",
+          "model": "opencode/deepseek-v4-pro",
           "variant": "high"
         },
         "beta": {
-          "model": "opencode/nemotron-3-ultra-free"
+          "model": "opencode/kimi-k2.6"
         },
         "gamma": {
           "model": "opencode/mimo-v2.5-free"
@@ -192,7 +165,7 @@
         }
       }
     },
-    "default_preset": "opencode-zen",
+    "default_preset": "opencode-go",
     "councillor_execution_mode": "parallel"
   },
   "disabled_agents": [],
@@ -202,7 +175,7 @@
   "todoContinuation": {
     "maxContinuations": 5,
     "cooldownMs": 3000,
-    "autoEnable": false,
-    "autoEnableThreshold": 4
+    "autoEnable": true,
+    "autoEnableThreshold": 3
   }
 }
