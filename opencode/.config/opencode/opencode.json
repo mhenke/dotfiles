@@ -1,5 +1,10 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "model": "opencode-go/glm-5.1",
+  "small_model": "opencode/deepseek-v4-flash-free",
+  "instructions": [
+    "/home/mhenke/dotfiles/opencode/.config/opencode/instructions/global.md"
+  ],
   "plugin": [
     "./plugins/claude-mem.js",
     "oh-my-opencode-slim"
@@ -31,6 +36,12 @@
     },
     "bash": {
       "*": "ask",
+      "rm *": "ask",
+      "rm -rf *": "deny",
+      "rmdir *": "ask",
+      "dd *": "ask",
+      "mkfs*": "deny",
+      "fdisk *": "deny",
       "git *": "allow",
       "grep *": "allow",
       "ls *": "allow",
@@ -64,6 +75,7 @@
       "disable": false
     },
     "plan": {
+      "mode": "primary",
       "disable": false
     },
     "alpha": {
