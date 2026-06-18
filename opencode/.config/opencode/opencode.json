@@ -120,13 +120,6 @@
         }
       }
     },
-    "siliconflow": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "SiliconFlow",
-      "options": {
-        "baseURL": "https://api.siliconflow.com/v1"
-      }
-    },
     "opencode": {}
   },
   "lsp": true
