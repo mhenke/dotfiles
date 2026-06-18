@@ -148,7 +148,7 @@
         "model": [
           "opencode-go/mimo-v2.5",
           "opencode/qwen3.6-plus",
-          "deepseek/deepseek-v4-pro"
+          "deepseek/deepseek-v4-flash"
         ],
         "skills": ["*"],
         "mcps": ["*", "!context7"]
@@ -203,8 +203,8 @@
       },
       "observer": {
         "model": [
-          "opencode-go/minimax-m3",
           "opencode/mimo-v2.5-free",
+          "opencode-go/minimax-m3",
           "opencode/kimi-k2.6"
         ],
         "variant": "low",
@@ -272,10 +272,10 @@
   },
   "agents": {
     "council": {
-      "model": "opencode-go/glm-5.1"
+      "model": "opencode-go/mimo-v2.5"
     },
     "councillor": {
-      "model": "opencode-go/glm-5.1"
+      "model": "opencode-go/mimo-v2.5"
     }
   },
   "disabled_agents": [],
