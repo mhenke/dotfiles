@@ -146,9 +146,9 @@
     "balanced": {
       "orchestrator": {
         "model": [
+          "opencode/mimo-v2.5-free",
           "opencode-go/mimo-v2.5",
-          "opencode/qwen3.6-plus",
-          "deepseek/deepseek-v4-flash"
+          "deepseek/deepseek-v4-pro"
         ],
         "skills": ["*"],
         "mcps": ["*", "!context7"]
@@ -167,7 +167,7 @@
         "model": [
           "opencode-go/kimi-k2.7-code",
           "opencode/qwen3.6-plus",
-          "opencode-go/minimax-m3"
+          "opencode/kimi-k2.6"
         ],
         "variant": "medium",
         "skills": [],
@@ -176,7 +176,7 @@
       "librarian": {
         "model": [
           "opencode/mimo-v2.5-free",
-          "opencode/qwen3.6-plus",
+          "opencode-go/mimo-v2.5",
           "deepseek/deepseek-v4-pro"
         ],
         "skills": [],
@@ -185,8 +185,8 @@
       "explorer": {
         "model": [
           "opencode/deepseek-v4-flash-free",
-          "deepseek/deepseek-v4-flash",
-          "opencode/deepseek-v4-flash"
+          "opencode-go/deepseek-v4-flash",
+          "deepseek/deepseek-v4-flash"
         ],
         "skills": [],
         "mcps": []
@@ -194,8 +194,8 @@
       "fixer": {
         "model": [
           "opencode/deepseek-v4-flash-free",
-          "deepseek/deepseek-v4-flash",
-          "opencode/deepseek-v4-flash"
+          "opencode-go/deepseek-v4-flash",
+          "deepseek/deepseek-v4-flash"
         ],
         "variant": "high",
         "skills": [],
@@ -204,8 +204,8 @@
       "observer": {
         "model": [
           "opencode/mimo-v2.5-free",
-          "opencode-go/minimax-m3",
-          "opencode/kimi-k2.6"
+          "opencode-go/mimo-v2.5",
+          "opencode/qwen3.6-plus"
         ],
         "variant": "low",
         "skills": [],
@@ -261,7 +261,7 @@
         "gamma": {
           "model": "opencode/mimo-v2.5-free",
           "fallback_models": [
-            "opencode-go/qwen3.7-max",
+            "opencode-go/mimo-v2.5",
             "opencode/qwen3.6-plus"
           ]
         }
@@ -272,10 +272,7 @@
   },
   "agents": {
     "council": {
-      "model": "opencode-go/mimo-v2.5"
-    },
-    "councillor": {
-      "model": "opencode-go/mimo-v2.5"
+      "model": ["opencode/mimo-v2.5-free", "opencode-go/mimo-v2.5", "deepseek/deepseek-v4-pro"]
     }
   },
   "disabled_agents": [],
