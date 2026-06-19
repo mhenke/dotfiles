@@ -203,7 +203,7 @@
       },
       "observer": {
         "model": [
-          "opencode-go/qwen3.7-max",
+          "opencode-go/qwen3.7-plus",
           "opencode/qwen3.6-plus",
           "deepseek/deepseek-v4-pro"
         ],
