@@ -72,9 +72,11 @@
   "default_agent": "plan",
   "agent": {
     "build": {
+      "model": "opencode/deepseek-v4-flash-free",
       "disable": false
     },
     "plan": {
+      "model": "opencode/deepseek-v4-flash-free",
       "mode": "primary",
       "disable": false
     },
