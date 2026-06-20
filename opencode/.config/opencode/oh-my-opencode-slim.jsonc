@@ -148,8 +148,10 @@
         "model": [
           "opencode/mimo-v2.5-free",
           "opencode-go/mimo-v2.5",
+          "nvidia/z-ai/glm-5.1",
           "deepseek/deepseek-v4-pro"
         ],
+        "temperature": 0.4,
         "skills": ["*"],
         "mcps": ["*", "!context7"]
       },
@@ -157,8 +159,10 @@
         "model": [
           "opencode-go/kimi-k2.7-code",
           "opencode/kimi-k2.6",
+          "nvidia/mistralai/mistral-large-3",
           "deepseek/deepseek-v4-pro"
         ],
+        "temperature": 0.4,
         "variant": "max",
         "skills": ["simplify"],
         "mcps": []
@@ -167,8 +171,10 @@
         "model": [
           "opencode-go/kimi-k2.7-code",
           "opencode/qwen3.6-plus",
+          "nvidia/moonshotai/kimi-k2-instruct",
           "deepseek/deepseek-v4-pro"
         ],
+        "temperature": 0.3,
         "variant": "medium",
         "skills": [],
         "mcps": []
@@ -177,8 +183,10 @@
         "model": [
           "opencode/mimo-v2.5-free",
           "opencode-go/mimo-v2.5",
+          "nvidia/qwen/qwen3.5-122b-a10b",
           "deepseek/deepseek-v4-flash"
         ],
+        "temperature": 0.2,
         "skills": [],
         "mcps": ["websearch", "context7", "gh_grep"]
       },
@@ -186,8 +194,10 @@
         "model": [
           "opencode/deepseek-v4-flash-free",
           "opencode-go/deepseek-v4-flash",
+          "nvidia/deepseek-ai/deepseek-v4-flash",
           "deepseek/deepseek-v4-flash"
         ],
+        "temperature": 0.2,
         "skills": [],
         "mcps": []
       },
@@ -195,8 +205,10 @@
         "model": [
           "opencode/deepseek-v4-flash-free",
           "opencode-go/deepseek-v4-flash",
+          "nvidia/minimaxai/minimax-m2.7",
           "deepseek/deepseek-v4-flash"
         ],
+        "temperature": 0.2,
         "variant": "high",
         "skills": [],
         "mcps": []
@@ -205,8 +217,10 @@
         "model": [
           "opencode-go/qwen3.7-plus",
           "opencode/qwen3.6-plus",
+          "nvidia/meta/llama-3.2-90b-vision-instruct",
           "deepseek/deepseek-v4-pro"
         ],
+        "temperature": 0.2,
         "variant": "low",
         "skills": [],
         "mcps": []
@@ -243,24 +257,28 @@
       },
       "balanced": {
         "alpha": {
-          "model": "opencode-go/kimi-k2.7-code",
+          "model": "nvidia/glm-5.1",
           "variant": "high",
           "fallback_models": [
+            "opencode-go/kimi-k2.7-code",
             "opencode/kimi-k2.6",
             "deepseek/deepseek-v4-pro"
           ]
         },
         "beta": {
-          "model": "opencode-go/minimax-m3",
-          "variant": "medium",
+          "model": "nvidia/nemotron-3-ultra-550b-a55b",
+          "variant": "high",
           "fallback_models": [
+            "opencode-go/minimax-m3",
             "opencode/qwen3.6-plus",
             "deepseek/deepseek-v4-pro"
           ]
         },
         "gamma": {
-          "model": "opencode/mimo-v2.5-free",
+          "model": "nvidia/deepseek-v4-flash",
+          "variant": "medium",
           "fallback_models": [
+            "opencode/mimo-v2.5-free",
             "opencode-go/qwen3.7-max",
             "deepseek/deepseek-v4-flash"
           ]

@@ -92,6 +92,22 @@
   },
   "provider": {
     "deepseek": {},
+    "nvidia": {
+      "name": "NVIDIA",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "https://integrate.api.nvidia.com/v1"
+      },
+      "models": {
+        "minimaxai/minimax-m3": {
+          "name": "MiniMax M3 (NVIDIA)",
+          "limit": {
+            "context": 1048576,
+            "output": 8192
+          }
+        }
+      }
+    },
     "ollama": {
       "name": "Ollama",
       "npm": "@ai-sdk/openai-compatible",
