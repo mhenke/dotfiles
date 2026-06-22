@@ -157,10 +157,10 @@
       },
       "oracle": {
         "model": [
-          "opencode-go/kimi-k2.7-code",
-          "opencode/kimi-k2.6",
-          "nvidia/mistralai/mistral-large-3",
-          "deepseek/deepseek-v4-pro"
+          "opencode-go/deepseek-v4-pro",
+          "nvidia/deepseek-ai/deepseek-v4-pro",
+          "deepseek/deepseek-v4-pro",
+          "opencode/deepseek-v4-pro"
         ],
         "temperature": 0.4,
         "variant": "max",
@@ -170,8 +170,8 @@
       "designer": {
         "model": [
           "opencode-go/kimi-k2.7-code",
-          "opencode/qwen3.6-plus",
-          "nvidia/moonshotai/kimi-k2-instruct",
+          "nvidia/moonshotai/kimi-k2.6",
+          "opencode/kimi-k2.6",
           "deepseek/deepseek-v4-pro"
         ],
         "temperature": 0.3,
@@ -193,8 +193,8 @@
       "explorer": {
         "model": [
           "opencode/deepseek-v4-flash-free",
-          "opencode-go/deepseek-v4-flash",
           "nvidia/deepseek-ai/deepseek-v4-flash",
+          "opencode-go/deepseek-v4-flash",
           "deepseek/deepseek-v4-flash"
         ],
         "temperature": 0.2,
@@ -204,8 +204,8 @@
       "fixer": {
         "model": [
           "opencode/deepseek-v4-flash-free",
+          "nvidia/deepseek-ai/deepseek-v4-flash",
           "opencode-go/deepseek-v4-flash",
-          "nvidia/minimaxai/minimax-m2.7",
           "deepseek/deepseek-v4-flash"
         ],
         "temperature": 0.2,
@@ -216,8 +216,8 @@
       "observer": {
         "model": [
           "opencode-go/qwen3.7-plus",
+          "nvidia/qwen/qwen3.5-397b-a17b",
           "opencode/qwen3.6-plus",
-          "nvidia/meta/llama-3.2-90b-vision-instruct",
           "deepseek/deepseek-v4-pro"
         ],
         "temperature": 0.2,
@@ -260,27 +260,27 @@
           "model": "nvidia/glm-5.1",
           "variant": "high",
           "fallback_models": [
-            "opencode-go/kimi-k2.7-code",
-            "opencode/kimi-k2.6",
+            "opencode-go/glm-5.1",
+            "opencode/glm-5.1",
             "deepseek/deepseek-v4-pro"
           ]
         },
         "beta": {
-          "model": "nvidia/nemotron-3-ultra-550b-a55b",
+          "model": "opencode-go/kimi-k2.7-code",
           "variant": "high",
           "fallback_models": [
-            "opencode-go/minimax-m3",
-            "opencode/qwen3.6-plus",
-            "deepseek/deepseek-v4-pro"
+            "nvidia/moonshotai/kimi-k2.6",
+            "opencode/kimi-k2.6",
+            "deepseek/deepseek-v4-flash"
           ]
         },
         "gamma": {
-          "model": "nvidia/deepseek-v4-flash",
-          "variant": "medium",
+          "model": "opencode-go/qwen3.7-plus",
+          "variant": "high",
           "fallback_models": [
-            "opencode/mimo-v2.5-free",
-            "opencode-go/qwen3.7-max",
-            "deepseek/deepseek-v4-flash"
+            "nvidia/qwen/qwen3.5-397b-a17b",
+            "opencode/qwen3.6-plus",
+            "deepseek/deepseek-v4-pro"
           ]
         }
       }
@@ -290,7 +290,12 @@
   },
   "agents": {
     "council": {
-      "model": ["opencode/mimo-v2.5-free", "opencode-go/mimo-v2.5", "deepseek/deepseek-v4-pro"]
+      "model": [
+        "opencode/mimo-v2.5-free",
+        "opencode-go/mimo-v2.5",
+        "nvidia/z-ai/glm-5.1",
+        "deepseek/deepseek-v4-pro"
+      ]
     }
   },
   "disabled_agents": [],
