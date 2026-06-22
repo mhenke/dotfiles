@@ -203,9 +203,9 @@
       },
       "fixer": {
         "model": [
+          "opencode-go/qwen3.7-plus",
+          "nvidia/qwen/qwen3-coder-480b-a35b-instruct",
           "opencode/deepseek-v4-flash-free",
-          "nvidia/deepseek-ai/deepseek-v4-flash",
-          "opencode-go/deepseek-v4-flash",
           "deepseek/deepseek-v4-flash"
         ],
         "temperature": 0.2,
