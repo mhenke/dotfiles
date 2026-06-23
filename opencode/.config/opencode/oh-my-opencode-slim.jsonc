@@ -257,10 +257,10 @@
       },
       "balanced": {
         "alpha": {
-          "model": "nvidia/glm-5.1",
+          "model": "opencode-go/glm-5.2",
           "variant": "high",
           "fallback_models": [
-            "opencode-go/glm-5.2",
+            "nvidia/glm-5.1",
             "opencode/glm-5.1",
             "deepseek/deepseek-v4-pro"
           ]
