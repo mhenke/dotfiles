@@ -69,7 +69,7 @@
     "github-copilot",
     "openrouter"
   ],
-  "default_agent": "plan",
+  "default_agent": "orchestrator",
   "agent": {
     "build": {
       "model": "opencode/deepseek-v4-flash-free",
@@ -79,15 +79,6 @@
       "model": "opencode/deepseek-v4-flash-free",
       "mode": "primary",
       "disable": false
-    },
-    "alpha": {
-      "disable": true
-    },
-    "explore": {
-      "disable": true
-    },
-    "general": {
-      "disable": true
     }
   },
   "provider": {

@@ -260,7 +260,7 @@
           "model": "nvidia/glm-5.1",
           "variant": "high",
           "fallback_models": [
-            "opencode-go/glm-5.1",
+            "opencode-go/glm-5.2",
             "opencode/glm-5.1",
             "deepseek/deepseek-v4-pro"
           ]
@@ -298,7 +298,7 @@
       ]
     }
   },
-  "disabled_agents": [],
+  "disabled_agents": ["explore", "general", "alpha"],
   "websearch": {
     "provider": "exa"
   },
