@@ -148,7 +148,7 @@
         "model": [
           "opencode/mimo-v2.5-free",
           "opencode-go/mimo-v2.5",
-          "nvidia/moonshotai/kimi-k2.6",
+          "nvidia/z-ai/glm-5.1",
           "deepseek/deepseek-v4-pro"
         ],
         "temperature": 0.4,
@@ -157,7 +157,7 @@
       },
       "oracle": {
         "model": [
-          "opencode-go/qwen3.7-max",
+          "opencode-go/deepseek-v4-pro",
           "nvidia/deepseek-ai/deepseek-v4-pro",
           "deepseek/deepseek-v4-pro",
           "opencode/deepseek-v4-pro"
