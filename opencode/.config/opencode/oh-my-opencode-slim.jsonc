@@ -158,8 +158,8 @@
       "oracle": {
         "model": [
           "opencode-go/qwen3.7-max",
-          "nvidia/deepseek-ai/deepseek-v4-pro",
           "deepseek/deepseek-v4-pro",
+          "opencode-go/deepseek-v4-pro",
           "opencode/deepseek-v4-pro"
         ],
         "temperature": 0.4,
