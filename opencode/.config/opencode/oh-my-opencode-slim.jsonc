@@ -260,8 +260,8 @@
           "model": "opencode-go/glm-5.2",
           "variant": "high",
           "fallback_models": [
+            "opencode/big-pickle",
             "nvidia/glm-5.1",
-            "opencode/glm-5.1",
             "deepseek/deepseek-v4-pro"
           ]
         },
