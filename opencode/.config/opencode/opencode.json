@@ -96,6 +96,13 @@
             "context": 1048576,
             "output": 8192
           }
+        },
+        "nemotron-3-ultra-550b-a55b": {
+          "name": "Nemotron 3 Ultra 550B (NVIDIA)",
+          "limit": {
+            "context": 131072,
+            "output": 16384
+          }
         }
       }
     },
