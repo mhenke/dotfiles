@@ -18,8 +18,13 @@
           "opencode/nemotron-3-ultra-free"
         ],
         "variant": "medium",
-        "skills": ["*"],
-        "mcps": ["*", "!context7"]
+        "skills": [
+          "*"
+        ],
+        "mcps": [
+          "*",
+          "!context7"
+        ]
       },
       "oracle": {
         "model": [
@@ -28,7 +33,9 @@
           "opencode/claude-sonnet-4"
         ],
         "variant": "max",
-        "skills": ["simplify"],
+        "skills": [
+          "simplify"
+        ],
         "mcps": []
       },
       "librarian": {
@@ -37,7 +44,11 @@
           "opencode/north-mini-code-free"
         ],
         "skills": [],
-        "mcps": ["websearch", "context7", "gh_grep"]
+        "mcps": [
+          "websearch",
+          "context7",
+          "gh_grep"
+        ]
       },
       "explorer": {
         "model": [
@@ -82,8 +93,13 @@
           "opencode-go/qwen3.7-plus",
           "opencode/deepseek-v4-flash-free"
         ],
-        "skills": ["*"],
-        "mcps": ["*", "!context7"]
+        "skills": [
+          "*"
+        ],
+        "mcps": [
+          "*",
+          "!context7"
+        ]
       },
       "oracle": {
         "model": [
@@ -92,7 +108,9 @@
           "opencode/deepseek-v4-pro"
         ],
         "variant": "max",
-        "skills": ["simplify"],
+        "skills": [
+          "simplify"
+        ],
         "mcps": []
       },
       "librarian": {
@@ -102,7 +120,11 @@
           "opencode/mimo-v2.5-free"
         ],
         "skills": [],
-        "mcps": ["websearch", "context7", "gh_grep"]
+        "mcps": [
+          "websearch",
+          "context7",
+          "gh_grep"
+        ]
       },
       "explorer": {
         "model": [
@@ -152,8 +174,13 @@
           "deepseek/deepseek-v4-pro"
         ],
         "temperature": 0.4,
-        "skills": ["*"],
-        "mcps": ["*", "!context7"]
+        "skills": [
+          "*"
+        ],
+        "mcps": [
+          "*",
+          "!context7"
+        ]
       },
       "oracle": {
         "model": [
@@ -164,7 +191,9 @@
         ],
         "temperature": 0.4,
         "variant": "max",
-        "skills": ["simplify"],
+        "skills": [
+          "simplify"
+        ],
         "mcps": []
       },
       "designer": {
@@ -188,7 +217,11 @@
         ],
         "temperature": 0.2,
         "skills": [],
-        "mcps": ["websearch", "context7", "gh_grep"]
+        "mcps": [
+          "websearch",
+          "context7",
+          "gh_grep"
+        ]
       },
       "explorer": {
         "model": [
@@ -298,7 +331,11 @@
       ]
     }
   },
-  "disabled_agents": ["explore", "general", "alpha"],
+  "disabled_agents": [
+    "explore",
+    "general",
+    "alpha"
+  ],
   "websearch": {
     "provider": "exa"
   },
