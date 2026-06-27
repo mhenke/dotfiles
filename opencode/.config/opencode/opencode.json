@@ -7,7 +7,9 @@
   ],
   "plugin": [
     "./plugins/claude-mem.js",
-    "oh-my-opencode-slim"
+    "oh-my-opencode-slim",
+    "@dietrichgeber/ponytail",
+    "superpowers@git+https://github.com/obra/superpowers.git"
   ],
   "mcp": {
     "playwright": {

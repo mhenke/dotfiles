@@ -37,3 +37,7 @@ The orchestrator MUST delegate work to specialist agents. Direct execution by th
 - Keep changes minimal, explicit, and easy to verify.
 - Prefer direct edits over clever abstractions unless reuse is clear.
 - Validate assumptions with docs, schema, or runtime checks before changing behavior.
+
+## Communication
+
+- When reporting information to me, be extremely concise and sacrifice grammar for the sake of concision.
