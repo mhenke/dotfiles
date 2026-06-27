@@ -74,7 +74,6 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ## Preferred Skills
 
 - Use `customize-opencode` whenever editing `opencode.json`, `oh-my-opencode-slim.jsonc`, prompt fragments, agents, skills, or plugins under the opencode config tree.
-- Use `verification-before-completion` before claiming config or code changes are complete.
 - Use `humanizer` when editing or reviewing text to remove signs of AI-generated writing and make it sound more natural.
 - Use `impeccable` when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a frontend interface.
 
