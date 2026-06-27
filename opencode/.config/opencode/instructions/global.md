@@ -94,6 +94,10 @@ The orchestrator MUST delegate work to specialist agents. Direct execution by th
 
 **Enforcement:** If you catch yourself reading more than 2 files to understand the codebase, stop and dispatch `@explorer`. If you catch yourself writing implementation code, stop and dispatch `@fixer`. These rules are non-negotiable.
 
+**Build agent:** MUST NOT delegate to specialist agents. Execute directly.
+
+**Plan agent:** MUST NOT delegate to specialist agents. Execute directly.
+
 ## Communication
 
 - When reporting information to me, be extremely concise and sacrifice grammar for the sake of concision.
