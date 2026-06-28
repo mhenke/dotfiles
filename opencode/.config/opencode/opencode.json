@@ -5,10 +5,16 @@
   "instructions": [
     "/home/mhenke/dotfiles/opencode/.config/opencode/instructions/global.md"
   ],
+  "skills": {
+    "paths": [
+      "/home/mhenke/.config/opencode/node_modules/@dietrichgebert/ponytail/skills"
+    ]
+  },
   "plugin": [
     "./plugins/claude-mem.js",
+    "./plugins/rtk.ts",
     "oh-my-opencode-slim",
-    "@dietrichgebert/ponytail",
+    "/home/mhenke/.config/opencode/node_modules/@dietrichgebert/ponytail/.opencode/plugins/ponytail.mjs",
     "superpowers@git+https://github.com/obra/superpowers.git"
   ],
   "mcp": {
