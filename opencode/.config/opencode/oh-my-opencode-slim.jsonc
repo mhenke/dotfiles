@@ -82,7 +82,7 @@
       "fixer": {
         "model": [
           "opencode-go/qwen3.7-plus",
-          "nvidia/nemotron-3-ultra-550b-a55b",
+          "nvidia/deepseek-ai/deepseek-v4-flash",
           "opencode/nemotron-3-ultra-free",
           "deepseek/deepseek-v4-flash"
         ],
