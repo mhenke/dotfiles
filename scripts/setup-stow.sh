@@ -27,7 +27,7 @@ log_info "Dotfiles directory: $DOTFILES_DIR"
 # Packages to stow
 PACKAGES=(
     "ghostty" "git" "gtk" "gtkrc" "htop" "hypr" "jules" "kitty" "kvantum" 
-    "swaync" "thunar" "wallust" "waybar" "wlogout" "xed" "yazi" "zsh" 
+    "rtk" "swaync" "thunar" "wallust" "waybar" "wlogout" "xed" "yazi" "zsh" 
     "zprofile"
 )
 
