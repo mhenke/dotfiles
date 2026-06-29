@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "compactSidebar": true,
-  "preset": "balanced",
+  "preset": "nvidia-free",
   "autoUpdate": true,
   "setDefaultAgent": true,
   "scoringEngineVersion": "v2",
@@ -99,6 +99,124 @@
           "opencode/qwen3.6-plus",
           "deepseek/deepseek-v4-pro"
         ],
+        "temperature": 0.2,
+        "variant": "low",
+        "skills": [],
+        "mcps": []
+      }
+    },
+    "opencode-zen-free": {
+      "orchestrator": {
+        "model": "opencode/mimo-v2.5-free",
+        "temperature": 0.4,
+        "skills": [
+          "*"
+        ],
+        "mcps": [
+          "*",
+          "!context7"
+        ]
+      },
+      "oracle": {
+        "model": "opencode/big-pickle",
+        "temperature": 0.4,
+        "variant": "max",
+        "skills": [
+          "simplify"
+        ],
+        "mcps": []
+      },
+      "explorer": {
+        "model": "stepfun-ai/step-3.7-flash-fast-moe",
+        "temperature": 0.2,
+        "skills": [],
+        "mcps": []
+      },
+      "librarian": {
+        "model": "opencode/deepseek-v4-flash-free",
+        "temperature": 0.2,
+        "skills": [],
+        "mcps": [
+          "websearch",
+          "context7",
+          "gh_grep"
+        ]
+      },
+      "designer": {
+        "model": "opencode/mimo-v2.5-free",
+        "temperature": 0.3,
+        "variant": "medium",
+        "skills": [],
+        "mcps": []
+      },
+      "fixer": {
+        "model": "opencode/deepseek-v4-flash-free",
+        "temperature": 0.2,
+        "variant": "high",
+        "skills": [],
+        "mcps": []
+      },
+      "observer": {
+        "model": "opencode/north-mini-code-free",
+        "temperature": 0.2,
+        "variant": "low",
+        "skills": [],
+        "mcps": []
+      }
+    },
+    "nvidia-free": {
+      "orchestrator": {
+        "model": "nvidia/minimaxai/minimax-m2.7",
+        "temperature": 0.4,
+        "skills": [
+          "*"
+        ],
+        "mcps": [
+          "*",
+          "!context7"
+        ]
+      },
+      "oracle": {
+        "model": "nvidia/mistralai/mistral-large-3-675b-instruct-2512",
+        "temperature": 0.4,
+        "variant": "max",
+        "skills": [
+          "simplify"
+        ],
+        "mcps": []
+      },
+      "explorer": {
+        "model": "nvidia/stepfun-ai/step-3.5-flash",
+        "temperature": 0.2,
+        "skills": [],
+        "mcps": []
+      },
+      "librarian": {
+        "model": "nvidia/google/gemma-4-31b-i",
+        "temperature": 0.2,
+        "skills": [],
+        "mcps": [
+          "websearch",
+          "context7",
+          "gh_grep"
+        ]
+      },
+      "designer": {
+        "model": "nvidia/minimaxai/minimax-m3",
+        "temperature": 0.3,
+        "variant": "medium",
+        "skills": [],
+        "mcps": []
+      },
+      "fixer": {
+        "model": "nvidia/mistralai/mistral-small-4-119b-2603",
+        "temperature": 0.2,
+        "variant": "high",
+        "skills": [],
+        "mcps": []
+      },
+      "observer": {
+        "model": "nvidia/nvidia/nvidia-nemotron-nano-9b-v2",
         "temperature": 0.2,
         "variant": "low",
         "skills": [],

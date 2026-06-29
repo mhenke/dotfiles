@@ -14,7 +14,7 @@
     "./plugins/claude-mem.js",
     "./plugins/rtk.ts",
     "oh-my-opencode-slim",
-    "/home/mhenke/.config/opencode/node_modules/@dietrichgebert/ponytail/.opencode/plugins/ponytail.mjs",
+    "@dietrichgebert/ponytail",
     "superpowers@git+https://github.com/obra/superpowers.git"
   ],
   "mcp": {

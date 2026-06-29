@@ -67,6 +67,7 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 ## Superpowers & Skill Workflow
 
 - Load the `using-superpowers` skill early in the session to establish the skill discovery workflow.
+- `ponytail` is already active via plugin injection — do NOT load it as a skill. It's in your system prompt.
 - Follow its workflow: check for relevant skills before any action, invoke them via the skill tool, then execute.
 - Prefer specialized skills over improvised generic behavior when a good match exists.
 - If the session is already underway, still follow the same intent: proactively look for relevant skills before taking action.
