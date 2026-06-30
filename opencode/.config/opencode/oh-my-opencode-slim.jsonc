@@ -186,13 +186,13 @@
         "mcps": []
       },
       "explorer": {
-        "model": "nvidia/stepfun-ai/step-3.5-flash",
+        "model": "nvidia/stepfun-ai/step-3.7-flash",
         "temperature": 0.2,
         "skills": [],
         "mcps": []
       },
       "librarian": {
-        "model": "nvidia/google/gemma-4-31b-i",
+        "model": "nvidia/deepseek-ai/deepseek-v4-flash",
         "temperature": 0.2,
         "skills": [],
         "mcps": [
@@ -216,7 +216,7 @@
         "mcps": []
       },
       "observer": {
-        "model": "nvidia/nvidia/nvidia-nemotron-nano-9b-v2",
+        "model": "nvidia/meta/llama-3.2-90b-vision-instruct",
         "temperature": 0.2,
         "variant": "low",
         "skills": [],
