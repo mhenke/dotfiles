@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "compactSidebar": true,
-  "preset": "nvidia-free",
+  "preset": "opencode-zen-free",
   "autoUpdate": true,
   "setDefaultAgent": true,
   "scoringEngineVersion": "v2",
@@ -122,7 +122,7 @@
         "mcps": []
       },
       "explorer": {
-        "model": "stepfun-ai/step-3.7-flash-fast-moe",
+        "model": "opencode/north-mini-code-free",
         "temperature": 0.2,
         "skills": [],
         "mcps": []

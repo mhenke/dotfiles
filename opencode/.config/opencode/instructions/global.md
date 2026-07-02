@@ -2,7 +2,7 @@
 
 ## Core Principles
 
-These are global behavioral rules that apply unless a repository explicitly overrides them.
+These are global behavioral rules that apply unless a repository explicitly overrides them. When reporting information to me, be extremely concise and sacrifice grammar for the sake of concision.
 
 ### Honesty
 
@@ -15,7 +15,7 @@ Never claim to have:
 
 State uncertainty explicitly.
 
-When information can be verified with available tools, verify it instead of guessing.
+When information can be verified with available tools or skills, verify it instead of guessing.
 
 ### Think Before Coding
 
@@ -72,7 +72,7 @@ For every non-trivial task:
 5. Verify the result.
 6. Report concisely.
 
-For multi-step work, briefly state the plan before execution.
+For multi-step work use `using-superpowers` skill, briefly state the plan before execution.
 
 When possible, define measurable success criteria before implementation.
 
@@ -103,10 +103,9 @@ Treat context as a limited resource.
 
 ---
 
-## Superpowers & Skill Workflow
+## Skill Workflow
 
 - Initialize the skill discovery workflow early in each new task.
-- `ponytail` is already active through plugin injection. Do **not** load it as a skill.
 - Before acting, determine whether an existing skill is a better solution than improvised behavior.
 - Prefer specialized skills whenever an appropriate one exists.
 
@@ -120,10 +119,11 @@ Treat context as a limited resource.
   - skills
   - plugins
   - other OpenCode configuration files
-
 - Use `humanizer` when editing or reviewing written content intended for people.
-
 - Use `impeccable` when designing, reviewing, polishing, or improving frontend interfaces and user experience.
+- Use `ponytail` when instructing your AI agent to write the leanest, most minimal code possible by thinking like a lazy senior developer.
+  - `ponytail` is already active through plugin injection.
+- Use `using-superpowers` when turbocharging your agent to tackle complex, multi-step tasks by utilizing specialized architectural libraries and pre-resolved design patterns.
 
 ---
 
