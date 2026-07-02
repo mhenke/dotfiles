@@ -172,7 +172,11 @@
         ]
       },
       "oracle": {
-        "model": "nvidia/z-ai/glm-5.2",
+        "model": [
+          "nvidia/z-ai/glm-5.2",
+          "nvidia/deepseek-ai/deepseek-v4-pro",
+          "nvidia/nvidia/nemotron-3-ultra-550b-a55b"
+        ],
         "temperature": 0.4,
         "variant": "max",
         "skills": [
