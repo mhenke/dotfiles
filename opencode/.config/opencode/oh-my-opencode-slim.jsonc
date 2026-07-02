@@ -1,15 +1,10 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "compactSidebar": true,
-  "preset": "opencode-zen-free",
+  "preset": "nvidia-free",
   "autoUpdate": true,
   "setDefaultAgent": true,
   "scoringEngineVersion": "v2",
-  "multiplexer": {
-    "type": "tmux",
-    "layout": "main-vertical",
-    "main_pane_size": 60
-  },
   "presets": {
     "balanced": {
       "orchestrator": {

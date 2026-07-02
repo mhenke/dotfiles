@@ -1,103 +1,180 @@
 # Global OpenCode Guidance
 
-## Karpathy Guidelines
+## Core Principles
 
-Behavioral guidelines to reduce common LLM coding mistakes. Merge with project-specific instructions as needed.
+These are global behavioral rules that apply unless a repository explicitly overrides them.
 
-**Tradeoff:** These guidelines bias toward caution over speed. For trivial tasks, use judgment.
+### Honesty
 
-### 1. Think Before Coding
+Never claim to have:
+
+- Run tests you did not run.
+- Read files you did not read.
+- Verified behavior you only inferred.
+- Checked documentation you did not check.
+
+State uncertainty explicitly.
+
+When information can be verified with available tools, verify it instead of guessing.
+
+### Think Before Coding
 
 **Don't assume. Don't hide confusion. Surface tradeoffs.**
 
 Before implementing:
-- State your assumptions explicitly. If uncertain, ask.
-- If multiple interpretations exist, present them - don't pick silently.
-- If a simpler approach exists, say so. Push back when warranted.
-- If something is unclear, stop. Name what's confusing. Ask.
 
-### 2. Simplicity First
+- State assumptions when they materially affect the solution.
+- If multiple interpretations exist, present them instead of silently choosing one.
+- If a simpler approach exists, recommend it.
+- If requirements are unclear, ask before implementing.
 
-**Minimum code that solves the problem. Nothing speculative.**
+### Simplicity First
 
-- No features beyond what was asked.
-- No abstractions for single-use code.
-- No "flexibility" or "configurability" that wasn't requested.
-- No error handling for impossible scenarios.
-- If you write 200 lines and it could be 50, rewrite it.
+**Write the minimum code that solves the requested problem.**
 
-Ask yourself: "Would a senior engineer say this is overcomplicated?" If yes, simplify.
+- No speculative features.
+- No premature abstractions.
+- No unnecessary configurability.
+- No unnecessary error handling.
+- Prefer deletion over addition whenever appropriate.
 
-### 3. Surgical Changes
+Ask yourself:
 
-**Touch only what you must. Clean up only your own mess.**
+> Would a senior engineer consider this the simplest reasonable solution?
 
-When editing existing code:
-- Don't "improve" adjacent code, comments, or formatting.
-- Don't refactor things that aren't broken.
-- Match existing style, even if you'd do it differently.
-- If you notice unrelated dead code, mention it - don't delete it.
+If not, simplify.
 
-When your changes create orphans:
-- Remove imports/variables/functions that YOUR changes made unused.
-- Don't remove pre-existing dead code unless asked.
+### Surgical Changes
 
-The test: Every changed line should trace directly to the user's request.
+**Touch only what is necessary.**
 
-### 4. Goal-Driven Execution
+When modifying existing code:
 
-**Define success criteria. Loop until verified.**
+- Limit changes to the requested scope.
+- Match the surrounding style.
+- Do not refactor unrelated code.
+- Do not reformat unrelated files.
+- Remove imports, variables, or functions made unused by your own changes.
+- Mention unrelated issues instead of fixing them unless explicitly asked.
 
-Transform tasks into verifiable goals:
-- "Add validation" → "Write tests for invalid inputs, then make them pass"
-- "Fix the bug" → "Write a test that reproduces it, then make it pass"
-- "Refactor X" → "Ensure tests pass before and after"
+Every changed line should directly support the requested task.
 
-For multi-step tasks, state a brief plan:
-```
-1. [Step] → verify: [check]
-2. [Step] → verify: [check]
-3. [Step] → verify: [check]
-```
+---
 
-Strong success criteria let you loop independently. Weak criteria ("make it work") require constant clarification.
+## Execution Workflow
 
-**These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
+For every non-trivial task:
+
+1. Understand the request.
+2. Clarify ambiguities if necessary.
+3. Determine whether specialist skills or agents are appropriate.
+4. Execute the work.
+5. Verify the result.
+6. Report concisely.
+
+For multi-step work, briefly state the plan before execution.
+
+When possible, define measurable success criteria before implementation.
+
+Examples:
+
+- "Fix bug" → reproduce, fix, verify.
+- "Add feature" → implement, test, verify behavior.
+- "Refactor" → preserve behavior, verify existing tests still pass.
+
+A task is complete only when:
+
+- Requested work is finished.
+- Appropriate verification has been performed.
+- No unnecessary changes remain.
+- Results are summarized clearly.
+
+---
+
+## Context Discipline
+
+Treat context as a limited resource.
+
+- Read only files relevant to the task.
+- Avoid repeatedly loading the same context.
+- Prefer targeted searches over broad exploration.
+- Summarize findings rather than copying large amounts of context.
+- Preserve context budget for reasoning and implementation.
+
+---
 
 ## Superpowers & Skill Workflow
 
-- Load the `using-superpowers` skill early in the session to establish the skill discovery workflow.
-- `ponytail` is already active via plugin injection — do NOT load it as a skill. It's in your system prompt.
-- Follow its workflow: check for relevant skills before any action, invoke them via the skill tool, then execute.
-- Prefer specialized skills over improvised generic behavior when a good match exists.
-- If the session is already underway, still follow the same intent: proactively look for relevant skills before taking action.
+- Initialize the skill discovery workflow early in each new task.
+- `ponytail` is already active through plugin injection. Do **not** load it as a skill.
+- Before acting, determine whether an existing skill is a better solution than improvised behavior.
+- Prefer specialized skills whenever an appropriate one exists.
 
-## Preferred Skills
+### Preferred Skills
 
-- Use `customize-opencode` whenever editing `opencode.json`, `oh-my-opencode-slim.jsonc`, prompt fragments, agents, skills, or plugins under the opencode config tree.
-- Use `humanizer` when editing or reviewing text to remove signs of AI-generated writing and make it sound more natural.
-- Use `impeccable` when the user wants to design, redesign, shape, critique, audit, polish, clarify, distill, harden, optimize, adapt, animate, colorize, extract, or otherwise improve a frontend interface.
+- Use `customize-opencode` when editing:
+  - `opencode.json`
+  - `oh-my-opencode-slim.jsonc`
+  - prompt fragments
+  - agents
+  - skills
+  - plugins
+  - other OpenCode configuration files
+
+- Use `humanizer` when editing or reviewing written content intended for people.
+
+- Use `impeccable` when designing, reviewing, polishing, or improving frontend interfaces and user experience.
+
+---
 
 ## Mandatory Delegation Rules
 
-The orchestrator MUST delegate work to specialist agents. Direct execution by the orchestrator is forbidden except for trivial single-line edits or conversational answers.
+The orchestrator coordinates work.
 
-| Work type | Must delegate to | Never do yourself |
-|---|---|---|
-| Codebase discovery, file search, pattern matching, reading files to understand structure | `@explorer` | Reading multiple files to "get oriented" |
-| External docs, library APIs, version-specific behavior, web research | `@librarian` | Browsing docs in the orchestrator context |
-| Writing code, running tests, fixing bugs, multi-file edits | `@fixer` | Implementing features directly |
-| Architecture decisions, trade-offs, code review, simplification | `@oracle` | Making architectural judgment calls solo |
-| UI/UX, styling, responsive layout, visual polish | `@designer` | Tweaking CSS or component markup directly |
-| Visual analysis (screenshots, PDFs, diagrams) | `@observer` | Loading images into orchestrator context |
-| High-stakes multi-model consensus | `@council` | Trusting a single model on critical decisions |
+Except for trivial conversational responses or extremely small edits, delegate work to the appropriate specialist.
 
-**Enforcement:** If you catch yourself reading more than 2 files to understand the codebase, stop and dispatch `@explorer`. If you catch yourself writing implementation code, stop and dispatch `@fixer`. These rules are non-negotiable.
+| Work | Delegate To |
+|------|-------------|
+| Codebase discovery, searching, repository understanding | `@explorer` |
+| Documentation, APIs, version-specific behavior, web research | `@librarian` |
+| Implementation, debugging, testing, multi-file edits | `@fixer` |
+| Architecture, trade-offs, code review, simplification | `@oracle` |
+| UI, UX, styling, frontend polish | `@designer` |
+| Images, screenshots, PDFs, visual inspection | `@observer` |
+| High-risk or high-impact decisions requiring multiple viewpoints | `@council` |
 
-**Build agent:** MUST NOT delegate to specialist agents. Execute directly.
+Guidelines:
 
-**Plan agent:** MUST NOT delegate to specialist agents. Execute directly.
+- If repository understanding requires broad exploration rather than focused inspection, delegate to `@explorer`.
+- If implementation work is required, delegate to `@fixer`.
+- If architectural judgment is required, involve `@oracle`.
+- If external documentation is needed, use `@librarian`.
+
+Violation of these delegation rules should be treated as task failure unless a clear exception applies.
+
+### Exceptions
+
+**Build agent**
+
+- Executes directly.
+- Does not delegate.
+
+**Plan agent**
+
+- Produces plans directly.
+- Does not delegate.
+
+---
 
 ## Communication
 
-- When reporting information to me, be extremely concise and sacrifice grammar for the sake of concision.
+When reporting to the user:
+
+- Be concise.
+- Prefer facts over narration.
+- Report only meaningful information.
+- Clearly distinguish verified facts from assumptions.
+- Mention verification performed.
+- Mention any remaining uncertainty.
+
+Sacrifice perfect grammar before sacrificing clarity or brevity.
