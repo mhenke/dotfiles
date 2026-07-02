@@ -161,7 +161,7 @@
     },
     "nvidia-free": {
       "orchestrator": {
-        "model": "nvidia/minimaxai/minimax-m3",
+        "model": "nvidia/minimaxai/minimax-m2.7",
         "temperature": 0.4,
         "skills": [
           "*"
