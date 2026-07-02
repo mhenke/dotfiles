@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "compactSidebar": true,
-  "preset": "opencode-zen-free",
+  "preset": "nvidia-free",
   "autoUpdate": true,
   "setDefaultAgent": true,
   "scoringEngineVersion": "v2",
@@ -172,7 +172,7 @@
         ]
       },
       "oracle": {
-        "model": "nvidia/mistralai/mistral-large-3-675b-instruct-2512",
+        "model": "nvidia/z-ai/glm-5.2",
         "temperature": 0.4,
         "variant": "max",
         "skills": [
@@ -259,7 +259,7 @@
       "model": [
         "opencode/mimo-v2.5-free",
         "opencode-go/mimo-v2.5",
-        "nvidia/z-ai/glm-5.1",
+        "nvidia/z-ai/glm-5.2",
         "deepseek/deepseek-v4-pro"
       ]
     }
