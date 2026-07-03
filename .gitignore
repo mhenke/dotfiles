@@ -63,3 +63,6 @@ ngrok.yml
 .aider.conf.yml
 .claude
 opencode/.config/opencode/oh-my-opencode-slim/reflections/
+
+# Playwright MCP session artifacts
+.playwright-mcp/
