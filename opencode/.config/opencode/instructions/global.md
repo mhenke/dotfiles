@@ -124,6 +124,7 @@ Treat context as a limited resource.
 - Use `ponytail` when instructing your AI agent to write the leanest, most minimal code possible by thinking like a lazy senior developer.
   - `ponytail` is already active through plugin injection.
 - Use `using-superpowers` when turbocharging your agent to tackle complex, multi-step tasks by utilizing specialized architectural libraries and pre-resolved design patterns.
+- Use `using-git-worktrees` when starting feature work that needs isolation from the current workspace or before executing implementation plans — ensures an isolated workspace exists via native tools or git worktree fallback.
 
 ---
 
