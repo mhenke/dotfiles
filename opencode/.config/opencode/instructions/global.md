@@ -119,7 +119,7 @@ Treat context as a limited resource.
   - skills
   - plugins
   - other OpenCode configuration files
-- Use `humanizer` when editing or reviewing written content intended for people.
+- Use `humanizer` when editing or reviewing written content intended for people — especially PR descriptions, issue bodies, code review comments, commit messages, READMEs, and other markdown docs.
 - Use `impeccable` when designing, reviewing, polishing, or improving frontend interfaces and user experience.
 - Use `ponytail` when instructing your AI agent to write the leanest, most minimal code possible by thinking like a lazy senior developer.
   - `ponytail` is already active through plugin injection.
