@@ -194,9 +194,9 @@
       },
       "librarian": {
         "model": [
+          "nvidia/minimaxai/minimax-m2.7",
           "nvidia/moonshotai/kimi-k2.6",
-          "nvidia/openai/gpt-oss-20b",
-          "nvidia/minimaxai/minimax-m2.7"
+          "nvidia/openai/gpt-oss-20b"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -206,21 +206,20 @@
           "gh_grep"
         ]
       },
-      "designer": {
-        "model": [
-          "nvidia/minimaxai/minimax-m3",
-          "nvidia/z-ai/glm-5.2",
-          "nvidia/moonshotai/kimi-k2.6"
-        ],
-        "temperature": 0.3,
-        "variant": "medium",
-        "skills": [],
-        "mcps": []
-      },
+"designer": {
+         "model": [
+           "nvidia/moonshotai/kimi-k2.6",
+           "nvidia/z-ai/glm-5.2"
+         ],
+         "temperature": 0.3,
+         "variant": "medium",
+         "skills": [],
+         "mcps": []
+       },
       "fixer": {
         "model": [
           "nvidia/mistralai/mistral-small-4-119b-2603",
-          "nvidia/openai/gpt-oss-120b"
+          "nvidia/qwen/qwen3-next-80b-a3b-instruct"
         ],
         "temperature": 0.2,
         "variant": "high",
@@ -270,43 +269,23 @@
           ]
         }
       },
-      "nvidia-free": {
-        "councillor": {
-          "model": "nvidia/deepseek-ai/deepseek-v4-pro",
-          "variant": "high",
-          "fallback_models": [
-            "nvidia/nvidia/nemotron-3-super-120b-a12b",
-            "nvidia/z-ai/glm-5.2",
-            "nvidia/mistralai/mistral-large-3-675b-instruct-2512"
-          ]
-        },
-        "alpha": {
-          "model": "nvidia/nvidia/nemotron-3-super-120b-a12b",
-          "variant": "high",
-          "fallback_models": [
-            "nvidia/deepseek-ai/deepseek-v4-pro",
-            "nvidia/z-ai/glm-5.2",
-            "nvidia/mistralai/mistral-large-3-675b-instruct-2512"
-          ]
-        },
-        "beta": {
-          "model": "nvidia/minimaxai/minimax-m3",
-          "variant": "high",
-          "fallback_models": [
-            "nvidia/moonshotai/kimi-k2.6",
-            "nvidia/openai/gpt-oss-120b",
-            "nvidia/mistralai/mistral-large-3-675b-instruct-2512"
-          ]
-        },
-        "gamma": {
-          "model": "nvidia/qwen/qwen3-next-80b-a3b-instruct",
-          "variant": "high",
-          "fallback_models": [
-            "nvidia/minimaxai/minimax-m2.7",
-            "nvidia/openai/gpt-oss-20b",
-            "nvidia/moonshotai/kimi-k2.6"
-          ]
-        }
+"nvidia-free": {
+      "councillor": {
+        "model": "nvidia/minimaxai/minimax-m3",
+        "variant": "high"
+      },
+      "alpha": {
+        "model": "nvidia/z-ai/glm-5.2",
+        "variant": "high"
+      },
+      "beta": {
+        "model": "nvidia/deepseek-ai/deepseek-v4-pro",
+        "variant": "high"
+      },
+      "gamma": {
+        "model": "nvidia/openai/gpt-oss-120b",
+        "variant": "high"
+      }
       }
     },
     "default_preset": "balanced",
