@@ -155,9 +155,9 @@
     "nvidia-free": {
       "orchestrator": {
         "model": [
-          "nvidia/nvidia/nemotron-3-ultra-550b-a55b",
-          "nvidia/qwen/qwen3-next-80b-a3b-instruct",
-          "nvidia/minimaxai/minimax-m3"
+          "nvidia/deepseek-ai/deepseek-v4-pro",
+          "nvidia/nemotron-3-ultra-550b-a55b",
+          "nvidia/qwen/qwen3-next-80b-a3b-instruct"
         ],
         "temperature": 0.4,
         "skills": [
@@ -168,11 +168,11 @@
           "!context7"
         ]
       },
-      "oracle": {
+"oracle": {
         "model": [
+          "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/deepseek-ai/deepseek-v4-pro",
-          "nvidia/z-ai/glm-5.2",
-          "nvidia/mistralai/mistral-large-3-675b-instruct-2512"
+          "nvidia/qwen/qwen3-next-80b-a3b-instruct"
         ],
         "temperature": 0.4,
         "variant": "max",
@@ -193,9 +193,9 @@
       },
       "librarian": {
         "model": [
-          "nvidia/minimaxai/minimax-m2.7",
+          "nvidia/qwen/qwen3-next-80b-a3b-instruct",
           "nvidia/moonshotai/kimi-k2.6",
-          "nvidia/openai/gpt-oss-20b"
+          "nvidia/minimaxai/minimax-m2.7"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -217,6 +217,7 @@
       },
       "fixer": {
         "model": [
+          "nvidia/qwen/qwen3-coder-480b-a35b-instruct",
           "nvidia/mistralai/mistral-small-4-119b-2603",
           "nvidia/qwen/qwen3-next-80b-a3b-instruct"
         ],
@@ -227,6 +228,7 @@
       },
       "observer": {
         "model": [
+          "nvidia/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
           "nvidia/minimaxai/minimax-m3",
           "nvidia/moonshotai/kimi-k2.6"
         ],
