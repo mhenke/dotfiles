@@ -81,23 +81,39 @@
   "agent": {
     "build": {
       "model": "deepseek/deepseek-v4-flash",
-      "disable": false
+      "disable": false,
+      "permission": {
+        "task": {
+          "*": "deny",
+          "general": "allow",
+          "explore": "allow",
+          "scout": "allow"
+        }
+      }
     },
     "plan": {
       "model": "deepseek/deepseek-v4-pro",
       "mode": "primary",
-      "disable": false
+      "disable": false,
+      "permission": {
+        "task": {
+          "*": "deny",
+          "general": "allow",
+          "explore": "allow",
+          "scout": "allow"
+        }
+      }
     },
-  "alpha": {
-    "disable": true
+    "alpha": {
+      "disable": true
+    },
+    "explore": {
+      "disable": true
+    },
+    "general": {
+      "disable": true
+    }
   },
-  "explore": {
-    "disable": true
-  },
-  "general": {
-    "disable": true
-  }
-},
   "provider": {
     "deepseek": {},
     "nvidia": {

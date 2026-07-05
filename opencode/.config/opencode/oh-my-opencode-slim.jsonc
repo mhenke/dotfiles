@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "compactSidebar": true,
-  "preset": "nvidia-free",
+  "preset": "balanced",
   "autoUpdate": true,
   "setDefaultAgent": true,
   "scoringEngineVersion": "v2",
@@ -206,16 +206,16 @@
           "gh_grep"
         ]
       },
-"designer": {
-         "model": [
-           "nvidia/moonshotai/kimi-k2.6",
-           "nvidia/z-ai/glm-5.2"
-         ],
-         "temperature": 0.3,
-         "variant": "medium",
-         "skills": [],
-         "mcps": []
-       },
+      "designer": {
+        "model": [
+          "nvidia/moonshotai/kimi-k2.6",
+          "nvidia/z-ai/glm-5.2"
+        ],
+        "temperature": 0.3,
+        "variant": "medium",
+        "skills": [],
+        "mcps": []
+      },
       "fixer": {
         "model": [
           "nvidia/mistralai/mistral-small-4-119b-2603",
@@ -269,23 +269,23 @@
           ]
         }
       },
-"nvidia-free": {
-      "councillor": {
-        "model": "nvidia/minimaxai/minimax-m3",
-        "variant": "high"
-      },
-      "alpha": {
-        "model": "nvidia/z-ai/glm-5.2",
-        "variant": "high"
-      },
-      "beta": {
-        "model": "nvidia/deepseek-ai/deepseek-v4-pro",
-        "variant": "high"
-      },
-      "gamma": {
-        "model": "nvidia/openai/gpt-oss-120b",
-        "variant": "high"
-      }
+      "nvidia-free": {
+        "councillor": {
+          "model": "nvidia/minimaxai/minimax-m3",
+          "variant": "high"
+        },
+        "alpha": {
+          "model": "nvidia/z-ai/glm-5.2",
+          "variant": "high"
+        },
+        "beta": {
+          "model": "nvidia/deepseek-ai/deepseek-v4-pro",
+          "variant": "high"
+        },
+        "gamma": {
+          "model": "nvidia/openai/gpt-oss-120b",
+          "variant": "high"
+        }
       }
     },
     "default_preset": "balanced",
