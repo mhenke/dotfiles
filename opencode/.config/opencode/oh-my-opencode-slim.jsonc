@@ -11,7 +11,7 @@
         "model": [
           "opencode/mimo-v2.5-free",
           "opencode-go/mimo-v2.5",
-          "nvidia/minimaxai/minimax-m3"
+          "nvidia/nvidia/nemotron-3-super-120b-a12b"
         ],
         "temperature": 0.4,
         "skills": [
@@ -26,7 +26,7 @@
         "model": [
           "opencode/big-pickle",
           "opencode-go/qwen3.7-max",
-          "nvidia/mistralai/mistral-large-3-675b-instruct-2512"
+          "nvidia/deepseek-ai/deepseek-v4-pro"
         ],
         "temperature": 0.4,
         "variant": "max",
@@ -39,7 +39,7 @@
         "model": [
           "opencode-go/kimi-k2.7-code",
           "opencode/mimo-v2.5-free",
-          "nvidia/moonshotai/kimi-k2.6"
+          "nvidia/z-ai/glm-5.2"
         ],
         "temperature": 0.3,
         "variant": "medium",
@@ -70,7 +70,7 @@
         "skills": [],
         "mcps": []
       },
-      "fixer": {
+"fixer": {
         "model": [
           "opencode-go/qwen3.7-plus",
           "opencode/deepseek-v4-flash-free",
@@ -85,8 +85,7 @@
         "model": [
           "opencode-go/kimi-k2.6",
           "opencode/mimo-v2.5-free",
-          "nvidia/moonshotai/kimi-k2.6",
-          "nvidia/meta/llama-3.2-90b-vision-instruct"
+          "nvidia/minimaxai/minimax-m3"
         ],
         "temperature": 0.2,
         "variant": "low",
