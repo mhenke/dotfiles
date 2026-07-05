@@ -80,14 +80,14 @@
   "default_agent": "orchestrator",
   "agent": {
     "build": {
-      "model": "opencode/deepseek-v4-flash-free",
+      "model": "deepseek/deepseek-v4-flash",
       "disable": false
     },
-  "plan": {
-    "model": "opencode/deepseek-v4-flash-free",
-    "mode": "primary",
-    "disable": false
-  },
+    "plan": {
+      "model": "deepseek/deepseek-v4-pro",
+      "mode": "primary",
+      "disable": false
+    },
   "alpha": {
     "disable": true
   },

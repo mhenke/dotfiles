@@ -156,8 +156,8 @@
     "nvidia-free": {
       "orchestrator": {
         "model": [
+          "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/qwen/qwen3-next-80b-a3b-instruct",
-          "nvidia/minimaxai/minimax-m2.7",
           "nvidia/minimaxai/minimax-m3"
         ],
         "temperature": 0.4,
@@ -184,9 +184,9 @@
       },
       "explorer": {
         "model": [
+          "nvidia/stepfun-ai/step-3.7-flash",
           "nvidia/minimaxai/minimax-m2.7",
-          "nvidia/qwen/qwen3-next-80b-a3b-instruct",
-          "nvidia/stepfun-ai/step-3.7-flash"
+          "nvidia/qwen/qwen3-next-80b-a3b-instruct"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -267,6 +267,44 @@
             "opencode/deepseek-v4-flash-free",
             "nvidia/qwen/qwen3-coder-480b-a35b-instruct",
             "nvidia/meta/llama-3.2-90b-vision-instruct"
+          ]
+        }
+      },
+      "nvidia-free": {
+        "councillor": {
+          "model": "nvidia/deepseek-ai/deepseek-v4-pro",
+          "variant": "high",
+          "fallback_models": [
+            "nvidia/nvidia/nemotron-3-super-120b-a12b",
+            "nvidia/z-ai/glm-5.2",
+            "nvidia/mistralai/mistral-large-3-675b-instruct-2512"
+          ]
+        },
+        "alpha": {
+          "model": "nvidia/nvidia/nemotron-3-super-120b-a12b",
+          "variant": "high",
+          "fallback_models": [
+            "nvidia/deepseek-ai/deepseek-v4-pro",
+            "nvidia/z-ai/glm-5.2",
+            "nvidia/mistralai/mistral-large-3-675b-instruct-2512"
+          ]
+        },
+        "beta": {
+          "model": "nvidia/minimaxai/minimax-m3",
+          "variant": "high",
+          "fallback_models": [
+            "nvidia/moonshotai/kimi-k2.6",
+            "nvidia/openai/gpt-oss-120b",
+            "nvidia/mistralai/mistral-large-3-675b-instruct-2512"
+          ]
+        },
+        "gamma": {
+          "model": "nvidia/qwen/qwen3-next-80b-a3b-instruct",
+          "variant": "high",
+          "fallback_models": [
+            "nvidia/minimaxai/minimax-m2.7",
+            "nvidia/openai/gpt-oss-20b",
+            "nvidia/moonshotai/kimi-k2.6"
           ]
         }
       }
