@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "compactSidebar": true,
-  "preset": "balanced",
+  "preset": "nvidia-free",
   "autoUpdate": true,
   "setDefaultAgent": true,
   "scoringEngineVersion": "v2",
@@ -208,8 +208,8 @@
       },
       "designer": {
         "model": [
-          "nvidia/moonshotai/kimi-k2.6",
-          "nvidia/z-ai/glm-5.2"
+          "nvidia/z-ai/glm-5.2",
+          "nvidia/moonshotai/kimi-k2.6"
         ],
         "temperature": 0.3,
         "variant": "medium",
@@ -228,7 +228,7 @@
       },
       "observer": {
         "model": [
-          "nvidia/meta/llama-3.2-90b-vision-instruct",
+          "nvidia/minimaxai/minimax-m3",
           "nvidia/moonshotai/kimi-k2.6"
         ],
         "temperature": 0.2,
