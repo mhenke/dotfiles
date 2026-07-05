@@ -156,7 +156,7 @@
     "nvidia-free": {
       "orchestrator": {
         "model": [
-          "nvidia/stepfun-ai/step-3.7-flash",
+          "nvidia/qwen/qwen3-next-80b-a3b-instruct",
           "nvidia/minimaxai/minimax-m2.7",
           "nvidia/minimaxai/minimax-m3"
         ],
