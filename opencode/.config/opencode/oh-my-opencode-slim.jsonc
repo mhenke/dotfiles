@@ -7,12 +7,12 @@
   "scoringEngineVersion": "v2",
   "presets": {
     "balanced": {
-      "orchestrator": {
-        "model": [
-          "opencode/mimo-v2.5-free",
-          "opencode-go/mimo-v2.5",
-          "nvidia/nvidia/nemotron-3-super-120b-a12b"
-        ],
+"orchestrator": {
+    "model": [
+      "opencode/mimo-v2.5-free",
+      "opencode-go/mimo-v2.5",
+      "nvidia/nvidia/nemotron-3-ultra-550b-a55b"
+    ],
         "temperature": 0.4,
         "skills": [
           "*"
@@ -155,7 +155,7 @@
     "nvidia-free": {
       "orchestrator": {
         "model": [
-          "nvidia/nvidia/nemotron-3-super-120b-a12b",
+          "nvidia/nvidia/nemotron-3-ultra-550b-a55b",
           "nvidia/qwen/qwen3-next-80b-a3b-instruct",
           "nvidia/minimaxai/minimax-m3"
         ],
