@@ -170,9 +170,9 @@
       },
 "oracle": {
         "model": [
+          "nvidia/qwen/qwen3-235b-a22b-instruct",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
-          "nvidia/deepseek-ai/deepseek-v4-pro",
-          "nvidia/qwen/qwen3-next-80b-a3b-instruct"
+          "nvidia/deepseek-ai/deepseek-v4-pro"
         ],
         "temperature": 0.4,
         "variant": "max",
@@ -217,9 +217,9 @@
       },
       "fixer": {
         "model": [
-          "nvidia/qwen/qwen3-coder-480b-a35b-instruct",
           "nvidia/mistralai/mistral-small-4-119b-2603",
-          "nvidia/qwen/qwen3-next-80b-a3b-instruct"
+          "nvidia/mistralai/magistral-small-2506",
+          "nvidia/qwen/qwen2.5-coder-32b-instruct"
         ],
         "temperature": 0.2,
         "variant": "high",
@@ -265,7 +265,7 @@
           "variant": "high",
           "fallback_models": [
             "opencode/deepseek-v4-flash-free",
-            "nvidia/qwen/qwen3-coder-480b-a35b-instruct",
+            "nvidia/qwen/qwen3.5-397b-a17b",
             "nvidia/meta/llama-3.2-90b-vision-instruct"
           ]
         }
