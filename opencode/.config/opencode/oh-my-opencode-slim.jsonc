@@ -25,7 +25,7 @@
       "oracle": {
         "model": [
           "opencode/big-pickle",
-          "opencode-go/qwen3.7-max",
+          "opencode-go/qwen3.7-plus",
           "nvidia/deepseek-ai/deepseek-v4-pro"
         ],
         "temperature": 0.4,
@@ -38,7 +38,7 @@
       "designer": {
         "model": [
           "opencode-go/kimi-k2.7-code",
-          "opencode/mimo-v2.5-free",
+          "opencode/minimax-m3",
           "nvidia/z-ai/glm-5.2"
         ],
         "temperature": 0.3,
@@ -48,8 +48,8 @@
       },
       "librarian": {
         "model": [
-          "opencode/deepseek-v4-flash-free",
-          "opencode-go/minimax-m3",
+          "opencode/mimo-v2.5-free",
+          "opencode-go/mimo-v2.5",
           "nvidia/minimaxai/minimax-m2.7"
         ],
         "temperature": 0.2,
@@ -83,8 +83,8 @@
       },
       "observer": {
         "model": [
-          "opencode-go/kimi-k2.6",
-          "opencode/mimo-v2.5-free",
+          "opencode/mimo-v2.5-free,
+"opencode-go/mimo-v2.5",
           "nvidia/minimaxai/minimax-m3"
         ],
         "temperature": 0.2,
