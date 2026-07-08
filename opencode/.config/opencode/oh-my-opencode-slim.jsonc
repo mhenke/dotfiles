@@ -1,18 +1,18 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "compactSidebar": true,
-  "preset": "nvidia-free",
+  "preset": "opencode-zen-free",
   "autoUpdate": true,
   "setDefaultAgent": true,
   "scoringEngineVersion": "v2",
   "presets": {
     "balanced": {
-"orchestrator": {
-    "model": [
-      "opencode/mimo-v2.5-free",
-      "opencode-go/mimo-v2.5",
-      "nvidia/nvidia/nemotron-3-ultra-550b-a55b"
-    ],
+      "orchestrator": {
+        "model": [
+          "opencode/hy3-free",
+          "opencode-go/mimo-v2.5",
+          "nvidia/nvidia/nemotron-3-ultra-550b-a55b"
+        ],
         "temperature": 0.4,
         "skills": [
           "*"
@@ -70,7 +70,7 @@
         "skills": [],
         "mcps": []
       },
-"fixer": {
+      "fixer": {
         "model": [
           "opencode-go/qwen3.7-plus",
           "opencode/deepseek-v4-flash-free",
@@ -83,8 +83,8 @@
       },
       "observer": {
         "model": [
-          "opencode/mimo-v2.5-free,
-"opencode-go/mimo-v2.5",
+          "opencode/mimo-v2.5-free",
+          "opencode-go/mimo-v2.5",
           "nvidia/minimaxai/minimax-m3"
         ],
         "temperature": 0.2,
@@ -95,7 +95,7 @@
     },
     "opencode-zen-free": {
       "orchestrator": {
-        "model": "opencode/mimo-v2.5-free",
+        "model": "opencode/hy3-free",
         "temperature": 0.4,
         "skills": [
           "*"
@@ -168,9 +168,9 @@
           "!context7"
         ]
       },
-"oracle": {
+      "oracle": {
         "model": [
-          "nvidia/qwen/qwen3-235b-a22b-instruct",
+          "qwen/qwen3-coder-480b-a35b-instruct",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/deepseek-ai/deepseek-v4-pro"
         ],
@@ -300,6 +300,11 @@
         "nvidia/nvidia/nemotron-3-super-120b-a12b",
         "nvidia/z-ai/glm-5.2"
       ]
+    },
+    "skeptic": {
+      "model": "opencode/big-pickle",
+      "variant": "max",
+      "prompt": "You are a structured critic. You aren't here to tear things down for sport — you make ideas prove they can survive contact with reality before they earn the greenlight. Before rendering any verdict, you always complete this protocol in order:\n\n1. **Restate** the idea or proposal in its strongest form — steel-man it. If you can't make it sound compelling, you haven't understood it yet.\n\n2. **Failure conditions** — list 2-4 concrete scenarios under which this fails, stalls, or isn't worth pursuing. Reference specific assumptions, edge cases, or implicit bets the proposal is making.\n\n3. **Effort realism** — estimate realistic effort versus what's being assumed. People are systematically optimistic here. Look for the 'three weeks pretending to be three days' pattern. What hidden costs are being ignored? (Setup, onboarding, maintenance, context-switching.)\n\n4. **Required conditions** — what would need to be true for this to succeed? Which of those can be validated cheaply right now? This isn't about belief — it's about testable hypotheses.\n\n5. **Verdict and next step** — based on the above, is this worth pursuing? What's the single most useful thing to do next?\n\nDo not skip steps. Do not disagree for its own sake — if the idea is genuinely sound, say so, but only after completing steps 1-4. Use concrete scenarios and assumptions, not abstract criticism."
     }
   },
   "websearch": {
