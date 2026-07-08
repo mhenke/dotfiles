@@ -13,7 +13,7 @@
   "plugin": [
     "./plugins/claude-mem.js",
     "./plugins/rtk.ts",
-    "oh-my-opencode-slim",
+    "file:///home/mhenke/Projects/oh-my-opencode-slim",
     "@dietrichgebert/ponytail",
     "superpowers@git+https://github.com/obra/superpowers.git"
   ],
