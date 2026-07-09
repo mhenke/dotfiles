@@ -14,8 +14,13 @@
           "nvidia/nvidia/nemotron-3-ultra-550b-a55b"
         ],
         "temperature": 0.4,
-        "skills": ["*"],
-        "mcps": ["*", "!context7"]
+        "skills": [
+          " "
+        ],
+        "mcps": [
+          " ",
+          "!context7"
+        ]
       },
       "oracle": {
         "model": [
@@ -25,7 +30,9 @@
         ],
         "temperature": 0.4,
         "variant": "max",
-        "skills": ["simplify"],
+        "skills": [
+          "simplify"
+        ],
         "mcps": []
       },
       "designer": {
@@ -47,7 +54,11 @@
         ],
         "temperature": 0.2,
         "skills": [],
-        "mcps": ["websearch", "context7", "gh_grep"]
+        "mcps": [
+          "websearch",
+          "context7",
+          "gh_grep"
+        ]
       },
       "explorer": {
         "model": [
@@ -86,27 +97,38 @@
       "orchestrator": {
         "model": "opencode/hy3-free",
         "temperature": 0.4,
-        "skills": ["*"],
-        "mcps": ["*", "!context7"]
+        "skills": [
+          " "
+        ],
+        "mcps": [
+          " ",
+          "!context7"
+        ]
       },
       "oracle": {
         "model": "opencode/big-pickle",
         "temperature": 0.4,
         "variant": "max",
-        "skills": ["simplify"],
+        "skills": [
+          "simplify"
+        ],
         "mcps": []
       },
       "explorer": {
-        "model": "opencode/north-mini-code-free",
+        "model": "opencode/deepseek-v4-flash-free",
         "temperature": 0.2,
         "skills": [],
         "mcps": []
       },
       "librarian": {
-        "model": "opencode/deepseek-v4-flash-free",
+        "model": "opencode/mimo-v2.5-free",
         "temperature": 0.2,
         "skills": [],
-        "mcps": ["websearch", "context7", "gh_grep"]
+        "mcps": [
+          "websearch",
+          "context7",
+          "gh_grep"
+        ]
       },
       "designer": {
         "model": "opencode/mimo-v2.5-free",
@@ -134,29 +156,36 @@
       "orchestrator": {
         "model": [
           "nvidia/deepseek-ai/deepseek-v4-pro",
-          "nvidia/nemotron-3-ultra-550b-a55b",
-          "nvidia/qwen/qwen3-next-80b-a3b-instruct"
+          "nvidia/z-ai/glm-5.2",
+          "nvidia/meta/llama-3.3-70b-instruct"
         ],
         "temperature": 0.4,
-        "skills": ["*"],
-        "mcps": ["*", "!context7"]
+        "skills": [
+          " "
+        ],
+        "mcps": [
+          " ",
+          "!context7"
+        ]
       },
       "oracle": {
         "model": [
-          "qwen/qwen3-coder-480b-a35b-instruct",
-          "nvidia/nvidia/nemotron-3-super-120b-a12b",
-          "nvidia/deepseek-ai/deepseek-v4-pro"
+          "nvidia/deepseek-ai/deepseek-v4-pro",
+          "nvidia/z-ai/glm-5.2",
+          "nvidia/mistralai/mistral-large-3-675b-instruct-2512"
         ],
         "temperature": 0.4,
         "variant": "max",
-        "skills": ["simplify"],
+        "skills": [
+          "simplify"
+        ],
         "mcps": []
       },
       "explorer": {
         "model": [
           "nvidia/stepfun-ai/step-3.7-flash",
-          "nvidia/minimaxai/minimax-m2.7",
-          "nvidia/qwen/qwen3-next-80b-a3b-instruct"
+          "nvidia/moonshotai/kimi-k2.6",
+          "nvidia/minimaxai/minimax-m2.7"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -164,18 +193,22 @@
       },
       "librarian": {
         "model": [
-          "nvidia/qwen/qwen3-next-80b-a3b-instruct",
           "nvidia/moonshotai/kimi-k2.6",
-          "nvidia/minimaxai/minimax-m2.7"
+          "nvidia/minimaxai/minimax-m2.7",
+          "nvidia/stepfun-ai/step-3.7-flash"
         ],
         "temperature": 0.2,
         "skills": [],
-        "mcps": ["websearch", "context7", "gh_grep"]
+        "mcps": [
+          "websearch",
+          "context7",
+          "gh_grep"
+        ]
       },
       "designer": {
         "model": [
-          "nvidia/z-ai/glm-5.2",
-          "nvidia/moonshotai/kimi-k2.6"
+          "nvidia/moonshotai/kimi-k2.6",
+          "nvidia/z-ai/glm-5.2"
         ],
         "temperature": 0.3,
         "variant": "medium",
@@ -185,8 +218,8 @@
       "fixer": {
         "model": [
           "nvidia/mistralai/mistral-small-4-119b-2603",
-          "nvidia/mistralai/magistral-small-2506",
-          "nvidia/qwen/qwen2.5-coder-32b-instruct"
+          "nvidia/qwen/qwen2.5-coder-32b-instruct",
+          "nvidia/z-ai/glm-5.2"
         ],
         "temperature": 0.2,
         "variant": "high",
@@ -195,8 +228,7 @@
       },
       "observer": {
         "model": [
-          "nvidia/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
-          "nvidia/minimaxai/minimax-m3",
+          "nvidia/meta/llama-3.2-90b-vision-instruct",
           "nvidia/moonshotai/kimi-k2.6"
         ],
         "temperature": 0.2,
@@ -233,19 +265,19 @@
       },
       "nvidia-free": {
         "councillor": {
-          "model": "nvidia/minimaxai/minimax-m3",
-          "variant": "high"
-        },
-        "alpha": {
           "model": "nvidia/z-ai/glm-5.2",
           "variant": "high"
         },
-        "beta": {
+        "alpha": {
           "model": "nvidia/deepseek-ai/deepseek-v4-pro",
           "variant": "high"
         },
+        "beta": {
+          "model": "nvidia/z-ai/glm-5.2",
+          "variant": "high"
+        },
         "gamma": {
-          "model": "nvidia/openai/gpt-oss-120b",
+          "model": "nvidia/meta/llama-3.3-70b-instruct",
           "variant": "high"
         }
       }
@@ -265,7 +297,7 @@
     "skeptic": {
       "model": "opencode/big-pickle",
       "variant": "max",
-      "prompt": "You are a structured critic. You aren't here to tear things down for sport — you make ideas prove they can survive contact with reality before they earn the greenlight. Before rendering any verdict, you always complete this protocol in order:\n\n1. **Restate** the idea or proposal in its strongest form — steel-man it. If you can't make it sound compelling, you haven't understood it yet.\n\n2. **Failure conditions** — list 2-4 concrete scenarios under which this fails, stalls, or isn't worth pursuing. Reference specific assumptions, edge cases, or implicit bets the proposal is making.\n\n3. **Effort realism** — estimate realistic effort versus what's being assumed. People are systematically optimistic here. Look for the 'three weeks pretending to be three days' pattern. What hidden costs are being ignored? (Setup, onboarding, maintenance, context-switching.)\n\n4. **Required conditions** — what would need to be true for this to succeed? Which of those can be validated cheaply right now? This isn't about belief — it's about testable hypotheses.\n\n5. **Verdict and next step** — based on the above, is this worth pursuing? What's the single most useful thing to do next?\n\nDo not skip steps. Do not disagree for its own sake — if the idea is genuinely sound, say so, but only after completing steps 1-4. Use concrete scenarios and assumptions, not abstract criticism."
+      "prompt": "You are a structured critic. You aren't here to tear things down for sport — you make ideas prove they can survive contact with reality before they earn the greenlight. Before rendering any verdict, you always complete this protocol in order:\n\n1. Restate the idea or proposal in its strongest form — steel-man it. If you can't make it sound compelling, you haven't understood it yet.\n\n2. Failure conditions — list 2-4 concrete scenarios under which this fails, stalls, or isn't worth pursuing. Reference specific assumptions, edge cases, or implicit bets the proposal is making.\n\n3. Effort realism — estimate realistic effort versus what's being assumed. People are systematically optimistic here. Look for the 'three weeks pretending to be three days' pattern. What hidden costs are being ignored? (Setup, onboarding, maintenance, context-switching.)\n\n4. Required conditions — what would need to be true for this to succeed? Which of those can be validated cheaply right now? This isn't about belief — it's about testable hypotheses.\n\n5. Verdict and next step — based on the above, is this worth pursuing? What's the single most useful thing to do next?\n\nDo not skip steps. Do not disagree for its own sake — if the idea is genuinely sound, say so, but only after completing steps 1-4. Use concrete scenarios and assumptions, not abstract criticism."
     }
   },
   "websearch": {
@@ -278,4 +310,3 @@
     "autoEnableThreshold": 3
   }
 }
-
