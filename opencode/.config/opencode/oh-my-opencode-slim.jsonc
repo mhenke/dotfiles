@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "compactSidebar": true,
-  "preset": "opencode-zen-free",
+  "preset": "balanced",
   "autoUpdate": true,
   "setDefaultAgent": true,
   "scoringEngineVersion": "v2",
@@ -11,7 +11,7 @@
         "model": [
           "opencode/hy3-free",
           "opencode-go/mimo-v2.5",
-          "nvidia/nvidia/nemotron-3-ultra-550b-a55b"
+          "nvidia/nvidia/nemotron-3-super-120b-a12b"
         ],
         "temperature": 0.4,
         "skills": [
@@ -288,8 +288,8 @@
   "agents": {
     "council": {
       "model": [
-        "opencode-go/mimo-v2.5",
         "opencode/mimo-v2.5-free",
+        "opencode-go/mimo-v2.5",
         "nvidia/nvidia/nemotron-3-super-120b-a12b",
         "nvidia/z-ai/glm-5.2"
       ]
