@@ -121,22 +121,6 @@
       "npm": "@ai-sdk/openai-compatible",
       "options": {
         "baseURL": "https://integrate.api.nvidia.com/v1"
-      },
-      "models": {
-        "minimaxai/minimax-m3": {
-          "name": "MiniMax M3 (NVIDIA)",
-          "limit": {
-            "context": 1048576,
-            "output": 8192
-          }
-        },
-        "nemotron-3-ultra-550b-a55b": {
-          "name": "Nemotron 3 Ultra 550B (NVIDIA)",
-          "limit": {
-            "context": 131072,
-            "output": 16384
-          }
-        }
       }
     },
     "ollama": {
