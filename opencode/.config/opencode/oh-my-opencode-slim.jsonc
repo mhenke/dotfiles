@@ -85,7 +85,7 @@
         "model": [
           "opencode/mimo-v2.5-free",
           "opencode-go/mimo-v2.5",
-          "nvidia/minimaxai/minimax-m3"
+          "nvidia/meta/llama-3.2-90b-vision-instruct"
         ],
         "temperature": 0.2,
         "variant": "low",
