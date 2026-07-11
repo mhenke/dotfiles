@@ -77,7 +77,6 @@
       "fixer": {
         "model": [
           "opencode/deepseek-v4-flash-free",
-          "deepseek/deepseek-v4-flash",
           "opencode/north-mini-code-free",
           "opencode-go/deepseek-v4-flash",
           "nvidia/mistralai/mistral-small-4-119b-2603"
