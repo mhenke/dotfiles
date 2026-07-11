@@ -10,6 +10,8 @@
       "orchestrator": {
         "model": [
           "opencode/hy3-free",
+          "opencode/nemotron-3-ultra-free",
+          "opencode/mimo-v2.5-free",
           "opencode-go/mimo-v2.5",
           "nvidia/nvidia/nemotron-3-super-120b-a12b"
         ],
@@ -49,6 +51,7 @@
       "librarian": {
         "model": [
           "opencode/mimo-v2.5-free",
+          "opencode/north-mini-code-free",
           "opencode-go/mimo-v2.5",
           "nvidia/minimaxai/minimax-m2.7"
         ],
@@ -63,6 +66,7 @@
       "explorer": {
         "model": [
           "opencode/deepseek-v4-flash-free",
+          "opencode/north-mini-code-free",
           "opencode-go/deepseek-v4-flash",
           "nvidia/stepfun-ai/step-3.7-flash"
         ],
@@ -72,8 +76,10 @@
       },
       "fixer": {
         "model": [
-          "opencode-go/qwen3.7-plus",
           "opencode/deepseek-v4-flash-free",
+          "deepseek/deepseek-v4-flash",
+          "opencode/north-mini-code-free",
+          "opencode-go/deepseek-v4-flash",
           "nvidia/mistralai/mistral-small-4-119b-2603"
         ],
         "temperature": 0.2,
