@@ -88,7 +88,6 @@
       "observer": {
         "model": [
           "opencode/mimo-v2.5-free",
-          "opencode-go/mimo-v2.5",
           "opencode/qwen3.5-plus"
         ],
         "temperature": 0.2,
