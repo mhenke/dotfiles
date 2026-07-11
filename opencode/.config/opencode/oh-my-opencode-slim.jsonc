@@ -257,9 +257,7 @@
           "model": "opencode-go/qwen3.7-plus",
           "variant": "high",
           "fallback_models": [
-            "opencode/deepseek-v4-flash-free",
-            "opencode/north-mini-code-free",
-            "opencode/deepseek-v4-flash"
+            "opencode/qwen3.7-plus"
           ]
         },
         "gamma": {
