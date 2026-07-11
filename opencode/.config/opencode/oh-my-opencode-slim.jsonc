@@ -249,21 +249,26 @@
           "model": "opencode/big-pickle",
           "variant": "high",
           "fallback_models": [
-            "opencode-go/glm-5.2"
+            "opencode-go/glm-5.2",
+            "opencode/glm-5.2"
           ]
         },
         "beta": {
           "model": "opencode-go/qwen3.7-plus",
           "variant": "high",
           "fallback_models": [
-            "opencode/deepseek-v4-flash-free"
+            "opencode/deepseek-v4-flash-free",
+            "opencode/north-mini-code-free",
+            "opencode-go/deepseek-v4-flash",
+            "opencode/deepseek-v4-flash"
           ]
         },
         "gamma": {
           "model": "opencode/mimo-v2.5-free",
           "variant": "high",
           "fallback_models": [
-            "opencode-go/mimo-v2.5"
+            "opencode-go/mimo-v2.5",
+            "opencode/mimo-v2.5"
           ]
         }
       },
