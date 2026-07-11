@@ -246,7 +246,11 @@
     "presets": {
       "balanced": {
         "alpha": {
-          "model": "opencode/big-pickle",
+          "model": [
+            "opencode/big-pickle",
+            "opencode-go/qwen3.7-plus",
+            "opencode/qwen3.7-plus"
+          ],
           "variant": "high",
           "fallback_models": [
             "opencode-go/glm-5.2",
