@@ -17,7 +17,7 @@
         ],
         "temperature": 0.4,
         "skills": [
-          " "
+          "*"
         ],
         "mcps": [
           " ",
@@ -104,7 +104,7 @@
         "model": "opencode/hy3-free",
         "temperature": 0.4,
         "skills": [
-          " "
+          "*"
         ],
         "mcps": [
           " ",
@@ -167,7 +167,7 @@
         ],
         "temperature": 0.4,
         "skills": [
-          " "
+          "*"
         ],
         "mcps": [
           " ",
