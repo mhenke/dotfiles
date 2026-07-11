@@ -2,6 +2,8 @@
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "compactSidebar": true,
   "preset": "balanced",
+  "disabled_agents": [],
+  "image_routing": "auto",
   "autoUpdate": true,
   "setDefaultAgent": true,
   "scoringEngineVersion": "v2",
@@ -319,5 +321,8 @@
     "cooldownMs": 3000,
     "autoEnable": true,
     "autoEnableThreshold": 3
+  },
+  "multiplexer": {
+    "type": "tmux"
   }
 }
