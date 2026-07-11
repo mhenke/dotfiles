@@ -246,15 +246,11 @@
     "presets": {
       "balanced": {
         "alpha": {
-          "model": [
-            "opencode/big-pickle",
-            "opencode-go/qwen3.7-plus",
-            "opencode/qwen3.7-plus"
-          ],
+          "model": "opencode/big-pickle",
           "variant": "high",
           "fallback_models": [
-            "opencode-go/glm-5.2",
-            "opencode/glm-5.2"
+            "opencode-go/qwen3.7-plus",
+            "opencode/qwen3.7-plus"
           ]
         },
         "beta": {
@@ -263,7 +259,6 @@
           "fallback_models": [
             "opencode/deepseek-v4-flash-free",
             "opencode/north-mini-code-free",
-            "opencode-go/deepseek-v4-flash",
             "opencode/deepseek-v4-flash"
           ]
         },
