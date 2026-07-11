@@ -88,6 +88,7 @@
       "observer": {
         "model": [
           "opencode/mimo-v2.5-free",
+          "opencode-go/mimo-v2.5",
           "opencode/qwen3.5-plus"
         ],
         "temperature": 0.2,
@@ -291,10 +292,11 @@
   "agents": {
     "council": {
       "model": [
+        "opencode/hy3-free",
+        "opencode/nemotron-3-ultra-free",
         "opencode/mimo-v2.5-free",
         "opencode-go/mimo-v2.5",
-        "nvidia/nvidia/nemotron-3-super-120b-a12b",
-        "nvidia/z-ai/glm-5.2"
+        "opencode/minimax-m2.7"
       ]
     },
     "skeptic": {
