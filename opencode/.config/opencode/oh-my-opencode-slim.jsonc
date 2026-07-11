@@ -13,7 +13,7 @@
           "opencode/nemotron-3-ultra-free",
           "opencode/mimo-v2.5-free",
           "opencode-go/mimo-v2.5",
-          "nvidia/nvidia/nemotron-3-super-120b-a12b"
+          "opencode/minimax-m2.7"
         ],
         "temperature": 0.4,
         "skills": [
@@ -28,7 +28,7 @@
         "model": [
           "opencode/big-pickle",
           "opencode-go/qwen3.7-plus",
-          "nvidia/deepseek-ai/deepseek-v4-pro"
+          "opencode/qwen3.7-plus"
         ],
         "temperature": 0.4,
         "variant": "max",
@@ -40,8 +40,7 @@
       "designer": {
         "model": [
           "opencode-go/kimi-k2.7-code",
-          "opencode/minimax-m3",
-          "nvidia/z-ai/glm-5.2"
+          "opencode/minimax-m3"
         ],
         "temperature": 0.3,
         "variant": "medium",
@@ -53,7 +52,7 @@
           "opencode/mimo-v2.5-free",
           "opencode/north-mini-code-free",
           "opencode-go/mimo-v2.5",
-          "nvidia/minimaxai/minimax-m2.7"
+          "opencode/minimax-m2.7"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -68,7 +67,7 @@
           "opencode/deepseek-v4-flash-free",
           "opencode/north-mini-code-free",
           "opencode-go/deepseek-v4-flash",
-          "nvidia/stepfun-ai/step-3.7-flash"
+          "opencode/deepseek-v4-flash"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -79,7 +78,7 @@
           "opencode/deepseek-v4-flash-free",
           "opencode/north-mini-code-free",
           "opencode-go/deepseek-v4-flash",
-          "nvidia/mistralai/mistral-small-4-119b-2603"
+          "opencode/deepseek-v4-flash"
         ],
         "temperature": 0.2,
         "variant": "high",
@@ -90,7 +89,7 @@
         "model": [
           "opencode/mimo-v2.5-free",
           "opencode-go/mimo-v2.5",
-          "nvidia/meta/llama-3.2-90b-vision-instruct"
+          "opencode/qwen3.5-plus"
         ],
         "temperature": 0.2,
         "variant": "low",
