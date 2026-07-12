@@ -12,8 +12,8 @@
       "orchestrator": {
         "model": [
           "opencode/hy3-free",
-          "opencode/nemotron-3-ultra-free",
           "opencode/mimo-v2.5-free",
+          "opencode/nemotron-3-ultra-free",
           "opencode-go/mimo-v2.5",
           "opencode/minimax-m2.7"
         ],
