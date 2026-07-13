@@ -149,3 +149,6 @@ export VISUAL=mousepad
 # >>> oh-my-opencode-slim background subagents >>>
 export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
 # <<< oh-my-opencode-slim background subagents <<<
+
+# OpenCode: default to DEBUG log level
+export OPENCODE_LOG_LEVEL=DEBUG
