@@ -14,8 +14,8 @@
           "opencode/hy3-free",
           "opencode/mimo-v2.5-free",
           "opencode/nemotron-3-ultra-free",
-          "opencode-go/mimo-v2.5",
-          "opencode/minimax-m2.7"
+          "opencode-go/minimax-m3",
+          "opencode/minimax-m3"
         ],
         "temperature": 0.4,
         "skills": [
@@ -157,102 +157,16 @@
         "skills": [],
         "mcps": []
       }
-    },
-    "nvidia-free": {
-      "orchestrator": {
-        "model": [
-          "nvidia/deepseek-ai/deepseek-v4-pro",
-          "nvidia/z-ai/glm-5.2",
-          "nvidia/meta/llama-3.3-70b-instruct"
-        ],
-        "temperature": 0.4,
-        "skills": [
-          "*"
-        ],
-        "mcps": [
-          " ",
-          "!context7"
-        ]
-      },
-      "oracle": {
-        "model": [
-          "nvidia/deepseek-ai/deepseek-v4-pro",
-          "nvidia/z-ai/glm-5.2",
-          "nvidia/mistralai/mistral-large-3-675b-instruct-2512"
-        ],
-        "temperature": 0.4,
-        "variant": "max",
-        "skills": [
-          "simplify"
-        ],
-        "mcps": []
-      },
-      "explorer": {
-        "model": [
-          "nvidia/stepfun-ai/step-3.7-flash",
-          "nvidia/moonshotai/kimi-k2.6",
-          "nvidia/minimaxai/minimax-m2.7"
-        ],
-        "temperature": 0.2,
-        "skills": [],
-        "mcps": []
-      },
-      "librarian": {
-        "model": [
-          "nvidia/moonshotai/kimi-k2.6",
-          "nvidia/minimaxai/minimax-m2.7",
-          "nvidia/stepfun-ai/step-3.7-flash"
-        ],
-        "temperature": 0.2,
-        "skills": [],
-        "mcps": [
-          "websearch",
-          "context7",
-          "gh_grep"
-        ]
-      },
-      "designer": {
-        "model": [
-          "nvidia/moonshotai/kimi-k2.6",
-          "nvidia/z-ai/glm-5.2"
-        ],
-        "temperature": 0.3,
-        "variant": "medium",
-        "skills": [],
-        "mcps": []
-      },
-      "fixer": {
-        "model": [
-          "nvidia/mistralai/mistral-small-4-119b-2603",
-          "nvidia/qwen/qwen2.5-coder-32b-instruct",
-          "nvidia/z-ai/glm-5.2"
-        ],
-        "temperature": 0.2,
-        "variant": "high",
-        "skills": [],
-        "mcps": []
-      },
-      "observer": {
-        "model": [
-          "nvidia/meta/llama-3.2-90b-vision-instruct",
-          "nvidia/moonshotai/kimi-k2.6"
-        ],
-        "temperature": 0.2,
-        "variant": "low",
-        "skills": [],
-        "mcps": []
-      }
     }
   },
   "council": {
     "presets": {
       "balanced": {
         "alpha": {
-          "model": "opencode/big-pickle",
+          "model": "opencode-go/glm-5.2",
           "variant": "high",
           "fallback_models": [
-            "opencode-go/qwen3.6-plus",
-            "opencode/qwen3.6-plus"
+            "opencode/glm-5.2"
           ]
         },
         "beta": {
@@ -266,27 +180,8 @@
           "model": "opencode/mimo-v2.5-free",
           "variant": "high",
           "fallback_models": [
-            "opencode-go/mimo-v2.5",
-            "opencode/mimo-v2.5"
+            "opencode/mimo-v2.5-free"
           ]
-        }
-      },
-      "nvidia-free": {
-        "councillor": {
-          "model": "nvidia/z-ai/glm-5.2",
-          "variant": "high"
-        },
-        "alpha": {
-          "model": "nvidia/deepseek-ai/deepseek-v4-pro",
-          "variant": "high"
-        },
-        "beta": {
-          "model": "nvidia/z-ai/glm-5.2",
-          "variant": "high"
-        },
-        "gamma": {
-          "model": "nvidia/meta/llama-3.3-70b-instruct",
-          "variant": "high"
         }
       }
     },
@@ -299,8 +194,8 @@
         "opencode/hy3-free",
         "opencode/mimo-v2.5-free",
         "opencode/nemotron-3-ultra-free",
-          "opencode-go/minimax-m3",
-          "opencode/minimax-m3"
+        "opencode-go/minimax-m3",
+        "opencode/minimax-m3"
       ]
     },
     "skeptic": {
@@ -310,7 +205,7 @@
         "opencode/qwen3.6-plus"
       ],
       "variant": "max",
-      "prompt": "You are a structured critic. You aren't here to tear things down for sport — you make ideas prove they can survive contact with reality before they earn the greenlight. Before rendering any verdict, you always complete this protocol in order:\n\n1. Restate the idea or proposal in its strongest form — steel-man it. If you can't make it sound compelling, you haven't understood it yet.\n\n2. Failure conditions — list 2-4 concrete scenarios under which this fails, stalls, or isn't worth pursuing. Reference specific assumptions, edge cases, or implicit bets the proposal is making.\n\n3. Effort realism — estimate realistic effort versus what's being assumed. People are systematically optimistic here. Look for the 'three weeks pretending to be three days' pattern. What hidden costs are being ignored? (Setup, onboarding, maintenance, context-switching.)\n\n4. Required conditions — what would need to be true for this to succeed? Which of those can be validated cheaply right now? This isn't about belief — it's about testable hypotheses.\n\n5. Verdict and next step — based on the above, is this worth pursuing? What's the single most useful thing to do next?\n\nDo not skip steps. Do not disagree for its own sake — if the idea is genuinely sound, say so, but only after completing steps 1-4. Use concrete scenarios and assumptions, not abstract criticism."
+      "prompt": "You are a structured critic. You aren't here to tear things down for sport \u2014 you make ideas prove they can survive contact with reality before they earn the greenlight. Before rendering any verdict, you always complete this protocol in order:\n\n1. Restate the idea or proposal in its strongest form \u2014 steel-man it. If you can't make it sound compelling, you haven't understood it yet.\n\n2. Failure conditions \u2014 list 2-4 concrete scenarios under which this fails, stalls, or isn't worth pursuing. Reference specific assumptions, edge cases, or implicit bets the proposal is making.\n\n3. Effort realism \u2014 estimate realistic effort versus what's being assumed. People are systematically optimistic here. Look for the 'three weeks pretending to be three days' pattern. What hidden costs are being ignored? (Setup, onboarding, maintenance, context-switching.)\n\n4. Required conditions \u2014 what would need to be true for this to succeed? Which of those can be validated cheaply right now? This isn't about belief \u2014 it's about testable hypotheses.\n\n5. Verdict and next step \u2014 based on the above, is this worth pursuing? What's the single most useful thing to do next?\n\nDo not skip steps. Do not disagree for its own sake \u2014 if the idea is genuinely sound, say so, but only after completing steps 1-4. Use concrete scenarios and assumptions, not abstract criticism."
     }
   },
   "websearch": {
