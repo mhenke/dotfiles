@@ -29,8 +29,8 @@
       "oracle": {
         "model": [
           "opencode/big-pickle",
-          "opencode-go/qwen3.6-plus",
-          "opencode/qwen3.6-plus"
+          "opencode-go/glm-5.2",
+          "opencode/glm-5.2"
         ],
         "temperature": 0.4,
         "variant": "max",
