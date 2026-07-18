@@ -163,7 +163,7 @@
     "presets": {
       "balanced": {
         "alpha": {
-          "model": "opencode-go/glm-5.2",
+          "model": "opencode/big-pickle",
           "variant": "high",
           "fallback_models": [
             "opencode/glm-5.2"
@@ -180,7 +180,9 @@
           "model": "opencode/mimo-v2.5-free",
           "variant": "high",
           "fallback_models": [
-            "opencode/mimo-v2.5-free"
+            "opencode/mimo-v2.5-free",
+            "opencode-go/mimo-v2.5",
+            "opencode/mimo-v2.5"
           ]
         }
       }
