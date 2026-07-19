@@ -13,7 +13,6 @@
         "model": [
           "opencode/hy3-free",
           "opencode/mimo-v2.5-free",
-          "opencode/nemotron-3-ultra-free",
           "opencode-go/minimax-m3",
           "opencode/minimax-m3"
         ],
@@ -194,7 +193,6 @@
       "model": [
         "opencode/hy3-free",
         "opencode/mimo-v2.5-free",
-        "opencode/nemotron-3-ultra-free",
         "opencode-go/minimax-m3",
         "opencode/minimax-m3"
       ]
