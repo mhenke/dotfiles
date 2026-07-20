@@ -200,7 +200,6 @@
     },
     "skeptic": {
       "model": [
-        "opencode/big-pickle",
         "opencode-go/qwen3.7-plus",
         "opencode/qwen3.7-plus"
       ],
