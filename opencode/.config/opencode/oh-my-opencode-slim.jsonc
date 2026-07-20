@@ -28,9 +28,9 @@
       "oracle": {
         "model": [
           "opencode/big-pickle",
-          "opencode-go/glm-5.2",
-          "opencode/glm-5.2"
-        ],
+          "opencode-go/deepseek-v4-pro",
+          "opencode/deepseek-v4-pro"
+        ]
         "temperature": 0.4,
         "variant": "max",
         "skills": [
@@ -162,10 +162,11 @@
     "presets": {
       "balanced": {
         "alpha": {
-          "model": "opencode-go/glm-5.2",
+          "model": "opencode/big-pickle",
           "variant": "high",
           "fallback_models": [
-            "opencode/glm-5.2"
+            "opencode-go/deepseek-v4-pro",
+            "opencode/deepseek-v4-pro"
           ]
         },
         "beta": {
