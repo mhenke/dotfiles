@@ -11,8 +11,8 @@
     "balanced": {
       "orchestrator": {
         "model": [
-          "opencode/hy3-free",
           "opencode/mimo-v2.5-free",
+          "opencode/nemotron-free",
           "opencode-go/minimax-m3",
           "opencode/minimax-m3"
         ],
@@ -29,7 +29,7 @@
         "model": [
           "opencode/big-pickle",
           "opencode-go/deepseek-v4-pro",
-          "opencode/deepseek-v4-pro"
+          "deepseek/deepseek-v4-pro"
         ],
         "temperature": 0.4,
         "variant": "max",
@@ -166,7 +166,7 @@
           "variant": "high",
           "fallback_models": [
             "opencode-go/deepseek-v4-pro",
-            "opencode/deepseek-v4-pro"
+            "deepseek/deepseek-v4-pro"
           ]
         },
         "beta": {
@@ -192,8 +192,8 @@
   "agents": {
     "council": {
       "model": [
-        "opencode/hy3-free",
         "opencode/mimo-v2.5-free",
+        "opencode/nemotron-free",
         "opencode-go/minimax-m3",
         "opencode/minimax-m3"
       ]
