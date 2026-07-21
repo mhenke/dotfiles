@@ -12,7 +12,7 @@
       "orchestrator": {
         "model": [
           "opencode/mimo-v2.5-free",
-          "opencode/nemotron-free",
+          "opencode/nemotron-3-ultra-free",
           "opencode-go/minimax-m3",
           "opencode/minimax-m3"
         ],
@@ -193,7 +193,7 @@
     "council": {
       "model": [
         "opencode/mimo-v2.5-free",
-        "opencode/nemotron-free",
+        "opencode/nemotron-3-ultra-free",
         "opencode-go/minimax-m3",
         "opencode/minimax-m3"
       ]
