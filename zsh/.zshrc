@@ -152,3 +152,7 @@ export OPENCODE_EXPERIMENTAL_BACKGROUND_SUBAGENTS=true
 
 # OpenCode: default to DEBUG log level
 export OPENCODE_LOG_LEVEL=DEBUG
+
+. "$HOME/.atuin/bin/env"
+
+eval "$(atuin init zsh)"
