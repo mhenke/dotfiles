@@ -129,3 +129,8 @@ export BROWSER=zen-browser
 export PATH="/home/mhenke/.local/bin:$PATH"
 export EDITOR=mousepad
 export VISUAL=mousepad
+
+. "$HOME/.atuin/bin/env"
+
+[[ -f ~/.bash-preexec.sh ]] && source ~/.bash-preexec.sh
+eval "$(atuin init bash)"
