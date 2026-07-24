@@ -12,7 +12,7 @@
       "orchestrator": {
         "model": [
           "opencode/mimo-v2.5-free",
-          "opencode/nemotron-3-ultra-free",
+          "opencode/north-mini-code-free",
           "opencode/laguna-s-2.1-free",
           "opencode-go/minimax-m3",
           "opencode/minimax-m3"
@@ -29,11 +29,12 @@
       "oracle": {
         "model": [
           "opencode/big-pickle",
+          "opencode/nemotron-3-ultra-free",
           "opencode-go/deepseek-v4-pro",
           "deepseek/deepseek-v4-pro"
         ],
         "temperature": 0.4,
-        "variant": "max",
+        "variant": "high",
         "skills": [
           "simplify"
         ],
@@ -45,7 +46,6 @@
           "opencode/minimax-m3"
         ],
         "temperature": 0.3,
-        "variant": "medium",
         "skills": [],
         "mcps": []
       },
@@ -95,7 +95,6 @@
           "opencode/mimo-v2.5"
         ],
         "temperature": 0.2,
-        "variant": "low",
         "skills": [],
         "mcps": []
       }
@@ -167,6 +166,7 @@
           "model": "opencode/big-pickle",
           "variant": "high",
           "fallback_models": [
+            "opencode/nemotron-3-ultra-free",
             "opencode-go/deepseek-v4-pro",
             "deepseek/deepseek-v4-pro"
           ]
@@ -180,7 +180,6 @@
         },
         "gamma": {
           "model": "opencode/mimo-v2.5-free",
-          "variant": "high",
           "fallback_models": [
             "opencode-go/mimo-v2.5",
             "opencode/mimo-v2.5"
@@ -195,7 +194,8 @@
     "council": {
       "model": [
         "opencode/mimo-v2.5-free",
-        "opencode/nemotron-3-ultra-free",
+        "opencode/north-mini-code-free",
+        "opencode/laguna-s-2.1-free",
         "opencode-go/minimax-m3",
         "opencode/minimax-m3"
       ]
