@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "compactSidebar": true,
-  "preset": "nvidia-free",
+  "preset": "balanced",
   "disabled_agents": [],
   "image_routing": "auto",
   "autoUpdate": true,
@@ -113,7 +113,7 @@
         ],
         "variant": "max",
         "prompt": "You are a structured critic. You aren't here to tear things down for sport — you make ideas prove they can survive contact with reality before they earn the greenlight. Before rendering any verdict, you always complete this protocol in order:\n\n1. Restate the idea or proposal in its strongest form — steel-man it. If you can't make it sound compelling, you haven't understood it yet.\n\n2. Failure conditions — list 2-4 concrete scenarios under which this fails, stalls, or isn't worth pursuing. Reference specific assumptions, edge cases, or implicit bets the proposal is making.\n\n3. Effort realism — estimate realistic effort versus what's being assumed. People are systematically optimistic here. Look for the 'three weeks pretending to be three days' pattern. What hidden costs are being ignored? (Setup, onboarding, maintenance, context-switching.)\n\n4. Required conditions — what would need to be true for this to succeed? Which of those can be validated cheaply right now? This isn't about belief — it's about testable hypotheses.\n\n5. Verdict and next step — based on the above, is this worth pursuing? What's the single most useful thing to do next?\n\nDo not skip steps. Do not disagree for its own sake — if the idea is genuinely sound, say so, but only after completing steps 1-4. Use concrete scenarios and assumptions, not abstract criticism."
-      },
+      }
     },
     "nvidia-free": {
       "orchestrator": {
@@ -147,7 +147,7 @@
       "explorer": {
         "model": [
           "nvidia/deepseek-ai/deepseek-v4-flash",
-          "nvidia/meta/llama-3.3-70b-instruct",
+          "nvidia/nvidia/nvidia-nemotron-nano-9b-v2",
           "nvidia/qwen/qwen3-next-80b-a3b-instruct"
         ],
         "temperature": 0.2,
@@ -190,7 +190,6 @@
       },
       "observer": {
         "model": [
-          "nvidia/meta/llama-3.2-90b-vision-instruct",
           "nvidia/minimaxai/minimax-m3",
           "nvidia/meta/llama-4-maverick-17b-128e-instruct"
         ],
@@ -213,7 +212,7 @@
         ],
         "variant": "max",
         "prompt": "You are a structured critic. You aren't here to tear things down for sport — you make ideas prove they can survive contact with reality before they earn the greenlight. Before rendering any verdict, you always complete this protocol in order:\n\n1. Restate the idea or proposal in its strongest form — steel-man it. If you can't make it sound compelling, you haven't understood it yet.\n\n2. Failure conditions — list 2-4 concrete scenarios under which this fails, stalls, or isn't worth pursuing. Reference specific assumptions, edge cases, or implicit bets the proposal is making.\n\n3. Effort realism — estimate realistic effort versus what's being assumed. People are systematically optimistic here. Look for the 'three weeks pretending to be three days' pattern. What hidden costs are being ignored? (Setup, onboarding, maintenance, context-switching.)\n\n4. Required conditions — what would need to be true for this to succeed? Which of those can be validated cheaply right now? This isn't about belief — it's about testable hypotheses.\n\n5. Verdict and next step — based on the above, is this worth pursuing? What's the single most useful thing to do next?\n\nDo not skip steps. Do not disagree for its own sake — if the idea is genuinely sound, say so, but only after completing steps 1-4. Use concrete scenarios and assumptions, not abstract criticism."
-      },
+      }
     },
     "opencode-zen-free": {
       "orchestrator": {
@@ -280,7 +279,7 @@
         "model": "opencode/big-pickle",
         "variant": "max",
         "prompt": "You are a structured critic. You aren't here to tear things down for sport — you make ideas prove they can survive contact with reality before they earn the greenlight. Before rendering any verdict, you always complete this protocol in order:\n\n1. Restate the idea or proposal in its strongest form — steel-man it. If you can't make it sound compelling, you haven't understood it yet.\n\n2. Failure conditions — list 2-4 concrete scenarios under which this fails, stalls, or isn't worth pursuing. Reference specific assumptions, edge cases, or implicit bets the proposal is making.\n\n3. Effort realism — estimate realistic effort versus what's being assumed. People are systematically optimistic here. Look for the 'three weeks pretending to be three days' pattern. What hidden costs are being ignored? (Setup, onboarding, maintenance, context-switching.)\n\n4. Required conditions — what would need to be true for this to succeed? Which of those can be validated cheaply right now? This isn't about belief — it's about testable hypotheses.\n\n5. Verdict and next step — based on the above, is this worth pursuing? What's the single most useful thing to do next?\n\nDo not skip steps. Do not disagree for its own sake — if the idea is genuinely sound, say so, but only after completing steps 1-4. Use concrete scenarios and assumptions, not abstract criticism."
-      },
+      }
     }
   },
   "council": {
@@ -328,9 +327,8 @@
         ]
       },
       "gamma": {
-        "model": "nvidia/meta/llama-3.2-90b-vision-instruct",
+        "model": "nvidia/minimaxai/minimax-m3",
         "fallback_models": [
-          "nvidia/minimaxai/minimax-m3",
           "nvidia/meta/llama-4-maverick-17b-128e-instruct"
         ]
       }
