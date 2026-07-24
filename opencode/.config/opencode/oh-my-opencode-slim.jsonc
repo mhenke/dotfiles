@@ -14,6 +14,9 @@
           "opencode/mimo-v2.5-free",
           "opencode/north-mini-code-free",
           "opencode/laguna-s-2.1-free",
+          "nvidia/stepfun-ai/step-3.7-flash",
+          "nvidia/mistralai/mistral-small-4-119b-2603",
+          "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "opencode-go/minimax-m3",
           "opencode/minimax-m3"
         ],
@@ -30,6 +33,9 @@
         "model": [
           "opencode/big-pickle",
           "opencode/nemotron-3-ultra-free",
+          "nvidia/z-ai/glm-5.2",
+          "nvidia/minimaxai/minimax-m3",
+          "nvidia/mistralai/mistral-nemotron",
           "opencode-go/deepseek-v4-pro",
           "deepseek/deepseek-v4-pro"
         ],
