@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "compactSidebar": true,
-  "preset": "balanced",
+  "preset": "nvidia-free",
   "disabled_agents": [],
   "image_routing": "auto",
   "autoUpdate": true,
@@ -133,8 +133,10 @@
       "orchestrator": {
         "model": [
           "nvidia/stepfun-ai/step-3.7-flash",
+          "nvidia/stepfun-ai/laguna-xs-2.1",
           "nvidia/mistralai/mistral-small-4-119b-2603",
-          "nvidia/nvidia/nemotron-3-super-120b-a12b"
+          "nvidia/nvidia/nemotron-3-super-120b-a12b",
+          "nvidia/minimaxai/minimax-m3"
         ],
         "temperature": 0.4,
         "skills": [
@@ -148,6 +150,7 @@
       "oracle": {
         "model": [
           "nvidia/z-ai/glm-5.2",
+          "nvidia/deepseek-ai/deepseek-v4-pro",
           "nvidia/minimaxai/minimax-m3",
           "nvidia/mistralai/mistral-nemotron"
         ],
@@ -161,8 +164,7 @@
       "explorer": {
         "model": [
           "nvidia/deepseek-ai/deepseek-v4-flash",
-          "nvidia/nvidia/nvidia-nemotron-nano-9b-v2",
-          "nvidia/qwen/qwen3-next-80b-a3b-instruct"
+          "nvidia/nvidia/nvidia-nemotron-nano-9b-v2"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -170,9 +172,9 @@
       },
       "librarian": {
         "model": [
-          "nvidia/minimaxai/minimax-m3",
+          "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/deepseek-ai/deepseek-v4-flash",
-          "nvidia/nvidia/nemotron-3-super-120b-a12b"
+          "nvidia/minimaxai/minimax-m3"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -184,8 +186,9 @@
       },
       "designer": {
         "model": [
-          "nvidia/mistralai/mistral-nemotron",
           "nvidia/minimaxai/minimax-m3",
+          "nvidia/minimaxai/kimi-k2.6",
+          "nvidia/mistralai/mistral-nemotron",
           "nvidia/z-ai/glm-5.2"
         ],
         "temperature": 0.3,
@@ -195,7 +198,6 @@
       "fixer": {
         "model": [
           "nvidia/deepseek-ai/deepseek-v4-flash",
-          "nvidia/qwen/qwen3-next-80b-a3b-instruct",
           "nvidia/mistralai/mistral-small-4-119b-2603"
         ],
         "temperature": 0.2,
@@ -204,8 +206,8 @@
       },
       "observer": {
         "model": [
-          "nvidia/minimaxai/minimax-m3",
-          "nvidia/meta/llama-4-maverick-17b-128e-instruct"
+          "nvidia/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+          "nvidia/minimaxai/minimax-m3"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -213,14 +215,17 @@
       },
       "council": {
         "model": [
-          "nvidia/z-ai/glm-5.2",
-          "nvidia/minimaxai/minimax-m3",
-          "nvidia/qwen/qwen3-next-80b-a3b-instruct"
+          "nvidia/stepfun-ai/step-3.7-flash",
+          "nvidia/stepfun-ai/laguna-xs-2.1",
+          "nvidia/mistralai/mistral-small-4-119b-2603",
+          "nvidia/nvidia/nemotron-3-super-120b-a12b",
+          "nvidia/minimaxai/minimax-m3"
         ]
       },
       "skeptic": {
         "model": [
-          "nvidia/qwen/qwen3-next-80b-a3b-instruct",
+          "nvidia/nvidia/nemotron-3-ultra-550b-a55b",
+          "nvidia/mistralai/mistral-medium-3.5-128b",
           "nvidia/mistralai/mistral-small-4-119b-2603",
           "nvidia/nvidia/nvidia-nemotron-nano-9b-v2"
         ],
@@ -331,21 +336,24 @@
         "model": "nvidia/z-ai/glm-5.2",
         "variant": "high",
         "fallback_models": [
+          "nvidia/deepseek-ai/deepseek-v4-pro",
           "nvidia/minimaxai/minimax-m3",
           "nvidia/mistralai/mistral-nemotron"
         ]
       },
       "beta": {
-        "model": "nvidia/qwen/qwen3-next-80b-a3b-instruct",
+        "model": "nvidia/nvidia/nemotron-3-ultra-550b-a55b",
         "variant": "high",
         "fallback_models": [
+          "nvidia/mistralai/mistral-medium-3.5-128b",
+          "nvidia/mistralai/mistral-small-4-119b-2603",
           "nvidia/nvidia/nvidia-nemotron-nano-9b-v2"
         ]
       },
       "gamma": {
-        "model": "nvidia/minimaxai/minimax-m3",
+        "model": "nvidia/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
         "fallback_models": [
-          "nvidia/meta/llama-4-maverick-17b-128e-instruct"
+          "nvidia/minimaxai/minimax-m3"
         ]
       }
     },
