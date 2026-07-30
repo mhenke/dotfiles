@@ -12,11 +12,11 @@
       "orchestrator": {
         "model": [
           "opencode/mimo-v2.5-free",
-          "opencode/north-mini-code-free",
           "opencode/laguna-s-2.1-free",
           "nvidia/stepfun-ai/step-3.7-flash",
           "nvidia/mistralai/mistral-small-4-119b-2603",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
+          "nvidia/minimaxai/minimax-m3",
           "opencode-go/minimax-m3",
           "opencode/minimax-m3"
         ],
@@ -32,10 +32,8 @@
       "oracle": {
         "model": [
           "opencode/big-pickle",
-          "opencode/nemotron-3-ultra-free",
           "nvidia/z-ai/glm-5.2",
-          "nvidia/minimaxai/minimax-m3",
-          "nvidia/mistralai/mistral-nemotron",
+          "nvidia/deepseek-ai/deepseek-v4-pro",
           "opencode-go/deepseek-v4-pro",
           "deepseek/deepseek-v4-pro"
         ],
@@ -49,6 +47,7 @@
       "designer": {
         "model": [
           "opencode-go/kimi-k2.7-code",
+          "nvidia/minimaxai/minimax-m3",
           "opencode/minimax-m3"
         ],
         "temperature": 0.3,
@@ -75,6 +74,8 @@
           "opencode/deepseek-v4-flash-free",
           "opencode/laguna-s-2.1-free",
           "opencode/north-mini-code-free",
+          "opencode/ling-3.0-flash-free",
+          "nvidia/deepseek-ai/deepseek-v4-flash",
           "opencode-go/deepseek-v4-flash",
           "opencode/deepseek-v4-flash"
         ],
@@ -87,6 +88,8 @@
           "opencode/deepseek-v4-flash-free",
           "opencode/laguna-s-2.1-free",
           "opencode/north-mini-code-free",
+          "opencode/ling-3.0-flash-free",
+          "nvidia/deepseek-ai/deepseek-v4-flash",
           "opencode-go/deepseek-v4-flash",
           "opencode/deepseek-v4-flash"
         ],
@@ -107,13 +110,18 @@
       "council": {
         "model": [
           "opencode/mimo-v2.5-free",
+          "opencode/laguna-s-2.1-free",
+          "nvidia/stepfun-ai/step-3.7-flash",
+          "nvidia/mistralai/mistral-small-4-119b-2603",
+          "nvidia/nvidia/nemotron-3-super-120b-a12b",
+          "nvidia/minimaxai/minimax-m3",
           "opencode-go/minimax-m3",
           "opencode/minimax-m3"
         ]
       },
       "skeptic": {
         "model": [
-          "opencode/big-pickle",
+          "opencode/nemotron-3-ultra-free",
           "opencode-go/qwen3.7-plus",
           "opencode/qwen3.7-plus"
         ],
@@ -295,15 +303,17 @@
           "model": "opencode/big-pickle",
           "variant": "high",
           "fallback_models": [
-            "opencode/nemotron-3-ultra-free",
+            "nvidia/z-ai/glm-5.2",
+            "nvidia/deepseek-ai/deepseek-v4-pro",
             "opencode-go/deepseek-v4-pro",
             "deepseek/deepseek-v4-pro"
           ]
         },
         "beta": {
-          "model": "opencode-go/qwen3.7-plus",
+          "model": "opencode/nemotron-3-ultra-free",
           "variant": "high",
           "fallback_models": [
+            "opencode-go/qwen3.7-plus",
             "opencode/qwen3.7-plus"
           ]
         },
