@@ -46,11 +46,12 @@
       },
       "designer": {
         "model": [
-          "opencode-go/kimi-k2.7-code",
+          "opencode-go/gpt-5.6-luna",
           "nvidia/minimaxai/minimax-m3",
-          "opencode/minimax-m3"
+          "opencode/gpt-5.6-luna"
         ],
         "temperature": 0.3,
+        "variant": "xhigh",
         "skills": [],
         "mcps": []
       },
