@@ -22,6 +22,7 @@ fish_variables
 # Git configs with potential tokens
 .gitconfig
 config.yml
+!omp/.omp/agent/config.yml
 
 # Temporary files
 *.tmp
