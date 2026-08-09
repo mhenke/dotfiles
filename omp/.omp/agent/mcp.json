@@ -1,0 +1,4 @@
+{
+  "disabledServers": ["context7", "faker", "stitch"],
+  "mcpServers": {}
+}
