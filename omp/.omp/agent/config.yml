@@ -1,0 +1,98 @@
+setupVersion: 1
+modelRoles: 
+  scout: opencode-zen/deepseek-v4-flash-free
+  librarian: opencode-zen/mimo-v2.5-free
+  designer: opencode-go/gpt-5.6-luna
+  task: opencode-zen/deepseek-v4-flash-free
+  oracle: opencode-zen/big-pickle
+  skeptic: opencode-zen/nemotron-3-ultra-free
+  default: opencode-zen/mimo-v2.5-free
+providers: 
+  disabled: 
+    - llama.cpp
+    - lm-studio
+    - bedrock-mantle
+  webSearchOrder: 
+    - exa
+    - perplexity
+    - gemini
+    - anthropic
+    - codex
+    - xai
+    - zai
+    - tinyfish
+    - jina
+    - kagi
+    - tavily
+    - firecrawl
+    - brave
+    - kimi
+    - parallel
+    - synthetic
+    - searxng
+    - startpage
+    - duckduckgo
+    - ecosia
+    - google
+    - mojeek
+    - public
+retry: 
+  enabled: true
+  maxRetries: 10
+  baseDelayMs: 500
+  maxDelayMs: 300000
+  modelFallback: true
+  fallbackRevertPolicy: cooldown-expiry
+  fallbackChains: 
+    default: 
+      - opencode-zen/mimo-v2.5-free
+      - opencode-zen/laguna-s-2.1-free
+      - nvidia/stepfun-ai/step-3.7-flash
+      - nvidia/mistralai/mistral-small-4-119b-2603
+      - nvidia/nvidia/nemotron-3-super-120b-a12b
+      - nvidia/minimaxai/minimax-m3
+      - opencode-go/minimax-m3
+      - opencode-zen/minimax-m3
+    scout: 
+      - opencode-zen/deepseek-v4-flash-free
+      - opencode-zen/laguna-s-2.1-free
+      - opencode-zen/north-mini-code-free
+      - opencode-zen/ling-3.0-flash-free
+      - nvidia/deepseek-ai/deepseek-v4-flash
+      - opencode-go/deepseek-v4-flash
+      - opencode-zen/deepseek-v4-flash
+    task: 
+      - opencode-zen/deepseek-v4-flash-free
+      - opencode-zen/laguna-s-2.1-free
+      - opencode-zen/north-mini-code-free
+      - opencode-zen/ling-3.0-flash-free
+      - nvidia/deepseek-ai/deepseek-v4-flash
+      - opencode-go/deepseek-v4-flash
+      - opencode-zen/deepseek-v4-flash
+    librarian: 
+      - opencode-zen/mimo-v2.5-free
+      - opencode-zen/north-mini-code-free
+      - opencode-go/mimo-v2.5
+      - opencode-zen/minimax-m2.7
+    designer: 
+      - opencode-go/gpt-5.6-luna
+      - nvidia/minimaxai/minimax-m3
+      - opencode-zen/gpt-5.6-luna
+    oracle: 
+      - opencode-zen/big-pickle
+      - nvidia/z-ai/glm-5.2
+      - nvidia/deepseek-ai/deepseek-v4-pro
+      - opencode-go/deepseek-v4-pro
+      - deepseek/deepseek-v4-pro
+    skeptic: 
+      - opencode-zen/nemotron-3-ultra-free
+      - opencode-go/qwen3.7-plus
+      - opencode-zen/qwen3.6-plus
+task: 
+  agentModelOverrides: 
+    scout: "@scout"
+    librarian: "@librarian"
+    designer: "@designer"
+    task: "@task"
+    reviewer: "@skeptic"
+    oracle: "@oracle"
