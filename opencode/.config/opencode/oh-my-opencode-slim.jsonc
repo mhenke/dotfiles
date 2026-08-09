@@ -11,10 +11,9 @@
     "balanced": {
       "orchestrator": {
         "model": [
-          "opencode/mimo-v2.5-free",
+          "opencode/longcat-2.0-free",
           "opencode/laguna-s-2.1-free",
           "nvidia/stepfun-ai/step-3.7-flash",
-          "nvidia/mistralai/mistral-small-4-119b-2603",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/minimaxai/minimax-m3",
           "opencode-go/minimax-m3",
@@ -44,21 +43,22 @@
         ],
         "mcps": []
       },
-      "designer": {
-        "model": [
-          "opencode-go/gpt-5.6-luna",
-          "nvidia/minimaxai/minimax-m3",
-          "opencode/gpt-5.6-luna"
+"designer": {
+      "model": [
+        "opencode/mimo-v2.5-free",
+        "nvidia/minimaxai/minimax-m3",
+        "opencode-go/minimax-m3",
+        "opencode/minimax-m3"
         ],
         "temperature": 0.3,
         "variant": "xhigh",
         "skills": [],
         "mcps": []
       },
-      "librarian": {
-        "model": [
-          "opencode/mimo-v2.5-free",
-          "opencode/north-mini-code-free",
+"librarian": {
+      "model": [
+        "opencode/deepseek-v4-flash-free",
+        "opencode/north-mini-code-free",
           "opencode-go/mimo-v2.5",
           "opencode/minimax-m2.7"
         ],
@@ -70,10 +70,10 @@
           "gh_grep"
         ]
       },
-      "explorer": {
-        "model": [
-          "opencode/deepseek-v4-flash-free",
-          "opencode/laguna-s-2.1-free",
+"explorer": {
+      "model": [
+        "opencode/ling-3.0-flash-free",
+        "opencode/laguna-s-2.1-free",
           "opencode/north-mini-code-free",
           "opencode/ling-3.0-flash-free",
           "nvidia/deepseek-ai/deepseek-v4-flash",
@@ -110,10 +110,9 @@
       },
       "council": {
         "model": [
-          "opencode/mimo-v2.5-free",
+          "opencode/longcat-2.0-free",
           "opencode/laguna-s-2.1-free",
           "nvidia/stepfun-ai/step-3.7-flash",
-          "nvidia/mistralai/mistral-small-4-119b-2603",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/minimaxai/minimax-m3",
           "opencode-go/minimax-m3",
@@ -127,7 +126,6 @@
           "opencode/qwen3.7-plus"
         ],
         "variant": "max",
-        "prompt": "You are a structured critic. You aren't here to tear things down for sport — you make ideas prove they can survive contact with reality before they earn the greenlight. Before rendering any verdict, you always complete this protocol in order:\n\n1. Restate the idea or proposal in its strongest form — steel-man it. If you can't make it sound compelling, you haven't understood it yet.\n\n2. Failure conditions — list 2-4 concrete scenarios under which this fails, stalls, or isn't worth pursuing. Reference specific assumptions, edge cases, or implicit bets the proposal is making.\n\n3. Effort realism — estimate realistic effort versus what's being assumed. People are systematically optimistic here. Look for the 'three weeks pretending to be three days' pattern. What hidden costs are being ignored? (Setup, onboarding, maintenance, context-switching.)\n\n4. Required conditions — what would need to be true for this to succeed? Which of those can be validated cheaply right now? This isn't about belief — it's about testable hypotheses.\n\n5. Verdict and next step — based on the above, is this worth pursuing? What's the single most useful thing to do next?\n\nDo not skip steps. Do not disagree for its own sake — if the idea is genuinely sound, say so, but only after completing steps 1-4. Use concrete scenarios and assumptions, not abstract criticism."
       }
     },
     "nvidia-free": {
@@ -135,7 +133,6 @@
         "model": [
           "nvidia/stepfun-ai/step-3.7-flash",
           "nvidia/stepfun-ai/laguna-xs-2.1",
-          "nvidia/mistralai/mistral-small-4-119b-2603",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/minimaxai/minimax-m3"
         ],
@@ -198,8 +195,7 @@
       },
       "fixer": {
         "model": [
-          "nvidia/deepseek-ai/deepseek-v4-flash",
-          "nvidia/mistralai/mistral-small-4-119b-2603"
+          "nvidia/deepseek-ai/deepseek-v4-flash"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -218,7 +214,6 @@
         "model": [
           "nvidia/stepfun-ai/step-3.7-flash",
           "nvidia/stepfun-ai/laguna-xs-2.1",
-          "nvidia/mistralai/mistral-small-4-119b-2603",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/minimaxai/minimax-m3"
         ]
@@ -227,16 +222,14 @@
         "model": [
           "nvidia/nvidia/nemotron-3-ultra-550b-a55b",
           "nvidia/mistralai/mistral-medium-3.5-128b",
-          "nvidia/mistralai/mistral-small-4-119b-2603",
           "nvidia/nvidia/nvidia-nemotron-nano-9b-v2"
         ],
         "variant": "max",
-        "prompt": "You are a structured critic. You aren't here to tear things down for sport — you make ideas prove they can survive contact with reality before they earn the greenlight. Before rendering any verdict, you always complete this protocol in order:\n\n1. Restate the idea or proposal in its strongest form — steel-man it. If you can't make it sound compelling, you haven't understood it yet.\n\n2. Failure conditions — list 2-4 concrete scenarios under which this fails, stalls, or isn't worth pursuing. Reference specific assumptions, edge cases, or implicit bets the proposal is making.\n\n3. Effort realism — estimate realistic effort versus what's being assumed. People are systematically optimistic here. Look for the 'three weeks pretending to be three days' pattern. What hidden costs are being ignored? (Setup, onboarding, maintenance, context-switching.)\n\n4. Required conditions — what would need to be true for this to succeed? Which of those can be validated cheaply right now? This isn't about belief — it's about testable hypotheses.\n\n5. Verdict and next step — based on the above, is this worth pursuing? What's the single most useful thing to do next?\n\nDo not skip steps. Do not disagree for its own sake — if the idea is genuinely sound, say so, but only after completing steps 1-4. Use concrete scenarios and assumptions, not abstract criticism."
       }
     },
-    "opencode-zen-free": {
-      "orchestrator": {
-        "model": "opencode/hy3-free",
+"opencode-zen-free": {
+    "orchestrator": {
+      "model": "opencode/longcat-2.0-free",
         "temperature": 0.4,
         "skills": [
           "*"
@@ -255,14 +248,14 @@
         ],
         "mcps": []
       },
-      "explorer": {
-        "model": "opencode/deepseek-v4-flash-free",
+"explorer": {
+      "model": "opencode/ling-3.0-flash-free",
         "temperature": 0.2,
         "skills": [],
         "mcps": []
       },
-      "librarian": {
-        "model": "opencode/mimo-v2.5-free",
+"librarian": {
+      "model": "opencode/deepseek-v4-flash-free",
         "temperature": 0.2,
         "skills": [],
         "mcps": [
@@ -293,12 +286,11 @@
         "mcps": []
       },
       "council": {
-        "model": "opencode/mimo-v2.5-free"
+        "model": "opencode/longcat-2.0-free"
       },
       "skeptic": {
         "model": "opencode/big-pickle",
         "variant": "max",
-        "prompt": "You are a structured critic. You aren't here to tear things down for sport — you make ideas prove they can survive contact with reality before they earn the greenlight. Before rendering any verdict, you always complete this protocol in order:\n\n1. Restate the idea or proposal in its strongest form — steel-man it. If you can't make it sound compelling, you haven't understood it yet.\n\n2. Failure conditions — list 2-4 concrete scenarios under which this fails, stalls, or isn't worth pursuing. Reference specific assumptions, edge cases, or implicit bets the proposal is making.\n\n3. Effort realism — estimate realistic effort versus what's being assumed. People are systematically optimistic here. Look for the 'three weeks pretending to be three days' pattern. What hidden costs are being ignored? (Setup, onboarding, maintenance, context-switching.)\n\n4. Required conditions — what would need to be true for this to succeed? Which of those can be validated cheaply right now? This isn't about belief — it's about testable hypotheses.\n\n5. Verdict and next step — based on the above, is this worth pursuing? What's the single most useful thing to do next?\n\nDo not skip steps. Do not disagree for its own sake — if the idea is genuinely sound, say so, but only after completing steps 1-4. Use concrete scenarios and assumptions, not abstract criticism."
       }
     }
   },
@@ -326,8 +318,9 @@
         "gamma": {
           "model": "opencode/mimo-v2.5-free",
           "fallback_models": [
-            "opencode-go/mimo-v2.5",
-            "opencode/mimo-v2.5"
+            "nvidia/minimaxai/minimax-m3",
+            "opencode-go/minimax-m3",
+            "opencode/minimax-m3"
           ]
         }
       }
@@ -347,7 +340,6 @@
         "variant": "high",
         "fallback_models": [
           "nvidia/mistralai/mistral-medium-3.5-128b",
-          "nvidia/mistralai/mistral-small-4-119b-2603",
           "nvidia/nvidia/nvidia-nemotron-nano-9b-v2"
         ]
       },

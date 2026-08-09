@@ -11,11 +11,10 @@
     ]
   },
   "plugin": [
-    "./plugins/claude-mem.js",
     "./plugins/rtk.ts",
-    "file:///home/mhenke/Projects/oh-my-opencode-slim",
     "@dietrichgebert/ponytail",
-    "superpowers@git+https://github.com/obra/superpowers.git"
+    "superpowers@git+https://github.com/obra/superpowers.git",
+    "file:///home/mhenke/Projects/oh-my-opencode-slim"
   ],
   "mcp": {
     "playwright": {
@@ -58,13 +57,16 @@
       "npm *": "allow",
       "npx *": "allow",
       "bun *": "allow",
+      "echo *": "allow",
       "mkdir *": "allow",
       "touch *": "allow",
       "sudo *": "deny",
       "chmod *": "deny",
       "chown *": "deny"
     },
-    "edit": "ask",
+    "edit": {
+      "**/codemap.md": "allow"
+    },
     "glob": "allow",
     "grep": "allow",
     "webfetch": "allow",
@@ -72,10 +74,12 @@
     "task": "allow",
     "skill": "allow"
   },
-  "disabled_providers": [
-    "github-models",
-    "github-copilot",
-    "openrouter"
+  "enabled_providers": [
+    "deepseek",
+    "ollama",
+    "opencode",
+    "opencode-go",
+    "nvidia"
   ],
   "default_agent": "orchestrator",
   "agent": {
@@ -116,13 +120,6 @@
   },
   "provider": {
     "deepseek": {},
-    "nvidia": {
-      "name": "NVIDIA",
-      "npm": "@ai-sdk/openai-compatible",
-      "options": {
-        "baseURL": "https://integrate.api.nvidia.com/v1"
-      }
-    },
     "ollama": {
       "name": "Ollama",
       "npm": "@ai-sdk/openai-compatible",
@@ -153,7 +150,8 @@
         }
       }
     },
-    "opencode": {}
+    "opencode": {},
+    "nvidia": {}
   },
   "lsp": true
 }
