@@ -14,7 +14,7 @@
     "./plugins/rtk.ts",
     "@dietrichgebert/ponytail",
     "superpowers@git+https://github.com/obra/superpowers.git",
-    "file:///home/mhenke/Projects/oh-my-opencode-slim/.slim/worktrees/new-rules"
+    "file:///home/mhenke/Projects/oh-my-opencode-slim"
   ],
   "mcp": {
     "playwright": {
