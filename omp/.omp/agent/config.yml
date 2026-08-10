@@ -1,12 +1,12 @@
 setupVersion: 1
 modelRoles: 
-  scout: opencode/ling-3.0-flash-free
+  scout: opencode/north-mini-code-free
   librarian: opencode/deepseek-v4-flash-free
   designer: opencode/mimo-v2.5-free
   task: opencode/deepseek-v4-flash-free
   oracle: opencode/big-pickle
   skeptic: opencode/nemotron-3-ultra-free
-  default: opencode-zen/longcat-2.0-free
+  default: opencode-zen/mimo-v2.5-free:high
 providers: 
   disabled: 
     - llama.cpp
@@ -45,6 +45,7 @@ retry:
   fallbackRevertPolicy: cooldown-expiry
   fallbackChains: 
     default: 
+      - opencode/mimo-v2.5-free
       - opencode/longcat-2.0-free
       - opencode/laguna-s-2.1-free
       - nvidia/stepfun-ai/step-3.7-flash
@@ -53,10 +54,8 @@ retry:
       - opencode-go/minimax-m3
       - opencode/minimax-m3
     scout: 
-      - opencode/ling-3.0-flash-free
-      - opencode/laguna-s-2.1-free
       - opencode/north-mini-code-free
-      - opencode/ling-3.0-flash-free
+      - opencode/laguna-s-2.1-free
       - nvidia/deepseek-ai/deepseek-v4-flash
       - opencode-go/deepseek-v4-flash
       - opencode/deepseek-v4-flash
@@ -64,7 +63,6 @@ retry:
       - opencode/deepseek-v4-flash-free
       - opencode/laguna-s-2.1-free
       - opencode/north-mini-code-free
-      - opencode/ling-3.0-flash-free
       - nvidia/deepseek-ai/deepseek-v4-flash
       - opencode-go/deepseek-v4-flash
       - opencode/deepseek-v4-flash
