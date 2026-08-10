@@ -1,12 +1,12 @@
 setupVersion: 1
-modelRoles:
+modelRoles: 
   scout: opencode/ling-3.0-flash-free
   librarian: opencode/deepseek-v4-flash-free
   designer: opencode/mimo-v2.5-free
   task: opencode/deepseek-v4-flash-free
   oracle: opencode/big-pickle
   skeptic: opencode/nemotron-3-ultra-free
-  default: opencode/longcat-2.0-free
+  default: opencode-zen/longcat-2.0-free
 providers: 
   disabled: 
     - llama.cpp
@@ -44,7 +44,7 @@ retry:
   modelFallback: true
   fallbackRevertPolicy: cooldown-expiry
   fallbackChains: 
-    default:
+    default: 
       - opencode/longcat-2.0-free
       - opencode/laguna-s-2.1-free
       - nvidia/stepfun-ai/step-3.7-flash
@@ -52,7 +52,7 @@ retry:
       - nvidia/minimaxai/minimax-m3
       - opencode-go/minimax-m3
       - opencode/minimax-m3
-    scout:
+    scout: 
       - opencode/ling-3.0-flash-free
       - opencode/laguna-s-2.1-free
       - opencode/north-mini-code-free
@@ -60,7 +60,7 @@ retry:
       - nvidia/deepseek-ai/deepseek-v4-flash
       - opencode-go/deepseek-v4-flash
       - opencode/deepseek-v4-flash
-    task:
+    task: 
       - opencode/deepseek-v4-flash-free
       - opencode/laguna-s-2.1-free
       - opencode/north-mini-code-free
@@ -68,23 +68,23 @@ retry:
       - nvidia/deepseek-ai/deepseek-v4-flash
       - opencode-go/deepseek-v4-flash
       - opencode/deepseek-v4-flash
-    librarian:
+    librarian: 
       - opencode/deepseek-v4-flash-free
       - opencode/north-mini-code-free
       - opencode-go/mimo-v2.5
       - opencode/minimax-m2.7
-    designer:
+    designer: 
       - opencode/mimo-v2.5-free
       - nvidia/minimaxai/minimax-m3
       - opencode-go/minimax-m3
       - opencode/minimax-m3
-    oracle:
+    oracle: 
       - opencode/big-pickle
       - nvidia/z-ai/glm-5.2
       - nvidia/deepseek-ai/deepseek-v4-pro
       - opencode-go/deepseek-v4-pro
       - deepseek/deepseek-v4-pro
-    skeptic:
+    skeptic: 
       - opencode/nemotron-3-ultra-free
       - opencode-go/qwen3.7-plus
       - opencode/qwen3.7-plus
@@ -96,3 +96,10 @@ task:
     task: "@task"
     reviewer: "@skeptic"
     oracle: "@oracle"
+theme: 
+  light: titanium
+  dark: titanium
+memory: 
+  backend: mnemopi
+github: 
+  enabled: true
