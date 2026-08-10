@@ -71,25 +71,22 @@
         ]
       },
 "explorer": {
-      "model": [
-        "opencode/ling-3.0-flash-free",
-        "opencode/laguna-s-2.1-free",
-          "opencode/north-mini-code-free",
-          "opencode/ling-3.0-flash-free",
-          "nvidia/deepseek-ai/deepseek-v4-flash",
-          "opencode-go/deepseek-v4-flash",
-          "opencode/deepseek-v4-flash"
-        ],
-        "temperature": 0.2,
-        "skills": [],
-        "mcps": []
-      },
+  "model": [
+    "opencode/north-mini-code-free",
+    "opencode/laguna-s-2.1-free",
+    "nvidia/deepseek-ai/deepseek-v4-flash",
+    "opencode-go/deepseek-v4-flash",
+    "opencode/deepseek-v4-flash"
+  ],
+  "temperature": 0.2,
+  "skills": [],
+  "mcps": []
+},
       "fixer": {
         "model": [
           "opencode/deepseek-v4-flash-free",
           "opencode/laguna-s-2.1-free",
           "opencode/north-mini-code-free",
-          "opencode/ling-3.0-flash-free",
           "nvidia/deepseek-ai/deepseek-v4-flash",
           "opencode-go/deepseek-v4-flash",
           "opencode/deepseek-v4-flash"
@@ -239,21 +236,12 @@
           "!context7"
         ]
       },
-      "oracle": {
-        "model": "opencode/big-pickle",
-        "temperature": 0.4,
-        "variant": "max",
-        "skills": [
-          "simplify"
-        ],
-        "mcps": []
-      },
 "explorer": {
-      "model": "opencode/ling-3.0-flash-free",
-        "temperature": 0.2,
-        "skills": [],
-        "mcps": []
-      },
+  "model": "opencode/north-mini-code-free",
+    "temperature": 0.2,
+    "skills": [],
+    "mcps": []
+  },
 "librarian": {
       "model": "opencode/deepseek-v4-flash-free",
         "temperature": 0.2,
