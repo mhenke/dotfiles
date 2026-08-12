@@ -43,32 +43,28 @@ retry:
   maxDelayMs: 300000
   modelFallback: true
   fallbackRevertPolicy: cooldown-expiry
-  fallbackChains: 
-    default: 
+  fallbackChains:
+    default:
       - opencode/mimo-v2.5-free
-      - opencode/longcat-2.0-free
       - opencode/laguna-s-2.1-free
       - nvidia/stepfun-ai/step-3.7-flash
       - nvidia/nvidia/nemotron-3-super-120b-a12b
       - nvidia/minimaxai/minimax-m3
       - opencode-go/minimax-m3
       - opencode/minimax-m3
-    scout: 
-      - opencode/north-mini-code-free
+    scout:
       - opencode/laguna-s-2.1-free
       - nvidia/deepseek-ai/deepseek-v4-flash
       - opencode-go/deepseek-v4-flash
       - opencode/deepseek-v4-flash
-    task: 
+    task:
       - opencode/deepseek-v4-flash-free
       - opencode/laguna-s-2.1-free
-      - opencode/north-mini-code-free
       - nvidia/deepseek-ai/deepseek-v4-flash
       - opencode-go/deepseek-v4-flash
       - opencode/deepseek-v4-flash
-    librarian: 
+    librarian:
       - opencode/deepseek-v4-flash-free
-      - opencode/north-mini-code-free
       - opencode-go/mimo-v2.5
       - opencode/minimax-m2.7
     designer: 

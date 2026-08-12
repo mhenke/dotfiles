@@ -11,7 +11,6 @@
     "balanced": {
       "orchestrator": {
         "model": [
-          "opencode/longcat-2.0-free",
           "opencode/laguna-s-2.1-free",
           "nvidia/stepfun-ai/step-3.7-flash",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
@@ -88,8 +87,8 @@
           "opencode/laguna-s-2.1-free",
           "opencode/north-mini-code-free",
           "nvidia/deepseek-ai/deepseek-v4-flash",
-          "opencode-go/deepseek-v4-flash",
-          "opencode/deepseek-v4-flash"
+          "opencode-go/gpt-5.6-luna",
+          "opencode/gpt-5.6-luna"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -99,7 +98,7 @@
         "model": [
           "opencode/mimo-v2.5-free",
           "opencode-go/mimo-v2.5",
-          "opencode/mimo-v2.5"
+          "opencode/minimax-m3"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -224,9 +223,9 @@
         "variant": "max",
       }
     },
-"opencode-zen-free": {
+    "opencode-zen-free": {
     "orchestrator": {
-      "model": "opencode/longcat-2.0-free",
+      "model": "opencode/laguna-s-2.1-free",
         "temperature": 0.4,
         "skills": [
           "*"
@@ -237,7 +236,7 @@
         ]
       },
 "explorer": {
-  "model": "opencode/north-mini-code-free",
+  "model": "opencode/deepseek-v4-flash",
     "temperature": 0.2,
     "skills": [],
     "mcps": []
@@ -274,7 +273,7 @@
         "mcps": []
       },
       "council": {
-        "model": "opencode/longcat-2.0-free"
+        "model": "opencode/laguna-s-2.1-free"
       },
       "skeptic": {
         "model": "opencode/big-pickle",
