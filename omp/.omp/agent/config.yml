@@ -1,12 +1,12 @@
 setupVersion: 1
-modelRoles: 
-  scout: opencode/north-mini-code-free
+modelRoles:
+  scout: opencode/deepseek-v4-flash-free
   librarian: opencode/deepseek-v4-flash-free
   designer: opencode/mimo-v2.5-free
   task: opencode/deepseek-v4-flash-free
   oracle: opencode/big-pickle
   skeptic: opencode/nemotron-3-ultra-free
-  default: opencode-zen/mimo-v2.5-free:high
+  default: opencode/hy3-free
 providers: 
   disabled: 
     - llama.cpp

@@ -11,6 +11,7 @@
     "balanced": {
       "orchestrator": {
         "model": [
+          "opencode/hy3-free",
           "opencode/laguna-s-2.1-free",
           "nvidia/stepfun-ai/step-3.7-flash",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
@@ -54,10 +55,9 @@
         "skills": [],
         "mcps": []
       },
-"librarian": {
-      "model": [
-        "opencode/deepseek-v4-flash-free",
-        "opencode/north-mini-code-free",
+      "librarian": {
+        "model": [
+          "opencode/deepseek-v4-flash-free",
           "opencode-go/mimo-v2.5",
           "opencode/minimax-m2.7"
         ],
@@ -71,7 +71,6 @@
       },
 "explorer": {
   "model": [
-    "opencode/north-mini-code-free",
     "opencode/laguna-s-2.1-free",
     "nvidia/deepseek-ai/deepseek-v4-flash",
     "opencode-go/deepseek-v4-flash",
@@ -85,7 +84,6 @@
         "model": [
           "opencode/deepseek-v4-flash-free",
           "opencode/laguna-s-2.1-free",
-          "opencode/north-mini-code-free",
           "nvidia/deepseek-ai/deepseek-v4-flash",
           "opencode-go/gpt-5.6-luna",
           "opencode/gpt-5.6-luna"
@@ -106,7 +104,7 @@
       },
       "council": {
         "model": [
-          "opencode/longcat-2.0-free",
+          "opencode/hy3-free",
           "opencode/laguna-s-2.1-free",
           "nvidia/stepfun-ai/step-3.7-flash",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
@@ -225,7 +223,7 @@
     },
     "opencode-zen-free": {
     "orchestrator": {
-      "model": "opencode/laguna-s-2.1-free",
+      "model": "opencode/hy3-free",
         "temperature": 0.4,
         "skills": [
           "*"
@@ -273,7 +271,7 @@
         "mcps": []
       },
       "council": {
-        "model": "opencode/laguna-s-2.1-free"
+        "model": "opencode/hy3-free"
       },
       "skeptic": {
         "model": "opencode/big-pickle",
