@@ -30,6 +30,7 @@ config.yml
 *.swp
 *~
 .claude/
+.opencode/
 
 # Large dev tool caches (don't stow)
 Cursor/
