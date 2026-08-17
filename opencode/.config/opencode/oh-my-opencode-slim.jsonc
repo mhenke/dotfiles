@@ -11,6 +11,7 @@
     "balanced": {
       "orchestrator": {
         "model": [
+          "opencode/hy3-free",
           "opencode/laguna-s-2.1-free",
           "nvidia/stepfun-ai/step-3.7-flash",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
@@ -43,11 +44,11 @@
         "mcps": []
       },
 "designer": {
-      "model": [
-        "opencode/mimo-v2.5-free",
-        "nvidia/minimaxai/minimax-m3",
-        "opencode-go/minimax-m3",
-        "opencode/minimax-m3"
+        "model": [
+          "opencode/mimo-v2.5-free",
+          "nvidia/minimaxai/minimax-m3",
+          "opencode-go/minimax-m3",
+          "opencode/minimax-m3"
         ],
         "temperature": 0.3,
         "variant": "xhigh",
@@ -55,12 +56,11 @@
         "mcps": []
       },
 "librarian": {
-      "model": [
-        "opencode/deepseek-v4-flash-free",
-        "opencode/north-mini-code-free",
-          "opencode-go/mimo-v2.5",
-          "opencode/minimax-m2.7"
-        ],
+  "model": [
+    "opencode/deepseek-v4-flash-free",
+    "opencode-go/mimo-v2.5",
+    "opencode/minimax-m2.7"
+  ],
         "temperature": 0.2,
         "skills": [],
         "mcps": [
@@ -71,9 +71,8 @@
       },
 "explorer": {
   "model": [
-    "opencode/north-mini-code-free",
+    "opencode/deepseek-v4-flash-free",
     "opencode/laguna-s-2.1-free",
-    "nvidia/deepseek-ai/deepseek-v4-flash",
     "opencode-go/deepseek-v4-flash",
     "opencode/deepseek-v4-flash"
   ],
@@ -81,19 +80,16 @@
   "skills": [],
   "mcps": []
 },
-      "fixer": {
-        "model": [
-          "opencode/deepseek-v4-flash-free",
-          "opencode/laguna-s-2.1-free",
-          "opencode/north-mini-code-free",
-          "nvidia/deepseek-ai/deepseek-v4-flash",
-          "opencode-go/gpt-5.6-luna",
-          "opencode/gpt-5.6-luna"
-        ],
-        "temperature": 0.2,
-        "skills": [],
-        "mcps": []
-      },
+"fixer": {
+  "model": [
+    "opencode/deepseek-v4-flash-free",
+    "opencode/laguna-s-2.1-free",
+    "deepseek/deepseek-v4-flash"
+  ],
+  "temperature": 0.2,
+  "skills": [],
+  "mcps": []
+},
       "observer": {
         "model": [
           "opencode/mimo-v2.5-free",
@@ -106,7 +102,7 @@
       },
       "council": {
         "model": [
-          "opencode/longcat-2.0-free",
+          "opencode/hy3-free",
           "opencode/laguna-s-2.1-free",
           "nvidia/stepfun-ai/step-3.7-flash",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
@@ -121,7 +117,7 @@
           "opencode-go/qwen3.7-plus",
           "opencode/qwen3.7-plus"
         ],
-        "variant": "max",
+        "variant": "max"
       }
     },
     "nvidia-free": {
@@ -157,7 +153,6 @@
       },
       "explorer": {
         "model": [
-          "nvidia/deepseek-ai/deepseek-v4-flash",
           "nvidia/nvidia/nvidia-nemotron-nano-9b-v2"
         ],
         "temperature": 0.2,
@@ -167,7 +162,6 @@
       "librarian": {
         "model": [
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
-          "nvidia/deepseek-ai/deepseek-v4-flash",
           "nvidia/minimaxai/minimax-m3"
         ],
         "temperature": 0.2,
@@ -191,7 +185,7 @@
       },
       "fixer": {
         "model": [
-          "nvidia/deepseek-ai/deepseek-v4-flash"
+          "nvidia/nemotron-3.5-lightning-30b-a3b"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -220,12 +214,12 @@
           "nvidia/mistralai/mistral-medium-3.5-128b",
           "nvidia/nvidia/nvidia-nemotron-nano-9b-v2"
         ],
-        "variant": "max",
+        "variant": "max"
       }
     },
     "opencode-zen-free": {
     "orchestrator": {
-      "model": "opencode/laguna-s-2.1-free",
+      "model": "opencode/hy3-free",
         "temperature": 0.4,
         "skills": [
           "*"
@@ -273,13 +267,115 @@
         "mcps": []
       },
       "council": {
-        "model": "opencode/laguna-s-2.1-free"
+        "model": "opencode/hy3-free"
       },
       "skeptic": {
         "model": "opencode/big-pickle",
-        "variant": "max",
+        "variant": "max"
       }
-    }
+    },
+    "clinepass": {
+      "orchestrator": {
+        "model": [
+          "opencode/hy3-free",
+          "nvidia/stepfun-ai/step-3.7-flash",
+          "cline-pass/minimax-m3"
+        ],
+        "temperature": 0.4,
+        "skills": [
+          "*"
+        ],
+        "mcps": [
+          "*",
+          "!context7"
+        ]
+      },
+      "oracle": {
+        "model": [
+          "opencode/big-pickle",
+          "nvidia/z-ai/glm-5.2",
+          "cline-pass/glm-5.2"
+        ],
+        "temperature": 0.4,
+        "variant": "max",
+        "skills": [
+          "simplify"
+        ],
+        "mcps": []
+      },
+      "explorer": {
+        "model": [
+          "opencode/deepseek-v4-flash",
+          "nvidia/nvidia/nvidia-nemotron-nano-9b-v2",
+          "cline-pass/deepseek-v4-flash"
+        ],
+        "temperature": 0.2,
+        "skills": [],
+        "mcps": []
+      },
+      "librarian": {
+        "model": [
+          "opencode/deepseek-v4-flash-free",
+          "nvidia/nvidia/nemotron-3-super-120b-a12b",
+          "cline-pass/mimo-v2.5"
+        ],
+        "temperature": 0.2,
+        "skills": [],
+        "mcps": [
+          "websearch",
+          "context7",
+          "gh_grep"
+        ]
+      },
+      "designer": {
+        "model": [
+          "opencode/mimo-v2.5-free",
+          "nvidia/minimaxai/minimax-m3",
+          "cline-pass/kimi-k2.7-code"
+        ],
+        "temperature": 0.3,
+        "variant": "medium",
+        "skills": [],
+        "mcps": []
+      },
+      "fixer": {
+        "model": [
+          "opencode/deepseek-v4-flash-free",
+          "nvidia/nemotron-3.5-lightning-30b-a3b",
+          "cline-pass/deepseek-v4-flash"
+        ],
+        "temperature": 0.2,
+        "variant": "high",
+        "skills": [],
+        "mcps": []
+      },
+      "observer": {
+        "model": [
+          "opencode/mimo-v2.5-free",
+          "nvidia/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
+          "cline-pass/mimo-v2.5"
+        ],
+        "temperature": 0.2,
+        "variant": "low",
+        "skills": [],
+        "mcps": []
+      },
+      "council": {
+        "model": [
+          "opencode/hy3-free",
+          "nvidia/stepfun-ai/step-3.7-flash",
+          "cline-pass/minimax-m3"
+        ]
+      },
+      "skeptic": {
+        "model": [
+          "opencode/big-pickle",
+          "nvidia/nvidia/nemotron-3-ultra-550b-a55b",
+          "cline-pass/glm-5.2"
+        ],
+        "variant": "max"
+      }
+    },
   },
   "council": {
     "presets": {
@@ -334,6 +430,84 @@
         "model": "nvidia/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
         "fallback_models": [
           "nvidia/minimaxai/minimax-m3"
+        ]
+      }
+    },
+    "clinepass": {
+      "alpha": {
+        "model": "cline-pass/minimax-m3",
+        "variant": "high",
+        "fallback_models": [
+          "cline-pass/glm-5.2",
+          "cline-pass/deepseek-v4-flash",
+          "cline-pass/mimo-v2.5"
+        ]
+      },
+      "beta": {
+        "model": "cline-pass/glm-5.2",
+        "variant": "high",
+        "fallback_models": [
+          "cline-pass/deepseek-v4-flash",
+          "cline-pass/mimo-v2.5"
+        ]
+      },
+      "gamma": {
+        "model": "cline-pass/mimo-v2.5",
+        "fallback_models": [
+          "cline-pass/kimi-k2.7-code",
+          "cline-pass/deepseek-v4-flash"
+        ]
+      }
+    },
+    "clinepass": {
+      "alpha": {
+        "model": "cline-pass/minimax-m3",
+        "variant": "high",
+        "fallback_models": [
+          "cline-pass/glm-5.2",
+          "cline-pass/deepseek-v4-flash",
+          "cline-pass/mimo-v2.5"
+        ]
+      },
+      "beta": {
+        "model": "cline-pass/glm-5.2",
+        "variant": "high",
+        "fallback_models": [
+          "cline-pass/deepseek-v4-flash",
+          "cline-pass/mimo-v2.5"
+        ]
+      },
+      "gamma": {
+        "model": "cline-pass/mimo-v2.5",
+        "fallback_models": [
+          "cline-pass/kimi-k2.7-code",
+          "cline-pass/deepseek-v4-flash"
+        ]
+      }
+    },
+    "clinepass": {
+      "alpha": {
+        "model": "cline-pass/minimax-m3",
+        "variant": "high",
+        "fallback_models": [
+          "cline-pass/glm-5.2",
+          "cline-pass/deepseek-v4-flash",
+          "cline-pass/mimo-v2.5"
+        ]
+      },
+      "beta": {
+        "model": "cline-pass/glm-5.2",
+        "variant": "high",
+        "fallback_models": [
+          "cline-pass/deepseek-v4-flash",
+          "cline-pass/mimo-v2.5"
+        ]
+      },
+      "gamma": {
+        "model": "cline-pass/mimo-v2.5",
+        "fallback_models": [
+          "cline-pass/kimi-k2.7-code",
+          "cline-pass/deepseek-v4-flash"
         ]
       }
     },

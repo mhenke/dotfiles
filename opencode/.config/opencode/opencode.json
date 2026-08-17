@@ -10,12 +10,13 @@
       "/home/mhenke/.config/opencode/node_modules/@dietrichgebert/ponytail/skills"
     ]
   },
-  "plugin": [
-    "./plugins/rtk.ts",
-    "@dietrichgebert/ponytail",
-    "superpowers@git+https://github.com/obra/superpowers.git",
-    "file:///home/mhenke/Projects/oh-my-opencode-slim"
-  ],
+"plugin": [
+        "./plugins/rtk.ts",
+        "@dietrichgebert/ponytail",
+        "superpowers@git+https://github.com/obra/superpowers.git",
+        "file:///home/mhenke/Projects/oh-my-opencode-slim",
+        "opencode-models-discovery@latest"
+    ],
   "mcp": {
     "playwright": {
       "type": "local",
@@ -75,6 +76,7 @@
     "skill": "allow"
   },
   "enabled_providers": [
+    "commandcode",
     "deepseek",
     "ollama",
     "opencode",
@@ -119,6 +121,16 @@
     }
   },
   "provider": {
+    "commandcode": {
+      "name": "Command Code",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "https://api.commandcode.ai/provider/v1",
+        "modelsDiscovery": {
+          "enabled": true
+        }
+      }
+    },
     "deepseek": {},
     "ollama": {
       "name": "Ollama",
