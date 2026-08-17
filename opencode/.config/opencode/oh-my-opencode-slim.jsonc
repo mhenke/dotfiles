@@ -32,7 +32,6 @@
         "model": [
           "opencode/big-pickle",
           "nvidia/z-ai/glm-5.2",
-          "nvidia/deepseek-ai/deepseek-v4-pro",
           "opencode-go/deepseek-v4-pro",
           "deepseek/deepseek-v4-pro"
         ],
@@ -140,7 +139,6 @@
       "oracle": {
         "model": [
           "nvidia/z-ai/glm-5.2",
-          "nvidia/deepseek-ai/deepseek-v4-pro",
           "nvidia/minimaxai/minimax-m3",
           "nvidia/mistralai/mistral-nemotron"
         ],
@@ -385,7 +383,6 @@
           "variant": "high",
           "fallback_models": [
             "nvidia/z-ai/glm-5.2",
-            "nvidia/deepseek-ai/deepseek-v4-pro",
             "opencode-go/deepseek-v4-pro",
             "deepseek/deepseek-v4-pro"
           ]
@@ -413,7 +410,6 @@
         "model": "nvidia/z-ai/glm-5.2",
         "variant": "high",
         "fallback_models": [
-          "nvidia/deepseek-ai/deepseek-v4-pro",
           "nvidia/minimaxai/minimax-m3",
           "nvidia/mistralai/mistral-nemotron"
         ]

@@ -73,7 +73,6 @@ retry:
     oracle: 
       - opencode/big-pickle
       - nvidia/z-ai/glm-5.2
-      - nvidia/deepseek-ai/deepseek-v4-pro
       - opencode-go/deepseek-v4-pro
       - deepseek/deepseek-v4-pro
     skeptic: 
