@@ -6,7 +6,6 @@ modelRoles:
   task: opencode/deepseek-v4-flash-free
   oracle: opencode/big-pickle
   skeptic: opencode/nemotron-3-ultra-free
-  default: clinepass/cline-pass/deepseek-v4-flash
 providers: 
   disabled: 
     - llama.cpp
