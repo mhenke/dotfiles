@@ -12,7 +12,6 @@
       "orchestrator": {
         "model": [
           "opencode/hy3-free",
-          "opencode/laguna-s-2.1-free",
           "nvidia/stepfun-ai/step-3.7-flash",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/minimaxai/minimax-m3",
@@ -71,7 +70,6 @@
 "explorer": {
   "model": [
     "opencode/mimo-v2.5-free",
-    "opencode/laguna-s-2.1-free",
     "opencode-go/deepseek-v4-flash",
     "opencode/deepseek-v4-flash"
   ],
@@ -82,7 +80,6 @@
 "fixer": {
   "model": [
     "opencode/mimo-v2.5-free",
-    "opencode/laguna-s-2.1-free",
     "deepseek/deepseek-v4-flash"
   ],
   "temperature": 0.2,
@@ -102,7 +99,6 @@
       "council": {
         "model": [
           "opencode/hy3-free",
-          "opencode/laguna-s-2.1-free",
           "nvidia/stepfun-ai/step-3.7-flash",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/minimaxai/minimax-m3",
