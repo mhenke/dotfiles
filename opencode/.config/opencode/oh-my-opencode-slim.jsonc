@@ -44,7 +44,7 @@
       },
 "designer": {
         "model": [
-          "opencode/mimo-v2.5-free",
+          "opencode/x-preview-f-free",
           "nvidia/minimaxai/minimax-m3",
           "opencode-go/minimax-m3",
           "opencode/minimax-m3"
@@ -56,7 +56,7 @@
       },
 "librarian": {
   "model": [
-    "opencode/deepseek-v4-flash-free",
+    "opencode/nemotron-3.5-lightning-free",
     "opencode-go/mimo-v2.5",
     "opencode/minimax-m2.7"
   ],
@@ -70,7 +70,7 @@
       },
 "explorer": {
   "model": [
-    "opencode/deepseek-v4-flash-free",
+    "opencode/mimo-v2.5-free",
     "opencode/laguna-s-2.1-free",
     "opencode-go/deepseek-v4-flash",
     "opencode/deepseek-v4-flash"
@@ -81,7 +81,7 @@
 },
 "fixer": {
   "model": [
-    "opencode/deepseek-v4-flash-free",
+    "opencode/mimo-v2.5-free",
     "opencode/laguna-s-2.1-free",
     "deepseek/deepseek-v4-flash"
   ],
@@ -112,7 +112,7 @@
       },
       "skeptic": {
         "model": [
-          "opencode/nemotron-3-ultra-free",
+          "opencode/x-preview-f-free",
           "opencode-go/qwen3.7-plus",
           "opencode/qwen3.7-plus"
         ],
@@ -217,7 +217,11 @@
     },
     "opencode-zen-free": {
     "orchestrator": {
-      "model": "opencode/hy3-free",
+      "model": [
+        "opencode/nemotron-3-ultra-free",
+        "opencode/big-pickle",
+        "opencode/muse-spark-1.2-contributor-free"
+      ],
         "temperature": 0.4,
         "skills": [
           "*"
@@ -228,13 +232,13 @@
         ]
       },
 "explorer": {
-  "model": "opencode/deepseek-v4-flash",
+  "model": "opencode/mimo-v2.5-free",
     "temperature": 0.2,
     "skills": [],
     "mcps": []
   },
 "librarian": {
-      "model": "opencode/deepseek-v4-flash-free",
+      "model": "opencode/nemotron-3.5-lightning-free",
         "temperature": 0.2,
         "skills": [],
         "mcps": [
@@ -244,14 +248,14 @@
         ]
       },
       "designer": {
-        "model": "opencode/mimo-v2.5-free",
+        "model": "opencode/x-preview-f-free",
         "temperature": 0.3,
         "variant": "medium",
         "skills": [],
         "mcps": []
       },
       "fixer": {
-        "model": "opencode/deepseek-v4-flash-free",
+        "model": "opencode/mimo-v2.5-free",
         "temperature": 0.2,
         "variant": "high",
         "skills": [],
@@ -268,7 +272,7 @@
         "model": "opencode/hy3-free"
       },
       "skeptic": {
-        "model": "opencode/big-pickle",
+        "model": "opencode/x-preview-f-free",
         "variant": "max"
       }
     },
@@ -396,8 +400,9 @@
           ]
         },
         "gamma": {
-          "model": "opencode/mimo-v2.5-free",
+          "model": "opencode/muse-spark-1.2-contributor-free",
           "fallback_models": [
+            "opencode/mimo-v2.5-free",
             "nvidia/minimaxai/minimax-m3",
             "opencode-go/minimax-m3",
             "opencode/minimax-m3"

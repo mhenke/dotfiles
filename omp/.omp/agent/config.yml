@@ -1,11 +1,11 @@
 setupVersion: 1
 modelRoles: 
-  scout: opencode/deepseek-v4-flash-free
-  librarian: opencode/deepseek-v4-flash-free
+  scout: opencode/mimo-v2.5-free
+  librarian: opencode/nemotron-3.5-lightning-free
   designer: opencode/mimo-v2.5-free
-  task: opencode/deepseek-v4-flash-free
+  task: opencode/mimo-v2.5-free
   oracle: opencode/big-pickle
-  skeptic: opencode/nemotron-3-ultra-free
+  skeptic: opencode/x-preview-f-free
 providers: 
   disabled: 
     - llama.cpp
@@ -52,19 +52,21 @@ retry:
       - opencode-go/minimax-m3
       - opencode/minimax-m3
     scout: 
+      - opencode/mimo-v2.5-free
       - opencode/laguna-s-2.1-free
       - opencode-go/deepseek-v4-flash
       - opencode/deepseek-v4-flash
     task: 
-      - opencode/deepseek-v4-flash-free
+      - opencode/mimo-v2.5-free
       - opencode/laguna-s-2.1-free
       - opencode-go/deepseek-v4-flash
       - opencode/deepseek-v4-flash
     librarian: 
-      - opencode/deepseek-v4-flash-free
+      - opencode/nemotron-3.5-lightning-free
       - opencode-go/mimo-v2.5
       - opencode/minimax-m2.7
     designer: 
+      - opencode/x-preview-f-free
       - opencode/mimo-v2.5-free
       - nvidia/minimaxai/minimax-m3
       - opencode-go/minimax-m3
@@ -75,7 +77,7 @@ retry:
       - opencode-go/deepseek-v4-pro
       - deepseek/deepseek-v4-pro
     skeptic: 
-      - opencode/nemotron-3-ultra-free
+      - opencode/x-preview-f-free
       - opencode-go/qwen3.7-plus
       - opencode/qwen3.7-plus
 task: 
