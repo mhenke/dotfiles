@@ -6,7 +6,7 @@ modelRoles:
   task: opencode/mimo-v2.5-free
   oracle: opencode/big-pickle
   skeptic: opencode/x-preview-f-free
-  default: opencode-zen/x-preview-f-free
+  default: opencode-zen/mimo-v2.5-free:high
 providers: 
   disabled: 
     - llama.cpp
