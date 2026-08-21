@@ -46,7 +46,6 @@ retry:
   fallbackChains: 
     default: 
       - opencode/mimo-v2.5-free
-      - opencode/laguna-s-2.1-free
       - nvidia/stepfun-ai/step-3.7-flash
       - nvidia/nvidia/nemotron-3-super-120b-a12b
       - nvidia/minimaxai/minimax-m3
@@ -54,12 +53,10 @@ retry:
       - opencode/minimax-m3
     scout: 
       - opencode/mimo-v2.5-free
-      - opencode/laguna-s-2.1-free
       - opencode-go/deepseek-v4-flash
       - opencode/deepseek-v4-flash
     task: 
       - opencode/mimo-v2.5-free
-      - opencode/laguna-s-2.1-free
       - opencode-go/deepseek-v4-flash
       - opencode/deepseek-v4-flash
     librarian: 
