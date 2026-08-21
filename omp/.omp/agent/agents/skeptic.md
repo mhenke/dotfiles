@@ -1,0 +1,1 @@
+/home/mhenke/dotfiles/opencode/.opencode/oh-my-opencode-slim/skeptic.md
