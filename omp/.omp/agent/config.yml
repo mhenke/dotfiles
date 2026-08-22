@@ -1,4 +1,4 @@
-setupVersion: 1
+setupVersion: 2
 modelRoles: 
   scout: opencode/mimo-v2.5-free
   librarian: opencode/nemotron-3.5-lightning-free
@@ -6,7 +6,6 @@ modelRoles:
   task: opencode/mimo-v2.5-free
   oracle: opencode/big-pickle
   skeptic: opencode/x-preview-f-free
-  default: opencode-zen/mimo-v2.5-free:high
 providers: 
   disabled: 
     - llama.cpp
@@ -80,12 +79,13 @@ retry:
       - opencode/qwen3.7-plus
 task: 
   agentModelOverrides: 
-    scout: "@scout"
-    librarian: "@librarian"
-    designer: "@designer"
-    task: "@task"
-    reviewer: "@skeptic"
     oracle: "@oracle"
+    reviewer: "@skeptic"
+    skeptic: nvidia/moonshotai/kimi-k3
+    designer: "@designer"
+    librarian: "@librarian"
+    scout: "@scout"
+    task: "@task"
 theme: 
   light: titanium
   dark: titanium
