@@ -30,7 +30,7 @@
       "oracle": {
         "model": [
           "opencode/big-pickle",
-          "nvidia/z-ai/glm-5.2",
+          "deepseek-ai/deepseek-v4-flash-0731",
           "opencode-go/deepseek-v4-pro",
           "deepseek/deepseek-v4-pro"
         ],
@@ -134,7 +134,7 @@
       },
       "oracle": {
         "model": [
-          "nvidia/z-ai/glm-5.2",
+          "deepseek-ai/deepseek-v4-flash-0731",
           "nvidia/minimaxai/minimax-m3",
           "nvidia/mistralai/mistral-nemotron"
         ],
@@ -169,9 +169,8 @@
       "designer": {
         "model": [
           "nvidia/minimaxai/minimax-m3",
-          "nvidia/minimaxai/kimi-k2.6",
           "nvidia/mistralai/mistral-nemotron",
-          "nvidia/z-ai/glm-5.2"
+          "deepseek-ai/deepseek-v4-flash-0731"
         ],
         "temperature": 0.3,
         "skills": [],
@@ -291,7 +290,7 @@
       "oracle": {
         "model": [
           "opencode/big-pickle",
-          "nvidia/z-ai/glm-5.2",
+          "deepseek-ai/deepseek-v4-flash-0731",
           "cline-pass/glm-5.2"
         ],
         "temperature": 0.4,
@@ -313,7 +312,7 @@
       },
       "librarian": {
         "model": [
-          "opencode/deepseek-v4-flash-free",
+          "opencode/nemotron-3.5-lightning-free",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "cline-pass/mimo-v2.5"
         ],
@@ -338,7 +337,7 @@
       },
       "fixer": {
         "model": [
-          "opencode/deepseek-v4-flash-free",
+          "opencode/mimo-v2.5-free",
           "nvidia/nemotron-3.5-lightning-30b-a3b",
           "cline-pass/deepseek-v4-flash"
         ],
@@ -382,7 +381,7 @@
           "model": "opencode/big-pickle",
           "variant": "high",
           "fallback_models": [
-            "nvidia/z-ai/glm-5.2",
+            "deepseek-ai/deepseek-v4-flash-0731",
             "opencode-go/deepseek-v4-pro",
             "deepseek/deepseek-v4-pro"
           ]
@@ -408,7 +407,7 @@
     },
     "nvidia-free": {
       "alpha": {
-        "model": "nvidia/z-ai/glm-5.2",
+        "model": "deepseek-ai/deepseek-v4-flash-0731",
         "variant": "high",
         "fallback_models": [
           "nvidia/minimaxai/minimax-m3",
