@@ -6,6 +6,7 @@ modelRoles:
   task: opencode/mimo-v2.5-free
   oracle: opencode/big-pickle
   skeptic: opencode/x-preview-f-free
+  default: opencode-zen/hy3-free
 providers: 
   disabled: 
     - llama.cpp
@@ -70,7 +71,7 @@ retry:
       - opencode/minimax-m3
     oracle: 
       - opencode/big-pickle
-      - nvidia/z-ai/glm-5.2
+      - deepseek-ai/deepseek-v4-flash-0731
       - opencode-go/deepseek-v4-pro
       - deepseek/deepseek-v4-pro
     skeptic: 
