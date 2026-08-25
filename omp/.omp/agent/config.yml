@@ -1,12 +1,12 @@
 setupVersion: 2
 modelRoles: 
-  scout: opencode/mimo-v2.5-free
-  librarian: opencode/nemotron-3.5-lightning-free
-  designer: opencode/mimo-v2.5-free
-  task: opencode/mimo-v2.5-free
-  oracle: opencode/big-pickle
-  skeptic: opencode/x-preview-f-free
-  default: opencode-zen/hy3-free
+  scout: opencode-zen/mimo-v2.5-free
+  librarian: opencode-zen/nemotron-3.5-lightning-free
+  designer: opencode-zen/mimo-v2.5-free
+  task: opencode-zen/mimo-v2.5-free
+  oracle: opencode-zen/big-pickle
+  skeptic: opencode-zen/x-preview-f-free
+  default: clinepass/cline-pass/deepseek-v4-flash:max
 providers: 
   disabled: 
     - llama.cpp
@@ -45,39 +45,39 @@ retry:
   fallbackRevertPolicy: cooldown-expiry
   fallbackChains: 
     default: 
-      - opencode/mimo-v2.5-free
+      - opencode-zen/mimo-v2.5-free
       - nvidia/stepfun-ai/step-3.7-flash
       - nvidia/nvidia/nemotron-3-super-120b-a12b
       - nvidia/minimaxai/minimax-m3
       - opencode-go/minimax-m3
-      - opencode/minimax-m3
+      - opencode-zen/minimax-m3
     scout: 
-      - opencode/mimo-v2.5-free
+      - opencode-zen/mimo-v2.5-free
       - opencode-go/deepseek-v4-flash
-      - opencode/deepseek-v4-flash
+      - opencode-zen/deepseek-v4-flash
     task: 
-      - opencode/mimo-v2.5-free
+      - opencode-zen/mimo-v2.5-free
       - opencode-go/deepseek-v4-flash
-      - opencode/deepseek-v4-flash
+      - opencode-zen/deepseek-v4-flash
     librarian: 
-      - opencode/nemotron-3.5-lightning-free
+      - opencode-zen/nemotron-3.5-lightning-free
       - opencode-go/mimo-v2.5
-      - opencode/minimax-m2.7
+      - opencode-zen/minimax-m2.7
     designer: 
-      - opencode/x-preview-f-free
-      - opencode/mimo-v2.5-free
+      - opencode-zen/x-preview-f-free
+      - opencode-zen/mimo-v2.5-free
       - nvidia/minimaxai/minimax-m3
       - opencode-go/minimax-m3
-      - opencode/minimax-m3
+      - opencode-zen/minimax-m3
     oracle: 
-      - opencode/big-pickle
+      - opencode-zen/big-pickle
       - deepseek-ai/deepseek-v4-flash-0731
       - opencode-go/deepseek-v4-pro
       - deepseek/deepseek-v4-pro
     skeptic: 
-      - opencode/x-preview-f-free
+      - opencode-zen/x-preview-f-free
       - opencode-go/qwen3.7-plus
-      - opencode/qwen3.7-plus
+      - opencode-zen/qwen3.7-plus
 task: 
   agentModelOverrides: 
     oracle: "@oracle"
