@@ -71,18 +71,19 @@ retry:
       - opencode-zen/minimax-m3
     oracle: 
       - opencode-zen/big-pickle
-      - deepseek-ai/deepseek-v4-flash-0731
+      - nvidia/deepseek-ai/deepseek-v4-flash-0731
       - opencode-go/deepseek-v4-pro
       - deepseek/deepseek-v4-pro
     skeptic: 
       - opencode-zen/x-preview-f-free
+      - nvidia/moonshotai/kimi-k3
       - opencode-go/qwen3.7-plus
       - opencode-zen/qwen3.7-plus
 task: 
   agentModelOverrides: 
     oracle: "@oracle"
     reviewer: "@skeptic"
-    skeptic: nvidia/moonshotai/kimi-k3
+    skeptic: "@skeptic"
     designer: "@designer"
     librarian: "@librarian"
     scout: "@scout"
