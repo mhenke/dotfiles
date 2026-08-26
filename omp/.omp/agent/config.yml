@@ -1,18 +1,18 @@
 setupVersion: 2
-modelRoles: 
+modelRoles:
   scout: opencode-zen/mimo-v2.5-free
   librarian: opencode-zen/nemotron-3.5-lightning-free
   designer: opencode-zen/mimo-v2.5-free
   task: opencode-zen/mimo-v2.5-free
   oracle: opencode-zen/big-pickle
-  skeptic: opencode-zen/x-preview-f-free
-  default: clinepass/cline-pass/deepseek-v4-flash:max
-providers: 
-  disabled: 
+  skeptic: opencode-zen/muse-spark-1.2-contributor-free
+  default: opencode-go/ox-alpha-free:max
+providers:
+  disabled:
     - llama.cpp
     - lm-studio
     - bedrock-mantle
-  webSearchOrder: 
+  webSearchOrder:
     - exa
     - perplexity
     - gemini
@@ -36,51 +36,52 @@ providers:
     - google
     - mojeek
     - public
-retry: 
+retry:
   enabled: true
   maxRetries: 10
   baseDelayMs: 500
   maxDelayMs: 300000
   modelFallback: true
   fallbackRevertPolicy: cooldown-expiry
-  fallbackChains: 
-    default: 
+  fallbackChains:
+    default:
       - opencode-zen/mimo-v2.5-free
       - nvidia/stepfun-ai/step-3.7-flash
       - nvidia/nvidia/nemotron-3-super-120b-a12b
       - nvidia/minimaxai/minimax-m3
       - opencode-go/minimax-m3
       - opencode-zen/minimax-m3
-    scout: 
+    scout:
       - opencode-zen/mimo-v2.5-free
       - opencode-go/deepseek-v4-flash
       - opencode-zen/deepseek-v4-flash
-    task: 
+    task:
       - opencode-zen/mimo-v2.5-free
       - opencode-go/deepseek-v4-flash
       - opencode-zen/deepseek-v4-flash
-    librarian: 
+    librarian:
       - opencode-zen/nemotron-3.5-lightning-free
       - opencode-go/mimo-v2.5
       - opencode-zen/minimax-m2.7
-    designer: 
-      - opencode-zen/x-preview-f-free
+    designer:
+      - opencode-zen/mimo-v2.5-free
       - opencode-zen/mimo-v2.5-free
       - nvidia/minimaxai/minimax-m3
       - opencode-go/minimax-m3
       - opencode-zen/minimax-m3
-    oracle: 
+    oracle:
       - opencode-zen/big-pickle
       - nvidia/deepseek-ai/deepseek-v4-flash-0731
       - opencode-go/deepseek-v4-pro
       - deepseek/deepseek-v4-pro
-    skeptic: 
-      - opencode-zen/x-preview-f-free
+    skeptic:
+      - opencode-zen/muse-spark-1.2-contributor-free
+      - opencode-zen/nemotron-3-ultra-free
       - nvidia/moonshotai/kimi-k3
       - opencode-go/qwen3.7-plus
       - opencode-zen/qwen3.7-plus
-task: 
-  agentModelOverrides: 
+task:
+  agentModelOverrides:
     oracle: "@oracle"
     reviewer: "@skeptic"
     skeptic: "@skeptic"
@@ -88,10 +89,10 @@ task:
     librarian: "@librarian"
     scout: "@scout"
     task: "@task"
-theme: 
+theme:
   light: titanium
   dark: titanium
-memory: 
+memory:
   backend: mnemopi
-github: 
+github:
   enabled: true
