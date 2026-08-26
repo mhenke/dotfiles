@@ -43,7 +43,7 @@
       },
 "designer": {
         "model": [
-          "opencode/x-preview-f-free",
+          "opencode/mimo-v2.5-free",
           "nvidia/minimaxai/minimax-m3",
           "opencode-go/minimax-m3",
           "opencode/minimax-m3"
@@ -108,7 +108,8 @@
       },
       "skeptic": {
         "model": [
-          "opencode/x-preview-f-free",
+          "opencode/muse-spark-1.2-contributor-free",
+          "opencode/nemotron-3-ultra-free",
           "opencode-go/qwen3.7-plus",
           "opencode/qwen3.7-plus"
         ],
@@ -243,7 +244,7 @@
         ]
       },
       "designer": {
-        "model": "opencode/x-preview-f-free",
+        "model": "opencode/mimo-v2.5-free",
         "temperature": 0.3,
         "variant": "medium",
         "skills": [],
@@ -267,7 +268,10 @@
         "model": "opencode/hy3-free"
       },
       "skeptic": {
-        "model": "opencode/x-preview-f-free",
+        "model": [
+          "opencode/muse-spark-1.2-contributor-free",
+          "opencode/nemotron-3-ultra-free"
+        ],
         "variant": "max"
       }
     },
