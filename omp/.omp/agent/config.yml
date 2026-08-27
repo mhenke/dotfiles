@@ -5,12 +5,13 @@ modelRoles:
   task: opencode/mimo-v2.5-free
   oracle: opencode/big-pickle
   skeptic: opencode/muse-spark-1.2-contributor-free
-  default: opencode/big-pickle:max
+  default: clinepass/cline-pass/deepseek-v4-flash:max
 providers:
   disabled:
     - llama.cpp
     - lm-studio
     - bedrock-mantle
+    - amazon-bedrock
   webSearchOrder:
     - exa
     - perplexity
@@ -94,3 +95,4 @@ memory:
   backend: mnemopi
 github:
   enabled: true
+setupVersion: 2
