@@ -6,12 +6,12 @@ modelRoles:
   oracle: opencode/big-pickle
   skeptic: opencode/muse-spark-1.2-contributor-free
   default: clinepass/cline-pass/deepseek-v4-flash:max
+disabledProviders:
+  - llama.cpp
+  - lm-studio
+  - bedrock-mantle
+  - amazon-bedrock
 providers:
-  disabled:
-    - llama.cpp
-    - lm-studio
-    - bedrock-mantle
-    - amazon-bedrock
   webSearchOrder:
     - exa
     - perplexity
