@@ -55,7 +55,7 @@
       },
 "librarian": {
   "model": [
-    "opencode/nemotron-3.5-lightning-free",
+    "opencode/mimo-v2.5-free",
     "opencode-go/mimo-v2.5",
     "opencode/minimax-m2.7"
   ],
@@ -234,7 +234,7 @@
     "mcps": []
   },
 "librarian": {
-      "model": "opencode/nemotron-3.5-lightning-free",
+      "model": "opencode/mimo-v2.5-free",
         "temperature": 0.2,
         "skills": [],
         "mcps": [
@@ -316,7 +316,7 @@
       },
       "librarian": {
         "model": [
-          "opencode/nemotron-3.5-lightning-free",
+          "opencode/mimo-v2.5-free",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "cline-pass/mimo-v2.5"
         ],
