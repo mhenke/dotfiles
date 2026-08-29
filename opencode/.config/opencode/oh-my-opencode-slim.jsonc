@@ -12,7 +12,7 @@
       "orchestrator": {
         "model": [
           "opencode/hy3-free",
-          "nvidia/stepfun-ai/step-3.7-flash",
+          "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/minimaxai/minimax-m3",
           "opencode-go/minimax-m3",
@@ -99,7 +99,7 @@
       "council": {
         "model": [
           "opencode/hy3-free",
-          "nvidia/stepfun-ai/step-3.7-flash",
+          "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/minimaxai/minimax-m3",
           "opencode-go/minimax-m3",
@@ -119,7 +119,7 @@
     "nvidia-free": {
       "orchestrator": {
         "model": [
-          "nvidia/stepfun-ai/step-3.7-flash",
+          "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "nvidia/stepfun-ai/laguna-xs-2.1",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/minimaxai/minimax-m3"
@@ -196,7 +196,7 @@
       },
       "council": {
         "model": [
-          "nvidia/stepfun-ai/step-3.7-flash",
+          "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "nvidia/stepfun-ai/laguna-xs-2.1",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/minimaxai/minimax-m3"
@@ -279,7 +279,7 @@
       "orchestrator": {
         "model": [
           "opencode/hy3-free",
-          "nvidia/stepfun-ai/step-3.7-flash",
+          "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "cline-pass/minimax-m3"
         ],
         "temperature": 0.4,
@@ -364,7 +364,7 @@
       "council": {
         "model": [
           "opencode/hy3-free",
-          "nvidia/stepfun-ai/step-3.7-flash",
+          "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "cline-pass/minimax-m3"
         ]
       },
