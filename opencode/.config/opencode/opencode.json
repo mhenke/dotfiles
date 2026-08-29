@@ -7,6 +7,7 @@
   ],
   "skills": {
     "paths": [
+      "/home/mhenke/.claude/skills",
       "/home/mhenke/.config/opencode/node_modules/@dietrichgebert/ponytail/skills"
     ]
   },
