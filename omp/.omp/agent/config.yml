@@ -48,7 +48,7 @@ retry:
       - opencode/mimo-v2.5-free
       - nvidia/nvidia/nemotron-3.5-lightning-30b-a3b
       - nvidia/nvidia/nemotron-3-super-120b-a12b
-      - nvidia/minimaxai/minimax-m3
+      - nvidia/moonshotai/kimi-k3
       - opencode-go/minimax-m3
       - opencode/minimax-m3
     scout:
@@ -66,7 +66,7 @@ retry:
     designer:
       - opencode/mimo-v2.5-free
       - opencode/mimo-v2.5-free
-      - nvidia/minimaxai/minimax-m3
+      - nvidia/moonshotai/kimi-k3
       - opencode-go/minimax-m3
       - opencode/minimax-m3
     oracle:
