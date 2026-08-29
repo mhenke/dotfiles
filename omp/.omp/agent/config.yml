@@ -46,7 +46,7 @@ retry:
   fallbackChains:
     default:
       - opencode/mimo-v2.5-free
-      - nvidia/stepfun-ai/step-3.7-flash
+      - nvidia/nvidia/nemotron-3.5-lightning-30b-a3b
       - nvidia/nvidia/nemotron-3-super-120b-a12b
       - nvidia/minimaxai/minimax-m3
       - opencode-go/minimax-m3
