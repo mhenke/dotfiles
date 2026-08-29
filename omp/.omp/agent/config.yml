@@ -5,7 +5,7 @@ modelRoles:
   task: opencode/mimo-v2.5-free
   oracle: opencode/big-pickle
   skeptic: opencode/muse-spark-1.2-contributor-free
-  default: clinepass/cline-pass/deepseek-v4-flash
+  default: clinepass/cline-pass/deepseek-v4-flash:max
 disabledProviders:
   - llama.cpp
   - lm-studio
