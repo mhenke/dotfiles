@@ -14,7 +14,7 @@
           "opencode/hy3-free",
           "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
-          "nvidia/minimaxai/minimax-m3",
+          "nvidia/moonshotai/kimi-k3",
           "opencode-go/minimax-m3",
           "opencode/minimax-m3"
         ],
@@ -44,7 +44,7 @@
 "designer": {
         "model": [
           "opencode/mimo-v2.5-free",
-          "nvidia/minimaxai/minimax-m3",
+          "nvidia/moonshotai/kimi-k3",
           "opencode-go/minimax-m3",
           "opencode/minimax-m3"
         ],
@@ -101,7 +101,7 @@
           "opencode/hy3-free",
           "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
-          "nvidia/minimaxai/minimax-m3",
+          "nvidia/moonshotai/kimi-k3",
           "opencode-go/minimax-m3",
           "opencode/minimax-m3"
         ]
@@ -122,7 +122,7 @@
           "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "nvidia/stepfun-ai/laguna-xs-2.1",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
-          "nvidia/minimaxai/minimax-m3"
+          "nvidia/moonshotai/kimi-k3"
         ],
         "temperature": 0.4,
         "skills": [
@@ -136,7 +136,7 @@
       "oracle": {
         "model": [
           "deepseek-ai/deepseek-v4-flash-0731",
-          "nvidia/minimaxai/minimax-m3",
+          "nvidia/moonshotai/kimi-k3",
           "nvidia/mistralai/mistral-nemotron"
         ],
         "temperature": 0.4,
@@ -157,7 +157,7 @@
       "librarian": {
         "model": [
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
-          "nvidia/minimaxai/minimax-m3"
+          "nvidia/moonshotai/kimi-k3"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -169,7 +169,7 @@
       },
       "designer": {
         "model": [
-          "nvidia/minimaxai/minimax-m3",
+          "nvidia/moonshotai/kimi-k3",
           "nvidia/mistralai/mistral-nemotron",
           "deepseek-ai/deepseek-v4-flash-0731"
         ],
@@ -188,7 +188,7 @@
       "observer": {
         "model": [
           "nvidia/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
-          "nvidia/minimaxai/minimax-m3"
+          "nvidia/moonshotai/kimi-k3"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -199,7 +199,7 @@
           "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "nvidia/stepfun-ai/laguna-xs-2.1",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
-          "nvidia/minimaxai/minimax-m3"
+          "nvidia/moonshotai/kimi-k3"
         ]
       },
       "skeptic": {
@@ -331,7 +331,7 @@
       "designer": {
         "model": [
           "opencode/mimo-v2.5-free",
-          "nvidia/minimaxai/minimax-m3",
+          "nvidia/moonshotai/kimi-k3",
           "cline-pass/kimi-k2.7-code"
         ],
         "temperature": 0.3,
@@ -402,7 +402,7 @@
           "model": "opencode/muse-spark-1.2-contributor-free",
           "fallback_models": [
             "opencode/mimo-v2.5-free",
-            "nvidia/minimaxai/minimax-m3",
+            "nvidia/moonshotai/kimi-k3",
             "opencode-go/minimax-m3",
             "opencode/minimax-m3"
           ]
@@ -414,7 +414,7 @@
         "model": "deepseek-ai/deepseek-v4-flash-0731",
         "variant": "high",
         "fallback_models": [
-          "nvidia/minimaxai/minimax-m3",
+          "nvidia/moonshotai/kimi-k3",
           "nvidia/mistralai/mistral-nemotron"
         ]
       },
@@ -429,7 +429,7 @@
       "gamma": {
         "model": "nvidia/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning",
         "fallback_models": [
-          "nvidia/minimaxai/minimax-m3"
+          "nvidia/moonshotai/kimi-k3"
         ]
       }
     },
