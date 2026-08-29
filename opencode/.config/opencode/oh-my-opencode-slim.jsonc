@@ -12,8 +12,8 @@
       "orchestrator": {
         "model": [
           "opencode/hy3-free",
-          "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
+          "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "nvidia/moonshotai/kimi-k3",
           "opencode-go/minimax-m3",
           "opencode/minimax-m3"
@@ -99,8 +99,8 @@
       "council": {
         "model": [
           "opencode/hy3-free",
-          "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
+          "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "nvidia/moonshotai/kimi-k3",
           "opencode-go/minimax-m3",
           "opencode/minimax-m3"
@@ -119,9 +119,9 @@
     "nvidia-free": {
       "orchestrator": {
         "model": [
+          "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "nvidia/stepfun-ai/laguna-xs-2.1",
-          "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/moonshotai/kimi-k3"
         ],
         "temperature": 0.4,
@@ -196,9 +196,9 @@
       },
       "council": {
         "model": [
+          "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "nvidia/stepfun-ai/laguna-xs-2.1",
-          "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/moonshotai/kimi-k3"
         ]
       },
@@ -279,6 +279,7 @@
       "orchestrator": {
         "model": [
           "opencode/hy3-free",
+          "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "cline-pass/minimax-m3"
         ],
@@ -364,6 +365,7 @@
       "council": {
         "model": [
           "opencode/hy3-free",
+          "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
           "cline-pass/minimax-m3"
         ]

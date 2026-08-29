@@ -46,8 +46,8 @@ retry:
   fallbackChains:
     default:
       - opencode/mimo-v2.5-free
-      - nvidia/nvidia/nemotron-3.5-lightning-30b-a3b
       - nvidia/nvidia/nemotron-3-super-120b-a12b
+      - nvidia/nvidia/nemotron-3.5-lightning-30b-a3b
       - nvidia/moonshotai/kimi-k3
       - opencode-go/minimax-m3
       - opencode/minimax-m3
