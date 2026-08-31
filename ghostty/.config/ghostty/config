@@ -1,5 +1,4 @@
-# Ghostty Configuration - High Contrast Theme
-# Matching Tilix readability
+# Font
 
 # Font
 font-family = JetBrainsMono Nerd Font
@@ -37,10 +36,6 @@ keybind = shift+ctrl+j=new_split:down
 keybind = shift+ctrl+k=new_split:up
 keybind = shift+ctrl+l=new_split:right
 
-# Custom keybinding to close split pane with Ctrl+Q
-
 # Clipboard Configuration (Wayland optimized)
-# Force Wayland clipboard backend for reliability
 clipboard-paste-protection = true
-# Use PRIMARY selection for middle-click and CLIPBOARD for Ctrl+Shift+V
 copy-on-select = clipboard

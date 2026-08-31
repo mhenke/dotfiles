@@ -5,8 +5,12 @@
   "disabled_agents": [],
   "image_routing": "auto",
   "autoUpdate": true,
-  "setDefaultAgent": true,
-  "scoringEngineVersion": "v2",
+  	"setDefaultAgent": true,
+	"multiplexer": {
+		"type": "herdr",
+		"layout": "main-vertical"
+	},
+	"scoringEngineVersion": "v2",
   "presets": {
     "balanced": {
       "orchestrator": {
@@ -525,7 +529,4 @@
     "autoEnable": true,
     "autoEnableThreshold": 3
   },
-  "multiplexer": {
-    "type": "tmux"
-  }
 }
