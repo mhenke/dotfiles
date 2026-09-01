@@ -14,14 +14,7 @@
   "presets": {
     "balanced": {
       "orchestrator": {
-        "model": [
-          "opencode/hy3-free",
-          "nvidia/nvidia/nemotron-3-super-120b-a12b",
-          "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
-          "nvidia/moonshotai/kimi-k3",
-          "opencode-go/minimax-m3",
-          "opencode/minimax-m3"
-        ],
+        "model": "omniroute/orchestrator",
         "temperature": 0.4,
         "skills": [
           "*"
@@ -32,12 +25,7 @@
         ]
       },
       "oracle": {
-        "model": [
-          "opencode/big-pickle",
-          "deepseek-ai/deepseek-v4-flash-0731",
-          "opencode-go/deepseek-v4-pro",
-          "deepseek/deepseek-v4-pro"
-        ],
+        "model": "omniroute/oracle",
         "temperature": 0.4,
         "variant": "high",
         "skills": [
@@ -46,23 +34,14 @@
         "mcps": []
       },
 "designer": {
-        "model": [
-          "opencode/mimo-v2.5-free",
-          "nvidia/moonshotai/kimi-k3",
-          "opencode-go/minimax-m3",
-          "opencode/minimax-m3"
-        ],
+        "model": "omniroute/designer",
         "temperature": 0.3,
         "variant": "xhigh",
         "skills": [],
         "mcps": []
       },
 "librarian": {
-  "model": [
-    "opencode/mimo-v2.5-free",
-    "opencode-go/mimo-v2.5",
-    "opencode/minimax-m2.7"
-  ],
+  "model": "omniroute/librarian",
         "temperature": 0.2,
         "skills": [],
         "mcps": [
@@ -72,51 +51,28 @@
         ]
       },
 "explorer": {
-  "model": [
-    "opencode/mimo-v2.5-free",
-    "opencode-go/deepseek-v4-flash",
-    "opencode/deepseek-v4-flash"
-  ],
+  "model": "omniroute/explorer",
   "temperature": 0.2,
   "skills": [],
   "mcps": []
 },
 "fixer": {
-  "model": [
-    "opencode/mimo-v2.5-free",
-    "deepseek/deepseek-v4-flash"
-  ],
+  "model": "omniroute/fixer",
   "temperature": 0.2,
   "skills": [],
   "mcps": []
 },
       "observer": {
-        "model": [
-          "opencode/mimo-v2.5-free",
-          "opencode-go/mimo-v2.5",
-          "opencode/minimax-m3"
-        ],
+        "model": "omniroute/observer",
         "temperature": 0.2,
         "skills": [],
         "mcps": []
       },
       "council": {
-        "model": [
-          "opencode/hy3-free",
-          "nvidia/nvidia/nemotron-3-super-120b-a12b",
-          "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
-          "nvidia/moonshotai/kimi-k3",
-          "opencode-go/minimax-m3",
-          "opencode/minimax-m3"
-        ]
+        "model": "omniroute/orchestrator"
       },
       "skeptic": {
-        "model": [
-          "opencode/muse-spark-1.2-contributor-free",
-          "opencode/nemotron-3-ultra-free",
-          "opencode-go/qwen3.7-plus",
-          "opencode/qwen3.7-plus"
-        ],
+        "model": "omniroute/skeptic",
         "variant": "max"
       }
     },
@@ -388,30 +344,18 @@
     "presets": {
       "balanced": {
         "alpha": {
-          "model": "opencode/big-pickle",
+          "model": "omniroute/oracle",
           "variant": "high",
-          "fallback_models": [
-            "deepseek-ai/deepseek-v4-flash-0731",
-            "opencode-go/deepseek-v4-pro",
-            "deepseek/deepseek-v4-pro"
-          ]
+          "fallback_models": []
         },
         "beta": {
-          "model": "opencode/nemotron-3-ultra-free",
+          "model": "omniroute/skeptic",
           "variant": "high",
-          "fallback_models": [
-            "opencode-go/qwen3.7-plus",
-            "opencode/qwen3.7-plus"
-          ]
+          "fallback_models": []
         },
         "gamma": {
-          "model": "opencode/muse-spark-1.2-contributor-free",
-          "fallback_models": [
-            "opencode/mimo-v2.5-free",
-            "nvidia/moonshotai/kimi-k3",
-            "opencode-go/minimax-m3",
-            "opencode/minimax-m3"
-          ]
+          "model": "omniroute/observer",
+          "fallback_models": []
         }
       }
     },
