@@ -5,7 +5,7 @@ modelRoles:
   task: omniroute/explorer
   oracle: omniroute/oracle
   skeptic: omniroute/skeptic
-  default: omniroute/orchestrator
+  default: commandcode/poolside/laguna-s-2.1-free:high
 disabledProviders:
   - llama.cpp
   - lm-studio
