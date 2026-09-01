@@ -1,0 +1,70 @@
+providers:
+  omniroute:
+    baseUrl: http://localhost:20128/v1
+    api: openai-completions
+    apiKey: REMOVED_BY_FILTER_REPO
+    authHeader: true
+    models:
+      - id: orchestrator
+        name: OmniRoute Orchestrator
+        reasoning: true
+        supportsTools: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 131072
+      - id: skeptic
+        name: OmniRoute Skeptic
+        reasoning: true
+        supportsTools: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 131072
+      - id: explorer
+        name: OmniRoute Explorer
+        reasoning: true
+        supportsTools: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 131072
+      - id: librarian
+        name: OmniRoute Librarian
+        reasoning: true
+        supportsTools: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 131072
+      - id: designer
+        name: OmniRoute Designer
+        reasoning: true
+        supportsTools: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 131072
+      - id: oracle
+        name: OmniRoute Oracle
+        reasoning: true
+        supportsTools: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 131072
+      - id: observer
+        name: OmniRoute Observer
+        reasoning: true
+        supportsTools: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 131072
+      - id: fixer
+        name: OmniRoute Fixer
+        reasoning: true
+        supportsTools: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 131072
+      - id: static-best-free
+        name: OmniRoute Static Best Free
+        reasoning: true
+        supportsTools: true
+        input: [text]
+        contextWindow: 200000
+        maxTokens: 131072
