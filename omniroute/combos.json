@@ -1,0 +1,288 @@
+[
+  {
+    "name": "designer",
+    "models": [
+      {
+        "id": "designer-model-1-opencode-zen-mimo-v2-5-free",
+        "kind": "model",
+        "model": "opencode-zen/mimo-v2.5-free",
+        "providerId": "opencode-zen",
+        "weight": 0
+      },
+      {
+        "id": "designer-model-2-nvidia-moonshotai-kimi-k3",
+        "kind": "model",
+        "model": "nvidia/moonshotai/kimi-k3",
+        "providerId": "nvidia",
+        "weight": 0
+      },
+      {
+        "id": "designer-model-3-opencode-zen-big-pickle",
+        "kind": "model",
+        "model": "opencode-zen/big-pickle",
+        "providerId": "opencode-zen",
+        "weight": 0
+      }
+    ],
+    "strategy": "priority",
+    "id": "8772ed55-98dc-45cb-94bb-8d2799cce801",
+    "config": {},
+    "isHidden": false,
+    "sortOrder": 4,
+    "createdAt": "2026-08-31T18:30:09.689Z",
+    "updatedAt": "2026-08-31T20:48:32.161Z",
+    "version": 2
+  },
+  {
+    "name": "explorer",
+    "models": [
+      {
+        "id": "explorer-model-1-opencode-zen-mimo-v2-5-free",
+        "kind": "model",
+        "model": "opencode-zen/mimo-v2.5-free",
+        "providerId": "opencode-zen",
+        "weight": 0
+      },
+      {
+        "id": "explorer-model-2-cmd-deepseek-deepseek-v4-flash",
+        "kind": "model",
+        "model": "cmd/deepseek/deepseek-v4-flash",
+        "providerId": "cmd",
+        "weight": 0
+      }
+    ],
+    "strategy": "priority",
+    "id": "a5ab75d0-dc6c-4776-94c4-aee63319c1aa",
+    "config": {},
+    "isHidden": false,
+    "sortOrder": 6,
+    "createdAt": "2026-08-31T18:30:09.909Z",
+    "updatedAt": "2026-08-31T20:42:05.330Z",
+    "version": 2
+  },
+  {
+    "name": "fixer",
+    "models": [
+      {
+        "id": "fixer-model-1-opencode-zen-mimo-v2-5-free",
+        "kind": "model",
+        "model": "opencode-zen/mimo-v2.5-free",
+        "providerId": "opencode-zen",
+        "weight": 0
+      },
+      {
+        "id": "fixer-model-2-cmd-deepseek-deepseek-v4-flash",
+        "kind": "model",
+        "model": "cmd/deepseek/deepseek-v4-flash",
+        "providerId": "cmd",
+        "weight": 0
+      }
+    ],
+    "strategy": "priority",
+    "id": "0dec46d1-cdcc-4c6d-8b01-707f0c32cf45",
+    "config": {},
+    "isHidden": false,
+    "sortOrder": 8,
+    "createdAt": "2026-08-31T18:30:10.123Z",
+    "updatedAt": "2026-08-31T20:42:05.442Z",
+    "version": 2
+  },
+  {
+    "name": "librarian",
+    "models": [
+      {
+        "id": "librarian-model-1-opencode-zen-mimo-v2-5-free",
+        "kind": "model",
+        "model": "opencode-zen/mimo-v2.5-free",
+        "providerId": "opencode-zen",
+        "weight": 0
+      },
+      {
+        "id": "librarian-model-2-cmd-xiaomi-mimo-v2-5",
+        "kind": "model",
+        "model": "cmd/xiaomi/mimo-v2.5",
+        "providerId": "cmd",
+        "weight": 0
+      },
+      {
+        "id": "librarian-model-3-opencode-zen-ling-3-0-flash-fin-free",
+        "kind": "model",
+        "model": "opencode-zen/ling-3.0-flash-fin-free",
+        "providerId": "opencode-zen",
+        "weight": 0
+      }
+    ],
+    "strategy": "priority",
+    "id": "3f95e549-954f-483d-a3e5-41e444eda202",
+    "config": {},
+    "isHidden": false,
+    "sortOrder": 5,
+    "createdAt": "2026-08-31T18:30:09.804Z",
+    "updatedAt": "2026-08-31T20:49:03.892Z",
+    "version": 2
+  },
+  {
+    "name": "observer",
+    "models": [
+      {
+        "id": "observer-model-1-opencode-zen-mimo-v2-5-free",
+        "kind": "model",
+        "model": "opencode-zen/mimo-v2.5-free",
+        "providerId": "opencode-zen",
+        "weight": 0
+      },
+      {
+        "id": "observer-model-2-cmd-xiaomi-mimo-v2-5",
+        "kind": "model",
+        "model": "cmd/xiaomi/mimo-v2.5",
+        "providerId": "cmd",
+        "weight": 0
+      },
+      {
+        "id": "observer-model-3-opencode-zen-ling-3-0-flash-fin-free",
+        "kind": "model",
+        "model": "opencode-zen/ling-3.0-flash-fin-free",
+        "providerId": "opencode-zen",
+        "weight": 0
+      }
+    ],
+    "strategy": "priority",
+    "id": "e2af7316-590b-4801-9b33-2ffb8a8fdc52",
+    "config": {},
+    "isHidden": false,
+    "sortOrder": 7,
+    "createdAt": "2026-08-31T18:30:10.015Z",
+    "updatedAt": "2026-08-31T20:49:04.019Z",
+    "version": 2
+  },
+  {
+    "name": "oracle",
+    "models": [
+      {
+        "id": "oracle-model-1-opencode-zen-big-pickle",
+        "kind": "model",
+        "model": "opencode-zen/big-pickle",
+        "providerId": "opencode-zen",
+        "weight": 0
+      },
+      {
+        "id": "oracle-model-2-nvidia-moonshotai-kimi-k3",
+        "kind": "model",
+        "model": "nvidia/moonshotai/kimi-k3",
+        "providerId": "nvidia",
+        "weight": 0
+      },
+      {
+        "id": "oracle-model-3-nvidia-deepseek-ai-deepseek-v4-pro-0813",
+        "kind": "model",
+        "model": "nvidia/deepseek-ai/deepseek-v4-pro-0813",
+        "providerId": "nvidia",
+        "weight": 0
+      },
+      {
+        "id": "oracle-model-4-cmd-deepseek-deepseek-v4-pro",
+        "kind": "model",
+        "model": "cmd/deepseek/deepseek-v4-pro",
+        "providerId": "cmd",
+        "weight": 0
+      }
+    ],
+    "strategy": "priority",
+    "id": "a2dae634-d665-4ae2-9115-5cac702a0689",
+    "config": {},
+    "isHidden": false,
+    "sortOrder": 3,
+    "createdAt": "2026-08-31T18:30:09.578Z",
+    "updatedAt": "2026-08-31T20:41:58.341Z",
+    "version": 2
+  },
+  {
+    "name": "orchestrator",
+    "models": [
+      {
+        "id": "orchestrator-model-1-opencode-zen-mimo-v2-5-free",
+        "kind": "model",
+        "model": "opencode-zen/mimo-v2.5-free",
+        "providerId": "opencode-zen",
+        "weight": 0
+      },
+      {
+        "id": "orchestrator-model-2-nvidia-nvidia-nemotron-3-super-120b-a12b",
+        "kind": "model",
+        "model": "nvidia/nvidia/nemotron-3-super-120b-a12b",
+        "providerId": "nvidia",
+        "weight": 0
+      },
+      {
+        "id": "orchestrator-model-3-nvidia-nvidia-nemotron-3-5-lightning-30b-a3b",
+        "kind": "model",
+        "model": "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
+        "providerId": "nvidia",
+        "weight": 0
+      },
+      {
+        "id": "orchestrator-model-4-cmd-deepseek-deepseek-v4-flash",
+        "kind": "model",
+        "model": "cmd/deepseek/deepseek-v4-flash",
+        "providerId": "cmd",
+        "weight": 0
+      },
+      {
+        "id": "orchestrator-model-5-opencode-deepseek-v4-flash",
+        "kind": "model",
+        "model": "opencode/deepseek-v4-flash",
+        "providerId": "opencode",
+        "weight": 0
+      }
+    ],
+    "strategy": "priority",
+    "id": "238a4eb9-2f6c-4822-b7c2-cf6630a9262b",
+    "config": {},
+    "isHidden": false,
+    "sortOrder": 2,
+    "createdAt": "2026-08-31T18:30:09.472Z",
+    "updatedAt": "2026-08-31T20:41:58.229Z",
+    "version": 2
+  },
+  {
+    "name": "skeptic",
+    "models": [
+      {
+        "id": "skeptic-model-1-opencode-zen-muse-spark-1-2-contributor-free",
+        "kind": "model",
+        "model": "opencode-zen/muse-spark-1.2-contributor-free",
+        "providerId": "opencode-zen",
+        "weight": 0
+      },
+      {
+        "id": "skeptic-model-2-opencode-zen-nemotron-3-ultra-free",
+        "kind": "model",
+        "model": "opencode-zen/nemotron-3-ultra-free",
+        "providerId": "opencode-zen",
+        "weight": 0
+      },
+      {
+        "id": "skeptic-model-3-cmd-qwen-qwen3-7-plus",
+        "kind": "model",
+        "model": "cmd/Qwen/Qwen3.7-Plus",
+        "providerId": "cmd",
+        "weight": 0
+      },
+      {
+        "id": "skeptic-model-4-opencode-zen-opencode-qwen3-7-plus",
+        "kind": "model",
+        "model": "opencode-zen/opencode/qwen3.7-plus",
+        "providerId": "opencode-zen",
+        "weight": 0
+      }
+    ],
+    "strategy": "priority",
+    "id": "5ce4a7a7-0e7c-4708-a8cf-7c2eb429fbf5",
+    "config": {},
+    "isHidden": false,
+    "sortOrder": 1,
+    "createdAt": "2026-08-31T16:03:27.776Z",
+    "updatedAt": "2026-08-31T20:42:05.774Z",
+    "version": 2
+  }
+]
