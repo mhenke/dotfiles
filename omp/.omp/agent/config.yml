@@ -1,11 +1,11 @@
 modelRoles:
-  scout: opencode/mimo-v2.5-free
-  librarian: opencode/mimo-v2.5-free
-  designer: opencode/mimo-v2.5-free
-  task: opencode/mimo-v2.5-free
-  oracle: opencode/big-pickle
-  skeptic: opencode/muse-spark-1.2-contributor-free
-  default: clinepass/cline-pass/deepseek-v4-flash:max
+  scout: omniroute/explorer
+  librarian: omniroute/librarian
+  designer: omniroute/designer
+  task: omniroute/explorer
+  oracle: omniroute/oracle
+  skeptic: omniroute/skeptic
+  default: omniroute/orchestrator
 disabledProviders:
   - llama.cpp
   - lm-studio
@@ -45,40 +45,19 @@ retry:
   fallbackRevertPolicy: cooldown-expiry
   fallbackChains:
     default:
-      - opencode/mimo-v2.5-free
-      - nvidia/nvidia/nemotron-3-super-120b-a12b
-      - nvidia/nvidia/nemotron-3.5-lightning-30b-a3b
-      - nvidia/moonshotai/kimi-k3
-      - opencode-go/minimax-m3
-      - opencode/minimax-m3
-    scout:
-      - opencode/mimo-v2.5-free
-      - opencode-go/deepseek-v4-flash
-      - opencode/deepseek-v4-flash
-    task:
-      - opencode/mimo-v2.5-free
-      - opencode-go/deepseek-v4-flash
-      - opencode/deepseek-v4-flash
-    librarian:
-      - opencode/mimo-v2.5-free
-      - opencode-go/mimo-v2.5
-      - opencode/minimax-m2.7
-    designer:
-      - opencode/mimo-v2.5-free
-      - opencode/mimo-v2.5-free
-      - nvidia/moonshotai/kimi-k3
-      - opencode-go/minimax-m3
-      - opencode/minimax-m3
-    oracle:
-      - opencode/big-pickle
-      - nvidia/deepseek-ai/deepseek-v4-flash-0731
-      - opencode-go/deepseek-v4-pro
-      - deepseek/deepseek-v4-pro
+      - omniroute/orchestrator
     skeptic:
-      - opencode/muse-spark-1.2-contributor-free
-      - opencode/nemotron-3-ultra-free
-      - opencode-go/qwen3.7-plus
-      - opencode/qwen3.7-plus
+      - omniroute/skeptic
+    scout:
+      - omniroute/explorer
+    task:
+      - omniroute/explorer
+    librarian:
+      - omniroute/librarian
+    designer:
+      - omniroute/designer
+    oracle:
+      - omniroute/oracle
 task:
   agentModelOverrides:
     oracle: "@oracle"
