@@ -5,7 +5,7 @@ modelRoles:
   task: omniroute/explorer
   oracle: omniroute/oracle
   skeptic: omniroute/skeptic
-  default: commandcode/poolside/laguna-s-2.1-free:high
+  default: omniroute/static-best-free
 disabledProviders:
   - llama.cpp
   - lm-studio
@@ -75,3 +75,4 @@ memory:
 github:
   enabled: true
 setupVersion: 2
+defaultThinkingLevel: auto
