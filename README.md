@@ -1,297 +1,109 @@
-# Linux Mint XFCE + i3 Dotfiles
+# Hyprland + XFCE Dotfiles
 
-Automated setup for migrating Linux Mint XFCE with i3wm to a new machine.
+GNU Stow-managed dotfiles for Linux Mint/Ubuntu. Primary: **Hyprland** (Wayland compositor). Fallback: **XFCE** (X11). Shell: zsh + oh-my-zsh.
 
 ## Quick Start (New Machine)
 
 ```bash
-# 0. Prerequisites (required first!)
+# 0. Prerequisites
 sudo apt update
-sudo apt install -y git gh
-
-# Authenticate with GitHub
+sudo apt install -y git git-lfs gh stow
 gh auth login
 
-# 1. Clone this repo (using gh for authentication)
+# 1. Clone
 gh repo clone mhenke/dotfiles ~/dotfiles
 cd ~/dotfiles
+git lfs install && git lfs pull   # sddm theme backgrounds
 
-# 2. Run bootstrap script (installs everything)
+# 2. Run bootstrap (interactive, 6 steps)
 ./bootstrap.sh
 
-# 3. Reboot and select i3 session at login
+# 3. Reboot and select Hyprland session at login (XFCE as fallback)
 ```
 
 ## What's Included
 
-### Window Manager & UI
-- **i3** - Tiling window manager with custom keybindings
-- **polybar** - Status bar with custom modules (volume, network, microphone)
-- **picom** - Compositor for transparency and effects
-- **rofi** - Application launcher and power menu
-- **dunst** - Notification daemon
+### Hyprland Ecosystem (primary)
+- **hypr** — compositor config, keybinds, hypridle AC/battery profiles, session watchdog (hyprlock crash respawn)
+- **waybar** — status bar · **swaync** — notifications · **kitty** + **ghostty** — terminals
+- **wlogout**, **swappy**, **wallust**, **cava**, **fastfetch**, **ronema**, **nwg-displays**
 
-### Terminal & Shell
-- **tilix** - Terminal emulator
-- **zsh** with oh-my-zsh - Shell with custom theme (af-magic)
-- **zsh plugins** - autosuggestions, syntax highlighting, z, fzf, etc.
+### XFCE (fallback)
+- **xed**, **thunar**, **kvantum**, **qt5ct/qt6ct**, gtk themes
 
-### Development Tools
-- **VSCode** - Code editor with automated extension installation
-- **git** + **gh** - Version control and GitHub CLI
-- **Node.js 22** + **npm** - JavaScript runtime and package manager (via NodeSource repository)
-- **Bun** - Fast JavaScript runtime (7× faster than npm)
-- **Claude Code** + **GitHub Copilot** - AI coding assistants
-- **Python3** + pip
-- **Ruby** + Jekyll
-- **AWS CLI v2**
+### Shell & Dev Tools
+- **zsh** (oh-my-zsh) · **bash** · **fish** · **git** + **gh**
+- **Node.js 22** · **Bun** · **Ruby/Jekyll** · **Python** · **AWS CLI v2**
+- **AI stack:** Ollama (systemd service + GPU override), Continue.dev, Goose, omp agent harness, opencode + oh-my-opencode-slim configs
 
-### Applications
-- **Bitwarden** - Password manager
-- **Discord** - Communication
-- **Kodi** - Media center
-- **Proton VPN** - VPN client (CLI, no GNOME bloat)
-- **Zen Browser** - Firefox-based browser (Flatpak)
-- **OSCAR** - CPAP analysis software
-- **Obsidian** - Note-taking and knowledge base
-- **Notion** (via Cohesion) - Productivity workspace
-- **xed** - Text editor
+### Themes
+- **Nordic** GTK · **Papirus-Dark** icons · **Bibata-Modern-Classic** cursor · auto dark mode
 
-### Themes & Appearance
-- **Nordic** - Dark GTK theme (blue/gray palette)
-- **Papirus-Dark** - Icon theme
-- **Bibata-Modern-Classic** - Cursor theme
-- **Nord** - Terminal color scheme
-- **Auto dark mode** - System-wide dark theme application (XFCE/Cinnamon/MATE support)
+## Stow Packages
 
-## Recent Improvements
-
-### New Features (2025-10)
-- ✨ **Automated VSCode extension management** - 37 extensions auto-installed
-- ✨ **Bun integration** - 7× faster package installation for 52/54 packages
-- ✨ **First-time stow helper** - Automatic conflict detection and backup
-- ✨ **Dark mode automation** - Desktop environment detection (XFCE/Cinnamon/MATE)
-- ✨ **Backup/export scripts** - Configs, Zen Browser profile, personal data
-- ✨ **Import scripts** - Automated restoration on new laptop
-- ✨ **Bootstrap order fix** - Stow runs before themes to avoid conflicts
-
-### Migration Tools
-- `export-configs.sh` - Backup SSH, GPG, AWS credentials (GPG encrypted)
-- `export-zen-profile.sh` - Export Zen Browser (detects Flatpak/AppImage/deb)
-- `export-personal-data.sh` - Backup Documents, Desktop, Kodi, themes
-- `export-vscode-extensions.sh` - Export VSCode extension list
-- `first-time-stow.sh` - Clean first-time setup for new machines
-- `clean-for-stow.sh` - Fix "existing target not owned by stow" errors
-
-## Manual Setup Steps
-
-### 1. Backup Current System (Old Laptop)
+Each top-level dir (minus `scripts/`, `packages/`, `docs/`) is a stow package mirroring `$HOME`:
 
 ```bash
+stow -n -v -t ~ hypr   # dry run first — always
+stow -t ~ hypr         # apply
+stow -R -t ~ hypr      # restow after changes
+stow -D -t ~ hypr      # unlink
+```
+
+Only the 21 packages in `scripts/setup-stow.sh` `PACKAGES` are linked. Intentionally **not** stowed (see `DONT-STOW.md`): `opencode/`, `claude/`, `ollama/` (systemd override), `sddm-themes/` (system path, Git LFS), `tilix/` (dconf — dump/load manually), VSCode (Settings Sync), AWS/GH credentials.
+
+## Scripts
+
+| Script | Purpose |
+|---|---|
+| `bootstrap.sh` | Fresh-machine setup, interactive 6 steps (refuses root) |
+| `verify-setup.sh` | Migration readiness check |
+| `scripts/setup-stow.sh` | Link all `PACKAGES` |
+| `scripts/install-{packages,dev-tools,apps,themes,bun}.sh` | Provisioning |
+| `scripts/backup-system.sh` | Regenerate `packages/*` manifests |
+| `scripts/backup-app-configs.sh` | Backup configs not yet in repo |
+| `scripts/export-{configs,zen-profile,personal-data,vscode-extensions}.sh` | Capture for migration |
+| `scripts/import-{configs,zen-profile}.sh` | Restore on new machine |
+| `scripts/{clean-for-stow,fix-stow-conflicts,first-time-stow}.sh` | Stow conflict repair |
+
+`packages/` manifests are generated — never hand-edit. `./scripts/backup-system.sh` refreshes them.
+
+## Making Changes
+
+```bash
+vim ~/dotfiles/hypr/.config/hypr/hyprland.conf  # live via symlink — test immediately
 cd ~/dotfiles
-./scripts/backup-system.sh
+./scripts/backup-system.sh   # refresh manifests if packages changed
+git add hypr/ && git commit -m "Update Hyprland keybindings" && git push
 ```
 
-This creates:
-- `packages-apt.txt` - All installed apt packages
-- `packages-npm-global.txt` - Global npm packages
-- `packages-gem.txt` - Ruby gems
-- `vscode-extensions.txt` - VSCode extensions
-- Backups of any configs not yet in dotfiles
+Other machines: `git pull && stow -R -t ~ <package>`.
 
-### 2. Fresh Install on New Laptop
+## AI Agent Instructions
 
-1. Install **Linux Mint XFCE** (latest version)
-2. Complete initial setup (username: mhenke recommended)
-3. Connect to internet
-4. Clone this repository:
-   ```bash
-   git clone https://github.com/yourusername/dotfiles.git ~/dotfiles
-   cd ~/dotfiles
-   ```
+`AGENTS.md` (repo root) defines stack context, code style, architecture guardrails, and security rules for coding agents. Generated by repo scan; human-confirmed updates only. `CLAUDE.md` covers system details (Ollama, SDDM, Tilix, desktop sessions).
 
-### 3. Automated Installation
+## Manual Post-Install
 
-```bash
-./bootstrap.sh
-```
-
-The script will:
-- Install system packages (i3, polybar, rofi, etc.)
-- Install development tools (Node.js, Ruby, Python packages)
-- Set up zsh with oh-my-zsh
-- Install applications (VSCode, Bitwarden, Discord, etc.)
-- Use GNU Stow to symlink all dotfiles
-- Restore VSCode extensions
-- Configure git
-
-### 4. Manual Post-Install
-
-After bootstrap completes:
-
-1. **Login to services:**
-   - Bitwarden
-   - GitHub: `gh auth login`
-   - Discord
-   - Proton VPN
-   - VSCode settings sync
-
-2. **Configure monitors** (if using external displays):
-   - Use aliases: `sceptre`, `laptop`, or `dual`
-
-3. **Select i3 at login:**
-   - Logout → Select i3 session → Login
-
-4. **Restore SSH keys:**
-   ```bash
-   # Copy from old laptop or backup
-   cp -r /path/to/backup/.ssh ~/
-   chmod 700 ~/.ssh
-   chmod 600 ~/.ssh/*
-   ```
-
-## Repository Structure
-
-```
-dotfiles/
-├── bootstrap.sh              # Main setup script
-├── scripts/
-│   ├── backup-system.sh      # Backup current system state
-│   ├── install-packages.sh   # Install system packages
-│   ├── install-dev-tools.sh  # Install development tools
-│   ├── install-apps.sh       # Install applications
-│   └── setup-stow.sh         # Symlink configs with stow
-├── packages/
-│   ├── apt.txt               # APT packages
-│   ├── npm-global.txt        # Global npm packages
-│   ├── gems.txt              # Ruby gems
-│   └── vscode-extensions.txt # VSCode extensions
-├── i3/
-│   └── .config/i3/config     # i3 configuration
-├── polybar/
-│   └── .config/polybar/      # Polybar configs and scripts
-├── picom/
-│   └── .config/picom/        # Picom configuration
-├── rofi/
-│   └── .config/rofi/         # Rofi themes and configs
-├── dunst/
-│   └── .config/dunst/        # Dunst notification config
-├── tilix/
-│   └── tilix.dconf           # Tilix terminal config
-├── zsh/
-│   └── .zshrc                # Zsh configuration
-├── git/
-│   └── .gitconfig            # Git configuration
-├── gtk/
-│   └── .config/gtk-3.0/      # GTK theme settings
-└── xed/
-    └── .config/xed/          # Xed text editor preferences
-```
-
-## Using GNU Stow
-
-This repo uses [GNU Stow](https://www.gnu.org/software/stow/) for managing symlinks.
-
-```bash
-# Install a package (creates symlinks)
-stow -t ~ i3
-
-# Remove a package (removes symlinks)
-stow -D -t ~ i3
-
-# Restow a package (update symlinks)
-stow -R -t ~ i3
-
-# Install all packages
-stow -t ~ */
-```
-
-## Customization
-
-### Display Configuration
-
-Three monitor setup aliases in `.zshrc`:
-- `sceptre` - External monitor only (3440x1440)
-- `laptop` - Laptop screen only (1366x768)
-- `dual` - Both screens (external above laptop)
-
-### i3 Keybindings
-
-See `.config/i3/config` for full list. Key highlights:
-- `Mod+Enter` - Open terminal (tilix)
-- `Mod+d` - Application launcher (rofi)
-- `Mod+Shift+e` - Power menu
-- `Mod+[1-9]` - Switch workspaces
-
-### Custom Aliases
-
-See `.zshrc` for all aliases including:
-- `ghpr` - List GitHub pull requests
-- `update` - Full system update
-- Development shortcuts from oh-my-zsh plugins
-
-## Most Used Commands
-
-Based on shell history analysis:
-1. `git` (341 uses)
-2. `cd` (202 uses)
-3. `npm` (161 uses)
-4. `ls` (116 uses)
-5. `npx` (104 uses)
-6. `gh` (98 uses)
-7. `bundle` (85 uses)
-8. `grep` (56 uses)
+- Login: Bitwarden, Discord, Proton VPN · `gh auth login` · VSCode Settings Sync
+- SSH keys: `cp -r /backup/.ssh ~/ && chmod 700 ~/.ssh && chmod 600 ~/.ssh/*`
+- Ollama GPU: `sudo mkdir -p /etc/systemd/system/ollama.service.d && sudo cp ~/dotfiles/ollama/performance.conf /etc/systemd/system/ollama.service.d/ && sudo systemctl daemon-reload && sudo systemctl restart ollama`
+- Displays: `sceptre` (external) · `laptop` · `dual` aliases in `.zshrc`
 
 ## Troubleshooting
 
-### Stow conflicts
-If stow reports conflicts, backup the conflicting files:
 ```bash
-mv ~/.config/i3/config ~/.config/i3/config.backup
-stow -t ~ i3
+./scripts/clean-for-stow.sh        # "existing target is not owned by stow"
+stow -R -t ~ <package>             # symlinks stale
+git lfs install && git lfs pull    # sddm backgrounds missing
+killall waybar                     # waybar frozen (relaunches via hyprland)
+systemctl status ollama            # GPU not used → check service override
 ```
 
-Or use our automated script:
-```bash
-./scripts/clean-for-stow.sh
-```
+## Security
 
-### Polybar not starting
-```bash
-~/.config/polybar/launch.sh
-```
-
-### Tilix terminal not found
-```bash
-sudo apt install tilix
-```
-
-### ZSH plugins not working
-```bash
-# Reinstall oh-my-zsh plugins
-git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
-```
-
-## Updates
-
-To update dotfiles from the old machine:
-
-```bash
-cd ~/dotfiles
-# Make changes to configs
-git add .
-git commit -m "Update configs"
-git push
-```
-
-On the new machine:
-```bash
-cd ~/dotfiles
-git pull
-stow -R -t ~ */  # Restow all packages
-```
+Never commit: AWS keys, `gh/hosts.yml`, SSH keys, shell history, `*.local`, `.npmrc`. Check `git status` before committing; sensitive paths are in `.gitignore` + per-package `.stow-local-ignore`.
 
 ## License
 
-Personal dotfiles - use at your own risk!
+Personal dotfiles — use at your own risk!
