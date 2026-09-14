@@ -4,4 +4,4 @@
 # For Hyprlock
 #pidof hyprlock || hyprlock -q 
 
-pidof hyprlock || hyprlock -q
+pidof hyprlock || ~/.config/hypr/scripts/hyprlock-guarded.sh   # guarded: sets watchdog marker, reports clean exit

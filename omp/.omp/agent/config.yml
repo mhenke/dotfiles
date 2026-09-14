@@ -5,7 +5,7 @@ modelRoles:
   task: omniroute/explorer
   oracle: omniroute/oracle
   skeptic: omniroute/skeptic
-  default: omniroute/static-best-free
+  default: commandcode/meta/muse-spark-1.3-contributor
 disabledProviders:
   - llama.cpp
   - lm-studio

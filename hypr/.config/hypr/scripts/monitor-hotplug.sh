@@ -5,4 +5,4 @@
 sleep 2
 
 # Run the monitor switch script
-/home/mhenke/.config/hypr/scripts/monitor-switch.sh
+"$HOME/.config/hypr/scripts/monitor-switch.sh"
