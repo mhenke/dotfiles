@@ -92,7 +92,7 @@ Applies to balanced preset agents, council balanced presets α/β/γ, `agents.co
 
 ### Definitions / scope
 
-1. "Free" = `opencode/...-free` models + `opencode/big-pickle`. Active lineup (post `hy3-free` decommission): `big-pickle`, `nemotron-3.5-lightning-free`, `mimo-v2.5-free`, `deepseek-v4-flash-free`, `nemotron-3-ultra-free`, `muse-spark-1.2-contributor-free`, `ling-3.0-flash-fin-free`.
+1. "Free" = `opencode/...-free` models + `opencode/big-pickle`. Active lineup (per Zen site, 2026-09-17): `big-pickle`, `union-alpha`, `mimo-v2.5-free`, `ling-3.0-flash-fin-free`, `nemotron-3-ultra-free`, `nemotron-3.5-lightning-free`, `muse-spark-1.3-contributor-free`. (1.2 contributor is superseded by 1.3; the stray `deepseek-v4-flash-free` id still exists in the omniroute catalog but is off the Zen site list. `union-alpha` uses Anthropic-style `/v1/messages`, muse-spark-1.3 uses OpenAI `/v1/responses` upstream — the only two non-chat-completions endpoints on Zen free tier. `opencode-zen/muse-spark-1.3-contributor-free` returned 500 on probes 2026-09-17 — upstream issue, kept but watch it.)
 2. "Chain" = model + `fallback_models`, in order.
 3. Rules exclude `nvidia-free` and `opencode-zen-free` presets — intentionally single-provider playgrounds.
 
@@ -134,7 +134,7 @@ Example body:
 
 | combo | n | chain |
 |---|---|---|
-| skeptic | 4 | zen/muse-spark-1.2-free → zen/nemotron-3-ultra-free → cmd/Qwen3.7-Plus → zen/opencode/qwen3.7-plus |
+| skeptic | 4 | zen/muse-spark-1.3-contributor-free → zen/nemotron-3-ultra-free → cmd/Qwen3.7-Plus → zen/opencode/qwen3.7-plus |
 | orchestrator | 8 | zen/mimo-v2.5-free → cmd/LongCat-2.0:free → or/nemotron-3-super:free → nv/nemotron-3-super → nv/nemotron-3.5-lightning → cmd/Qwen3.8-Flash → cmd/deepseek-v4-flash → cmd/deepseek-v4.1-flash |
 | oracle | 7 | zen/big-pickle → zen/nemotron-3-ultra-free → or/nemotron-3-ultra:free → nv/kimi-k3 → nv/deepseek-v4-pro-0813 → cmd/muse-spark-1.3-contributor → cmd/mimo-v2.5-pro |
 | designer | 6 | zen/mimo-v2.5-free → or/inkling-small:free → cmd/glm-5.3-flash → cmd/muse-spark-1.3-contributor → nv/kimi-k3 → cmd/deepseek-v4-flash-vision-exp |
@@ -142,7 +142,7 @@ Example body:
 | explorer | 7 | cmd/laguna-s-2.1-free → zen/union-alpha → or/nemotron-3.5-lightning:free → or/north-mini-code:free → cmd/Qwen3.7-Flash → nv/nemotron-3.5-lightning → cmd/deepseek-v4-flash-fast |
 | fixer | 5 | zen/nemotron-3.5-lightning-free → or/nex-n2.5-mini:free → cmd/glm-5.3-flash → cmd/deepseek-v4-flash → cmd/deepseek-v4.1-flash |
 | observer | 4 | cmd/glm-5.3-flash → cmd/deepseek-v4-flash-vision-exp → or/inkling:free → zen/mimo-v2.5-free |
-| static-best-free | 15 | zen free ×7 + union-alpha → cmd/LongCat-2.0:free → cmd/laguna-s-2.1-free → nv ×5 |
+| static-best-free | 14 | zen free ×6 + union-alpha → cmd/LongCat-2.0:free → cmd/laguna-s-2.1-free → nv ×5 |
 
 Prefix key: `zen/` = opencode-zen, `cmd/` = CommandCode, `or/` = openrouter `:free`, `nv/` = nvidia NIM.
 
