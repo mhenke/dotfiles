@@ -130,7 +130,10 @@ Example body:
 - **`nvidia/deepseek-ai/deepseek-v4-flash-0731` deprecated upstream** (per NVIDIA, removal pending). Removed from static-best-free 2026-09-17, replaced by `nvidia/z-ai/glm-5.3`. (deepseek-v4-pro-0813 still live, kept.)
 - **CommandCode free tier works from omniroute**: `cmd/meituan/LongCat-2.0:free`, `cmd/inclusionai/ling-3.0-flash-sante:free` → 200; `cmd/poolside/laguna-s-2.1-free` → 429 under load but alive.
 - **No new combo id? Nothing to refresh downstream.** omp (`models.yml`) and opencode (`opencode.json`) declare combo ids statically; chain *contents* resolve at request time. Only if you create/rename a combo id do clients need updating (`omniroute setup-opencode` regenerates the opencode provider block; add the id to `omp/.omp/agent/models.yml` by hand).
+
 ## Combo inventory (2026-09-17, zen-free-lanes-cleansed)
+
+
 
 **Zen connection custom models:** big-pickle, union-alpha, mimo-v2.5-free, ling-3.0-flash-fin-free, nemotron-3-ultra-free, nemotron-3.5-lightning-free, muse-spark-1.3-contributor-free — added so the ids are addressable for routing and auto-documented; all still 403 live (CLI gate). Stale builtin entries (hy3-free, deepseek-v4-flash-free, muse-spark-1.2*) remain in omniroute's builtin list but are dead upstream.
 
