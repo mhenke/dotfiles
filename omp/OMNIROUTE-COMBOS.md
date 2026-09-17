@@ -76,34 +76,33 @@ HTTP codes that mean "prune or ignore": `401` provider gone, `402` needs API key
 
 ## Chain-Structure Protocol (Balanced Preset)
 
-Framework for model hierarchies in agent chains — reliability + cost efficiency. Subscription lanes (`opencode-go/`, `cline-pass/`, `commandcode/`) go early, never last — need a paygo fallback (`opencode/`, unmetered) or the system fails under load. Free/unmetered models absorb basic load before paid ones. Council/skeptic blocks mirror their agent lists.
+Framework for model hierarchies in agent chains — reliability + cost efficiency. Free models absorb basic load (cost-saving), paid models are reliable anchors. Council/skeptic blocks mirror their agent lists.
 
 ### Rules
 
 Applies to balanced preset agents, council balanced presets α/β/γ, `agents.council`, `agents.skeptic`.
 
-1. No more than one subscription model (`opencode-go/...` or `cline-pass/...`) per chain. One outage kills both — a second sub model won't help. (Primary can be sub; fallbacks must not be sub.)
-2. Sub entry must not be in the last slot. Must fire before hitting paygo, or you're not using what you pay for.
-3. Last entry must be an unmetered `opencode/` paygo model. Not `nvidia/`, not `opencode-go/`, not `cline-pass/`. Guarantees a stable, unmetered final fallback.
-4. Multiple non-sub `opencode/` entries allowed only if a free model (or `opencode/big-pickle`) precedes any paid one. Free tier absorbs basic tasks first; paid tokens saved for hard fallbacks.
-5. Zero `nvidia/` models in a strict balanced preset — all slots filled by RoleZen paygo `opencode/` (`minimax-m2.7`, `qwen3.7-plus`, `deepseek-v4-flash`, `qwen3.5-plus`).
-   *Exception [v7]:* if shielding sub budget under high concurrency is the priority, free NVIDIA NIM previews may sit at the very front as a zero-cost cushion before the sub layer.
-6. Council/agent blocks mirror the balanced preset exactly: `agents.council` → orchestrator list. `agents.skeptic` → oracle list. `council.presets.balanced.alpha` → oracle list.
+1. **Max one non-free `cmd/` (CommandCode) model per chain.** `cmd/` has multiple free models (Laguna S 2.1, Ling 3.0 Flash Sante, LongCat 2.0 — all `:free` tier) plus paid ones (deepseek-v4-flash, qwen3.7-plus, mimo-v2.5-pro, etc.). Stack free cmd/ models as deep cushion, but only ONE non-free cmd/ per chain — a second paid cmd/ won't save you from a CommandCode outage, it just burns budget.
+2. **Paid `cmd/` must precede the final anchor** (unless it IS the final anchor). Paid tiers must fire before the final paygo, or you're not using what you pay for.
+3. **Last entry must be `cmd/deepseek-*` (DeepSeek subscription) or `opencode-zen/` non-free paygo.** Not `nv/`, not `opencode-go/`, not `cline-pass/`, not free. Guarantees a stable, reliable final fallback.
+4. **Free models front, paid models back.** Free tier (any provider) absorbs basic load first; paid tiers saved for hard fallbacks. Multiple `cmd/` free entries allowed as long as they precede any paid one. **Rationale:** free models are unreliable (rate limits, downtime, changing terms, stealth-model identity drift) — front-loading them is a cost-saving measure, not a reliability play. Paid tiers (DeepSeek, opencode-zen) have provider SLAs and are the anchors.
+5. **`nvidia/` free models (NIM previews) allowed in the free-cushion front slot only.** Zero paid `nvidia/` models — paid nv/ costs money with no reliability advantage over DeepSeek/zen anchors.
+6. **Council/agent blocks mirror the balanced preset exactly:** `agents.council` → orchestrator list. `agents.skeptic` → oracle list. `council.presets.balanced.alpha` → oracle list.
 
 ### Definitions / scope
 
-1. "Free" = `opencode/...-free` models + `opencode/big-pickle`. Active lineup (per Zen site, 2026-09-17): `big-pickle`, `union-alpha`, `mimo-v2.5-free`, `ling-3.0-flash-fin-free`, `nemotron-3-ultra-free`, `nemotron-3.5-lightning-free`, `muse-spark-1.3-contributor-free`. (1.2 contributor is superseded by 1.3; the stray `deepseek-v4-flash-free` id still exists in the omniroute catalog but is off the Zen site list. `union-alpha` uses Anthropic-style `/v1/messages`, muse-spark-1.3 uses OpenAI `/v1/responses` upstream — the only two non-chat-completions endpoints on Zen free tier. `opencode-zen/muse-spark-1.3-contributor-free` returned 500 on probes 2026-09-17 — upstream issue, kept but watch it.)
+1. "Free" = any `*:free` model + `opencode/big-pickle` + nvidia NIM previews. Active Zen free lineup (per Zen site, 2026-09-17): `big-pickle`, `union-alpha`, `mimo-v2.5-free`, `ling-3.0-flash-fin-free`, `nemotron-3-ultra-free`, `nemotron-3.5-lightning-free`, `muse-spark-1.3-contributor-free`. (1.2 contributor is superseded by 1.3; the stray `deepseek-v4-flash-free` id still exists in the omniroute catalog but is off the Zen site list. `union-alpha` uses Anthropic-style `/v1/messages`, muse-spark-1.3 uses OpenAI `/v1/responses` upstream — the only two non-chat-completions endpoints on Zen free tier. `opencode-zen/muse-spark-1.3-contributor-free` returned 500 on probes 2026-09-17 — upstream issue, kept but watch it.)
 2. "Chain" = model + `fallback_models`, in order.
 3. Rules exclude `nvidia-free` and `opencode-zen-free` presets — intentionally single-provider playgrounds.
 
 ### Resource dynamics
 
-1. Sub quota is one shared dollar pool ($60/mo Go, $70/mo GOAT), not per-model. Per-model "allowances" are sub-caps within that pool. Shift high-concurrency load to free cushions to avoid early pool depletion.
+1. `cmd/` is a flat subscription lane (monthly fee), `opencode-go/`/`cline-pass/` are subscription quotas with shared pools ($60/mo Go, $70/mo GOAT), `opencode-zen/` is pay-per-token. Shift high-concurrency load to free cushions to avoid burning paid tiers on easy tasks.
 2. Model diversity in a chain buys only transient fault tolerance (rate limits, timeouts) — no compounding cognitive benefit on single-turn calls. Keep chains short; excess nesting adds latency and risks orphaned subagent recoveries the parent orchestrator already timed out on.
 
 ### OmniRoute layering (how these rules map to omniroute combos)
 
-Free cushions from **all** providers sit front (zen → cmd → openrouter), then the NVIDIA NIM layer, then paid CommandCode terminal anchors. Duplicate models across providers are intentional — same model via a second lane = transient-fault tolerance, not redundancy to prune. Overlap (e.g. nemotron-3-ultra on zen AND openrouter) is a feature: free is free.
+Free cushions from **all** providers sit front (zen → cmd → openrouter), then the NVIDIA NIM layer, then the single paid `cmd/` model, then the DeepSeek/opencode-zen final anchor. Duplicate models across providers are intentional — same model via a second lane = transient-fault tolerance, not redundancy to prune. Overlap (e.g. nemotron-3-ultra on zen AND openrouter) is a feature: free is free.
 
 Example body:
 
@@ -137,19 +136,69 @@ Example body:
 
 **Zen connection custom models:** big-pickle, union-alpha, mimo-v2.5-free, ling-3.0-flash-fin-free, nemotron-3-ultra-free, nemotron-3.5-lightning-free, muse-spark-1.3-contributor-free — added so the ids are addressable for routing and auto-documented; all still 403 live (CLI gate). Stale builtin entries (hy3-free, deepseek-v4-flash-free, muse-spark-1.2*) remain in omniroute's builtin list but are dead upstream.
 
-| combo | n | chain |
-|---|---|---|
-| skeptic | 3 | or/nemotron-3-ultra:free → cmd/Qwen3.7-Plus → zen/qwen3.6-plus (paid) |
-| orchestrator | 7 | cmd/LongCat-2.0:free → or/nemotron-3-super:free → nv/nemotron-3-super → nv/nemotron-3.5-lightning → cmd/Qwen3.8-Flash → cmd/deepseek-v4-flash → cmd/deepseek-v4.1-flash |
-| oracle | 5 | or/nemotron-3-ultra:free → nv/kimi-k3 → nv/deepseek-v4-pro-0813 → cmd/muse-spark-1.3-contributor → cmd/mimo-v2.5-pro |
-| designer | 5 | or/inkling-small:free → cmd/glm-5.3-flash → cmd/muse-spark-1.3-contributor → nv/kimi-k3 → cmd/deepseek-v4-flash-vision-exp |
-| librarian | 5 | cmd/ling-3.0-flash-sante:free → or/ling-3.0-flash-fin:free → or/dots-3-note-preview:free → cmd/Qwen3.7-Flash → cmd/mimo-v2.5 |
-| explorer | 6 | cmd/laguna-s-2.1-free → or/nemotron-3.5-lightning:free → or/north-mini-code:free → cmd/Qwen3.7-Flash → nv/nemotron-3.5-lightning → cmd/deepseek-v4-flash-fast |
-| fixer | 4 | or/nex-n2.5-mini:free → cmd/glm-5.3-flash → cmd/deepseek-v4-flash → cmd/deepseek-v4.1-flash |
-| observer | 4 | cmd/glm-5.3-flash → cmd/deepseek-v4-flash-vision-exp → zen/mimo-v2.5-free (gate-lift watch slot) → or/inkling:free |
-| static-best-free | 14 | zen ×7 → cmd/LongCat-2.0:free → cmd/laguna-s-2.1-free → nv: nemotron-3-super, nemotron-3-ultra-550b, deepseek-v4-pro-0813, **z-ai/glm-5.3**, kimi-k3 |
+## Combo inventory (2026-09-17, zen-free-lanes-cleansed)
 
-Prefix key: `zen/` = opencode-zen, `cmd/` = CommandCode, `or/` = openrouter `:free`, `nv/` = nvidia NIM.
+Each model on its own row so the provider lane is explicit — bare model ids are ambiguous (e.g. `mimo-v2.5-free` exists on both `opencode-zen` and `cmd`).
+
+| combo | slot | provider | model | tier | notes |
+|---|---|---|---|---|---|
+| skeptic | 1 | or | nvidia/nemotron-3-ultra-550b-a55b:free | free | 550B-A55B MoE |
+| skeptic | 2 | cmd | Qwen/Qwen3.7-Plus | paid | primary paid |
+| skeptic | 3 | zen | qwen3.6-plus | paid | terminal anchor |
+| orchestrator | 1 | cmd | meituan/LongCat-2.0:free | free | 2.0 flash, high tool-call |
+| orchestrator | 2 | or | nvidia/nemotron-3-super-120b-a12b:free | free | 120B-A12B agentic |
+| orchestrator | 3 | nvidia | nvidia/nemotron-3-super-120b-a12b | free | NIM preview (same model, second lane) |
+| orchestrator | 4 | nvidia | nvidia/nemotron-3.5-lightning-30b-a3b | free | Terminal-Bench 2.1 24.58 — weak |
+| orchestrator | 5 | cmd | Qwen/Qwen3.8-Flash | paid | SWE-bench Pro 62.5, GPQA 91.7 |
+| orchestrator | 6 | cmd | deepseek/deepseek-v4-flash | paid | Terminal-Bench 2.1 82.7 |
+| orchestrator | 7 | cmd | deepseek/deepseek-v4.1-flash | paid | Terminal-Bench 2.1 90.6 — terminal anchor |
+| oracle | 1 | or | nvidia/nemotron-3-ultra-550b-a55b:free | free | GPQA 87.9 |
+| oracle | 2 | nvidia | moonshotai/kimi-k3 | paid | deep reasoning |
+| oracle | 3 | nvidia | deepseek-ai/deepseek-v4-pro-0813 | paid | audit-grade |
+| oracle | 4 | cmd | meta/muse-spark-1.3-contributor | paid | reasoning specialist |
+| oracle | 5 | cmd | xiaomi/mimo-v2.5-pro | paid | terminal anchor |
+| designer | 1 | or | thinkingmachines/inkling-small:free | free | multimodal reasoning |
+| designer | 2 | cmd | z-ai/glm-5.3-flash | paid | multimodal 320B/18B |
+| designer | 3 | cmd | meta/muse-spark-1.3-contributor | paid | vision-capable |
+| designer | 4 | nvidia | moonshotai/kimi-k3 | paid | |
+| designer | 5 | cmd | deepseek/deepseek-v4-flash-vision-exp | paid | vision-terminated anchor |
+| librarian | 1 | cmd | inclusionai/ling-3.0-flash-sante:free | free | health-tuned |
+| librarian | 2 | or | inclusionai/ling-3.0-flash-fin:free | free | finance-tuned |
+| librarian | 3 | or | dots-studio/dots-3-note-preview:free | free | 280B MoE, 512K ctx |
+| librarian | 4 | cmd | Qwen/Qwen3.7-Flash | paid | |
+| librarian | 5 | cmd | xiaomi/mimo-v2.5 | paid | terminal anchor |
+| explorer | 1 | cmd | poolside/laguna-s-2.1-free | free | Terminal-Bench 70.2%, 118B/8B |
+| explorer | 2 | or | nvidia/nemotron-3.5-lightning:free | free | |
+| explorer | 3 | or | cohere/north-mini-code:free | free | 30B/3B agentic code |
+| explorer | 4 | cmd | Qwen/Qwen3.7-Flash | paid | |
+| explorer | 5 | nvidia | nvidia/nemotron-3.5-lightning-30b-a3b | free | second lane |
+| explorer | 6 | cmd | deepseek/deepseek-v4-flash-fast | paid | terminal anchor |
+| fixer | 1 | or | nex-agi/nex-n2.5-mini:free | free | self-verifying agentic |
+| fixer | 2 | cmd | z-ai/glm-5.3-flash | paid | |
+| fixer | 3 | cmd | deepseek/deepseek-v4-flash | paid | |
+| fixer | 4 | cmd | deepseek/deepseek-v4.1-flash | paid | terminal anchor |
+| observer | 1 | cmd | z-ai/glm-5.3-flash | paid | multimodal 320B/18B |
+| observer | 2 | cmd | deepseek/deepseek-v4-flash-vision-exp | paid | vision |
+| observer | 3 | zen | mimo-v2.5-free | free | DEAD — OpenCode CLI gate; watch slot |
+| observer | 4 | or | thinkingmachines/inkling:free | free | multimodal 975B/41B; timed out in probes |
+| static-best-free | 1 | zen | big-pickle | free | DEAD — CLI gate |
+| static-best-free | 2 | zen | mimo-v2.5-free | free | DEAD |
+| static-best-free | 3 | zen | ling-3.0-flash-fin-free | free | DEAD |
+| static-best-free | 4 | zen | nemotron-3-ultra-free | free | DEAD |
+| static-best-free | 5 | zen | nemotron-3.5-lightning-free | free | DEAD |
+| static-best-free | 6 | zen | muse-spark-1.3-contributor-free | free | DEAD |
+| static-best-free | 7 | zen | union-alpha | free | DEAD |
+| static-best-free | 8 | cmd | meituan/LongCat-2.0:free | free | serving |
+| static-best-free | 9 | cmd | poolside/laguna-s-2.1-free | free | serving |
+| static-best-free | 10 | nvidia | nvidia/nemotron-3-super-120b-a12b | free | serving |
+| static-best-free | 11 | nvidia | nvidia/nemotron-3-ultra-550b-a55b | free | serving |
+| static-best-free | 12 | nvidia | deepseek-ai/deepseek-v4-pro-0813 | free | serving |
+| static-best-free | 13 | nvidia | z-ai/glm-5.3 | free | serving |
+| static-best-free | 14 | nvidia | moonshotai/kimi-k3 | free | serving |
+
+Provider lanes: `cmd` = CommandCode, `nvidia` = NVIDIA NIM, `or` = OpenRouter (`:free` tier), `zen` = opencode-zen (paid API key). All `zen/*-free` entries return 403 FreeTierError upstream — never front-load them.
+
+Bare ids (e.g. `mimo-v2.5-free`, `big-pickle`, `nemotron-3-super`) without a provider prefix are ambiguous and should never appear in chain definitions. The `opencode-zen-free` preset block in the OMOS jsonc and the old ADR-0001 reference these bare ids — both are superseded by the `omniroute/<role>` combo chains above and should be treated as stale.
 
 ## Client references (read-only context)
 

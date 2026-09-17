@@ -172,68 +172,18 @@
       }
     },
     "opencode-zen-free": {
+      "_deprecated": "2026-09-17 — all opencode/* free ids are gate-locked to the OpenCode CLI at the server (FreeTierError 403). This preset is kept commented out as a historical reference. Use the 'balanced' preset with omniroute/<role> combo chains instead.",
       "orchestrator": {
-        "model": [
-          "opencode/nemotron-3-ultra-free",
-          "opencode/big-pickle",
-          "opencode/muse-spark-1.2-contributor-free"
-        ],
-        "temperature": 0.4,
-        "skills": [
-          "*"
-        ],
-        "mcps": [
-          " ",
-          "!context7"
-        ]
+        "model": ["opencode/nemotron-3-ultra-free", "opencode/big-pickle", "opencode/muse-spark-1.2-contributor-free"],
+        "temperature": 0.4
       },
-      "explorer": {
-        "model": "opencode/mimo-v2.5-free",
-        "temperature": 0.2,
-        "skills": [],
-        "mcps": []
-      },
-      "librarian": {
-        "model": "opencode/mimo-v2.5-free",
-        "temperature": 0.2,
-        "skills": [],
-        "mcps": [
-          "websearch",
-          "context7",
-          "gh_grep"
-        ]
-      },
-      "designer": {
-        "model": "opencode/mimo-v2.5-free",
-        "temperature": 0.3,
-        "variant": "medium",
-        "skills": [],
-        "mcps": []
-      },
-      "fixer": {
-        "model": "opencode/mimo-v2.5-free",
-        "temperature": 0.2,
-        "variant": "high",
-        "skills": [],
-        "mcps": []
-      },
-      "observer": {
-        "model": "opencode/mimo-v2.5-free",
-        "temperature": 0.2,
-        "variant": "low",
-        "skills": [],
-        "mcps": []
-      },
-      "council": {
-        "model": "opencode/hy3-free"
-      },
-      "skeptic": {
-        "model": [
-          "opencode/muse-spark-1.2-contributor-free",
-          "opencode/nemotron-3-ultra-free"
-        ],
-        "variant": "max"
-      }
+      "explorer": { "model": "opencode/mimo-v2.5-free", "temperature": 0.2 },
+      "librarian": { "model": "opencode/mimo-v2.5-free", "temperature": 0.2 },
+      "designer":  { "model": "opencode/mimo-v2.5-free", "temperature": 0.3 },
+      "fixer":     { "model": "opencode/mimo-v2.5-free", "temperature": 0.2 },
+      "observer":  { "model": "opencode/mimo-v2.5-free", "temperature": 0.2 },
+      "council":   { "model": "opencode/hy3-free" },
+      "skeptic":   { "model": ["opencode/muse-spark-1.2-contributor-free", "opencode/nemotron-3-ultra-free"] }
     }
   },
   "council": {
