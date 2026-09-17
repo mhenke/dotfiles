@@ -125,6 +125,8 @@ Example body:
 ## Known gotchas (2026-09-17)
 
 - **OpenCode Zen free tier is OAuth/CLI-bound — dead lane from omniroute.** Probed 2026-09-17 with omniroute's `apikey` connection: `mimo-v2.5-free`/`nemotron-3-ultra-free`/`ling-3.0-flash-fin-free` → `403 "OpenCode's free tier can only be used from within OpenCode"`; `union-alpha` → `402 needs API key` (paid-only via key); `muse-spark-1.3-contributor-free` → `500` (upstream is OpenAI `/v1/responses`, not chat-completions — omniroute's proxy can't reach it); `big-pickle` → timeout. **Paid zen ids work fine via the same key** (`opencode-zen/glm-5.3-flash` → 200). Zen free models only serve inside the OpenCode CLI, which is OAuth'd (`~/.local/share/opencode/auth.json`). Consequence: do NOT put zen `*-free` ids at the front of omniroute combos — every request eats a 403 hop. Keep them out entirely, or at most one slot late in a chain if you want automatic coverage when the gate lifts.
+- **NVIDIA NIM added Z.ai free endpoints (2026-09-16)**: `nvidia/z-ai/glm-5.3` (753B text MoE, sparse attention, reasoning+tools) and `nvidia/z-ai/glm-5.3-flash` (320B/18B-active multimodal). Probed 2026-09-17: glm-5.3 → 200; glm-5.3-flash → 000/504 (endpoint live in catalog but unstable via omniroute — retry before trusting).
+- **`nvidia/deepseek-ai/deepseek-v4-flash-0731` deprecated upstream** (per NVIDIA, removal pending). Removed from static-best-free 2026-09-17, replaced by `nvidia/z-ai/glm-5.3`. (deepseek-v4-pro-0813 still live, kept.)
 - **CommandCode free tier works from omniroute**: `cmd/meituan/LongCat-2.0:free`, `cmd/inclusionai/ling-3.0-flash-sante:free` → 200; `cmd/poolside/laguna-s-2.1-free` → 429 under load but alive.
 - **No new combo id? Nothing to refresh downstream.** omp (`models.yml`) and opencode (`opencode.json`) declare combo ids statically; chain *contents* resolve at request time. Only if you create/rename a combo id do clients need updating (`omniroute setup-opencode` regenerates the opencode provider block; add the id to `omp/.omp/agent/models.yml` by hand).
 
@@ -140,7 +142,7 @@ Example body:
 | explorer | 6 | cmd/laguna-s-2.1-free → or/nemotron-3.5-lightning:free → or/north-mini-code:free → cmd/Qwen3.7-Flash → nv/nemotron-3.5-lightning → cmd/deepseek-v4-flash-fast |
 | fixer | 4 | or/nex-n2.5-mini:free → cmd/glm-5.3-flash → cmd/deepseek-v4-flash → cmd/deepseek-v4.1-flash |
 | observer | 4 | cmd/glm-5.3-flash → cmd/deepseek-v4-flash-vision-exp → zen/mimo-v2.5-free (gate-lift watch slot) → or/inkling:free |
-| static-best-free | 14 | zen big-pickle + mimo-free + ling-fin-free + nemotron-ultra-free + lightning-free + muse-1.3-free + union-alpha → cmd/LongCat-2.0:free → cmd/laguna-s-2.1-free → nv ×5 |
+| static-best-free | 14 | zen ×7 → cmd/LongCat-2.0:free → cmd/laguna-s-2.1-free → nv: nemotron-3-super, nemotron-3-ultra-550b, deepseek-v4-pro-0813, **z-ai/glm-5.3**, kimi-k3 |
 
 Prefix key: `zen/` = opencode-zen, `cmd/` = CommandCode, `or/` = openrouter `:free`, `nv/` = nvidia NIM.
 
