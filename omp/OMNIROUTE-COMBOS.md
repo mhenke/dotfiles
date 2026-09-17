@@ -124,25 +124,23 @@ Example body:
 
 ## Known gotchas (2026-09-17)
 
-- **`oc/*` ids are dead.** The `oc` provider vanished from the catalog; its combo entries 401. Use `opencode-zen/*` equivalents.
-- **OpenCode Zen free tier is gated outside OpenCode.** Direct calls return `403 "OpenCode's free tier can only be used from within OpenCode"` (Console-auth path) or `402 "requires an opencode API key"`. As omniroute chain members they always fall through — harmless but not serving. Fix: add an OpenCode API key in OmniRoute Settings → Providers → opencode-zen.
+- **OpenCode Zen free tier is OAuth/CLI-bound — dead lane from omniroute.** Probed 2026-09-17 with omniroute's `apikey` connection: `mimo-v2.5-free`/`nemotron-3-ultra-free`/`ling-3.0-flash-fin-free` → `403 "OpenCode's free tier can only be used from within OpenCode"`; `union-alpha` → `402 needs API key` (paid-only via key); `muse-spark-1.3-contributor-free` → `500` (upstream is OpenAI `/v1/responses`, not chat-completions — omniroute's proxy can't reach it); `big-pickle` → timeout. **Paid zen ids work fine via the same key** (`opencode-zen/glm-5.3-flash` → 200). Zen free models only serve inside the OpenCode CLI, which is OAuth'd (`~/.local/share/opencode/auth.json`). Consequence: do NOT put zen `*-free` ids at the front of omniroute combos — every request eats a 403 hop. Keep them out entirely, or at most one slot late in a chain if you want automatic coverage when the gate lifts.
 - **CommandCode free tier works from omniroute**: `cmd/meituan/LongCat-2.0:free`, `cmd/inclusionai/ling-3.0-flash-sante:free` → 200; `cmd/poolside/laguna-s-2.1-free` → 429 under load but alive.
 - **No new combo id? Nothing to refresh downstream.** omp (`models.yml`) and opencode (`opencode.json`) declare combo ids statically; chain *contents* resolve at request time. Only if you create/rename a combo id do clients need updating (`omniroute setup-opencode` regenerates the opencode provider block; add the id to `omp/.omp/agent/models.yml` by hand).
 
-
-## Combo inventory (2026-09-17, post-merge)
+## Combo inventory (2026-09-17, zen-free-lanes-cleansed)
 
 | combo | n | chain |
 |---|---|---|
-| skeptic | 4 | zen/muse-spark-1.3-contributor-free → zen/nemotron-3-ultra-free → cmd/Qwen3.7-Plus → zen/opencode/qwen3.7-plus |
-| orchestrator | 8 | zen/mimo-v2.5-free → cmd/LongCat-2.0:free → or/nemotron-3-super:free → nv/nemotron-3-super → nv/nemotron-3.5-lightning → cmd/Qwen3.8-Flash → cmd/deepseek-v4-flash → cmd/deepseek-v4.1-flash |
-| oracle | 7 | zen/big-pickle → zen/nemotron-3-ultra-free → or/nemotron-3-ultra:free → nv/kimi-k3 → nv/deepseek-v4-pro-0813 → cmd/muse-spark-1.3-contributor → cmd/mimo-v2.5-pro |
-| designer | 6 | zen/mimo-v2.5-free → or/inkling-small:free → cmd/glm-5.3-flash → cmd/muse-spark-1.3-contributor → nv/kimi-k3 → cmd/deepseek-v4-flash-vision-exp |
-| librarian | 6 | zen/ling-3.0-flash-fin-free → cmd/ling-3.0-flash-sante:free → or/ling-3.0-flash-fin:free → or/dots-3-note-preview:free → cmd/Qwen3.7-Flash → cmd/mimo-v2.5 |
-| explorer | 7 | cmd/laguna-s-2.1-free → zen/union-alpha → or/nemotron-3.5-lightning:free → or/north-mini-code:free → cmd/Qwen3.7-Flash → nv/nemotron-3.5-lightning → cmd/deepseek-v4-flash-fast |
-| fixer | 5 | zen/nemotron-3.5-lightning-free → or/nex-n2.5-mini:free → cmd/glm-5.3-flash → cmd/deepseek-v4-flash → cmd/deepseek-v4.1-flash |
-| observer | 4 | cmd/glm-5.3-flash → cmd/deepseek-v4-flash-vision-exp → or/inkling:free → zen/mimo-v2.5-free |
-| static-best-free | 14 | zen free ×6 + union-alpha → cmd/LongCat-2.0:free → cmd/laguna-s-2.1-free → nv ×5 |
+| skeptic | 3 | or/nemotron-3-ultra:free → cmd/Qwen3.7-Plus → zen/opencode/qwen3.7-plus (paid) |
+| orchestrator | 7 | cmd/LongCat-2.0:free → or/nemotron-3-super:free → nv/nemotron-3-super → nv/nemotron-3.5-lightning → cmd/Qwen3.8-Flash → cmd/deepseek-v4-flash → cmd/deepseek-v4.1-flash |
+| oracle | 5 | or/nemotron-3-ultra:free → nv/kimi-k3 → nv/deepseek-v4-pro-0813 → cmd/muse-spark-1.3-contributor → cmd/mimo-v2.5-pro |
+| designer | 5 | or/inkling-small:free → cmd/glm-5.3-flash → cmd/muse-spark-1.3-contributor → nv/kimi-k3 → cmd/deepseek-v4-flash-vision-exp |
+| librarian | 5 | cmd/ling-3.0-flash-sante:free → or/ling-3.0-flash-fin:free → or/dots-3-note-preview:free → cmd/Qwen3.7-Flash → cmd/mimo-v2.5 |
+| explorer | 6 | cmd/laguna-s-2.1-free → or/nemotron-3.5-lightning:free → or/north-mini-code:free → cmd/Qwen3.7-Flash → nv/nemotron-3.5-lightning → cmd/deepseek-v4-flash-fast |
+| fixer | 4 | or/nex-n2.5-mini:free → cmd/glm-5.3-flash → cmd/deepseek-v4-flash → cmd/deepseek-v4.1-flash |
+| observer | 4 | cmd/glm-5.3-flash → cmd/deepseek-v4-flash-vision-exp → zen/mimo-v2.5-free (gate-lift watch slot) → or/inkling:free |
+| static-best-free | 14 | zen big-pickle + mimo-free + ling-fin-free + nemotron-ultra-free + lightning-free + muse-1.3-free + union-alpha → cmd/LongCat-2.0:free → cmd/laguna-s-2.1-free → nv ×5 |
 
 Prefix key: `zen/` = opencode-zen, `cmd/` = CommandCode, `or/` = openrouter `:free`, `nv/` = nvidia NIM.
 
