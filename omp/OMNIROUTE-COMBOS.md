@@ -130,12 +130,13 @@ Example body:
 - **`nvidia/deepseek-ai/deepseek-v4-flash-0731` deprecated upstream** (per NVIDIA, removal pending). Removed from static-best-free 2026-09-17, replaced by `nvidia/z-ai/glm-5.3`. (deepseek-v4-pro-0813 still live, kept.)
 - **CommandCode free tier works from omniroute**: `cmd/meituan/LongCat-2.0:free`, `cmd/inclusionai/ling-3.0-flash-sante:free` → 200; `cmd/poolside/laguna-s-2.1-free` → 429 under load but alive.
 - **No new combo id? Nothing to refresh downstream.** omp (`models.yml`) and opencode (`opencode.json`) declare combo ids statically; chain *contents* resolve at request time. Only if you create/rename a combo id do clients need updating (`omniroute setup-opencode` regenerates the opencode provider block; add the id to `omp/.omp/agent/models.yml` by hand).
-
 ## Combo inventory (2026-09-17, zen-free-lanes-cleansed)
+
+**Zen connection custom models:** big-pickle, union-alpha, mimo-v2.5-free, ling-3.0-flash-fin-free, nemotron-3-ultra-free, nemotron-3.5-lightning-free, muse-spark-1.3-contributor-free — added so the ids are addressable for routing and auto-documented; all still 403 live (CLI gate). Stale builtin entries (hy3-free, deepseek-v4-flash-free, muse-spark-1.2*) remain in omniroute's builtin list but are dead upstream.
 
 | combo | n | chain |
 |---|---|---|
-| skeptic | 3 | or/nemotron-3-ultra:free → cmd/Qwen3.7-Plus → zen/opencode/qwen3.7-plus (paid) |
+| skeptic | 3 | or/nemotron-3-ultra:free → cmd/Qwen3.7-Plus → zen/qwen3.6-plus (paid) |
 | orchestrator | 7 | cmd/LongCat-2.0:free → or/nemotron-3-super:free → nv/nemotron-3-super → nv/nemotron-3.5-lightning → cmd/Qwen3.8-Flash → cmd/deepseek-v4-flash → cmd/deepseek-v4.1-flash |
 | oracle | 5 | or/nemotron-3-ultra:free → nv/kimi-k3 → nv/deepseek-v4-pro-0813 → cmd/muse-spark-1.3-contributor → cmd/mimo-v2.5-pro |
 | designer | 5 | or/inkling-small:free → cmd/glm-5.3-flash → cmd/muse-spark-1.3-contributor → nv/kimi-k3 → cmd/deepseek-v4-flash-vision-exp |
