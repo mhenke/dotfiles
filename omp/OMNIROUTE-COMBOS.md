@@ -43,24 +43,6 @@ Keep the existing `id`, `strategy`, `config`, `isHidden`, `sortOrder`; replace `
 ```
 
 `strategy: "priority"` = ordered failover (top down). `strategy: "weighted"` = weighted pick — `static-best-free` uses this.
-
-Example body (`/tmp/omniroute-combos/fixer.json`):
-
-```json
-{
-  "name": "fixer",
-  "id": "<uuid from step 1>",
-  "strategy": "priority",
-  "config": {},
-  "isHidden": false,
-  "sortOrder": 8,
-  "models": [
-    { "id": "fixer-model-1-a", "kind": "model", "model": "opencode-zen/nemotron-3.5-lightning-free", "providerId": "opencode-zen", "weight": 0 },
-    { "id": "fixer-model-2-b", "kind": "model", "model": "cmd/z-ai/glm-5.3-flash", "providerId": "cmd", "weight": 0 }
-  ]
-}
-```
-
 ### 3. Apply
 
 ```bash
@@ -92,11 +74,53 @@ curl -s -X POST http://localhost:20128/v1/chat/completions \
 
 HTTP codes that mean "prune or ignore": `401` provider gone, `402` needs API key, `403` gated (see below), `404` unknown id. `429` = alive, just rate-limited.
 
-## Chain-structure protocol (Balanced Preset)
+## Chain-Structure Protocol (Balanced Preset)
 
-1. **Free cushioning first** — zero-cost models absorb baseline load.
-2. **Mid-layer efficiency** — cheap/high-benchmark models do the primary work.
-3. **Paygo terminal fallback** — chain ends on a reliable paid model.
+Framework for model hierarchies in agent chains — reliability + cost efficiency. Subscription lanes (`opencode-go/`, `cline-pass/`, `commandcode/`) go early, never last — need a paygo fallback (`opencode/`, unmetered) or the system fails under load. Free/unmetered models absorb basic load before paid ones. Council/skeptic blocks mirror their agent lists.
+
+### Rules
+
+Applies to balanced preset agents, council balanced presets α/β/γ, `agents.council`, `agents.skeptic`.
+
+1. No more than one subscription model (`opencode-go/...` or `cline-pass/...`) per chain. One outage kills both — a second sub model won't help. (Primary can be sub; fallbacks must not be sub.)
+2. Sub entry must not be in the last slot. Must fire before hitting paygo, or you're not using what you pay for.
+3. Last entry must be an unmetered `opencode/` paygo model. Not `nvidia/`, not `opencode-go/`, not `cline-pass/`. Guarantees a stable, unmetered final fallback.
+4. Multiple non-sub `opencode/` entries allowed only if a free model (or `opencode/big-pickle`) precedes any paid one. Free tier absorbs basic tasks first; paid tokens saved for hard fallbacks.
+5. Zero `nvidia/` models in a strict balanced preset — all slots filled by RoleZen paygo `opencode/` (`minimax-m2.7`, `qwen3.7-plus`, `deepseek-v4-flash`, `qwen3.5-plus`).
+   *Exception [v7]:* if shielding sub budget under high concurrency is the priority, free NVIDIA NIM previews may sit at the very front as a zero-cost cushion before the sub layer.
+6. Council/agent blocks mirror the balanced preset exactly: `agents.council` → orchestrator list. `agents.skeptic` → oracle list. `council.presets.balanced.alpha` → oracle list.
+
+### Definitions / scope
+
+1. "Free" = `opencode/...-free` models + `opencode/big-pickle`. Active lineup (post `hy3-free` decommission): `big-pickle`, `nemotron-3.5-lightning-free`, `mimo-v2.5-free`, `deepseek-v4-flash-free`, `nemotron-3-ultra-free`, `muse-spark-1.2-contributor-free`, `ling-3.0-flash-fin-free`.
+2. "Chain" = model + `fallback_models`, in order.
+3. Rules exclude `nvidia-free` and `opencode-zen-free` presets — intentionally single-provider playgrounds.
+
+### Resource dynamics
+
+1. Sub quota is one shared dollar pool ($60/mo Go, $70/mo GOAT), not per-model. Per-model "allowances" are sub-caps within that pool. Shift high-concurrency load to free cushions to avoid early pool depletion.
+2. Model diversity in a chain buys only transient fault tolerance (rate limits, timeouts) — no compounding cognitive benefit on single-turn calls. Keep chains short; excess nesting adds latency and risks orphaned subagent recoveries the parent orchestrator already timed out on.
+
+### OmniRoute layering (how these rules map to omniroute combos)
+
+Free cushions from **all** providers sit front (zen → cmd → openrouter), then the NVIDIA NIM layer, then paid CommandCode terminal anchors. Duplicate models across providers are intentional — same model via a second lane = transient-fault tolerance, not redundancy to prune. Overlap (e.g. nemotron-3-ultra on zen AND openrouter) is a feature: free is free.
+
+Example body:
+
+```json
+{
+  "name": "fixer",
+  "id": "<uuid from step 1>",
+  "strategy": "priority",
+  "config": {},
+  "isHidden": false,
+  "sortOrder": 8,
+  "models": [
+    { "id": "fixer-model-1-a", "kind": "model", "model": "opencode-zen/nemotron-3.5-lightning-free", "providerId": "opencode-zen", "weight": 0 },
+    { "id": "fixer-model-2-b", "kind": "model", "model": "cmd/z-ai/glm-5.3-flash", "providerId": "cmd", "weight": 0 }
+  ]
+}
+```
 
 ## Known gotchas (2026-09-17)
 
@@ -105,23 +129,27 @@ HTTP codes that mean "prune or ignore": `401` provider gone, `402` needs API key
 - **CommandCode free tier works from omniroute**: `cmd/meituan/LongCat-2.0:free`, `cmd/inclusionai/ling-3.0-flash-sante:free` → 200; `cmd/poolside/laguna-s-2.1-free` → 429 under load but alive.
 - **No new combo id? Nothing to refresh downstream.** omp (`models.yml`) and opencode (`opencode.json`) declare combo ids statically; chain *contents* resolve at request time. Only if you create/rename a combo id do clients need updating (`omniroute setup-opencode` regenerates the opencode provider block; add the id to `omp/.omp/agent/models.yml` by hand).
 
+
+## Combo inventory (2026-09-17, post-merge)
+
+| combo | n | chain |
+|---|---|---|
+| skeptic | 4 | zen/muse-spark-1.2-free → zen/nemotron-3-ultra-free → cmd/Qwen3.7-Plus → zen/opencode/qwen3.7-plus |
+| orchestrator | 8 | zen/mimo-v2.5-free → cmd/LongCat-2.0:free → or/nemotron-3-super:free → nv/nemotron-3-super → nv/nemotron-3.5-lightning → cmd/Qwen3.8-Flash → cmd/deepseek-v4-flash → cmd/deepseek-v4.1-flash |
+| oracle | 7 | zen/big-pickle → zen/nemotron-3-ultra-free → or/nemotron-3-ultra:free → nv/kimi-k3 → nv/deepseek-v4-pro-0813 → cmd/muse-spark-1.3-contributor → cmd/mimo-v2.5-pro |
+| designer | 6 | zen/mimo-v2.5-free → or/inkling-small:free → cmd/glm-5.3-flash → cmd/muse-spark-1.3-contributor → nv/kimi-k3 → cmd/deepseek-v4-flash-vision-exp |
+| librarian | 6 | zen/ling-3.0-flash-fin-free → cmd/ling-3.0-flash-sante:free → or/ling-3.0-flash-fin:free → or/dots-3-note-preview:free → cmd/Qwen3.7-Flash → cmd/mimo-v2.5 |
+| explorer | 7 | cmd/laguna-s-2.1-free → zen/union-alpha → or/nemotron-3.5-lightning:free → or/north-mini-code:free → cmd/Qwen3.7-Flash → nv/nemotron-3.5-lightning → cmd/deepseek-v4-flash-fast |
+| fixer | 5 | zen/nemotron-3.5-lightning-free → or/nex-n2.5-mini:free → cmd/glm-5.3-flash → cmd/deepseek-v4-flash → cmd/deepseek-v4.1-flash |
+| observer | 4 | cmd/glm-5.3-flash → cmd/deepseek-v4-flash-vision-exp → or/inkling:free → zen/mimo-v2.5-free |
+| static-best-free | 15 | zen free ×7 + union-alpha → cmd/LongCat-2.0:free → cmd/laguna-s-2.1-free → nv ×5 |
+
+Prefix key: `zen/` = opencode-zen, `cmd/` = CommandCode, `or/` = openrouter `:free`, `nv/` = nvidia NIM.
+
 ## Client references (read-only context)
 
 - omp: `omp/.omp/agent/models.yml` (9 combo ids declared) + `config.yml` `fallbackChains`/`modelRoles` → `omniroute/<role>`
 - opencode/OMOS: `~/.config/opencode/opencode.json` `provider.omniroute.models` + `oh-my-opencode-slim.jsonc` `presets.balanced.<role>.model` → `omniroute/<role>`
-
-## Combo inventory (2026-09-17)
-
-| combo | strategy | chain |
-|---|---|---|
-| orchestrator | priority | opencode-zen/mimo-v2.5-free → cmd/LongCat-2.0:free → cmd/Qwen3.8-Flash → cmd/deepseek-v4.1-flash |
-| oracle | priority | opencode-zen/big-pickle → opencode-zen/nemotron-3-ultra-free → cmd/muse-spark-1.3-contributor → cmd/mimo-v2.5-pro |
-| designer | priority | opencode-zen/mimo-v2.5-free → cmd/glm-5.3-flash → cmd/muse-spark-1.3-contributor → cmd/deepseek-v4-flash-vision-exp |
-| librarian | priority | opencode-zen/ling-3.0-flash-fin-free → cmd/ling-3.0-flash-sante:free → cmd/Qwen3.7-Flash → cmd/mimo-v2.5 |
-| explorer | priority | cmd/laguna-s-2.1-free → opencode-zen/union-alpha → cmd/Qwen3.7-Flash → cmd/deepseek-v4-flash-fast |
-| fixer | priority | opencode-zen/nemotron-3.5-lightning-free → cmd/glm-5.3-flash → cmd/deepseek-v4-flash → cmd/deepseek-v4.1-flash |
-| observer | priority | cmd/glm-5.3-flash → cmd/deepseek-v4-flash-vision-exp → opencode-zen/mimo-v2.5-free |
-| skeptic | priority | opencode-zen/muse-spark-1.2-contributor-free → opencode-zen/nemotron-3-ultra-free → cmd/Qwen3.7-Plus → opencode-zen/opencode/qwen3.7-plus |
 
 ## Removing the omniroute model list from opencode CLI
 
