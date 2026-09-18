@@ -67,6 +67,11 @@ dconf load /com/gexperts/Tilix/ < ~/dotfiles/tilix/tilix.dconf
 - Why: May contain tokens in `hosts.yml`
 - **Decision:** Stow config.yml only, exclude hosts.yml
 
+### OpenCode CLI
+- Location: `~/.config/opencode/opencode.json`
+- Why: Machine-specific absolute paths (`/home/<user>/...` in instructions, skills, plugin URLs); live-edited by the CLI; provider auth lives outside the file (`~/.local/share/opencode/auth.json`)
+- **Decision:** Don't stow. Edit live; port intentional changes here only as a sanitized template if cross-machine sync is ever needed
+
 ---
 
 **Summary:** 22 stowed packages + these excluded = complete coverage
