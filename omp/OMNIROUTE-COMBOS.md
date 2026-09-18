@@ -84,7 +84,7 @@ Applies to balanced preset agents, council balanced presets α/β/γ, `agents.co
 
 1. **Max one non-free `cmd/` (CommandCode) model per chain.** `cmd/` has multiple free models (Laguna S 2.1, Ling 3.0 Flash Sante, LongCat 2.0 — all `:free` tier) plus paid ones (deepseek-v4-flash, qwen3.7-plus, mimo-v2.5-pro, etc.). Stack free cmd/ models as deep cushion, but only ONE non-free cmd/ per chain — a second paid cmd/ won't save you from a CommandCode outage, it just burns budget.
 2. **Paid `cmd/` must precede the final anchor** (unless it IS the final anchor). Paid tiers must fire before the final paygo, or you're not using what you pay for.
-3. **Last entry must be `cmd/deepseek-*` (DeepSeek subscription) or `opencode-zen/` non-free paygo.** Not `nv/`, not `opencode-go/`, not `cline-pass/`, not free. Guarantees a stable, reliable final fallback.
+3. **Last entry must be a paid paygo/subscription anchor: `deepseek/deepseek-*` (DeepSeek platform), `opencode-zen/` non-free, or `cmd/deepseek-*` (DeepSeek subscription).** Not `nv/`, not `opencode-go/`, not `cline-pass/`, not free. Guarantees a stable, reliable final fallback. **Diversify across providers fleet-wide — do not put every chain's anchor on one lane** (2026-09-18: qwen account-gating on Zen briefly stranded all 8 zen anchors; the 4/4 platform↔zen split is the standing layout).
 4. **Free models front, paid models back.** Free tier (any provider) absorbs basic load first; paid tiers saved for hard fallbacks. Multiple `cmd/` free entries allowed as long as they precede any paid one. **Rationale:** free models are unreliable (rate limits, downtime, changing terms, stealth-model identity drift) — front-loading them is a cost-saving measure, not a reliability play. Paid tiers (DeepSeek, opencode-zen) have provider SLAs and are the anchors.
 5. **`nvidia/` models are all free (NVIDIA NIM previews).** They belong in the front free-cushion slot. Zero paid `nvidia/` models exist in the fleet.
 6. **Council/agent blocks mirror the balanced preset exactly:** `agents.council` → orchestrator list. `agents.skeptic` → oracle list. `council.presets.balanced.alpha` → oracle list.
@@ -133,7 +133,7 @@ Example body:
 - **UI combo "Test" false-negatives on reasoning models (2026-09-18).** The test panel's tiny token budget (~10 out-tokens) is consumed entirely by reasoning tokens; providers return 200 but the combo quality gate rejects with `reasoning consumed N/N tokens — no content output` and the slot shows "error" in ~ms. Reproduced: `max_tokens=10` → `finish=length`, empty content; `max_tokens=200` → clean reply. Verify combos via API smoke probes (`POST /v1/chat/completions` with `model=<combo>`, realistic max_tokens) and `~/.omniroute/call_logs/` + `combo trace terminal=` lines in `logs/application/app.log` — not via the UI Test button.
 - **No new combo id? Nothing to refresh downstream.** omp (`models.yml`) and opencode (`opencode.json`) declare combo ids statically; chain *contents* resolve at request time. Only if you create/rename a combo id do clients need updating (`omniroute setup-opencode` regenerates the opencode provider block; add the id to `omp/.omp/agent/models.yml` by hand).
 
-## Combo inventory (2026-09-18, v4 — cheap role-aligned zen anchors)
+## Combo inventory (2026-09-18, v5 — dual-provider role-aligned paygo anchors)
 
 All six current Zen limited-time free models have role-aligned slots (403/500 watch slots, cost $0 when the gate lifts they light up). **Terminal anchors were rebuilt 2026-09-18 against the Zen price list + live probes:** the `opencode-zen/opencode/qwen3.7-plus` anchor is DEAD for this workspace at the ACCOUNT level — a full valid key returns `402 requires an opencode API key` / `401 not-supported` for qwen models while `glm-*` and `deepseek-*` serve 200 on the same key (workspace model-access gating). Anchors now sit on the cheapest SERVING zen paygo model that fits each role: `deepseek-v4-flash` $0.14/$0.28 (text lanes), `deepseek-v4-flash-vision-exp` $0.14/$0.28 (vision lanes designer/observer), `glm-5.3-flash` $0.15/$0.50 (reasoning lanes). Oracle's old `glm-5.2` anchor was $1.40/$4.40 for a WEAKER model (DeepSWE 46.2 vs glm-5.3-flash 63.4) — 10× spend cut. `nvidia/deepseek-ai/deepseek-v4-pro-0813` pruned from static-best-free (400 not in catalog).
 
@@ -152,7 +152,7 @@ All six current Zen limited-time free models have role-aligned slots (403/500 wa
 | orchestrator | 5 | zen | opencode-zen/nemotron-3.5-lightning-free | free | 403 watch; 2nd lane |
 | orchestrator | 6 | zen | opencode-zen/mimo-v2.5-free | free | timeout watch; general-aligned, last free |
 | orchestrator | 7 | cmd | Qwen/Qwen3.8-Flash | paid | single cmd/ sub (Code Arena R2) |
-| orchestrator | 8 | zen | opencode-zen/glm-5.3-flash | paid | terminal anchor — $0.15/$0.50 planning ✅ |
+| orchestrator | 8 | deepseek | deepseek/deepseek-flash | paid | terminal anchor — platform V4.1-Flash (TB 2.1 90.6), cache-hit $0.003/M ✅ |
 | oracle | 1 | or | nvidia/nemotron-3-ultra-550b-a55b:free | free | GPQA 87.9 |
 | oracle | 2 | zen | opencode-zen/nemotron-3-ultra-free | free | 403 watch; 2nd lane |
 | oracle | 3 | nvidia | moonshotai/kimi-k3 | free | Agent Arena Rank 1, DeepSWE 69% |
@@ -165,13 +165,13 @@ All six current Zen limited-time free models have role-aligned slots (403/500 wa
 | designer | 3 | zen | opencode-zen/mimo-v2.5-free | free | timeout watch; general-aligned |
 | designer | 4 | cmd | z-ai/glm-5.3-flash | paid | #1 Image-to-WebDev 1588 ELO |
 | designer | 5 | cmd | deepseek/deepseek-v4-flash-vision-exp | paid | vision OCR (2nd paid cmd/ — vision exception) |
-| designer | 6 | zen | opencode-zen/deepseek-v4-flash-vision-exp | paid | terminal anchor — $0.14/$0.28 VISION ✅ |
+| designer | 6 | deepseek | deepseek/deepseek-flash | paid | terminal anchor — platform V4.1-Flash, vision ✓ (off-peak $0.075/$0.30) ✅ |
 | librarian | 1 | cmd | inclusionai/ling-3.0-flash-sante:free | free | health-tuned |
 | librarian | 2 | or | inclusionai/ling-3.0-flash-fin:free | free | finance-tuned |
 | librarian | 3 | zen | opencode-zen/ling-3.0-flash-fin-free | free | 403 watch; 2nd lane (dup intentional) |
 | librarian | 4 | or | dots-studio/dots-3-note-preview:free | free | 280B MoE, 512K ctx |
 | librarian | 5 | cmd | xiaomi/mimo-v2.5 | paid | single cmd/ sub, 98% discount |
-| librarian | 6 | zen | opencode-zen/deepseek-v4-flash | paid | terminal anchor — $0.14/$0.28 cheapest ✅ |
+| librarian | 6 | deepseek | deepseek/deepseek-flash | paid | terminal anchor — platform, cache-hit $0.003/M for repetitive doc context ✅ |
 | explorer | 1 | cmd | poolside/laguna-s-2.1-free | free | 256K ctx |
 | explorer | 2 | or | nvidia/nemotron-3.5-lightning:free | free | |
 | explorer | 3 | or | cohere/north-mini-code:free | free | 30B/3B agentic code |
@@ -187,7 +187,7 @@ All six current Zen limited-time free models have role-aligned slots (403/500 wa
 | fixer | 3 | zen | opencode-zen/muse-spark-1.3-contributor-free | free | 500 watch; reasoning-aligned |
 | fixer | 4 | zen | opencode-zen/mimo-v2.5-free | free | timeout watch; code-aligned, last free |
 | fixer | 5 | cmd | Qwen/Qwen3.7-Flash | paid | single cmd/ sub (weak public data) |
-| fixer | 6 | zen | opencode-zen/deepseek-v4-flash | paid | terminal anchor — $0.14/$0.28 ✅ (unchanged) |
+| fixer | 6 | deepseek | deepseek/deepseek-flash | paid | terminal anchor — platform V4.1-Flash (beats zen V4-flash on Terminal-Bench) ✅ |
 | static-best-free | 1 | zen | opencode-zen/big-pickle … muse-spark-1.3-contributor-free (6 slots) | free | 403/500 watch (CLI gate) |
 | static-best-free | 7 | cmd | meituan/LongCat-2.0:free | free | serving |
 | static-best-free | 8 | cmd | poolside/laguna-s-2.1-free | free | serving |
@@ -196,14 +196,16 @@ All six current Zen limited-time free models have role-aligned slots (403/500 wa
 | static-best-free | 11 | nvidia | z-ai/glm-5.3 | free | serving |
 | static-best-free | 12 | nvidia | moonshotai/kimi-k3 | free | serving |
 
+**Key changes v4 → v5 (2026-09-18, provider diversification):**
+- After v4, every anchor sat on Zen — a single-provider choke point. The same-day qwen account-gating proved one lane's policy can strand every chain. Split 4/4 across providers: `orchestrator`/`designer`/`librarian`/`fixer` → **DeepSeek platform** (`deepseek/deepseek-flash`, direct `api.deepseek.com`, conn `0b19ff35-…`); `skeptic`/`oracle`/`explorer`/`observer` stay on Zen.
+- `deepseek-flash` = model version **DeepSeek-V4.1-Flash** (Terminal-Bench 2.1 90.6) — a capability upgrade over the zen `deepseek-v4-flash` (V4) it displaced; 1M ctx, vision ✓, peak $0.3/$1.2 (off-peak half), cache-hit input $0.003/$0.022 per M. Both vision roles covered: designer = platform V4.1-Flash vision ✓, observer = zen `v4-flash-vision-exp`.
+- Legacy `deepseek/deepseek-v4-flash` is retired (400 not-in-catalog) — always `deepseek/deepseek-flash`.
+- Provider lanes: `deepseek/` = platform, `cmd/deepseek/*` = CommandCode sub, `opencode-zen/deepseek-*` = Zen paygo — three distinct billing paths for the same model family.
+
 **Key changes v3 → v4 (2026-09-18, spend + role alignment):**
-- All 7 dead `opencode-zen/opencode/qwen3.7-plus` anchors (qwen is account-gated 401/402 on this key — see gotcha below) replaced with the cheapest SERVING zen paygo model that fits the role.
-- skeptic/orchestrator/oracle anchors → `glm-5.3-flash` ($0.15/$0.50); oracle cut 10× (was glm-5.2 $1.40/$4.40, a weaker model).
-- designer/observer anchors → `deepseek-v4-flash-vision-exp` ($0.14/$0.28, adds the vision those roles require; the qwen anchor had none).
-- librarian/explorer anchors → `deepseek-v4-flash` ($0.14/$0.28 cheapest serving).
-- fixer anchor unchanged (`deepseek-v4-flash` — already the ideal role/cost match).
+- 7 dead `opencode-zen/opencode/qwen3.7-plus` anchors (qwen is account-gated 401/402 on this key — see gotcha above) replaced with the cheapest serving zen paygo model per role; oracle's glm-5.2 cut 10× to glm-5.3-flash.
 - static-best-free: `nvidia/deepseek-v4-pro-0813` pruned (400 not-in-catalog), 13→12 entries.
-- designer + observer carry 2 paid cmd/ + a paid zen vision anchor (vision exception: Image-to-WebDev engine + vision OCR + vision anchor).
+- designer + observer carry 2 paid cmd/ + a paid vision anchor (vision exception: Image-to-WebDev engine + vision OCR + vision anchor).
 
 ## Client references (read-only context)
 
