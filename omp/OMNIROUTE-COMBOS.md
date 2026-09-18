@@ -121,26 +121,21 @@ Example body:
 }
 ```
 
-## Known gotchas (2026-09-17)
+## Known gotchas (2026-09-18)
 
 - **DeepSeek platform rename (2026-09-18): `deepseek-flash` is canonical (model version DeepSeek-V4.1-Flash).** Legacy platform ids `deepseek/deepseek-v4-flash` and `deepseek/deepseek-v4-flash-vision-exp` are retired — requests alias to V4.1-Flash where still accepted, but `deepseek/deepseek-v4-flash` already 400s via omniroute (not in active catalog). **Scope: DeepSeek platform lane only** — `cmd/deepseek/*`, `opencode-zen/deepseek-*`, `nvidia/deepseek-ai/*` ids unchanged. Platform specs: 1M ctx, 384K max out, thinking + non-thinking modes, vision ✓ on flash (pro has no vision), Responses + Anthropic APIs ✓. Pro keeps `deepseek-v4-pro` (DeepSeek-V4-Pro-0813). omos `opencode.json` build agent updated to `deepseek/deepseek-flash`; plan agent stays `deepseek/deepseek-v4-pro`.
 - **OpenCode free models are gate-locked to the OpenCode CLI at the SERVER — confirmed at source 2026-09-17.** OmniRoute ships TWO OpenCode lanes: `opencode` (`oc`, no-auth public endpoint) and `opencode-zen` (API key). BOTH now 403 on free models with `FreeTierError "OpenCode's free tier can only be used from within OpenCode"` — tested with a valid Zen key, with no key (no-auth lane), and with CLI headers replicated (`x-opencode-client/session/request/project`, UA). The gate is evaluated server-side per request; only the OpenCode CLI's own session binding passes it. Consequence: `oc/*` and `zen *-free` ids are dead weight in omniroute combos — do NOT front-load them; keep `oc` in blockedProviders. Custom model entries for the free ids are already registered on the zen connection, so if the gate ever lifts they light up with no reconfig.
 - **Zen paid lane + omniroute gotcha:** omniroute's zen connection needs the FULL Zen key. A truncated/partial key silently yields `402 "requires an opencode API key"` at request time while `test-connection` still reports what looks like success. If zen suddenly 402s in omniroute: (1) GET `/api/providers/client`, compare stored `apiKey` length against the real key in `~/.local/share/opencode/auth.json` (`opencode.key`), (2) PATCH `/api/providers/<conn-id>` with the full key, (3) POST `/api/providers/<conn-id>/test` until `testStatus: active`. 2026-09-17: fixed exactly this — omniroute had a stale 20-char key; restored a full 67-char key and paid zen models (e.g. `opencode-zen/glm-5.3-flash`, `opencode-zen/qwen3.6-plus`) returned to 200. **A freshly minted Zen key was tested the same day: paid 200, free models still `403 FreeTierError` — the free-tier CLI-only gate applies to every API key, new or old.**
+- **Zen qwen models are ACCOUNT-gated (2026-09-18).** On this workspace's key, every `*-qwen*` id (qwen3.5-plus, qwen3.6-plus, nested `opencode/qwen3.7-plus`) returns `402 requires an opencode API key` / `401 Model opencode/qwen3.7-plus is not supported` — while `glm-5.2/5.3-flash` and `deepseek-v4-flash/vision-exp` serve 200 **on the same key in the same second**. Distinguishing from the truncation gotcha above: truncated key = testStatus `expired` + ALL paid models 402; account gating = testStatus `active` + only the gated family 402. Zen admin panel "Model access" (per-workspace enable/disable) is the lever; we did not enable qwen there. Do NOT use qwen ids as anchors. Also: 2026-09-18 a PATCH with `auth.json`'s `opencode.key` turned out to be a DIFFERENT key than the one installed in omniroute (both 67 chars, different prefixes) — check the key actually matches before "restoring" it, and always re-probe a known-good paid model afterwards.
 - **NVIDIA NIM added Z.ai free endpoints (2026-09-16)**: `nvidia/z-ai/glm-5.3` (753B text MoE, sparse attention, reasoning+tools) and `nvidia/z-ai/glm-5.3-flash` (320B/18B-active multimodal). Probed 2026-09-17: glm-5.3 → 200; glm-5.3-flash → 000/504 (endpoint live in catalog but unstable via omniroute — retry before trusting).
 - **`nvidia/deepseek-ai/deepseek-v4-flash-0731` deprecated upstream** (per NVIDIA, removal pending). Removed from static-best-free 2026-09-17, replaced by `nvidia/z-ai/glm-5.3`. (deepseek-v4-pro-0813 still live, kept.)
 - **CommandCode free tier works from omniroute**: `cmd/meituan/LongCat-2.0:free`, `cmd/inclusionai/ling-3.0-flash-sante:free` → 200; `cmd/poolside/laguna-s-2.1-free` → 429 under load but alive.
 - **UI combo "Test" false-negatives on reasoning models (2026-09-18).** The test panel's tiny token budget (~10 out-tokens) is consumed entirely by reasoning tokens; providers return 200 but the combo quality gate rejects with `reasoning consumed N/N tokens — no content output` and the slot shows "error" in ~ms. Reproduced: `max_tokens=10` → `finish=length`, empty content; `max_tokens=200` → clean reply. Verify combos via API smoke probes (`POST /v1/chat/completions` with `model=<combo>`, realistic max_tokens) and `~/.omniroute/call_logs/` + `combo trace terminal=` lines in `logs/application/app.log` — not via the UI Test button.
 - **No new combo id? Nothing to refresh downstream.** omp (`models.yml`) and opencode (`opencode.json`) declare combo ids statically; chain *contents* resolve at request time. Only if you create/rename a combo id do clients need updating (`omniroute setup-opencode` regenerates the opencode provider block; add the id to `omp/.omp/agent/models.yml` by hand).
 
-## Combo inventory (2026-09-17, zen-free-lanes-cleansed)
+## Combo inventory (2026-09-18, v4 — cheap role-aligned zen anchors)
 
-
-
-**Zen connection custom models:** big-pickle, mimo-v2.5-free, ling-3.0-flash-fin-free, nemotron-3-ultra-free, nemotron-3.5-lightning-free, muse-spark-1.3-contributor-free — added so the ids are addressable for routing and auto-documented; all still 403/500 live (CLI gate) except big-pickle + mimo-v2.5-free which time out (slow upstream). (`union-alpha` removed 2026-09-18 — 401 not-supported upstream.) Stale builtin entries (hy3-free, deepseek-v4-flash-free, muse-spark-1.2*) remain in omniroute's builtin list but are dead upstream.
-
-## Combo inventory (2026-09-18, v3 — Zen-free aligned)
-
-All six current Zen limited-time free models have role-aligned slots. `union-alpha` removed everywhere (401 not-supported upstream). Zen paid anchor corrected to nested id `opencode-zen/opencode/qwen3.7-plus`. `nvidia/deepseek-ai/deepseek-v4-pro-0813` is gone upstream (404) — replaced in oracle by Zen-free reasoning duplicates.
+All six current Zen limited-time free models have role-aligned slots (403/500 watch slots, cost $0 when the gate lifts they light up). **Terminal anchors were rebuilt 2026-09-18 against the Zen price list + live probes:** the `opencode-zen/opencode/qwen3.7-plus` anchor is DEAD for this workspace at the ACCOUNT level — a full valid key returns `402 requires an opencode API key` / `401 not-supported` for qwen models while `glm-*` and `deepseek-*` serve 200 on the same key (workspace model-access gating). Anchors now sit on the cheapest SERVING zen paygo model that fits each role: `deepseek-v4-flash` $0.14/$0.28 (text lanes), `deepseek-v4-flash-vision-exp` $0.14/$0.28 (vision lanes designer/observer), `glm-5.3-flash` $0.15/$0.50 (reasoning lanes). Oracle's old `glm-5.2` anchor was $1.40/$4.40 for a WEAKER model (DeepSWE 46.2 vs glm-5.3-flash 63.4) — 10× spend cut. `nvidia/deepseek-ai/deepseek-v4-pro-0813` pruned from static-best-free (400 not in catalog).
 
 | combo | slot | provider | model | tier | notes |
 |---|---|---|---|---|---|
@@ -149,7 +144,7 @@ All six current Zen limited-time free models have role-aligned slots. `union-alp
 | skeptic | 3 | nvidia | moonshotai/kimi-k3 | free | Agent Arena Rank 1, DeepSWE 69% |
 | skeptic | 4 | zen | opencode-zen/muse-spark-1.3-contributor-free | free | 500 watch; reasoning-aligned |
 | skeptic | 5 | cmd | Qwen/Qwen3.7-Plus | paid | single cmd/ sub |
-| skeptic | 6 | zen | opencode-zen/opencode/qwen3.7-plus | paid | terminal anchor — zen paygo ✅ |
+| skeptic | 6 | zen | opencode-zen/glm-5.3-flash | paid | terminal anchor — $0.15/$0.50 reasoning ✅ |
 | orchestrator | 1 | cmd | meituan/LongCat-2.0:free | free | 1M ctx, high tool-call |
 | orchestrator | 2 | or | nvidia/nemotron-3-super-120b-a12b:free | free | 120B-A12B agentic |
 | orchestrator | 3 | nvidia | nvidia/nemotron-3-super-120b-a12b | free | NIM preview (same model, second lane) |
@@ -157,61 +152,58 @@ All six current Zen limited-time free models have role-aligned slots. `union-alp
 | orchestrator | 5 | zen | opencode-zen/nemotron-3.5-lightning-free | free | 403 watch; 2nd lane |
 | orchestrator | 6 | zen | opencode-zen/mimo-v2.5-free | free | timeout watch; general-aligned, last free |
 | orchestrator | 7 | cmd | Qwen/Qwen3.8-Flash | paid | single cmd/ sub (Code Arena R2) |
-| orchestrator | 8 | zen | opencode-zen/opencode/qwen3.7-plus | paid | terminal anchor — zen paygo ✅ |
+| orchestrator | 8 | zen | opencode-zen/glm-5.3-flash | paid | terminal anchor — $0.15/$0.50 planning ✅ |
 | oracle | 1 | or | nvidia/nemotron-3-ultra-550b-a55b:free | free | GPQA 87.9 |
 | oracle | 2 | zen | opencode-zen/nemotron-3-ultra-free | free | 403 watch; 2nd lane |
 | oracle | 3 | nvidia | moonshotai/kimi-k3 | free | Agent Arena Rank 1, DeepSWE 69% |
 | oracle | 4 | zen | opencode-zen/muse-spark-1.3-contributor-free | free | 500 watch; reasoning-aligned |
 | oracle | 5 | zen | opencode-zen/big-pickle | free | timeout watch; SWE Atlas 50.8% QnA |
 | oracle | 6 | cmd | meta/muse-spark-1.3-contributor | paid | single cmd/ sub (cheap) |
-| oracle | 7 | zen | opencode-zen/glm-5.2 | paid | SWE-rebench 62.9% Pass@5 ✅ |
+| oracle | 7 | zen | opencode-zen/glm-5.3-flash | paid | terminal anchor — $0.15/$0.50 (was glm-5.2 $1.40/$4.40) ✅ |
 | designer | 1 | or | thinkingmachines/inkling-small:free | free | multimodal reasoning |
 | designer | 2 | nvidia | moonshotai/kimi-k3 | free | #1 front-end synthesis |
 | designer | 3 | zen | opencode-zen/mimo-v2.5-free | free | timeout watch; general-aligned |
 | designer | 4 | cmd | z-ai/glm-5.3-flash | paid | #1 Image-to-WebDev 1588 ELO |
 | designer | 5 | cmd | deepseek/deepseek-v4-flash-vision-exp | paid | vision OCR (2nd paid cmd/ — vision exception) |
-| designer | 6 | zen | opencode-zen/opencode/qwen3.7-plus | paid | terminal anchor — zen paygo ✅ |
+| designer | 6 | zen | opencode-zen/deepseek-v4-flash-vision-exp | paid | terminal anchor — $0.14/$0.28 VISION ✅ |
 | librarian | 1 | cmd | inclusionai/ling-3.0-flash-sante:free | free | health-tuned |
 | librarian | 2 | or | inclusionai/ling-3.0-flash-fin:free | free | finance-tuned |
 | librarian | 3 | zen | opencode-zen/ling-3.0-flash-fin-free | free | 403 watch; 2nd lane (dup intentional) |
 | librarian | 4 | or | dots-studio/dots-3-note-preview:free | free | 280B MoE, 512K ctx |
 | librarian | 5 | cmd | xiaomi/mimo-v2.5 | paid | single cmd/ sub, 98% discount |
-| librarian | 6 | zen | opencode-zen/opencode/qwen3.7-plus | paid | terminal anchor — zen paygo ✅ |
+| librarian | 6 | zen | opencode-zen/deepseek-v4-flash | paid | terminal anchor — $0.14/$0.28 cheapest ✅ |
 | explorer | 1 | cmd | poolside/laguna-s-2.1-free | free | 256K ctx |
 | explorer | 2 | or | nvidia/nemotron-3.5-lightning:free | free | |
 | explorer | 3 | or | cohere/north-mini-code:free | free | 30B/3B agentic code |
 | explorer | 4 | zen | opencode-zen/big-pickle | free | timeout watch; SWE Atlas QnA-aligned |
 | explorer | 5 | cmd | deepseek/deepseek-v4-flash-fast | paid | single cmd/ sub, high-velocity |
-| explorer | 6 | zen | opencode-zen/opencode/qwen3.7-plus | paid | terminal anchor — zen paygo ✅ |
+| explorer | 6 | zen | opencode-zen/deepseek-v4-flash | paid | terminal anchor — $0.14/$0.28 cheapest ✅ |
 | observer | 1 | or | thinkingmachines/inkling:free | free | multimodal 975B/41B |
 | observer | 2 | cmd | z-ai/glm-5.3-flash | paid | #1 Image-to-WebDev |
 | observer | 3 | cmd | deepseek/deepseek-v4-flash-vision-exp | paid | vision OCR (2nd paid cmd/ — vision exception) |
-| observer | 4 | zen | opencode-zen/opencode/qwen3.7-plus | paid | terminal anchor — zen paygo ✅ |
+| observer | 4 | zen | opencode-zen/deepseek-v4-flash-vision-exp | paid | terminal anchor — $0.14/$0.28 VISION ✅ |
 | fixer | 1 | or | nex-agi/nex-n2.5-mini:free | free | self-verifying agentic |
 | fixer | 2 | cmd | poolside/laguna-s-2.1-free | free | instant first-pass edits |
 | fixer | 3 | zen | opencode-zen/muse-spark-1.3-contributor-free | free | 500 watch; reasoning-aligned |
 | fixer | 4 | zen | opencode-zen/mimo-v2.5-free | free | timeout watch; code-aligned, last free |
-| fixer | 5 | cmd | Qwen/Qwen3.7-Flash | paid | single cmd/ sub (unbenchmarked for code) |
-| fixer | 6 | zen | opencode-zen/deepseek-v4-flash | paid | terminal anchor — DeepSeek ✅ |
-| static-best-free | 1 | cmd | meituan/LongCat-2.0:free | free | serving |
-| static-best-free | 2 | cmd | poolside/laguna-s-2.1-free | free | serving |
-| static-best-free | 3 | nvidia | nvidia/nemotron-3-super-120b-a12b | free | serving |
-| static-best-free | 4 | nvidia | nvidia/nemotron-3-ultra-550b-a55b | free | serving |
-| static-best-free | 5 | nvidia | deepseek-ai/deepseek-v4-pro-0813 | free | STALE — 404 upstream, prune next |
-| static-best-free | 6 | nvidia | z-ai/glm-5.3 | free | serving |
-| static-best-free | 7 | nvidia | moonshotai/kimi-k3 | free | serving |
+| fixer | 5 | cmd | Qwen/Qwen3.7-Flash | paid | single cmd/ sub (weak public data) |
+| fixer | 6 | zen | opencode-zen/deepseek-v4-flash | paid | terminal anchor — $0.14/$0.28 ✅ (unchanged) |
+| static-best-free | 1 | zen | opencode-zen/big-pickle … muse-spark-1.3-contributor-free (6 slots) | free | 403/500 watch (CLI gate) |
+| static-best-free | 7 | cmd | meituan/LongCat-2.0:free | free | serving |
+| static-best-free | 8 | cmd | poolside/laguna-s-2.1-free | free | serving |
+| static-best-free | 9 | nvidia | nvidia/nemotron-3-super-120b-a12b | free | serving |
+| static-best-free | 10 | nvidia | nvidia/nemotron-3-ultra-550b-a55b | free | serving |
+| static-best-free | 11 | nvidia | z-ai/glm-5.3 | free | serving |
+| static-best-free | 12 | nvidia | moonshotai/kimi-k3 | free | serving |
 
-**Key changes v2 → v3:**
-- skeptic: +zen/nemotron-3-ultra-free, +zen/muse-spark-1.3-contributor-free, +nv/kimi-k3; anchor fixed to nested `opencode-zen/opencode/qwen3.7-plus`
-- orchestrator: +zen/nemotron-3.5-lightning-free, +zen/mimo-v2.5-free; anchor fixed to nested id
-- oracle: `nv/deepseek-v4-pro-0813` removed (404 upstream) → replaced by zen/muse-spark-1.3-contributor-free + zen/big-pickle + zen/nemotron-3-ultra-free
-- designer: +nv/kimi-k3, +zen/mimo-v2.5-free; anchor fixed to nested id
-- librarian: +zen/ling-3.0-flash-fin-free (2nd lane); anchor fixed to nested id
-- explorer: +zen/big-pickle; anchor fixed to nested id
-- observer: anchor fixed to nested id
-- fixer: +zen/mimo-v2.5-free, +zen/muse-spark-1.3-contributor-free; paid sub glm-5.3-flash → Qwen3.7-Flash (unbenchmarked for code); big-pickle removed
-- static-best-free: `union-alpha` removed (401); `nv/deepseek-v4-pro-0813` flagged STALE
-- designer + observer carry 2 paid cmd/ (vision exception: Image-to-WebDev engine + vision OCR both required; approved)
+**Key changes v3 → v4 (2026-09-18, spend + role alignment):**
+- All 7 dead `opencode-zen/opencode/qwen3.7-plus` anchors (qwen is account-gated 401/402 on this key — see gotcha below) replaced with the cheapest SERVING zen paygo model that fits the role.
+- skeptic/orchestrator/oracle anchors → `glm-5.3-flash` ($0.15/$0.50); oracle cut 10× (was glm-5.2 $1.40/$4.40, a weaker model).
+- designer/observer anchors → `deepseek-v4-flash-vision-exp` ($0.14/$0.28, adds the vision those roles require; the qwen anchor had none).
+- librarian/explorer anchors → `deepseek-v4-flash` ($0.14/$0.28 cheapest serving).
+- fixer anchor unchanged (`deepseek-v4-flash` — already the ideal role/cost match).
+- static-best-free: `nvidia/deepseek-v4-pro-0813` pruned (400 not-in-catalog), 13→12 entries.
+- designer + observer carry 2 paid cmd/ + a paid zen vision anchor (vision exception: Image-to-WebDev engine + vision OCR + vision anchor).
 
 ## Client references (read-only context)
 
