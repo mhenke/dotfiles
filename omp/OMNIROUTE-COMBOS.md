@@ -129,6 +129,7 @@ Example body:
 - **NVIDIA NIM added Z.ai free endpoints (2026-09-16)**: `nvidia/z-ai/glm-5.3` (753B text MoE, sparse attention, reasoning+tools) and `nvidia/z-ai/glm-5.3-flash` (320B/18B-active multimodal). Probed 2026-09-17: glm-5.3 → 200; glm-5.3-flash → 000/504 (endpoint live in catalog but unstable via omniroute — retry before trusting).
 - **`nvidia/deepseek-ai/deepseek-v4-flash-0731` deprecated upstream** (per NVIDIA, removal pending). Removed from static-best-free 2026-09-17, replaced by `nvidia/z-ai/glm-5.3`. (deepseek-v4-pro-0813 still live, kept.)
 - **CommandCode free tier works from omniroute**: `cmd/meituan/LongCat-2.0:free`, `cmd/inclusionai/ling-3.0-flash-sante:free` → 200; `cmd/poolside/laguna-s-2.1-free` → 429 under load but alive.
+- **UI combo "Test" false-negatives on reasoning models (2026-09-18).** The test panel's tiny token budget (~10 out-tokens) is consumed entirely by reasoning tokens; providers return 200 but the combo quality gate rejects with `reasoning consumed N/N tokens — no content output` and the slot shows "error" in ~ms. Reproduced: `max_tokens=10` → `finish=length`, empty content; `max_tokens=200` → clean reply. Verify combos via API smoke probes (`POST /v1/chat/completions` with `model=<combo>`, realistic max_tokens) and `~/.omniroute/call_logs/` + `combo trace terminal=` lines in `logs/application/app.log` — not via the UI Test button.
 - **No new combo id? Nothing to refresh downstream.** omp (`models.yml`) and opencode (`opencode.json`) declare combo ids statically; chain *contents* resolve at request time. Only if you create/rename a combo id do clients need updating (`omniroute setup-opencode` regenerates the opencode provider block; add the id to `omp/.omp/agent/models.yml` by hand).
 
 ## Combo inventory (2026-09-17, zen-free-lanes-cleansed)
@@ -188,9 +189,9 @@ All six current Zen limited-time free models have role-aligned slots. `union-alp
 | observer | 4 | zen | opencode-zen/opencode/qwen3.7-plus | paid | terminal anchor — zen paygo ✅ |
 | fixer | 1 | or | nex-agi/nex-n2.5-mini:free | free | self-verifying agentic |
 | fixer | 2 | cmd | poolside/laguna-s-2.1-free | free | instant first-pass edits |
-| fixer | 3 | zen | opencode-zen/big-pickle | free | timeout watch; code-QnA-aligned |
+| fixer | 3 | zen | opencode-zen/muse-spark-1.3-contributor-free | free | 500 watch; reasoning-aligned |
 | fixer | 4 | zen | opencode-zen/mimo-v2.5-free | free | timeout watch; code-aligned, last free |
-| fixer | 5 | cmd | z-ai/glm-5.3-flash | paid | single cmd/ sub, DeepSWE 63% |
+| fixer | 5 | cmd | Qwen/Qwen3.7-Flash | paid | single cmd/ sub (unbenchmarked for code) |
 | fixer | 6 | zen | opencode-zen/deepseek-v4-flash | paid | terminal anchor — DeepSeek ✅ |
 | static-best-free | 1 | cmd | meituan/LongCat-2.0:free | free | serving |
 | static-best-free | 2 | cmd | poolside/laguna-s-2.1-free | free | serving |
@@ -208,7 +209,7 @@ All six current Zen limited-time free models have role-aligned slots. `union-alp
 - librarian: +zen/ling-3.0-flash-fin-free (2nd lane); anchor fixed to nested id
 - explorer: +zen/big-pickle; anchor fixed to nested id
 - observer: anchor fixed to nested id
-- fixer: +zen/big-pickle, +zen/mimo-v2.5-free
+- fixer: +zen/mimo-v2.5-free, +zen/muse-spark-1.3-contributor-free; paid sub glm-5.3-flash → Qwen3.7-Flash (unbenchmarked for code); big-pickle removed
 - static-best-free: `union-alpha` removed (401); `nv/deepseek-v4-pro-0813` flagged STALE
 - designer + observer carry 2 paid cmd/ (vision exception: Image-to-WebDev engine + vision OCR both required; approved)
 
