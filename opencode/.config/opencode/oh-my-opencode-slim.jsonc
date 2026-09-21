@@ -14,7 +14,7 @@
   "presets": {
     "balanced": {
       "orchestrator": {
-        "model": "omniroute/orchestrator",
+        "model": ["opencode/mimo-v2.5-free", "omniroute/orchestrator"],
         "temperature": 0.4,
         "skills": [
           "*"
@@ -25,7 +25,7 @@
         ]
       },
       "oracle": {
-        "model": "omniroute/oracle",
+        "model": ["opencode/muse-spark-1.3-contributor-free", "omniroute/oracle"],
         "temperature": 0.4,
         "variant": "high",
         "skills": [
@@ -34,14 +34,14 @@
         "mcps": []
       },
       "designer": {
-        "model": "omniroute/designer",
+        "model": ["opencode/mimo-v2.5-free", "omniroute/designer"],
         "temperature": 0.3,
         "variant": "xhigh",
         "skills": [],
         "mcps": []
       },
       "librarian": {
-        "model": "omniroute/librarian",
+        "model": ["opencode/mimo-v2.5-free", "omniroute/librarian"],
         "temperature": 0.2,
         "skills": [],
         "mcps": [
@@ -51,28 +51,28 @@
         ]
       },
       "explorer": {
-        "model": "omniroute/explorer",
+        "model": ["opencode/nemotron-3.5-lightning-free", "omniroute/explorer"],
         "temperature": 0.2,
         "skills": [],
         "mcps": []
       },
       "fixer": {
-        "model": "omniroute/fixer",
+        "model": ["opencode/mimo-v2.5-free", "omniroute/fixer"],
         "temperature": 0.2,
         "skills": [],
         "mcps": []
       },
       "observer": {
-        "model": "omniroute/observer",
+        "model": ["opencode/muse-spark-1.3-contributor-free", "omniroute/observer"],
         "temperature": 0.2,
         "skills": [],
         "mcps": []
       },
       "council": {
-        "model": "omniroute/orchestrator"
+        "model": ["opencode/mimo-v2.5-free", "omniroute/orchestrator"]
       },
       "skeptic": {
-        "model": "omniroute/skeptic",
+        "model": ["opencode/nemotron-3-ultra-free", "omniroute/skeptic"],
         "variant": "max"
       }
     },
@@ -81,7 +81,7 @@
         "model": [
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
-          "nvidia/stepfun-ai/laguna-xs-2.1",
+          "nvidia/poolside/laguna-xs-2.1",
           "nvidia/moonshotai/kimi-k3"
         ],
         "temperature": 0.4,
@@ -95,7 +95,7 @@
       },
       "oracle": {
         "model": [
-          "deepseek-ai/deepseek-v4-flash-0731",
+          "nvidia/deepseek-ai/deepseek-v4-flash-0731",
           "nvidia/moonshotai/kimi-k3",
           "nvidia/mistralai/mistral-nemotron"
         ],
@@ -131,7 +131,7 @@
         "model": [
           "nvidia/moonshotai/kimi-k3",
           "nvidia/mistralai/mistral-nemotron",
-          "deepseek-ai/deepseek-v4-flash-0731"
+          "nvidia/deepseek-ai/deepseek-v4-flash-0731"
         ],
         "temperature": 0.3,
         "skills": [],
@@ -139,7 +139,7 @@
       },
       "fixer": {
         "model": [
-          "nvidia/nemotron-3.5-lightning-30b-a3b"
+          "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b"
         ],
         "temperature": 0.2,
         "skills": [],
@@ -158,7 +158,7 @@
         "model": [
           "nvidia/nvidia/nemotron-3-super-120b-a12b",
           "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
-          "nvidia/stepfun-ai/laguna-xs-2.1",
+          "nvidia/poolside/laguna-xs-2.1",
           "nvidia/moonshotai/kimi-k3"
         ]
       },
@@ -171,10 +171,10 @@
         "variant": "max"
       }
     },
+    // Zen free-tier models ARE available — but only from inside the OpenCode CLI (server-side gate; raw API calls 403 FreeTierError even with the CLI's own key).
     "opencode-zen-free": {
-      "_deprecated": "2026-09-17 — all opencode/* free ids are gate-locked to the OpenCode CLI at the server (FreeTierError 403). This preset is kept commented out as a historical reference. Use the 'balanced' preset with omniroute/<role> combo chains instead.",
       "orchestrator": {
-        "model": ["opencode/nemotron-3-ultra-free", "opencode/big-pickle", "opencode/muse-spark-1.2-contributor-free"],
+        "model": ["opencode/nemotron-3-ultra-free", "opencode/big-pickle", "opencode/muse-spark-1.3-contributor-free"],
         "temperature": 0.4
       },
       "explorer": { "model": "opencode/mimo-v2.5-free", "temperature": 0.2 },
@@ -182,25 +182,25 @@
       "designer":  { "model": "opencode/mimo-v2.5-free", "temperature": 0.3 },
       "fixer":     { "model": "opencode/mimo-v2.5-free", "temperature": 0.2 },
       "observer":  { "model": "opencode/mimo-v2.5-free", "temperature": 0.2 },
-      "council":   { "model": "opencode/hy3-free" },
-      "skeptic":   { "model": ["opencode/muse-spark-1.2-contributor-free", "opencode/nemotron-3-ultra-free"] }
+      "council":   { "model": "opencode/mimo-v2.5-free" },
+      "skeptic":   { "model": ["opencode/muse-spark-1.3-contributor-free", "opencode/nemotron-3-ultra-free"] }
     }
   },
   "council": {
     "presets": {
       "balanced": {
         "alpha": {
-          "model": "omniroute/oracle",
+          "model": ["opencode/muse-spark-1.3-contributor-free", "omniroute/oracle"],
           "variant": "high",
           "fallback_models": []
         },
         "beta": {
-          "model": "omniroute/skeptic",
+          "model": ["opencode/nemotron-3-ultra-free", "omniroute/skeptic"],
           "variant": "high",
           "fallback_models": []
         },
         "gamma": {
-          "model": "omniroute/observer",
+          "model": ["opencode/mimo-v2.5-free", "omniroute/observer"],
           "fallback_models": []
         }
       }

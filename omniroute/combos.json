@@ -1,288 +1,381 @@
 [
   {
-    "name": "designer",
+    "name": "static-best-free",
     "models": [
       {
-        "id": "designer-model-1-opencode-zen-mimo-v2-5-free",
+        "id": "static-best-free-model-1-LongCat-2-0-free",
         "kind": "model",
-        "model": "opencode-zen/mimo-v2.5-free",
-        "providerId": "opencode-zen",
-        "weight": 0
-      },
-      {
-        "id": "designer-model-2-nvidia-moonshotai-kimi-k3",
-        "kind": "model",
-        "model": "nvidia/moonshotai/kimi-k3",
-        "providerId": "nvidia",
-        "weight": 0
-      },
-      {
-        "id": "designer-model-3-opencode-zen-big-pickle",
-        "kind": "model",
-        "model": "opencode-zen/big-pickle",
-        "providerId": "opencode-zen",
-        "weight": 0
-      }
-    ],
-    "strategy": "priority",
-    "id": "8772ed55-98dc-45cb-94bb-8d2799cce801",
-    "config": {},
-    "isHidden": false,
-    "sortOrder": 4,
-    "createdAt": "2026-08-31T18:30:09.689Z",
-    "updatedAt": "2026-08-31T20:48:32.161Z",
-    "version": 2
-  },
-  {
-    "name": "explorer",
-    "models": [
-      {
-        "id": "explorer-model-1-opencode-zen-mimo-v2-5-free",
-        "kind": "model",
-        "model": "opencode-zen/mimo-v2.5-free",
-        "providerId": "opencode-zen",
-        "weight": 0
-      },
-      {
-        "id": "explorer-model-2-cmd-deepseek-deepseek-v4-flash",
-        "kind": "model",
-        "model": "cmd/deepseek/deepseek-v4-flash",
-        "providerId": "cmd",
-        "weight": 0
-      }
-    ],
-    "strategy": "priority",
-    "id": "a5ab75d0-dc6c-4776-94c4-aee63319c1aa",
-    "config": {},
-    "isHidden": false,
-    "sortOrder": 6,
-    "createdAt": "2026-08-31T18:30:09.909Z",
-    "updatedAt": "2026-08-31T20:42:05.330Z",
-    "version": 2
-  },
-  {
-    "name": "fixer",
-    "models": [
-      {
-        "id": "fixer-model-1-opencode-zen-mimo-v2-5-free",
-        "kind": "model",
-        "model": "opencode-zen/mimo-v2.5-free",
-        "providerId": "opencode-zen",
-        "weight": 0
-      },
-      {
-        "id": "fixer-model-2-cmd-deepseek-deepseek-v4-flash",
-        "kind": "model",
-        "model": "cmd/deepseek/deepseek-v4-flash",
-        "providerId": "cmd",
-        "weight": 0
-      }
-    ],
-    "strategy": "priority",
-    "id": "0dec46d1-cdcc-4c6d-8b01-707f0c32cf45",
-    "config": {},
-    "isHidden": false,
-    "sortOrder": 8,
-    "createdAt": "2026-08-31T18:30:10.123Z",
-    "updatedAt": "2026-08-31T20:42:05.442Z",
-    "version": 2
-  },
-  {
-    "name": "librarian",
-    "models": [
-      {
-        "id": "librarian-model-1-opencode-zen-mimo-v2-5-free",
-        "kind": "model",
-        "model": "opencode-zen/mimo-v2.5-free",
-        "providerId": "opencode-zen",
-        "weight": 0
-      },
-      {
-        "id": "librarian-model-2-cmd-xiaomi-mimo-v2-5",
-        "kind": "model",
-        "model": "cmd/xiaomi/mimo-v2.5",
+        "model": "cmd/meituan/LongCat-2.0:free",
         "providerId": "cmd",
         "weight": 0
       },
       {
-        "id": "librarian-model-3-opencode-zen-ling-3-0-flash-fin-free",
+        "id": "static-best-free-model-2-laguna-s-2-1-free",
         "kind": "model",
-        "model": "opencode-zen/ling-3.0-flash-fin-free",
-        "providerId": "opencode-zen",
-        "weight": 0
-      }
-    ],
-    "strategy": "priority",
-    "id": "3f95e549-954f-483d-a3e5-41e444eda202",
-    "config": {},
-    "isHidden": false,
-    "sortOrder": 5,
-    "createdAt": "2026-08-31T18:30:09.804Z",
-    "updatedAt": "2026-08-31T20:49:03.892Z",
-    "version": 2
-  },
-  {
-    "name": "observer",
-    "models": [
-      {
-        "id": "observer-model-1-opencode-zen-mimo-v2-5-free",
-        "kind": "model",
-        "model": "opencode-zen/mimo-v2.5-free",
-        "providerId": "opencode-zen",
-        "weight": 0
-      },
-      {
-        "id": "observer-model-2-cmd-xiaomi-mimo-v2-5",
-        "kind": "model",
-        "model": "cmd/xiaomi/mimo-v2.5",
+        "model": "cmd/poolside/laguna-s-2.1-free",
         "providerId": "cmd",
         "weight": 0
       },
       {
-        "id": "observer-model-3-opencode-zen-ling-3-0-flash-fin-free",
-        "kind": "model",
-        "model": "opencode-zen/ling-3.0-flash-fin-free",
-        "providerId": "opencode-zen",
-        "weight": 0
-      }
-    ],
-    "strategy": "priority",
-    "id": "e2af7316-590b-4801-9b33-2ffb8a8fdc52",
-    "config": {},
-    "isHidden": false,
-    "sortOrder": 7,
-    "createdAt": "2026-08-31T18:30:10.015Z",
-    "updatedAt": "2026-08-31T20:49:04.019Z",
-    "version": 2
-  },
-  {
-    "name": "oracle",
-    "models": [
-      {
-        "id": "oracle-model-1-opencode-zen-big-pickle",
-        "kind": "model",
-        "model": "opencode-zen/big-pickle",
-        "providerId": "opencode-zen",
-        "weight": 0
-      },
-      {
-        "id": "oracle-model-2-nvidia-moonshotai-kimi-k3",
-        "kind": "model",
-        "model": "nvidia/moonshotai/kimi-k3",
-        "providerId": "nvidia",
-        "weight": 0
-      },
-      {
-        "id": "oracle-model-3-nvidia-deepseek-ai-deepseek-v4-pro-0813",
-        "kind": "model",
-        "model": "nvidia/deepseek-ai/deepseek-v4-pro-0813",
-        "providerId": "nvidia",
-        "weight": 0
-      },
-      {
-        "id": "oracle-model-4-cmd-deepseek-deepseek-v4-pro",
-        "kind": "model",
-        "model": "cmd/deepseek/deepseek-v4-pro",
-        "providerId": "cmd",
-        "weight": 0
-      }
-    ],
-    "strategy": "priority",
-    "id": "a2dae634-d665-4ae2-9115-5cac702a0689",
-    "config": {},
-    "isHidden": false,
-    "sortOrder": 3,
-    "createdAt": "2026-08-31T18:30:09.578Z",
-    "updatedAt": "2026-08-31T20:41:58.341Z",
-    "version": 2
-  },
-  {
-    "name": "orchestrator",
-    "models": [
-      {
-        "id": "orchestrator-model-1-opencode-zen-mimo-v2-5-free",
-        "kind": "model",
-        "model": "opencode-zen/mimo-v2.5-free",
-        "providerId": "opencode-zen",
-        "weight": 0
-      },
-      {
-        "id": "orchestrator-model-2-nvidia-nvidia-nemotron-3-super-120b-a12b",
+        "id": "static-best-free-model-3-nemotron-3-super-120b-a12b",
         "kind": "model",
         "model": "nvidia/nvidia/nemotron-3-super-120b-a12b",
         "providerId": "nvidia",
         "weight": 0
       },
       {
-        "id": "orchestrator-model-3-nvidia-nvidia-nemotron-3-5-lightning-30b-a3b",
+        "id": "static-best-free-model-4-nemotron-3-ultra-550b-a55b",
+        "kind": "model",
+        "model": "nvidia/nvidia/nemotron-3-ultra-550b-a55b",
+        "providerId": "nvidia",
+        "weight": 0
+      },
+      {
+        "id": "static-best-free-model-5-glm-5-3",
+        "kind": "model",
+        "model": "nvidia/z-ai/glm-5.3",
+        "providerId": "nvidia",
+        "weight": 0
+      },
+      {
+        "id": "static-best-free-model-6-kimi-k3",
+        "kind": "model",
+        "model": "nvidia/moonshotai/kimi-k3",
+        "providerId": "nvidia",
+        "weight": 0
+      }
+    ],
+    "strategy": "weighted",
+    "config": {},
+    "id": "c90dd5ab-6f99-4504-819e-6ce055ee7d81",
+    "isHidden": false,
+    "sortOrder": 9,
+    "createdAt": "2026-09-03T19:35:14.100Z",
+    "updatedAt": "2026-09-18T15:33:44.061Z",
+    "version": 2
+  },
+  {
+    "name": "observer",
+    "models": [
+      {
+        "id": "observer-model-1-openrouter-inclusionai-ling-3-0-flash-vl-free",
+        "kind": "model",
+        "model": "openrouter/inclusionai/ling-3.0-flash-vl:free",
+        "providerId": "openrouter",
+        "weight": 0
+      },
+      {
+        "id": "observer-model-2-nvidia-z-ai-glm-5-3-flash",
+        "kind": "model",
+        "model": "nvidia/z-ai/glm-5.3-flash",
+        "providerId": "nvidia",
+        "weight": 0
+      },
+      {
+        "id": "observer-model-3-cmd-z-ai-glm-5-3-flash",
+        "kind": "model",
+        "model": "cmd/z-ai/glm-5.3-flash",
+        "providerId": "cmd",
+        "weight": 0
+      },
+      {
+        "id": "observer-model-4-opencode-zen-glm-5-3-flash",
+        "kind": "model",
+        "model": "opencode-zen/glm-5.3-flash",
+        "providerId": "opencode-zen",
+        "weight": 0
+      }
+    ],
+    "strategy": "priority",
+    "config": {},
+    "id": "6bc6c5e2-e47c-409a-a8a6-050f39e70146",
+    "isHidden": false,
+    "sortOrder": 29,
+    "createdAt": "2026-09-19T21:19:11.387Z",
+    "updatedAt": "2026-09-19T21:19:11.387Z",
+    "version": 2,
+    "computed_context_length": 1000000
+  },
+  {
+    "name": "designer",
+    "models": [
+      {
+        "id": "designer-model-1-nvidia-moonshotai-kimi-k3",
+        "kind": "model",
+        "model": "nvidia/moonshotai/kimi-k3",
+        "providerId": "nvidia",
+        "weight": 0
+      },
+      {
+        "id": "designer-model-2-cmd-z-ai-glm-5-3-flash",
+        "kind": "model",
+        "model": "cmd/z-ai/glm-5.3-flash",
+        "providerId": "cmd",
+        "weight": 0
+      },
+      {
+        "id": "designer-model-3-opencode-zen-glm-5-3-flash",
+        "kind": "model",
+        "model": "opencode-zen/glm-5.3-flash",
+        "providerId": "opencode-zen",
+        "weight": 0
+      }
+    ],
+    "strategy": "priority",
+    "config": {},
+    "id": "6e9abf0b-d1c5-4b5a-9e16-f8ddc5eac179",
+    "isHidden": false,
+    "sortOrder": 35,
+    "createdAt": "2026-09-19T22:44:39.216Z",
+    "updatedAt": "2026-09-19T22:44:39.216Z",
+    "version": 2,
+    "computed_context_length": 1000000
+  },
+  {
+    "name": "orchestrator",
+    "models": [
+      {
+        "id": "orchestrator-model-1-openrouter-nvidia-nemotron-3-super-120b-a12b-free",
+        "kind": "model",
+        "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
+        "providerId": "openrouter",
+        "weight": 0
+      },
+      {
+        "id": "orchestrator-model-2-nvidia-z-ai-glm-5-3-flash",
+        "kind": "model",
+        "model": "nvidia/z-ai/glm-5.3-flash",
+        "providerId": "nvidia",
+        "weight": 0
+      },
+      {
+        "id": "orchestrator-model-3-cmd-deepseek-deepseek-v4-1-flash",
+        "kind": "model",
+        "model": "cmd/deepseek/deepseek-v4.1-flash",
+        "providerId": "cmd",
+        "weight": 0
+      },
+      {
+        "id": "orchestrator-model-4-deepseek-deepseek-flash",
+        "kind": "model",
+        "model": "deepseek/deepseek-flash",
+        "providerId": "deepseek",
+        "weight": 0
+      }
+    ],
+    "strategy": "priority",
+    "config": {},
+    "id": "8fb44adc-6f91-47ec-a6b3-290d66212ab6",
+    "isHidden": false,
+    "sortOrder": 36,
+    "createdAt": "2026-09-19T23:02:35.040Z",
+    "updatedAt": "2026-09-19T23:02:35.040Z",
+    "version": 2
+  },
+  {
+    "name": "oracle",
+    "models": [
+      {
+        "id": "oracle-model-1-openrouter-nvidia-nemotron-3-ultra-550b-a55b-free",
+        "kind": "model",
+        "model": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+        "providerId": "openrouter",
+        "weight": 0
+      },
+      {
+        "id": "oracle-model-2-nvidia-z-ai-glm-5-3",
+        "kind": "model",
+        "model": "nvidia/z-ai/glm-5.3",
+        "providerId": "nvidia",
+        "weight": 0
+      },
+      {
+        "id": "oracle-model-3-cmd-gpt-5-6-luna",
+        "kind": "model",
+        "model": "cmd/gpt-5.6-luna",
+        "providerId": "cmd",
+        "weight": 0
+      },
+      {
+        "id": "oracle-model-4-opencode-zen-gpt-5-6-luna",
+        "kind": "model",
+        "model": "opencode-zen/gpt-5.6-luna",
+        "providerId": "opencode-zen",
+        "weight": 0
+      }
+    ],
+    "strategy": "priority",
+    "config": {},
+    "id": "2fa284d5-ae0d-4e40-9532-d1f42dff435c",
+    "isHidden": false,
+    "sortOrder": 37,
+    "createdAt": "2026-09-19T23:26:26.644Z",
+    "updatedAt": "2026-09-19T23:26:26.644Z",
+    "version": 2,
+    "computed_context_length": 1050000
+  },
+  {
+    "name": "explorer",
+    "models": [
+      {
+        "id": "explorer-model-1-openrouter-cohere-north-mini-code-free",
+        "kind": "model",
+        "model": "openrouter/cohere/north-mini-code:free",
+        "providerId": "openrouter",
+        "weight": 0
+      },
+      {
+        "id": "explorer-model-2-nvidia-nvidia-nemotron-3-5-lightning-30b-a3b",
         "kind": "model",
         "model": "nvidia/nvidia/nemotron-3.5-lightning-30b-a3b",
         "providerId": "nvidia",
         "weight": 0
       },
       {
-        "id": "orchestrator-model-4-cmd-deepseek-deepseek-v4-flash",
+        "id": "explorer-model-3-cmd-deepseek-deepseek-v4-1-flash",
         "kind": "model",
-        "model": "cmd/deepseek/deepseek-v4-flash",
+        "model": "cmd/deepseek/deepseek-v4.1-flash",
         "providerId": "cmd",
         "weight": 0
       },
       {
-        "id": "orchestrator-model-5-opencode-deepseek-v4-flash",
+        "id": "explorer-model-4-deepseek-deepseek-flash",
         "kind": "model",
-        "model": "opencode/deepseek-v4-flash",
-        "providerId": "opencode",
+        "model": "deepseek/deepseek-flash",
+        "providerId": "deepseek",
         "weight": 0
       }
     ],
     "strategy": "priority",
-    "id": "238a4eb9-2f6c-4822-b7c2-cf6630a9262b",
     "config": {},
+    "id": "7dc779dd-9b72-4348-b488-dd8cce00eba4",
     "isHidden": false,
-    "sortOrder": 2,
-    "createdAt": "2026-08-31T18:30:09.472Z",
-    "updatedAt": "2026-08-31T20:41:58.229Z",
+    "sortOrder": 39,
+    "createdAt": "2026-09-19T23:26:35.462Z",
+    "updatedAt": "2026-09-19T23:26:35.462Z",
+    "version": 2
+  },
+  {
+    "name": "librarian",
+    "models": [
+      {
+        "id": "librarian-model-1-cmd-inclusionai-ling-3-0-flash-sante-free",
+        "kind": "model",
+        "model": "cmd/inclusionai/ling-3.0-flash-sante:free",
+        "providerId": "cmd",
+        "weight": 0
+      },
+      {
+        "id": "librarian-model-2-openrouter-inclusionai-ling-3-0-flash-fin-free",
+        "kind": "model",
+        "model": "openrouter/inclusionai/ling-3.0-flash-fin:free",
+        "providerId": "openrouter",
+        "weight": 0
+      },
+      {
+        "id": "librarian-model-3-openrouter-dots-studio-dots-3-note-preview-free",
+        "kind": "model",
+        "model": "openrouter/dots-studio/dots-3-note-preview:free",
+        "providerId": "openrouter",
+        "weight": 0
+      },
+      {
+        "id": "librarian-model-4-cmd-deepseek-deepseek-v4-1-flash",
+        "kind": "model",
+        "model": "cmd/deepseek/deepseek-v4.1-flash",
+        "providerId": "cmd",
+        "weight": 0
+      },
+      {
+        "id": "librarian-model-5-deepseek-deepseek-flash",
+        "kind": "model",
+        "model": "deepseek/deepseek-flash",
+        "providerId": "deepseek",
+        "weight": 0
+      }
+    ],
+    "strategy": "priority",
+    "config": {},
+    "id": "a8581934-2285-4daf-bd25-19b1871dcaf7",
+    "isHidden": false,
+    "sortOrder": 40,
+    "createdAt": "2026-09-19T23:26:43.555Z",
+    "updatedAt": "2026-09-19T23:26:43.555Z",
+    "version": 2
+  },
+  {
+    "name": "fixer",
+    "models": [
+      {
+        "id": "fixer-model-1-openrouter-nex-agi-nex-n2-5-mini-free",
+        "kind": "model",
+        "model": "openrouter/nex-agi/nex-n2.5-mini:free",
+        "providerId": "openrouter",
+        "weight": 0
+      },
+      {
+        "id": "fixer-model-2-openrouter-cohere-north-mini-code-free",
+        "kind": "model",
+        "model": "openrouter/cohere/north-mini-code:free",
+        "providerId": "openrouter",
+        "weight": 0
+      },
+      {
+        "id": "fixer-model-3-cmd-qwen-qwen3-8-flash",
+        "kind": "model",
+        "model": "cmd/Qwen/Qwen3.8-Flash",
+        "providerId": "cmd",
+        "weight": 0
+      },
+      {
+        "id": "fixer-model-4-opencode-zen-qwen3-8-flash",
+        "kind": "model",
+        "model": "opencode-zen/qwen3.8-flash",
+        "providerId": "opencode-zen",
+        "weight": 0
+      }
+    ],
+    "strategy": "priority",
+    "config": {},
+    "id": "f3e9466c-bd86-431e-8d89-d399355b79df",
+    "isHidden": false,
+    "sortOrder": 41,
+    "createdAt": "2026-09-19T23:40:00.562Z",
+    "updatedAt": "2026-09-19T23:40:00.562Z",
     "version": 2
   },
   {
     "name": "skeptic",
     "models": [
       {
-        "id": "skeptic-model-1-opencode-zen-muse-spark-1-2-contributor-free",
+        "id": "skeptic-model-1-nvidia-moonshotai-kimi-k3",
         "kind": "model",
-        "model": "opencode-zen/muse-spark-1.2-contributor-free",
-        "providerId": "opencode-zen",
+        "model": "nvidia/moonshotai/kimi-k3",
+        "providerId": "nvidia",
         "weight": 0
       },
       {
-        "id": "skeptic-model-2-opencode-zen-nemotron-3-ultra-free",
+        "id": "skeptic-model-2-cmd-deepseek-deepseek-v4-1-flash",
         "kind": "model",
-        "model": "opencode-zen/nemotron-3-ultra-free",
-        "providerId": "opencode-zen",
-        "weight": 0
-      },
-      {
-        "id": "skeptic-model-3-cmd-qwen-qwen3-7-plus",
-        "kind": "model",
-        "model": "cmd/Qwen/Qwen3.7-Plus",
+        "model": "cmd/deepseek/deepseek-v4.1-flash",
         "providerId": "cmd",
         "weight": 0
       },
       {
-        "id": "skeptic-model-4-opencode-zen-opencode-qwen3-7-plus",
+        "id": "skeptic-model-3-deepseek-deepseek-flash",
         "kind": "model",
-        "model": "opencode-zen/opencode/qwen3.7-plus",
-        "providerId": "opencode-zen",
+        "model": "deepseek/deepseek-flash",
+        "providerId": "deepseek",
         "weight": 0
       }
     ],
     "strategy": "priority",
-    "id": "5ce4a7a7-0e7c-4708-a8cf-7c2eb429fbf5",
     "config": {},
+    "id": "472bc186-b102-4f85-a20e-1acbaa323c08",
     "isHidden": false,
-    "sortOrder": 1,
-    "createdAt": "2026-08-31T16:03:27.776Z",
-    "updatedAt": "2026-08-31T20:42:05.774Z",
+    "sortOrder": 42,
+    "createdAt": "2026-09-19T23:40:02.818Z",
+    "updatedAt": "2026-09-19T23:40:02.818Z",
     "version": 2
   }
 ]
