@@ -5,7 +5,7 @@ modelRoles:
   task: omniroute/explorer
   oracle: omniroute/oracle
   skeptic: omniroute/skeptic
-  default: omniroute/fixer
+  default: zai/glm-5.3-flash:max
 disabledProviders:
   - llama.cpp
   - lm-studio
@@ -62,11 +62,11 @@ task:
   agentModelOverrides:
     oracle: "@oracle"
     reviewer: "@skeptic"
-    skeptic: "@skeptic"
-    designer: "@designer"
-    librarian: "@librarian"
+    skeptic: commandcode/meta/muse-spark-1.3-contributor
     scout: "@scout"
     task: "@task"
+  disabledAgents:
+    []
 theme:
   light: titanium
   dark: titanium
@@ -78,3 +78,6 @@ setupVersion: 2
 defaultThinkingLevel: auto
 dev:
   autoqaConsent: denied
+skills:
+  customDirectories:
+    - /home/mhenke/.config/opencode/skills
