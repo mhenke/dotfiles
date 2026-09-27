@@ -174,6 +174,8 @@ service that's less likely to be simultaneously affected.
   with a real image before depending on it
 - `mimo-v2.5-free` is a limited-time free model on Zen; if deprecated, switch orchestrator
   primary to another free-tier model or `opencode-go/mimo-v2.5` with deepseek fallback
+  - 2026-09-22: v2.5-free removed from Zen; all `mimo-v2.5-free` refs in
+    `oh-my-opencode-slim.jsonc` switched to `mimo-v2.6-flash-free`
 
 ## References
 

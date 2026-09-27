@@ -5,37 +5,13 @@ modelRoles:
   task: omniroute/explorer
   oracle: omniroute/oracle
   skeptic: omniroute/skeptic
-  default: zai/glm-5.3-flash:max
+  web: web/exa
+  default: commandcode/stealth/space-bunny-alpha
 disabledProviders:
   - llama.cpp
   - lm-studio
   - bedrock-mantle
   - amazon-bedrock
-providers:
-  webSearchOrder:
-    - exa
-    - perplexity
-    - gemini
-    - anthropic
-    - codex
-    - xai
-    - zai
-    - tinyfish
-    - jina
-    - kagi
-    - tavily
-    - firecrawl
-    - brave
-    - kimi
-    - parallel
-    - synthetic
-    - searxng
-    - startpage
-    - duckduckgo
-    - ecosia
-    - google
-    - mojeek
-    - public
 retry:
   enabled: true
   maxRetries: 10
@@ -58,6 +34,35 @@ retry:
       - omniroute/designer
     oracle:
       - omniroute/oracle
+    web:
+      - web/perplexity
+      - google-gemini-cli/gemini-2.5-flash
+      - google-antigravity/gemini-2.5-flash
+      - google/gemini-2.5-flash
+      - anthropic/claude-haiku-4-5
+      - openai-codex/gpt-5.6-luna
+      - xai/grok-4.5
+      - web/zai
+      - web/tinyfish
+      - web/jina
+      - web/kagi
+      - web/tavily
+      - web/firecrawl
+      - web/brave
+      - web/kimi
+      - web/parallel
+      - web/synthetic
+      - web/searxng
+      - web/startpage
+      - web/duckduckgo
+      - web/ecosia
+      - web/google
+      - web/mojeek
+      - web/public
+      - openai-codex/gpt-5.6
+      - openai-codex/gpt-5.5
+      - xai-oauth/grok-4.5
+      - web/ollama
 task:
   agentModelOverrides:
     oracle: "@oracle"
