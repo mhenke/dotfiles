@@ -1,20 +1,23 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "compactSidebar": true,
-  "preset": "balanced",
+  "preset": "hybrid-glm-kimi",
   "disabled_agents": [],
   "image_routing": "auto",
   "autoUpdate": true,
   "setDefaultAgent": true,
   "multiplexer": {
-    "type": "herdr",
+    "type": "zellij",
     "layout": "main-vertical"
   },
   "scoringEngineVersion": "v2",
   "presets": {
     "balanced": {
       "orchestrator": {
-        "model": ["opencode/mimo-v2.5-free", "omniroute/orchestrator"],
+        "model": [
+          "opencode/mimo-v2.6-flash-free",
+          "omniroute/orchestrator"
+        ],
         "temperature": 0.4,
         "skills": [
           "*"
@@ -25,7 +28,10 @@
         ]
       },
       "oracle": {
-        "model": ["opencode/muse-spark-1.3-contributor-free", "omniroute/oracle"],
+        "model": [
+          "opencode/muse-spark-1.3-contributor-free",
+          "omniroute/oracle"
+        ],
         "temperature": 0.4,
         "variant": "high",
         "skills": [
@@ -34,14 +40,20 @@
         "mcps": []
       },
       "designer": {
-        "model": ["opencode/mimo-v2.5-free", "omniroute/designer"],
+        "model": [
+          "opencode/mimo-v2.6-flash-free",
+          "omniroute/designer"
+        ],
         "temperature": 0.3,
         "variant": "xhigh",
         "skills": [],
         "mcps": []
       },
       "librarian": {
-        "model": ["opencode/mimo-v2.5-free", "omniroute/librarian"],
+        "model": [
+          "opencode/mimo-v2.6-flash-free",
+          "omniroute/librarian"
+        ],
         "temperature": 0.2,
         "skills": [],
         "mcps": [
@@ -51,28 +63,43 @@
         ]
       },
       "explorer": {
-        "model": ["opencode/nemotron-3.5-lightning-free", "omniroute/explorer"],
+        "model": [
+          "opencode/nemotron-3.5-lightning-free",
+          "omniroute/explorer"
+        ],
         "temperature": 0.2,
         "skills": [],
         "mcps": []
       },
       "fixer": {
-        "model": ["opencode/mimo-v2.5-free", "omniroute/fixer"],
+        "model": [
+          "opencode/mimo-v2.6-flash-free",
+          "omniroute/fixer"
+        ],
         "temperature": 0.2,
         "skills": [],
         "mcps": []
       },
       "observer": {
-        "model": ["opencode/muse-spark-1.3-contributor-free", "omniroute/observer"],
+        "model": [
+          "opencode/muse-spark-1.3-contributor-free",
+          "omniroute/observer"
+        ],
         "temperature": 0.2,
         "skills": [],
         "mcps": []
       },
       "council": {
-        "model": ["opencode/mimo-v2.5-free", "omniroute/orchestrator"]
+        "model": [
+          "opencode/mimo-v2.6-flash-free",
+          "omniroute/orchestrator"
+        ]
       },
       "skeptic": {
-        "model": ["opencode/nemotron-3-ultra-free", "omniroute/skeptic"],
+        "model": [
+          "opencode/nemotron-3-ultra-free",
+          "omniroute/skeptic"
+        ],
         "variant": "max"
       }
     },
@@ -95,7 +122,7 @@
       },
       "oracle": {
         "model": [
-          "nvidia/deepseek-ai/deepseek-v4-flash-0731",
+          "nvidia/z-ai/glm-5.3",
           "nvidia/moonshotai/kimi-k3",
           "nvidia/mistralai/mistral-nemotron"
         ],
@@ -130,8 +157,7 @@
       "designer": {
         "model": [
           "nvidia/moonshotai/kimi-k3",
-          "nvidia/mistralai/mistral-nemotron",
-          "nvidia/deepseek-ai/deepseek-v4-flash-0731"
+          "nvidia/mistralai/mistral-nemotron"
         ],
         "temperature": 0.3,
         "skills": [],
@@ -171,41 +197,143 @@
         "variant": "max"
       }
     },
-    // Zen free-tier models ARE available — but only from inside the OpenCode CLI (server-side gate; raw API calls 403 FreeTierError even with the CLI's own key).
     "opencode-zen-free": {
       "orchestrator": {
-        "model": ["opencode/nemotron-3-ultra-free", "opencode/big-pickle", "opencode/muse-spark-1.3-contributor-free"],
+        "model": [
+          "opencode/nemotron-3-ultra-free",
+          "opencode/big-pickle",
+          "opencode/muse-spark-1.3-contributor-free"
+        ],
         "temperature": 0.4
       },
-      "explorer": { "model": "opencode/mimo-v2.5-free", "temperature": 0.2 },
-      "librarian": { "model": "opencode/mimo-v2.5-free", "temperature": 0.2 },
-      "designer":  { "model": "opencode/mimo-v2.5-free", "temperature": 0.3 },
-      "fixer":     { "model": "opencode/mimo-v2.5-free", "temperature": 0.2 },
-      "observer":  { "model": "opencode/mimo-v2.5-free", "temperature": 0.2 },
-      "council":   { "model": "opencode/mimo-v2.5-free" },
-      "skeptic":   { "model": ["opencode/muse-spark-1.3-contributor-free", "opencode/nemotron-3-ultra-free"] }
+      "explorer": {
+        "model": "opencode/mimo-v2.6-flash-free",
+        "temperature": 0.2
+      },
+      "librarian": {
+        "model": "opencode/mimo-v2.6-flash-free",
+        "temperature": 0.2
+      },
+      "designer": {
+        "model": "opencode/mimo-v2.6-flash-free",
+        "temperature": 0.3
+      },
+      "fixer": {
+        "model": "opencode/mimo-v2.6-flash-free",
+        "temperature": 0.2
+      },
+      "observer": {
+        "model": "opencode/mimo-v2.6-flash-free",
+        "temperature": 0.2
+      },
+      "council": {
+        "model": "opencode/mimo-v2.6-flash-free"
+      },
+      "skeptic": {
+        "model": [
+          "opencode/muse-spark-1.3-contributor-free",
+          "opencode/nemotron-3-ultra-free"
+        ]
+      }
+    },
+    "hybrid-glm-kimi": {
+      "orchestrator": {
+        "model": [
+          "zai-coding-plan/glm-5.3",
+          "nvidia/z-ai/glm-5.3"
+        ],
+        "variant": "high"
+      },
+      "oracle": {
+        "model": [
+          "zai-coding-plan/glm-5.3",
+          "nvidia/z-ai/glm-5.3"
+        ],
+        "variant": "high"
+      },
+      "explorer": {
+        "model": [
+          "kimi-code-plan-global/k3",
+          "nvidia/moonshotai/kimi-k3"
+        ]
+      },
+      "designer": {
+        "model": [
+          "kimi-code-plan-global/k3",
+          "nvidia/moonshotai/kimi-k3"
+        ]
+      },
+      "fixer": {
+        "model": [
+          "kimi-code-plan-global/k3",
+          "nvidia/moonshotai/kimi-k3"
+        ]
+      },
+      "librarian": {
+        "model": [
+          "kimi-code-plan-global/k3",
+          "nvidia/moonshotai/kimi-k3"
+        ]
+      },
+      "observer": {
+        "model": [
+          "kimi-code-plan-global/k3",
+          "nvidia/moonshotai/kimi-k3"
+        ]
+      },
+      "council": {
+        "model": [
+          "zai-coding-plan/glm-5.3",
+          "nvidia/z-ai/glm-5.3"
+        ],
+        "variant": "high"
+      }
     }
   },
   "council": {
     "presets": {
       "balanced": {
         "alpha": {
-          "model": ["opencode/muse-spark-1.3-contributor-free", "omniroute/oracle"],
+          "model": [
+            "opencode/muse-spark-1.3-contributor-free",
+            "omniroute/oracle"
+          ],
           "variant": "high",
           "fallback_models": []
         },
         "beta": {
-          "model": ["opencode/nemotron-3-ultra-free", "omniroute/skeptic"],
+          "model": [
+            "opencode/nemotron-3-ultra-free",
+            "omniroute/skeptic"
+          ],
           "variant": "high",
           "fallback_models": []
         },
         "gamma": {
-          "model": ["opencode/mimo-v2.5-free", "omniroute/observer"],
+          "model": [
+            "opencode/mimo-v2.6-flash-free",
+            "omniroute/observer"
+          ],
           "fallback_models": []
+        }
+      },
+      "hybrid-glm-kimi": {
+        "alpha": {
+          "model": [
+            "zai-coding-plan/glm-5.3",
+            "nvidia/z-ai/glm-5.3"
+          ],
+          "variant": "high"
+        },
+        "beta": {
+          "model": [
+            "kimi-code-plan-global/k3",
+            "nvidia/moonshotai/kimi-k3"
+          ]
         }
       }
     },
-    "default_preset": "balanced",
+    "default_preset": "hybrid-glm-kimi",
     "councillor_execution_mode": "parallel"
   },
   "websearch": {
