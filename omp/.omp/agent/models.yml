@@ -2,7 +2,9 @@ providers:
   omniroute:
     baseUrl: http://localhost:20128/v1
     api: openai-completions
-    apiKey: REMOVED_BY_FILTER_REPO
+    # !command keeps the key in opencode's auth.json instead of this tracked
+    # file (see resolve-config-value.ts). Same shape as kimi-code below.
+    apiKey: "!jq -r '.omniroute.key' $HOME/.local/share/opencode/auth.json"
     authHeader: true
     models:
       - id: orchestrator
@@ -68,3 +70,14 @@ providers:
         input: [text]
         contextWindow: 200000
         maxTokens: 131072
+
+  # Kimi Code Plan (global kimi.ai account). baseUrl redirects the built-in
+  # kimi-code provider off the mainland default (api.kimi.com) — the plan bills
+  # against the kimi.ai subscription, not per-token.
+  # apiKey is a !command (resolved at request time, see resolve-config-value.ts),
+  # so the secret stays in opencode's auth.json and never enters this tracked file.
+  # No `models:` block on purpose: the built-in provider discovers from
+  # /coding/v1/models, keeping limits and thinking levels current.
+  kimi-code:
+    baseUrl: https://api.kimi.ai/coding/v1
+    apiKey: "!jq -r '.[\"kimi-code-plan-global\"].key' $HOME/.local/share/opencode/auth.json"

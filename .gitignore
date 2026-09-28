@@ -52,6 +52,8 @@ hosts.yml
 # Custom additions for sensitive files and local configurations
 *.local
 .npmrc
+.env
+.env.*
 ngrok.yml
 .ollama
 .claude/.credentials.json
