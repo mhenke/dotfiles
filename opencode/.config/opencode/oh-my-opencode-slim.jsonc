@@ -253,8 +253,8 @@
       },
       "explorer": {
         "model": [
-          "kimi-code-plan-global/k3",
-          "nvidia/moonshotai/kimi-k3"
+          "zai-coding-plan/glm-5.3-flash",
+          "nvidia/z-ai/glm-5.3-flash"
         ]
       },
       "designer": {
@@ -265,14 +265,14 @@
       },
       "fixer": {
         "model": [
-          "kimi-code-plan-global/k3",
-          "nvidia/moonshotai/kimi-k3"
+          "zai-coding-plan/glm-5.3-flash",
+          "nvidia/z-ai/glm-5.3-flash"
         ]
       },
       "librarian": {
         "model": [
-          "kimi-code-plan-global/k3",
-          "nvidia/moonshotai/kimi-k3"
+          "zai-coding-plan/glm-5.3-flash",
+          "nvidia/z-ai/glm-5.3-flash"
         ]
       },
       "observer": {
