@@ -6,7 +6,6 @@ modelRoles:
   oracle: omniroute/oracle
   skeptic: omniroute/skeptic
   web: web/exa
-  default: nvidia/z-ai/glm-5.3:max
 disabledProviders:
   - llama.cpp
   - lm-studio
