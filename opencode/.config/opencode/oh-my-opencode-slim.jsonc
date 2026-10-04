@@ -241,8 +241,7 @@
         "model": [
           "zai-coding-plan/glm-5.3-flash",
           "nvidia/z-ai/glm-5.3-flash"
-        ],
-        "variant": "max"
+        ]
       },
       "oracle": {
         "model": [
