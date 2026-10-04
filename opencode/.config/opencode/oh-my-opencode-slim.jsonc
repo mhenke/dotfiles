@@ -242,14 +242,14 @@
           "zai-coding-plan/glm-5.3-flash",
           "nvidia/z-ai/glm-5.3-flash"
         ],
-        "variant": "high"
+        "variant": "max"
       },
       "oracle": {
         "model": [
           "zai-coding-plan/glm-5.3",
           "nvidia/z-ai/glm-5.3"
         ],
-        "variant": "high"
+        "variant": "max"
       },
       "explorer": {
         "model": [
@@ -261,7 +261,8 @@
         "model": [
           "kimi-code-plan-global/k3",
           "nvidia/moonshotai/kimi-k3"
-        ]
+        ],
+        "variant": "max"
       },
       "fixer": {
         "model": [
@@ -286,7 +287,7 @@
           "zai-coding-plan/glm-5.3",
           "nvidia/z-ai/glm-5.3"
         ],
-        "variant": "high"
+        "variant": "max"
       }
     }
   },
@@ -323,7 +324,7 @@
             "zai-coding-plan/glm-5.3",
             "nvidia/z-ai/glm-5.3"
           ],
-          "variant": "high"
+          "variant": "max"
         },
         "beta": {
           "model": [
