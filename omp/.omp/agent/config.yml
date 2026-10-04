@@ -6,7 +6,7 @@ modelRoles:
   oracle: omniroute/oracle
   skeptic: omniroute/skeptic
   web: web/exa
-  default: commandcode/stealth/space-bunny-alpha
+  default: kimi-code/k3:max
 disabledProviders:
   - llama.cpp
   - lm-studio

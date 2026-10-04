@@ -105,7 +105,10 @@ echo ""
 log_info "Checking Stow structure..."
 STOW_OK=true
 for config in "${CONFIGS[@]}"; do
-    if [[ -d "$config/.config" ]] || [[ -f "$config/.zshrc" ]] || [[ -f "$config/.gitconfig" ]]; then
+    # A package is Stow-compatible iff stow itself would accept it. Testing for
+    # .config/ misses dotfile-at-root packages (gtkrc/.gtkrc-2.0, omp/.omp/,
+    # zprofile/.zprofile), so ask stow instead of guessing at layouts.
+    if stow -n -t ~ "$config" >/dev/null 2>&1; then
         log_pass "$config/ has Stow-compatible structure"
     else
         log_warn "$config/ may not be Stow-compatible"

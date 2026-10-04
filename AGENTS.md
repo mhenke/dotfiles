@@ -10,6 +10,9 @@ It defines the rules, patterns, and guardrails specific to this project.
 ## Stack Context
 GNU Stow dotfiles monorepo (Hyprland + XFCE, zsh, 644 tracked files): per-app stow packages + Bash installer/backup scripts, no build step, no test suite.
 
+
+**Vocabulary:** this repo uses precise terms for packaging state — see [GLOSSARY.md](./GLOSSARY.md) (*Linked package*, *Stray*, *Conflict*, *Tracked*, *Untracked*, *Stow-clean*). Use them; they are not interchangeable. Notable decisions are in [docs/adr/](./docs/adr/).
+
 ## Code Style Rules
 - DO mirror the home tree inside each stow package (`<pkg>/.config/<app>/…` → `~/.config/<app>/`). DON'T add stray top-level dirs without deciding stowed vs. support.
 - DO start runnable scripts with `#!/bin/bash`, a 3-line header comment, and `set -e` — unless it's a long-running daemon (watchdog), which uses explicit error checks instead.
