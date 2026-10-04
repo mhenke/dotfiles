@@ -239,8 +239,8 @@
     "hybrid-glm-kimi": {
       "orchestrator": {
         "model": [
-          "zai-coding-plan/glm-5.3",
-          "nvidia/z-ai/glm-5.3"
+          "zai-coding-plan/glm-5.3-flash",
+          "nvidia/z-ai/glm-5.3-flash"
         ],
         "variant": "high"
       },
