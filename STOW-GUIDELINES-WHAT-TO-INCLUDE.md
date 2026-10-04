@@ -1,5 +1,7 @@
 # Stow Guidelines: What TO and NOT TO Include
 
+> **Historical planning doc (2025-10-25).** The lists below are aspirational and name apps not installed (`mc`, `rofi`, `zed`, `goose`, `btop`). Current truth: the 21 packages in `scripts/setup-stow.sh` `PACKAGES` — see `README.md`.
+
 **Date**: October 25, 2025
 **Purpose**: Research-based guidelines for selective Stow management
 

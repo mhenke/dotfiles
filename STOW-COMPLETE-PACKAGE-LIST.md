@@ -1,5 +1,7 @@
 # Complete Stow Package List - All Configurations
 
+> **Historical planning doc (2025-10-25).** The inventory below is aspirational and lists apps not installed (`mc`, `rofi`, `zed`, `goose`, `btop`). Current truth: the 21 packages in `scripts/setup-stow.sh` `PACKAGES` — see `README.md`.
+
 **Date**: October 25, 2025
 **Based on**: System analysis + usage patterns
 

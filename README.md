@@ -41,7 +41,7 @@ git lfs install && git lfs pull   # sddm theme backgrounds
 
 ## Stow Packages
 
-Each top-level dir (minus `scripts/`, `packages/`, `docs/`) is a stow package mirroring `$HOME`:
+Each top-level dir is shaped like a stow package mirroring `$HOME`, but only the 21 dirs named in `scripts/setup-stow.sh` `PACKAGES` are ever linked. The rest are config-in-repo: tracked and restorable by hand, never linked by the setup scripts. A few (`aws/`) must stay unlinked for security; a few (`applications/`, `qt5ct/`, `qt6ct/`) would conflict if linked today. `AGENTS.md` names the reason per dir.
 
 ```bash
 stow -n -v -t ~ hypr   # dry run first — always
@@ -50,7 +50,7 @@ stow -R -t ~ hypr      # restow after changes
 stow -D -t ~ hypr      # unlink
 ```
 
-Only the 21 packages in `scripts/setup-stow.sh` `PACKAGES` are linked. Intentionally **not** stowed (see `DONT-STOW.md`): `opencode/`, `claude/`, `ollama/` (systemd override), `sddm-themes/` (system path, Git LFS), `tilix/` (dconf — dump/load manually), VSCode (Settings Sync), AWS/GH credentials.
+Only the 21 packages in `scripts/setup-stow.sh` `PACKAGES` are linked. Intentionally **not** stowed (see `DONT-STOW.md`): `opencode/`, `claude/`, `ollama/` (systemd override), `sddm-themes/` (system path, Git LFS), `tilix/` (dconf — dump/load manually), VSCode (Settings Sync), AWS credentials. `gh/` *is* stowed, but only `config.yml` — `hosts.yml` holds a live token and is excluded.
 
 ## Scripts
 

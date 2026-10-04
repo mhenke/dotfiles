@@ -1,5 +1,7 @@
 # Dotfiles Migration Complete
 
+> **Historical snapshot (2024-10-25).** Package counts below describe that migration, not today. Current truth: the 21 packages in `scripts/setup-stow.sh` `PACKAGES` — see `README.md`.
+
 **Date:** October 25, 2024
 **From:** i3 + X11 setup
 **To:** Hyprland + Wayland setup

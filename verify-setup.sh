@@ -32,10 +32,11 @@ WARNINGS=0
 
 # Check documentation
 log_info "Checking documentation..."
-[[ -f "README.md" ]] && log_pass "README.md exists" || { log_fail "README.md missing"; ((ERRORS++)); }
-[[ -f "MIGRATION.md" ]] && log_pass "MIGRATION.md exists" || { log_fail "MIGRATION.md missing"; ((ERRORS++)); }
-[[ -f "QUICKREF.md" ]] && log_pass "QUICKREF.md exists" || { log_warn "QUICKREF.md missing"; ((WARNINGS++)); }
-[[ -f ".gitignore" ]] && log_pass ".gitignore exists" || { log_warn ".gitignore missing"; ((WARNINGS++)); }
+[[ -f "README.md" ]] && log_pass "README.md exists" || { log_fail "README.md missing"; ((ERRORS+=1)); }
+# MIGRATION.md was removed as redundant (1603a1c); DONT-STOW.md + README.md are the live docs.
+[[ -f "DONT-STOW.md" ]] && log_pass "DONT-STOW.md exists" || { log_warn "DONT-STOW.md missing"; ((WARNINGS+=1)); }
+[[ -f "QUICKREF.md" ]] && log_pass "QUICKREF.md exists" || { log_warn "QUICKREF.md missing"; ((WARNINGS+=1)); }
+[[ -f ".gitignore" ]] && log_pass ".gitignore exists" || { log_warn ".gitignore missing"; ((WARNINGS+=1)); }
 echo ""
 
 # Check main script
@@ -44,7 +45,7 @@ if [[ -f "bootstrap.sh" && -x "bootstrap.sh" ]]; then
     log_pass "bootstrap.sh exists and is executable"
 else
     log_fail "bootstrap.sh missing or not executable"
-    ((ERRORS++))
+    ((ERRORS+=1))
 fi
 echo ""
 
@@ -56,14 +57,14 @@ for script in "${SCRIPTS[@]}"; do
         log_pass "scripts/$script exists and is executable"
     else
         log_fail "scripts/$script missing or not executable"
-        ((ERRORS++))
+        ((ERRORS+=1))
     fi
 done
 echo ""
 
 # Check packages directory
 log_info "Checking package lists..."
-[[ -d "packages" ]] && log_pass "packages/ directory exists" || { log_fail "packages/ directory missing"; ((ERRORS++)); }
+[[ -d "packages" ]] && log_pass "packages/ directory exists" || { log_fail "packages/ directory missing"; ((ERRORS+=1)); }
 if [[ -d "packages" ]]; then
     PKG_FILES=("apt-all.txt" "apt-manual.txt" "npm-global.txt" "gems.txt" "vscode-extensions.txt")
     for file in "${PKG_FILES[@]}"; do
@@ -72,7 +73,7 @@ if [[ -d "packages" ]]; then
             log_pass "packages/$file exists ($lines lines)"
         else
             log_warn "packages/$file missing (run backup-system.sh)"
-            ((WARNINGS++))
+            ((WARNINGS+=1))
         fi
     done
 fi
@@ -80,13 +81,22 @@ echo ""
 
 # Check config directories
 log_info "Checking config directories..."
-CONFIGS=("i3" "polybar" "picom" "rofi" "dunst" "tilix" "zsh" "git" "gtk" "xed")
+# Source of truth: PACKAGES in setup-stow.sh, so this can't drift from what's linked.
+CONFIGS=()
+while read -r pkg; do
+    # Skip the literal `PACKAGES=(` header and closing `)`.
+    [[ "$pkg" == "PACKAGES=(" || "$pkg" == ")" ]] && continue
+    CONFIGS+=("$pkg")
+done < <(
+    sed -n '/^PACKAGES=(/,/^)/p' "$(dirname "${BASH_SOURCE[0]}")/scripts/setup-stow.sh" \
+        | tr -d '"' | tr ' ' '\n' | grep -v '^$'
+)
 for config in "${CONFIGS[@]}"; do
     if [[ -d "$config" ]]; then
         log_pass "$config/ directory exists"
     else
         log_warn "$config/ directory missing"
-        ((WARNINGS++))
+        ((WARNINGS+=1))
     fi
 done
 echo ""
@@ -94,13 +104,13 @@ echo ""
 # Check for Stow compatibility
 log_info "Checking Stow structure..."
 STOW_OK=true
-for config in i3 polybar picom zsh git gtk xed; do
+for config in "${CONFIGS[@]}"; do
     if [[ -d "$config/.config" ]] || [[ -f "$config/.zshrc" ]] || [[ -f "$config/.gitconfig" ]]; then
         log_pass "$config/ has Stow-compatible structure"
     else
         log_warn "$config/ may not be Stow-compatible"
         STOW_OK=false
-        ((WARNINGS++))
+        ((WARNINGS+=1))
     fi
 done
 echo ""
@@ -111,14 +121,14 @@ if command -v stow &> /dev/null; then
     log_pass "GNU Stow is installed"
 else
     log_warn "GNU Stow not installed (bootstrap will install it)"
-    ((WARNINGS++))
+    ((WARNINGS+=1))
 fi
 
 if command -v git &> /dev/null; then
     log_pass "Git is installed"
 else
     log_fail "Git is not installed!"
-    ((ERRORS++))
+    ((ERRORS+=1))
 fi
 echo ""
 
@@ -131,7 +141,7 @@ if git rev-parse --git-dir > /dev/null 2>&1; then
     if [[ -n $(git status -s) ]]; then
         log_warn "Uncommitted changes detected:"
         git status -s | head -10
-        ((WARNINGS++))
+        ((WARNINGS+=1))
     else
         log_pass "No uncommitted changes"
     fi
@@ -142,11 +152,11 @@ if git rev-parse --git-dir > /dev/null 2>&1; then
         log_pass "Git remote configured: $remote"
     else
         log_warn "No git remote configured"
-        ((WARNINGS++))
+        ((WARNINGS+=1))
     fi
 else
     log_fail "Not a git repository!"
-    ((ERRORS++))
+    ((ERRORS+=1))
 fi
 echo ""
 
@@ -178,7 +188,7 @@ fi
 echo ""
 echo "Documentation:"
 echo "  - README.md      : Overview and quick start"
-echo "  - MIGRATION.md   : Step-by-step migration guide"
+echo "  - DONT-STOW.md   : What is excluded and why"
 echo "  - QUICKREF.md    : Command reference"
 echo ""
 echo "Scripts:"

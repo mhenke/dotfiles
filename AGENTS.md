@@ -8,7 +8,7 @@ Every agent in this pipeline reads this file before doing any work.
 It defines the rules, patterns, and guardrails specific to this project.
 
 ## Stack Context
-GNU Stow dotfiles monorepo (Hyprland + XFCE, zsh, 640 tracked files): per-app stow packages + Bash installer/backup scripts, no build step, no test suite.
+GNU Stow dotfiles monorepo (Hyprland + XFCE, zsh, 644 tracked files): per-app stow packages + Bash installer/backup scripts, no build step, no test suite.
 
 ## Code Style Rules
 - DO mirror the home tree inside each stow package (`<pkg>/.config/<app>/…` → `~/.config/<app>/`). DON'T add stray top-level dirs without deciding stowed vs. support.
@@ -21,7 +21,10 @@ GNU Stow dotfiles monorepo (Hyprland + XFCE, zsh, 640 tracked files): per-app st
 
 ## Architecture Guardrails
 - Only the 21 packages in `scripts/setup-stow.sh` `PACKAGES` get linked. Adding a new config dir does nothing until it's added there AND `stow -n -v -t ~ <pkg>` dry-runs clean.
-- `opencode/`, `claude/`, `ollama/`, `omniroute/`, `jules/`, `docs/`, `sddm-themes/`, `tilix/` are intentionally NOT stowed (conflict, system-level, dconf, or cache reasons per `DONT-STOW.md`). Never "fix" this by adding them to `PACKAGES` without resolving the underlying reason.
+- `opencode/`, `claude/`, `ollama/`, `omniroute/`, `docs/`, `sddm-themes/`, `tilix/` are intentionally NOT stowed (conflict, system-level, dconf, or cache reasons per `DONT-STOW.md`). Never "fix" this by adding them to `PACKAGES` without resolving the underlying reason.
+- `jules/` IS stowed (it's in `PACKAGES`) despite appearing in older notes as excluded — trust `setup-stow.sh`, not prose.
+- Top-level dirs that are stow-shaped but NOT in `PACKAGES`, and why: `aws/` (credentials — never link), `applications/`, `qt5ct/`, `qt6ct/` (all three fail `stow -n -t ~` on an existing non-link target — resolve the conflict first), and `bash/`, `cava/`, `fastfetch/`, `fish/`, `nwg-displays/`, `ronema/`, `swappy/` (plain config-in-repo, no stow intent).
+- `gh/` IS stowed, but note `gh/.config/gh/config.yml` is deliberately UNTRACKED (bare `config.yml` rule at `.gitignore:23`, like `.gitconfig`). Stowing it links live local state, not a repo file. `gh/.config/gh/hosts.yml` (real `oauth_token`, mode 0600) is excluded by both `.gitignore:50` and `gh/.stow-local-ignore` — never link or track it.
 - Runtime coordination state (lock markers, watchdog logs) goes under `$XDG_RUNTIME_DIR` (0700) — never world-writable `/tmp`.
 - Single-instance daemons via `flock`; process checks must be user-scoped (`pgrep -U`); file checks must verify ownership (`[ -O … ]`).
 
@@ -42,6 +45,8 @@ GNU Stow dotfiles monorepo (Hyprland + XFCE, zsh, 640 tracked files): per-app st
 - `omp/.omp/agent/config.yml` is allow-listed in `.gitignore` — keep it model-names only, never keys.
 - Any `exec-once`/script that can unlock, kill the locker, or bypass auth is 🔴 Critical — flag for human approval.
 - No new world-writable paths, no passwordless unlock hatches, no cross-user signaling.
+- **Secrets scanning:** only `gitleaks` (`~/.local/bin/gitleaks`) is installed — verified 2026-10-04 by PATH/cargo/go/snap/brew/apt/filesystem sweep. `trufflehog`, `detect-secrets`, `shhgit` are NOT present. Do not claim a two-tool scan passed; verify with `command -v <tool>` before citing it. No `.gitleaks.toml`/`.gitleaksignore` config exists — bare defaults.
+- A scanner only covers what it scanned. It says nothing about live files outside the repo (e.g. `~/.config/gh/hosts.yml` holds a real `oauth_token`). For credential-adjacent paths, read the actual file contents — `.stow-local-ignore` protects the filesystem, `.gitignore` protects git; neither substitutes for looking.
 
 ## Agent-Specific Instructions
 

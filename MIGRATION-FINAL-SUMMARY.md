@@ -1,5 +1,7 @@
 # Dotfiles Migration - Final Summary
 
+> **Historical snapshot (2024-10-25).** The inventory below describes that migration, not today. Current truth: the 21 packages in `scripts/setup-stow.sh` `PACKAGES` — see `README.md`.
+
 ## Completed: October 25, 2024
 
 ### Total Packages: 26 Stowed + 4 Special

@@ -287,6 +287,13 @@
           "nvidia/z-ai/glm-5.3"
         ],
         "variant": "max"
+      },
+      "skeptic": {
+        "model": [
+          "zai-coding-plan/glm-5.3",
+          "nvidia/z-ai/glm-5.3"
+        ],
+        "variant": "max"
       }
     }
   },

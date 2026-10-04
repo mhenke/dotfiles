@@ -64,8 +64,8 @@ dconf load /com/gexperts/Tilix/ < ~/dotfiles/tilix/tilix.dconf
 
 ### GitHub CLI
 - Location: `~/.config/gh/`
-- Why: May contain tokens in `hosts.yml`
-- **Decision:** Stow config.yml only, exclude hosts.yml
+- Why: `hosts.yml` holds a live `oauth_token`
+- **Decision:** Stowed as a package (in `PACKAGES`) — `config.yml` only. `hosts.yml` is excluded twice over: `.gitignore:50` and `gh/.stow-local-ignore`. Note `config.yml` itself is untracked (bare `config.yml` rule at `.gitignore:23`), so stowing links live local state.
 
 ### OpenCode CLI
 - Location: `~/.config/opencode/opencode.json`
@@ -74,4 +74,4 @@ dconf load /com/gexperts/Tilix/ < ~/dotfiles/tilix/tilix.dconf
 
 ---
 
-**Summary:** 22 stowed packages + these excluded = complete coverage
+**Summary:** 21 stowed packages + these excluded = complete coverage
