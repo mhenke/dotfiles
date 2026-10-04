@@ -1,0 +1,8 @@
+# Zed regenerates this desktop file on every launch, writing absolute paths
+# from its own install location (e.g. /home/<user>/.local/zed.app/bin/zed).
+# Symlinking the repo copy would let Zed rewrite tracked content, so it is
+# excluded from Stow and lives only on the machine that installed Zed.
+dev.zed.Zed.desktop
+
+# Kodi is not installed; the tracked .desktop file is kept for reference only.
+kodi.desktop

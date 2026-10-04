@@ -41,7 +41,7 @@ git lfs install && git lfs pull   # sddm theme backgrounds
 
 ## Stow Packages
 
-Each top-level dir is shaped like a stow package mirroring `$HOME`, but only the 21 dirs named in `scripts/setup-stow.sh` `PACKAGES` are ever linked. The rest are config-in-repo: tracked and restorable by hand, never linked by the setup scripts. A few (`aws/`) must stay unlinked for security; a few (`applications/`, `qt5ct/`, `qt6ct/`) would conflict if linked today. `AGENTS.md` names the reason per dir.
+Each top-level dir is shaped like a stow package mirroring `$HOME`, but only the 21 dirs named in `scripts/setup-stow.sh` `PACKAGES` are ever linked. The rest are config-in-repo: tracked and restorable by hand, never linked by the setup scripts. `aws/` must stay unlinked for security. `AGENTS.md` names the reason per dir.
 
 ```bash
 stow -n -v -t ~ hypr   # dry run first — always
