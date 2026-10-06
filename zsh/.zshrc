@@ -157,3 +157,6 @@ export OPENCODE_LOG_LEVEL=DEBUG
 . "$HOME/.atuin/bin/env"
 
 eval "$(atuin init zsh)"
+
+# Shared oh-my-opencode-slim code graph (see omos-graphify wrapper)
+export GRAPHIFY_OUT="$HOME/.graphify/oh-my-opencode-slim"
