@@ -6,7 +6,7 @@ modelRoles:
   oracle: omniroute/oracle
   skeptic: omniroute/skeptic
   web: web/exa
-  default: kimi-code/k3:max
+  default: zai/glm-5.3-flash:max
 disabledProviders:
   - llama.cpp
   - lm-studio
