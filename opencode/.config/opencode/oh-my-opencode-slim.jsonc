@@ -236,7 +236,7 @@
         ]
       }
     },
-    "hybrid-glm-kimi": {
+    "z-ai": {
       "orchestrator": {
         "model": [
           "zai-coding-plan/glm-5.3-flash",
@@ -258,8 +258,8 @@
       },
       "designer": {
         "model": [
-          "kimi-code-plan-global/k3",
-          "nvidia/moonshotai/kimi-k3"
+          "zai-coding-plan/glm-5.3",
+          "nvidia/z-ai/glm-5.3"
         ],
         "variant": "max"
       },
@@ -277,8 +277,8 @@
       },
       "observer": {
         "model": [
-          "kimi-code-plan-global/k3",
-          "nvidia/moonshotai/kimi-k3"
+          "zai-coding-plan/glm-5.3-flash",
+          "nvidia/z-ai/glm-5.3-flash"
         ]
       },
       "council": {
@@ -324,7 +324,7 @@
           "fallback_models": []
         }
       },
-      "hybrid-glm-kimi": {
+      "z-ai": {
         "alpha": {
           "model": [
             "zai-coding-plan/glm-5.3",
@@ -334,13 +334,13 @@
         },
         "beta": {
           "model": [
-            "kimi-code-plan-global/k3",
-            "nvidia/moonshotai/kimi-k3"
+            "zai-coding-plan/glm-5.3-flash",
+            "nvidia/z-ai/glm-5.3-flash"
           ]
         }
       }
     },
-    "default_preset": "hybrid-glm-kimi",
+    "default_preset": "z-ai",
     "councillor_execution_mode": "parallel"
   },
   "websearch": {
