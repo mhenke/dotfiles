@@ -81,3 +81,28 @@ providers:
   kimi-code:
     baseUrl: https://api.kimi.ai/coding/v1
     apiKey: "!jq -r '.[\"kimi-code-plan-global\"].key' $HOME/.local/share/opencode/auth.json"
+
+  # MiMo Token Plan (platform.xiaomimimo.com subscription, not yet active).
+  # apiKey is a !command resolved at request time, so the secret stays in
+  # opencode's auth.json and never enters this tracked file.
+  # Explicit models: no discovery claim until the plan is live.
+  mimo-token:
+    baseUrl: https://token-plan-ams.xiaomimimo.com/v1
+    apiKey: "!jq -r '.mimo.key' $HOME/.local/share/opencode/auth.json"
+    authHeader: true
+    api: openai-completions
+    models:
+      - id: mimo-v2.6-pro
+        name: MiMo V2.6 Pro
+        reasoning: true
+        supportsTools: true
+        input: [text, image]
+        contextWindow: 1048576
+        maxTokens: 131072
+      - id: mimo-v2.6-flash
+        name: MiMo V2.6 Flash
+        reasoning: true
+        supportsTools: true
+        input: [text, image]
+        contextWindow: 1048576
+        maxTokens: 131072

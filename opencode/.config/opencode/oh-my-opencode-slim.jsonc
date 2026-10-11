@@ -240,58 +240,127 @@
       "orchestrator": {
         "model": [
           "zai-coding-plan/glm-5.3-flash",
-          "nvidia/z-ai/glm-5.3-flash"
+          "nvidia/z-ai/glm-5.3-flash",
+          "commandcode/z-ai/glm-5.3-flash"
         ]
       },
       "oracle": {
         "model": [
           "zai-coding-plan/glm-5.3",
-          "nvidia/z-ai/glm-5.3"
+          "nvidia/z-ai/glm-5.3",
+          "commandcode/z-ai/glm-5.3"
         ],
         "variant": "max"
       },
       "explorer": {
         "model": [
           "zai-coding-plan/glm-5.3-flash",
-          "nvidia/z-ai/glm-5.3-flash"
+          "nvidia/z-ai/glm-5.3-flash",
+          "commandcode/z-ai/glm-5.3-flash"
         ]
       },
       "designer": {
         "model": [
           "zai-coding-plan/glm-5.3",
-          "nvidia/z-ai/glm-5.3"
+          "nvidia/z-ai/glm-5.3",
+          "commandcode/z-ai/glm-5.3"
         ],
         "variant": "max"
       },
       "fixer": {
         "model": [
           "zai-coding-plan/glm-5.3-flash",
-          "nvidia/z-ai/glm-5.3-flash"
+          "nvidia/z-ai/glm-5.3-flash",
+          "commandcode/z-ai/glm-5.3-flash"
         ]
       },
       "librarian": {
         "model": [
           "zai-coding-plan/glm-5.3-flash",
-          "nvidia/z-ai/glm-5.3-flash"
+          "nvidia/z-ai/glm-5.3-flash",
+          "commandcode/z-ai/glm-5.3-flash"
         ]
       },
       "observer": {
         "model": [
           "zai-coding-plan/glm-5.3-flash",
-          "nvidia/z-ai/glm-5.3-flash"
+          "nvidia/z-ai/glm-5.3-flash",
+          "commandcode/z-ai/glm-5.3-flash"
         ]
       },
       "council": {
         "model": [
           "zai-coding-plan/glm-5.3",
-          "nvidia/z-ai/glm-5.3"
+          "nvidia/z-ai/glm-5.3",
+          "commandcode/z-ai/glm-5.3"
         ],
         "variant": "max"
       },
       "skeptic": {
         "model": [
           "zai-coding-plan/glm-5.3",
-          "nvidia/z-ai/glm-5.3"
+          "nvidia/z-ai/glm-5.3",
+          "commandcode/z-ai/glm-5.3"
+        ],
+        "variant": "max"
+      }
+    },
+    "mimo": {
+      "orchestrator": {
+        "model": [
+          "mimo/mimo-v2.6-flash",
+          "opencode/mimo-v2.6-flash-free"
+        ]
+      },
+      "oracle": {
+        "model": [
+          "mimo/mimo-v2.6-pro",
+          "commandcode/xiaomi/mimo-v2.5-pro"
+        ],
+        "variant": "max"
+      },
+      "explorer": {
+        "model": [
+          "mimo/mimo-v2.6-flash",
+          "opencode/mimo-v2.6-flash-free"
+        ]
+      },
+      "designer": {
+        "model": [
+          "mimo/mimo-v2.6-pro",
+          "commandcode/xiaomi/mimo-v2.5-pro"
+        ],
+        "variant": "max"
+      },
+      "fixer": {
+        "model": [
+          "mimo/mimo-v2.6-flash",
+          "opencode/mimo-v2.6-flash-free"
+        ]
+      },
+      "librarian": {
+        "model": [
+          "mimo/mimo-v2.6-flash",
+          "opencode/mimo-v2.6-flash-free"
+        ]
+      },
+      "observer": {
+        "model": [
+          "mimo/mimo-v2.6-flash",
+          "opencode/mimo-v2.6-flash-free"
+        ]
+      },
+      "council": {
+        "model": [
+          "mimo/mimo-v2.6-pro",
+          "commandcode/xiaomi/mimo-v2.5-pro"
+        ],
+        "variant": "max"
+      },
+      "skeptic": {
+        "model": [
+          "mimo/mimo-v2.6-pro",
+          "commandcode/xiaomi/mimo-v2.5-pro"
         ],
         "variant": "max"
       }
@@ -328,14 +397,31 @@
         "alpha": {
           "model": [
             "zai-coding-plan/glm-5.3",
-            "nvidia/z-ai/glm-5.3"
+            "nvidia/z-ai/glm-5.3",
+            "commandcode/z-ai/glm-5.3"
           ],
           "variant": "max"
         },
         "beta": {
           "model": [
             "zai-coding-plan/glm-5.3-flash",
-            "nvidia/z-ai/glm-5.3-flash"
+            "nvidia/z-ai/glm-5.3-flash",
+            "commandcode/z-ai/glm-5.3-flash"
+          ]
+        }
+      },
+      "mimo": {
+        "alpha": {
+          "model": [
+            "mimo/mimo-v2.6-pro",
+            "commandcode/xiaomi/mimo-v2.5-pro"
+          ],
+          "variant": "max"
+        },
+        "beta": {
+          "model": [
+            "mimo/mimo-v2.6-flash",
+            "opencode/mimo-v2.6-flash-free"
           ]
         }
       }
