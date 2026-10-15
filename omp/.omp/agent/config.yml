@@ -6,7 +6,7 @@ modelRoles:
   oracle: omniroute/oracle
   skeptic: omniroute/skeptic
   web: web/exa
-  default: commandcode/xiaomi/mimo-v2.6-pro
+  default: zai/glm-5.3:max
 disabledProviders:
   - llama.cpp
   - lm-studio
@@ -67,7 +67,7 @@ task:
   agentModelOverrides:
     oracle: "@oracle"
     reviewer: "@skeptic"
-    skeptic: commandcode/meta/muse-spark-1.3-contributor
+    skeptic: zai/glm-5.3
     scout: "@scout"
     task: "@task"
   disabledAgents: []

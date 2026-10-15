@@ -97,7 +97,7 @@
       },
       "skeptic": {
         "model": [
-          "opencode/nemotron-3-ultra-free",
+          "opencode/big-pickle",
           "omniroute/skeptic"
         ],
         "variant": "max"
@@ -232,7 +232,7 @@
       "skeptic": {
         "model": [
           "opencode/muse-spark-1.3-contributor-free",
-          "opencode/nemotron-3-ultra-free"
+          "opencode/big-pickle"
         ]
       }
     },
