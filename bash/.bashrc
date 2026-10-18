@@ -75,7 +75,7 @@ esac
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+    #alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
@@ -87,10 +87,14 @@ fi
 # colored GCC warnings and errors
 #export GCC_COLORS='error=01;31:warning=01;35:note=01;36:caret=01;32:locus=01:quote=01'
 
-# some more ls aliases
-alias ll='ls -alF'
-alias la='ls -A'
-alias l='ls -CF'
+# eza aliases for modern file listing
+alias ls='eza --icons=auto --group-directories-first'
+alias l='eza -l --icons=auto --git --group-directories-first'
+alias la='eza -a --icons=auto --group-directories-first'
+alias ll='eza -l --icons=auto --git --group-directories-first'
+alias lla='eza -la --icons=auto --git --group-directories-first'
+alias lt='eza --tree --level=2 --icons=auto'
+alias lta='eza --tree --level=2 -a --icons=auto'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert

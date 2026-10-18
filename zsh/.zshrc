@@ -52,12 +52,14 @@ pokemon-colorscripts --no-title -s -r | fastfetch -c $HOME/.config/fastfetch/con
 # fastfetch. Will be disabled if above colorscript was chosen to install
 #fastfetch -c $HOME/.config/fastfetch/config-compact.jsonc
 
-# Set-up icons for files/directories in terminal using lsd
-alias ls='lsd'
-alias l='ls -l'
-alias la='ls -a'
-alias lla='ls -la'
-alias lt='ls --tree'
+# Set-up icons for files/directories in terminal using eza
+alias ls='eza --icons=auto --group-directories-first'
+alias l='eza -l --icons=auto --git --group-directories-first'
+alias la='eza -a --icons=auto --group-directories-first'
+alias ll='eza -l --icons=auto --git --group-directories-first'
+alias lla='eza -la --icons=auto --git --group-directories-first'
+alias lt='eza --tree --level=2 --icons=auto'
+alias lta='eza --tree --level=2 -a --icons=auto'
 
 # System update alias
 alias update='~/bin/update-system.sh'
