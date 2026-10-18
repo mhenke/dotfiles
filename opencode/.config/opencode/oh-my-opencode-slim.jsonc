@@ -15,7 +15,8 @@
     "balanced": {
       "orchestrator": {
         "model": [
-          "opencode/muse-spark-1.3-contributor-free",
+          "opencode/beam-free",
+          "opencode/nemotron-3.5-lightning-free",
           "omniroute/orchestrator"
         ],
         "temperature": 0.4,
@@ -29,11 +30,10 @@
       },
       "oracle": {
         "model": [
-          "opencode/muse-spark-1.3-contributor-free",
+          "opencode/big-pickle",
           "omniroute/oracle"
         ],
         "temperature": 0.4,
-        "variant": "high",
         "skills": [
           "simplify"
         ],
@@ -73,7 +73,7 @@
       },
       "fixer": {
         "model": [
-          "opencode/muse-spark-1.3-contributor-free",
+          "opencode/mimo-v2.6-flash-free",
           "omniroute/fixer"
         ],
         "temperature": 0.2,
@@ -82,7 +82,7 @@
       },
       "observer": {
         "model": [
-          "opencode/muse-spark-1.3-contributor-free",
+          "opencode/mimo-v2.6-flash-free",
           "omniroute/observer"
         ],
         "temperature": 0.2,
@@ -99,8 +99,7 @@
         "model": [
           "opencode/big-pickle",
           "omniroute/skeptic"
-        ],
-        "variant": "max"
+        ]
       }
     },
     "nvidia-free": {
@@ -200,9 +199,8 @@
     "opencode-zen-free": {
       "orchestrator": {
         "model": [
-          "opencode/nemotron-3-ultra-free",
-          "opencode/big-pickle",
-          "opencode/muse-spark-1.3-contributor-free"
+          "opencode/beam-free",
+          "opencode/big-pickle"
         ],
         "temperature": 0.4
       },
@@ -231,7 +229,6 @@
       },
       "skeptic": {
         "model": [
-          "opencode/muse-spark-1.3-contributor-free",
           "opencode/big-pickle"
         ]
       }
@@ -304,66 +301,6 @@
         ],
         "variant": "max"
       }
-    },
-    "mimo": {
-      "orchestrator": {
-        "model": [
-          "mimo/mimo-v2.6-flash",
-          "opencode/mimo-v2.6-flash-free"
-        ]
-      },
-      "oracle": {
-        "model": [
-          "mimo/mimo-v2.6-pro",
-          "commandcode/xiaomi/mimo-v2.5-pro"
-        ],
-        "variant": "max"
-      },
-      "explorer": {
-        "model": [
-          "mimo/mimo-v2.6-flash",
-          "opencode/mimo-v2.6-flash-free"
-        ]
-      },
-      "designer": {
-        "model": [
-          "mimo/mimo-v2.6-pro",
-          "commandcode/xiaomi/mimo-v2.5-pro"
-        ],
-        "variant": "max"
-      },
-      "fixer": {
-        "model": [
-          "mimo/mimo-v2.6-flash",
-          "opencode/mimo-v2.6-flash-free"
-        ]
-      },
-      "librarian": {
-        "model": [
-          "mimo/mimo-v2.6-flash",
-          "opencode/mimo-v2.6-flash-free"
-        ]
-      },
-      "observer": {
-        "model": [
-          "mimo/mimo-v2.6-flash",
-          "opencode/mimo-v2.6-flash-free"
-        ]
-      },
-      "council": {
-        "model": [
-          "mimo/mimo-v2.6-pro",
-          "commandcode/xiaomi/mimo-v2.5-pro"
-        ],
-        "variant": "max"
-      },
-      "skeptic": {
-        "model": [
-          "mimo/mimo-v2.6-pro",
-          "commandcode/xiaomi/mimo-v2.5-pro"
-        ],
-        "variant": "max"
-      }
     }
   },
   "council": {
@@ -371,10 +308,9 @@
       "balanced": {
         "alpha": {
           "model": [
-            "opencode/muse-spark-1.3-contributor-free",
+            "opencode/big-pickle",
             "omniroute/oracle"
           ],
-          "variant": "high",
           "fallback_models": []
         },
         "beta": {
@@ -382,7 +318,6 @@
             "opencode/nemotron-3-ultra-free",
             "omniroute/skeptic"
           ],
-          "variant": "high",
           "fallback_models": []
         },
         "gamma": {
@@ -407,21 +342,6 @@
             "zai-coding-plan/glm-5.3-flash",
             "nvidia/z-ai/glm-5.3-flash",
             "commandcode/z-ai/glm-5.3-flash"
-          ]
-        }
-      },
-      "mimo": {
-        "alpha": {
-          "model": [
-            "mimo/mimo-v2.6-pro",
-            "commandcode/xiaomi/mimo-v2.5-pro"
-          ],
-          "variant": "max"
-        },
-        "beta": {
-          "model": [
-            "mimo/mimo-v2.6-flash",
-            "opencode/mimo-v2.6-flash-free"
           ]
         }
       }
