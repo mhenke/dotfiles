@@ -6,7 +6,7 @@ modelRoles:
   oracle: omniroute/oracle
   skeptic: omniroute/skeptic
   web: web/exa
-  default: xiaomi/mimo-v2.6-flash:high
+  default: zai/glm-5.3-flash:max
 disabledProviders:
   - llama.cpp
   - lm-studio
@@ -85,3 +85,5 @@ dev:
 skills:
   customDirectories:
     - /home/mhenke/.config/opencode/skills
+marketplace:
+  autoUpdate: auto
