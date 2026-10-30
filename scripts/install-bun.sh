@@ -56,9 +56,6 @@ else
     echo ""
     log_info "Bun can install global packages from npm-global.txt"
     echo ""
-    log_warn "Known compatibility issues:"
-    echo "  ⚠ @anthropic-ai/claude-code has bugs with Bun (crashes, permission issues)"
-    echo ""
     read -p "Install global packages with Bun? (y/N) " -n 1 -r
     echo
     if [[ $REPLY =~ ^[Yy]$ ]]; then
@@ -79,10 +76,8 @@ if [[ "$INSTALL_PACKAGES" == "yes" ]]; then
             # Skip comments and empty lines
             [[ -z "$package" || "$package" =~ ^# ]] && continue
 
-            # Skip CLI tools that should use npm (authentication, native modules)
+            # REMOVED 2026-10-26: claude-code & copilot uninstalled — keep excluded from npm-global.txt
             if [[ "$package" == "@anthropic-ai/claude-code" ]] || [[ "$package" == "@github/copilot" ]]; then
-                log_warn "Skipping $package (CLI tool - use npm for stability)"
-                log_info "  Install with: npm install -g $package"
                 continue
             fi
 
@@ -119,13 +114,6 @@ echo "Speed comparison to npm:"
 echo "  • 7× faster than npm install"
 echo "  • 4× faster than pnpm install"
 echo "  • 17× faster than yarn install"
-echo ""
-log_warn "CLI Tools - Use npm for stability:"
-echo "  ⚠ @anthropic-ai/claude-code"
-echo "  ⚠ @github/copilot"
-echo ""
-echo "Install with:"
-echo "  npm install -g @anthropic-ai/claude-code @github/copilot"
 echo ""
 log_info "Bun is installed to: $BUN_INSTALL"
 log_info "Add to PATH in ~/.zshrc if not already present"

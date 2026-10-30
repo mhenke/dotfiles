@@ -3,7 +3,6 @@
 # Or with Bun: bun install -g <package>
 
 # AI Development Tools (install with npm for stability)
-@anthropic-ai/claude-code
 @github/copilot
 
 # Package Managers

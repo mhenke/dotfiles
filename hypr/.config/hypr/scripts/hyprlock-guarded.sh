@@ -6,6 +6,8 @@
 # If RUNDIR is unsafe, lock WITHOUT a marker (fail toward locked; watchdog
 # just won't respawn this instance).
 ME="$(id -u)"
+# single instance: a second lock signal (lid + before_sleep_cmd) must not stack hyprlock
+pgrep -x hyprlock >/dev/null && exit 0
 RUNDIR="${XDG_RUNTIME_DIR:-/tmp/hypr-watchdog-$ME}"
 MARKER=""
 if mkdir -p "$RUNDIR" 2>/dev/null && chmod 700 "$RUNDIR" && [ -O "$RUNDIR" ]; then
@@ -14,5 +16,6 @@ if mkdir -p "$RUNDIR" 2>/dev/null && chmod 700 "$RUNDIR" && [ -O "$RUNDIR" ]; th
 fi
 hyprlock
 rc=$?
+[ -n "$MARKER" ] && echo "$(date -Is) hyprlock exit rc=$rc marker=${MARKER:+set}" >> "$RUNDIR/guarded.log"
 [ "$rc" -eq 0 ] && [ -n "$MARKER" ] && rm -f "$MARKER"
 exit "$rc"

@@ -63,22 +63,6 @@ done
 
 # Install CLI tools with npm (for stability)
 PACKAGES_DIR="$(dirname "$0")/../packages"
-log_info "Installing CLI tools with npm (claude, copilot)..."
-
-# Install claude
-if npm install -g @anthropic-ai/claude-code 2>&1 | grep -v "npm WARN"; then
-    log_success "Claude Code installed"
-else
-    log_warn "Failed to install Claude Code"
-fi
-
-# Install copilot
-if npm install -g @github/copilot 2>&1 | grep -v "npm WARN"; then
-    log_success "GitHub Copilot installed"
-else
-    log_warn "Failed to install GitHub Copilot"
-fi
-
 # Optionally install other packages with Bun (faster) or npm
 echo ""
 log_info "For remaining packages, you can:"
@@ -93,7 +77,7 @@ case "$INSTALL_METHOD" in
         if [[ -f "$PACKAGES_DIR/npm-global.txt" ]]; then
             while IFS= read -r package; do
                 [[ -z "$package" || "$package" =~ ^# ]] && continue
-                # Skip CLI tools (already installed)
+                # REMOVED 2026-10-26: claude-code & copilot uninstalled — keep excluded from npm-global.txt
                 [[ "$package" == "@anthropic-ai/claude-code" ]] && continue
                 [[ "$package" == "@github/copilot" ]] && continue
                 npm install -g "$package" 2>/dev/null || log_warn "Failed to install $package"

@@ -1,0 +1,33 @@
+# Termius quick import — SSH Config format
+# Import: Hosts → New Host dropdown → Import → SSH Config
+#
+# Termius import is LOSSY: only Host/HostName/User carry reliably.
+# IdentityFile imports only in desktop builds from termius.com (not store builds).
+# RemoteCommand/keepalives are NOT imported — don't rely on them.
+#
+# After import:
+#   1. Re-attach your key in Termius Keychain (or paste password).
+#   2. Create these snippets (name → command):
+#        herdr attach        → herdr                              (startup snippet for this host)
+#        herdr status        → herdr status
+#        herdr agents        → herdr agent list
+#        herdr read agent    → herdr agent read <name> --tail 100
+#        herdr stop server   → herdr server stop                  (after updates; kills panes)
+#        herdr reload config → herdr server reload-config
+#        herdr session       → herdr session attach <name>
+#   3. Set "herdr attach" as this host's Startup Snippet.
+#   4. "herdr-shell" stays snippet-free for plain shell access.
+#
+# Usage: SSH in → snippet runs herdr → ctrl+b q detaches (session survives);
+# reconnect reattaches to your agents. iOS may drop the connection after
+# ~20-30s in background; the herdr server keeps panes running regardless.
+
+Host herdr
+    HostName YOUR_SERVER_IP_OR_DOMAIN
+    User YOUR_USERNAME
+    # IdentityFile ~/.ssh/id_ed25519
+
+Host herdr-shell
+    HostName YOUR_SERVER_IP_OR_DOMAIN
+    User YOUR_USERNAME
+    # IdentityFile ~/.ssh/id_ed25519

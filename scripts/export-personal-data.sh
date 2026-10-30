@@ -44,7 +44,6 @@ PERSONAL_ITEMS=(
     "$HOME/Documents:Documents folder (includes OSCAR_Data)"
     "$HOME/Desktop:Desktop folder"
     "$HOME/.kodi:Kodi media center data"
-    "$HOME/.copilot:GitHub Copilot data"
     "$HOME/.themes:Custom GTK themes"
 )
 

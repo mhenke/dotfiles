@@ -50,7 +50,7 @@ stow -R -t ~ hypr      # restow after changes
 stow -D -t ~ hypr      # unlink
 ```
 
-Only the 21 packages in `scripts/setup-stow.sh` `PACKAGES` are linked. Intentionally **not** stowed (see `DONT-STOW.md`): `opencode/`, `claude/`, `ollama/` (systemd override), `sddm-themes/` (system path, Git LFS), `tilix/` (dconf — dump/load manually), VSCode (Settings Sync), AWS credentials. `gh/` *is* stowed, but only `config.yml` — `hosts.yml` holds a live token and is excluded.
+Only the 21 packages in `scripts/setup-stow.sh` `PACKAGES` are linked. Intentionally **not** stowed (see `DONT-STOW.md`): `opencode/`, `ollama/` (systemd override), `sddm-themes/` (system path, Git LFS), `tilix/` (dconf — dump/load manually), VSCode (Settings Sync), AWS credentials. `gh/` *is* stowed, but only `config.yml` — `hosts.yml` holds a live token and is excluded.
 
 ## Scripts
 

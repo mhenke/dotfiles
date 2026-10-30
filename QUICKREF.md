@@ -32,11 +32,6 @@ picomconfig        # Edit picom config
 ### GitHub CLI
 ```bash
 ghpr               # List pull requests: gh pr list
-ghco               # GitHub Copilot
-ghce               # GitHub Copilot explain
-ghcs               # GitHub Copilot suggest
-ghci               # GitHub Copilot interactive
-ghcopilot          # GitHub Copilot
 ```
 
 ### Display Configuration
