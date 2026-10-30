@@ -15,8 +15,8 @@
     "balanced": {
       "orchestrator": {
         "model": [
+          "opencode/glm-5.3-flash-free",
           "opencode/beam-free",
-          "opencode/nemotron-3.5-lightning-free",
           "omniroute/orchestrator"
         ],
         "temperature": 0.4,
@@ -73,6 +73,7 @@
       },
       "fixer": {
         "model": [
+          "opencode/deepseek-v4.1-flash-free",
           "opencode/mimo-v2.6-flash-free",
           "omniroute/fixer"
         ],
@@ -91,13 +92,15 @@
       },
       "council": {
         "model": [
+          "opencode/glm-5.3-flash-free",
           "opencode/mimo-v2.6-flash-free",
           "omniroute/orchestrator"
         ]
       },
       "skeptic": {
         "model": [
-          "opencode/big-pickle",
+          "opencode/deepseek-v4.1-flash-free",
+          "opencode/nemotron-3-ultra-free",
           "omniroute/skeptic"
         ]
       }
@@ -236,70 +239,48 @@
     "z-ai": {
       "orchestrator": {
         "model": [
-          "zai-coding-plan/glm-5.3-flash",
-          "nvidia/z-ai/glm-5.3-flash",
-          "commandcode/z-ai/glm-5.3-flash"
+          "nvidia/z-ai/glm-5.3-flash"
         ]
       },
       "oracle": {
         "model": [
-          "zai-coding-plan/glm-5.3",
-          "nvidia/z-ai/glm-5.3",
-          "commandcode/z-ai/glm-5.3"
-        ],
-        "variant": "max"
+          "nvidia/z-ai/glm-5.3"
+        ]
       },
       "explorer": {
         "model": [
-          "zai-coding-plan/glm-5.3-flash",
-          "nvidia/z-ai/glm-5.3-flash",
-          "commandcode/z-ai/glm-5.3-flash"
+          "nvidia/z-ai/glm-5.3-flash"
         ]
       },
       "designer": {
         "model": [
-          "zai-coding-plan/glm-5.3",
-          "nvidia/z-ai/glm-5.3",
-          "commandcode/z-ai/glm-5.3"
-        ],
-        "variant": "max"
+          "nvidia/z-ai/glm-5.3"
+        ]
       },
       "fixer": {
         "model": [
-          "zai-coding-plan/glm-5.3-flash",
-          "nvidia/z-ai/glm-5.3-flash",
-          "commandcode/z-ai/glm-5.3-flash"
+          "nvidia/z-ai/glm-5.3-flash"
         ]
       },
       "librarian": {
         "model": [
-          "zai-coding-plan/glm-5.3-flash",
-          "nvidia/z-ai/glm-5.3-flash",
-          "commandcode/z-ai/glm-5.3-flash"
+          "nvidia/z-ai/glm-5.3-flash"
         ]
       },
       "observer": {
         "model": [
-          "zai-coding-plan/glm-5.3-flash",
-          "nvidia/z-ai/glm-5.3-flash",
-          "commandcode/z-ai/glm-5.3-flash"
+          "nvidia/z-ai/glm-5.3-flash"
         ]
       },
       "council": {
         "model": [
-          "zai-coding-plan/glm-5.3",
-          "nvidia/z-ai/glm-5.3",
-          "commandcode/z-ai/glm-5.3"
-        ],
-        "variant": "max"
+          "nvidia/z-ai/glm-5.3"
+        ]
       },
       "skeptic": {
         "model": [
-          "zai-coding-plan/glm-5.3",
-          "nvidia/z-ai/glm-5.3",
-          "commandcode/z-ai/glm-5.3"
-        ],
-        "variant": "max"
+          "nvidia/z-ai/glm-5.3"
+        ]
       }
     }
   },
@@ -315,6 +296,7 @@
         },
         "beta": {
           "model": [
+            "opencode/deepseek-v4.1-flash-free",
             "opencode/nemotron-3-ultra-free",
             "omniroute/skeptic"
           ],
@@ -331,22 +313,22 @@
       "z-ai": {
         "alpha": {
           "model": [
-            "zai-coding-plan/glm-5.3",
-            "nvidia/z-ai/glm-5.3",
-            "commandcode/z-ai/glm-5.3"
-          ],
-          "variant": "max"
+            "nvidia/z-ai/glm-5.3"
+          ]
         },
         "beta": {
           "model": [
-            "zai-coding-plan/glm-5.3-flash",
-            "nvidia/z-ai/glm-5.3-flash",
-            "commandcode/z-ai/glm-5.3-flash"
+            "nvidia/z-ai/glm-5.3-flash"
+          ]
+        },
+        "gamma": {
+          "model": [
+            "nvidia/z-ai/glm-5.3-flash"
           ]
         }
       }
     },
-    "default_preset": "z-ai",
+    "default_preset": "balanced",
     "councillor_execution_mode": "parallel"
   },
   "websearch": {
