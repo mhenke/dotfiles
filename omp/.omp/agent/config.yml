@@ -6,7 +6,7 @@ modelRoles:
   oracle: omniroute/oracle
   skeptic: omniroute/skeptic
   web: web/exa
-  default: xiaomi/mimo-v2.6-pro:high
+  default: nvidia/z-ai/glm-5.3
 disabledProviders:
   - llama.cpp
   - lm-studio
