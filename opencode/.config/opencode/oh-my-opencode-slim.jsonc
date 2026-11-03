@@ -257,13 +257,13 @@
         "mcps": []
       },
       "explorer": {
-        "model": "github-copilot/gemini-3.8-flash",
+        "model": "github-copilot/gpt-6-luna",
         "temperature": 0.2,
         "skills": [],
         "mcps": []
       },
       "librarian": {
-        "model": "github-copilot/gemini-3.8-flash",
+        "model": "github-copilot/gpt-6-luna",
         "temperature": 0.2,
         "skills": [],
         "mcps": [
@@ -281,18 +281,18 @@
       "fixer": {
         "model": "github-copilot/gpt-6-luna",
         "temperature": 0.2,
-        "variant": "max",
+        "variant": "high",
         "skills": [],
         "mcps": []
       },
       "observer": {
-        "model": "github-copilot/grok-4.7",
+        "model": "github-copilot/kimi-k3",
         "temperature": 0.2,
         "skills": [],
         "mcps": []
       },
       "council": {
-        "model": "github-copilot/claude-haiku-5.5"
+        "model": "github-copilot/claude-sonnet-5.5"
       },
       "skeptic": {
         "model": "github-copilot/claude-opus-5.5"
@@ -404,7 +404,7 @@
         },
         "gamma": {
           "model": [
-            "github-copilot/grok-4.7"
+            "github-copilot/kimi-k3"
           ],
           "fallback_models": []
         }
