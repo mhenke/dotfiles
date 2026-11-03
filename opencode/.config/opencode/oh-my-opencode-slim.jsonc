@@ -249,7 +249,7 @@
         ]
       },
       "oracle": {
-        "model": "github-copilot/claude-opus-5.5",
+        "model": "github-copilot/gpt-6.1-sol",
         "temperature": 0.4,
         "skills": [
           "simplify"
@@ -286,7 +286,7 @@
         "mcps": []
       },
       "observer": {
-        "model": "github-copilot/claude-sonnet-5.5",
+        "model": "github-copilot/grok-4.7",
         "temperature": 0.2,
         "skills": [],
         "mcps": []
@@ -295,7 +295,7 @@
         "model": "github-copilot/claude-haiku-5.5"
       },
       "skeptic": {
-        "model": "github-copilot/gpt-6.1-sol"
+        "model": "github-copilot/claude-opus-5.5"
       }
     },
     "z-ai": {
@@ -392,7 +392,7 @@
       "copilot": {
         "alpha": {
           "model": [
-            "github-copilot/gpt-6.1-terra"
+            "github-copilot/gpt-6.1-sol"
           ],
           "fallback_models": []
         },
@@ -404,7 +404,7 @@
         },
         "gamma": {
           "model": [
-            "github-copilot/claude-sonnet-5.5"
+            "github-copilot/grok-4.7"
           ],
           "fallback_models": []
         }
