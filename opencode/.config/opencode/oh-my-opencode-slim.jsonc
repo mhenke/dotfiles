@@ -239,63 +239,64 @@
     "copilot": {
       "orchestrator": {
         "model": "github-copilot/claude-haiku-5.5",
-        "temperature": 0.4,
         "skills": [
           "*"
         ],
         "mcps": [
           " ",
           "!context7"
-        ]
+        ],
+        "variant": "low"
       },
       "oracle": {
         "model": "github-copilot/gpt-6.1-sol",
-        "temperature": 0.4,
         "skills": [
           "simplify"
         ],
-        "mcps": []
+        "mcps": [],
+        "variant": "high"
       },
       "explorer": {
         "model": "github-copilot/gpt-6-luna",
-        "temperature": 0.2,
         "skills": [],
-        "mcps": []
+        "mcps": [],
+        "variant": "none"
       },
       "librarian": {
         "model": "github-copilot/gpt-6-luna",
-        "temperature": 0.2,
         "skills": [],
         "mcps": [
           "websearch",
           "context7",
           "gh_grep"
-        ]
+        ],
+        "variant": "none"
       },
       "designer": {
         "model": "github-copilot/gemini-4-argon",
-        "temperature": 0.3,
         "skills": [],
-        "mcps": []
+        "mcps": [],
+        "variant": "medium"
       },
       "fixer": {
         "model": "github-copilot/gpt-6-luna",
-        "temperature": 0.2,
         "variant": "high",
         "skills": [],
         "mcps": []
       },
       "observer": {
         "model": "github-copilot/kimi-k3",
-        "temperature": 0.2,
         "skills": [],
-        "mcps": []
+        "mcps": [],
+        "variant": "low"
       },
       "council": {
-        "model": "github-copilot/claude-sonnet-5.5"
+        "model": "github-copilot/claude-sonnet-5.5",
+        "variant": "medium"
       },
       "skeptic": {
-        "model": "github-copilot/claude-opus-5.5"
+        "model": "github-copilot/claude-opus-5.5",
+        "variant": "high"
       }
     },
     "z-ai": {
@@ -394,19 +395,22 @@
           "model": [
             "github-copilot/gpt-6.1-sol"
           ],
-          "fallback_models": []
+          "fallback_models": [],
+          "variant": "high"
         },
         "beta": {
           "model": [
             "github-copilot/claude-opus-5.5"
           ],
-          "fallback_models": []
+          "fallback_models": [],
+          "variant": "high"
         },
         "gamma": {
           "model": [
             "github-copilot/kimi-k3"
           ],
-          "fallback_models": []
+          "fallback_models": [],
+          "variant": "high"
         }
       }
     },
