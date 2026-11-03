@@ -236,6 +236,68 @@
         ]
       }
     },
+    "copilot": {
+      "orchestrator": {
+        "model": "github-copilot/claude-haiku-5.5",
+        "temperature": 0.4,
+        "skills": [
+          "*"
+        ],
+        "mcps": [
+          " ",
+          "!context7"
+        ]
+      },
+      "oracle": {
+        "model": "github-copilot/claude-opus-5.5",
+        "temperature": 0.4,
+        "skills": [
+          "simplify"
+        ],
+        "mcps": []
+      },
+      "explorer": {
+        "model": "github-copilot/gemini-3.8-flash",
+        "temperature": 0.2,
+        "skills": [],
+        "mcps": []
+      },
+      "librarian": {
+        "model": "github-copilot/gemini-3.8-flash",
+        "temperature": 0.2,
+        "skills": [],
+        "mcps": [
+          "websearch",
+          "context7",
+          "gh_grep"
+        ]
+      },
+      "designer": {
+        "model": "github-copilot/gemini-4-argon",
+        "temperature": 0.3,
+        "skills": [],
+        "mcps": []
+      },
+      "fixer": {
+        "model": "github-copilot/gpt-6-luna",
+        "temperature": 0.2,
+        "variant": "max",
+        "skills": [],
+        "mcps": []
+      },
+      "observer": {
+        "model": "github-copilot/claude-sonnet-5.5",
+        "temperature": 0.2,
+        "skills": [],
+        "mcps": []
+      },
+      "council": {
+        "model": "github-copilot/claude-haiku-5.5"
+      },
+      "skeptic": {
+        "model": "github-copilot/gpt-6.1-sol"
+      }
+    },
     "z-ai": {
       "orchestrator": {
         "model": [
@@ -325,6 +387,26 @@
           "model": [
             "nvidia/z-ai/glm-5.3-flash"
           ]
+        }
+      },
+      "copilot": {
+        "alpha": {
+          "model": [
+            "github-copilot/gpt-6.1-terra"
+          ],
+          "fallback_models": []
+        },
+        "beta": {
+          "model": [
+            "github-copilot/claude-opus-5.5"
+          ],
+          "fallback_models": []
+        },
+        "gamma": {
+          "model": [
+            "github-copilot/claude-sonnet-5.5"
+          ],
+          "fallback_models": []
         }
       }
     },
