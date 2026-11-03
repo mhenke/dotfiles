@@ -43,6 +43,5 @@ These are the `providerId` values used in combo model entries and the `omniroute
 
 - `deepseek/` — DeepSeek, pay-as-you-go
 - `cmd/` — CommandCode, subscription
-- `openrouter/` — OpenRouter, free (`:free` suffix on model id)
 - `nvidia/` — NVIDIA, free
 - `opencode-zen/` — OpenCode Zen, pay-as-you-go (`*-free` ids excluded from combos — they 403/500 via API, only work through OpenCode CLI)

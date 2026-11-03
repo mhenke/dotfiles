@@ -58,13 +58,6 @@
     "name": "observer",
     "models": [
       {
-        "id": "observer-model-1-openrouter-inclusionai-ling-3-0-flash-vl-free",
-        "kind": "model",
-        "model": "openrouter/inclusionai/ling-3.0-flash-vl:free",
-        "providerId": "openrouter",
-        "weight": 0
-      },
-      {
         "id": "observer-model-2-nvidia-z-ai-glm-5-3-flash",
         "kind": "model",
         "model": "nvidia/z-ai/glm-5.3-flash",
@@ -135,13 +128,6 @@
     "name": "orchestrator",
     "models": [
       {
-        "id": "orchestrator-model-1-openrouter-nvidia-nemotron-3-super-120b-a12b-free",
-        "kind": "model",
-        "model": "openrouter/nvidia/nemotron-3-super-120b-a12b:free",
-        "providerId": "openrouter",
-        "weight": 0
-      },
-      {
         "id": "orchestrator-model-2-nvidia-z-ai-glm-5-3-flash",
         "kind": "model",
         "model": "nvidia/z-ai/glm-5.3-flash",
@@ -175,13 +161,6 @@
   {
     "name": "oracle",
     "models": [
-      {
-        "id": "oracle-model-1-openrouter-nvidia-nemotron-3-ultra-550b-a55b-free",
-        "kind": "model",
-        "model": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
-        "providerId": "openrouter",
-        "weight": 0
-      },
       {
         "id": "oracle-model-2-nvidia-z-ai-glm-5-3",
         "kind": "model",
@@ -217,13 +196,6 @@
   {
     "name": "explorer",
     "models": [
-      {
-        "id": "explorer-model-1-openrouter-cohere-north-mini-code-free",
-        "kind": "model",
-        "model": "openrouter/cohere/north-mini-code:free",
-        "providerId": "openrouter",
-        "weight": 0
-      },
       {
         "id": "explorer-model-2-nvidia-nvidia-nemotron-3-5-lightning-30b-a3b",
         "kind": "model",
@@ -266,20 +238,6 @@
         "weight": 0
       },
       {
-        "id": "librarian-model-2-openrouter-inclusionai-ling-3-0-flash-fin-free",
-        "kind": "model",
-        "model": "openrouter/inclusionai/ling-3.0-flash-fin:free",
-        "providerId": "openrouter",
-        "weight": 0
-      },
-      {
-        "id": "librarian-model-3-openrouter-dots-studio-dots-3-note-preview-free",
-        "kind": "model",
-        "model": "openrouter/dots-studio/dots-3-note-preview:free",
-        "providerId": "openrouter",
-        "weight": 0
-      },
-      {
         "id": "librarian-model-4-cmd-deepseek-deepseek-v4-1-flash",
         "kind": "model",
         "model": "cmd/deepseek/deepseek-v4.1-flash",
@@ -306,20 +264,6 @@
   {
     "name": "fixer",
     "models": [
-      {
-        "id": "fixer-model-1-openrouter-nex-agi-nex-n2-5-mini-free",
-        "kind": "model",
-        "model": "openrouter/nex-agi/nex-n2.5-mini:free",
-        "providerId": "openrouter",
-        "weight": 0
-      },
-      {
-        "id": "fixer-model-2-openrouter-cohere-north-mini-code-free",
-        "kind": "model",
-        "model": "openrouter/cohere/north-mini-code:free",
-        "providerId": "openrouter",
-        "weight": 0
-      },
       {
         "id": "fixer-model-3-cmd-qwen-qwen3-8-flash",
         "kind": "model",
