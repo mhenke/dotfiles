@@ -162,3 +162,6 @@ eval "$(atuin init zsh)"
 
 # Shared oh-my-opencode-slim code graph (see omos-graphify wrapper)
 export GRAPHIFY_OUT="$HOME/.graphify/oh-my-opencode-slim"
+
+
+# Node 24 from ~/.local/opt via ~/.local/bin symlinks (no nvm)
