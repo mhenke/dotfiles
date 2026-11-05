@@ -1,0 +1,9 @@
+# A .stow-local-ignore here REPLACES stow's default ignore list, so entries
+# the defaults covered (notably .gitignore) must be restated.
+# Repo-internal ignore rules for this config dir; nothing to link live.
+\.gitignore$
+
+# Reference-only copy of the live opencode.json (which is not tracked and is
+# rewritten by the CLI). Linking it would drop a junk .stale file into
+# ~/.config/opencode; it exists in the repo for reference, like kodi.desktop.
+opencode\.json\.stale

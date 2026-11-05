@@ -24,7 +24,7 @@
           "*"
         ],
         "mcps": [
-          " ",
+          "*",
           "!context7"
         ]
       },
@@ -48,19 +48,6 @@
         "variant": "xhigh",
         "skills": [],
         "mcps": []
-      },
-      "librarian": {
-        "model": [
-          "opencode/mimo-v2.6-flash-free",
-          "omniroute/librarian"
-        ],
-        "temperature": 0.2,
-        "skills": [],
-        "mcps": [
-          "websearch",
-          "context7",
-          "gh_grep"
-        ]
       },
       "explorer": {
         "model": [
@@ -118,7 +105,7 @@
           "*"
         ],
         "mcps": [
-          " ",
+          "*",
           "!context7"
         ]
       },
@@ -142,19 +129,6 @@
         "temperature": 0.2,
         "skills": [],
         "mcps": []
-      },
-      "librarian": {
-        "model": [
-          "nvidia/nvidia/nemotron-3-super-120b-a12b",
-          "nvidia/moonshotai/kimi-k3"
-        ],
-        "temperature": 0.2,
-        "skills": [],
-        "mcps": [
-          "websearch",
-          "context7",
-          "gh_grep"
-        ]
       },
       "designer": {
         "model": [
@@ -211,10 +185,6 @@
         "model": "opencode/mimo-v2.6-flash-free",
         "temperature": 0.2
       },
-      "librarian": {
-        "model": "opencode/mimo-v2.6-flash-free",
-        "temperature": 0.2
-      },
       "designer": {
         "model": "opencode/mimo-v2.6-flash-free",
         "temperature": 0.3
@@ -243,10 +213,10 @@
           "*"
         ],
         "mcps": [
-          " ",
+          "*",
           "!context7"
         ],
-        "variant": "low"
+        "variant": "medium"
       },
       "oracle": {
         "model": "github-copilot/gpt-6.1-sol",
@@ -259,14 +229,7 @@
       "explorer": {
         "model": "github-copilot/gpt-6-luna",
         "skills": [],
-        "mcps": [],
-        "variant": "none"
-      },
-      "librarian": {
-        "model": "github-copilot/gpt-6-luna",
-        "skills": [],
         "mcps": [
-          "websearch",
           "context7",
           "gh_grep"
         ],
@@ -285,7 +248,7 @@
         "mcps": []
       },
       "observer": {
-        "model": "github-copilot/kimi-k3",
+        "model": "github-copilot/gpt-6-luna",
         "skills": [],
         "mcps": [],
         "variant": "low"
@@ -295,7 +258,7 @@
         "variant": "medium"
       },
       "skeptic": {
-        "model": "github-copilot/claude-opus-5.5",
+        "model": "github-copilot/claude-sonnet-5.5",
         "variant": "high"
       }
     },
@@ -325,11 +288,6 @@
           "nvidia/z-ai/glm-5.3-flash"
         ]
       },
-      "librarian": {
-        "model": [
-          "nvidia/z-ai/glm-5.3-flash"
-        ]
-      },
       "observer": {
         "model": [
           "nvidia/z-ai/glm-5.3-flash"
@@ -344,6 +302,70 @@
         "model": [
           "nvidia/z-ai/glm-5.3"
         ]
+      }
+    },
+    "kimi-k3": {
+      "orchestrator": {
+        "model": "github-copilot/kimi-k3",
+        "temperature": 1,
+        "variant": "max",
+        "skills": [
+          "*"
+        ],
+        "mcps": [
+          "*",
+          "!context7"
+        ]
+      },
+      "oracle": {
+        "model": "github-copilot/kimi-k3",
+        "temperature": 1,
+        "variant": "max",
+        "skills": [
+          "simplify"
+        ],
+        "mcps": []
+      },
+      "explorer": {
+        "model": "github-copilot/kimi-k3",
+        "temperature": 1,
+        "variant": "max",
+        "skills": [],
+        "mcps": [
+          "context7",
+          "gh_grep"
+        ]
+      },
+      "designer": {
+        "model": "github-copilot/kimi-k3",
+        "temperature": 1,
+        "variant": "max",
+        "skills": [],
+        "mcps": []
+      },
+      "fixer": {
+        "model": "github-copilot/kimi-k3",
+        "temperature": 1,
+        "variant": "max",
+        "skills": [],
+        "mcps": []
+      },
+      "observer": {
+        "model": "github-copilot/kimi-k3",
+        "temperature": 1,
+        "variant": "max",
+        "skills": [],
+        "mcps": []
+      },
+      "council": {
+        "model": "github-copilot/kimi-k3",
+        "temperature": 1,
+        "variant": "max"
+      },
+      "skeptic": {
+        "model": "github-copilot/kimi-k3",
+        "temperature": 1,
+        "variant": "max"
       }
     }
   },
@@ -400,7 +422,7 @@
         },
         "beta": {
           "model": [
-            "github-copilot/claude-opus-5.5"
+            "github-copilot/claude-sonnet-5.5"
           ],
           "fallback_models": [],
           "variant": "high"
@@ -412,10 +434,32 @@
           "fallback_models": [],
           "variant": "high"
         }
+      },
+      "kimi-k3": {
+        "alpha": {
+          "model": [
+            "github-copilot/kimi-k3"
+          ],
+          "fallback_models": [],
+          "variant": "max"
+        },
+        "beta": {
+          "model": [
+            "github-copilot/kimi-k3"
+          ],
+          "fallback_models": [],
+          "variant": "max"
+        },
+        "gamma": {
+          "model": [
+            "github-copilot/kimi-k3"
+          ],
+          "fallback_models": [],
+          "variant": "max"
+        }
       }
     },
-    "default_preset": "balanced",
-    "councillor_execution_mode": "parallel"
+    "default_preset": "copilot"
   },
   "websearch": {
     "provider": "exa"

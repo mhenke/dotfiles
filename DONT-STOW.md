@@ -70,8 +70,8 @@ dconf load /com/gexperts/Tilix/ < ~/dotfiles/tilix/tilix.dconf
 ### OpenCode CLI
 - Location: `~/.config/opencode/opencode.json`
 - Why: Machine-specific absolute paths (`/home/<user>/...` in instructions, skills, plugin URLs); live-edited by the CLI; provider auth lives outside the file (`~/.local/share/opencode/auth.json`)
-- **Decision:** Don't stow. Edit live; port intentional changes here only as a sanitized template if cross-machine sync is ever needed
+- **Decision:** Don't stow *this file*. Edit live; port intentional changes here only as a sanitized template if cross-machine sync is ever needed. The rest of the `opencode/` package **is** stowed (in `PACKAGES`): the package tree holds no `opencode.json`, so the exclusion is file-level, not package-level.
 
 ---
 
-**Summary:** 21 stowed packages + these excluded = complete coverage
+**Summary:** 22 stowed packages + these excluded = complete coverage
