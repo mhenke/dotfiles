@@ -6,7 +6,6 @@ modelRoles:
   oracle: omniroute/oracle
   skeptic: omniroute/skeptic
   web: web/exa
-  default: commandcode/deepseek/deepseek-v4.1-flash
 disabledProviders:
   - llama.cpp
   - lm-studio
