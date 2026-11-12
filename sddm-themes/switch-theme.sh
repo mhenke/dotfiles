@@ -24,7 +24,6 @@ NC='\033[0m' # No Color
 
 # Check for --list or -l flag (doesn't require sudo)
 if [ "$1" = "--list" ] || [ "$1" = "-l" ]; then
-    CONFIGS_DIR="$HOME/dotfiles/sddm-themes/simple-sddm/configs"
     echo -e "${BLUE}Available SDDM Themes:${NC}"
     echo
     i=1
