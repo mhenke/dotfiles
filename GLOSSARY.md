@@ -73,7 +73,7 @@ _Avoid_: verifier, readiness check, preflight
 **Display surface**:
 One of the places the workstation paints a full-screen image: desktop, lock
 screen, login screen, logout screen. Each surface is configured independently;
-changing one never implies another.
+changing one never implies another, except when a look is applied.
 _Avoid_: screen, wallpaper screen, monitor
 
 **Desktop**:
@@ -111,6 +111,13 @@ _Avoid_: theme, login theme, preset, skin
 The greeting line a login-screen variant draws. It is display copy, never an
 identifier.
 _Avoid_: title, name
+
+**Look**:
+A login-screen variant plus the same image on the desktop, applied by one
+command. The surfaces stay independent underneath; a look is a deliberate
+shortcut across two of them, and it only exists when the wallpaper folder holds
+a file matching the variant's background name.
+_Avoid_: theme, preset, mode
 
 **Palette**:
 The color set derived from the current desktop wallpaper and pushed into

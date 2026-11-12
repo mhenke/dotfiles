@@ -76,7 +76,36 @@ if [ "$1" = "--menu" ]; then
     terminal=$(grep -E '^\$term *=' "$USER_HOME/.config/hypr/UserConfigs/01-UserDefaults.conf" 2>/dev/null | sed 's/.*= *//; s/ *#.*//')
     script=$(readlink -f "$0")
     # the terminal closes when the command returns, so report both outcomes
-    exec "${terminal:-ghostty}" -e bash -c "if sudo '$script' '$theme_name'; then notify-send -i '$HOME/.config/swaync/images/ja.png' SDDM 'Login theme: $theme_name'; else notify-send -u critical SDDM 'Login theme switch failed'; fi"
+    exec "${terminal:-ghostty}" -e bash -c "if sudo '$script' '$theme_name'; then '$script' --desktop '$theme_name' && notify-send -i '$HOME/.config/swaync/images/ja.png' SDDM 'Login + desktop: $theme_name' || notify-send -i '$HOME/.config/swaync/images/ja.png' SDDM 'Login screen: $theme_name (no desktop image)'; else notify-send -u critical SDDM 'Login theme switch failed'; fi"
+fi
+
+# Desktop side of the same look (no sudo): paint the variant's own image, recolor, repoint the lock screen.
+if [ "$1" = "--desktop" ]; then
+    if [ -z "$2" ]; then
+        echo "Usage: $0 --desktop <theme-name>"
+        exit 1
+    fi
+    if [ "$EUID" -eq 0 ]; then
+        echo "Error: run --desktop as your user, not with sudo (it talks to your swww daemon)"
+        exit 1
+    fi
+    config="$CONFIGS_DIR/theme-$2.conf"
+    if [ ! -f "$config" ]; then
+        echo "Unknown theme: $2"
+        exit 1
+    fi
+    image=$(grep "^Background=" "$config" | cut -d'"' -f2 | sed 's|Backgrounds/||')
+    wallpaper=$(find "$USER_HOME/Pictures/wallpapers" -maxdepth 2 -name "$image" -print -quit)
+    if [ -z "$wallpaper" ]; then
+        echo "No desktop copy of $image in ~/Pictures/wallpapers — login screen only."
+        exit 1
+    fi
+    monitor=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')
+    swww query > /dev/null 2>&1 || { swww-daemon --format xrgb & sleep 1; }
+    swww img -o "$monitor" "$wallpaper" --transition-fps 30 --transition-type any --transition-duration 1 --transition-bezier .43,1.19,1,.4
+    "$USER_HOME/.config/hypr/scripts/WallustSwww.sh"
+    echo "Desktop wallpaper: $wallpaper"
+    exit 0
 fi
 
 # Check if running with sudo

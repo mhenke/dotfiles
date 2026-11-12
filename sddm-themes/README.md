@@ -68,7 +68,13 @@ Features:
 ```bash
 ./switch-theme.sh --menu     # pick a variant; opens your default terminal for the sudo prompt
 ./switch-theme.sh --items    # just print the list, formatted "HEADER (slug)"
+./switch-theme.sh --desktop lofi-cafe   # paint the same image on the desktop (no sudo)
 ```
+
+`--menu` does both: it applies the login variant, then calls `--desktop` for the same slug.
+`--desktop` finds the variant's `Background=` filename in `~/Pictures/wallpapers`, sets it with
+swww, then runs the upstream `WallustSwww.sh` for the palette and the lock-screen pointer.
+Suffix `(no desktop image)` in the notification means the wallpaper folder has no file by that name.
 
 `--menu` reads the terminal from `$term` in `hypr/.config/hypr/UserConfigs/01-UserDefaults.conf`,
 matching the other Hyprland menus, and sends a notification when the switch lands.
