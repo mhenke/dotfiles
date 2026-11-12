@@ -200,7 +200,7 @@ apply_theme() {
     if [ -n "$SUDO_USER" ]; then
         bg_image=$(grep "^Background=" "$config_file" | cut -d'"' -f2 | sed 's|Backgrounds/||')
         if [ -f "$USER_HOME/Pictures/wallpapers/$bg_image" ] || [ -f "$BACKGROUNDS_DIR/$bg_image" ]; then
-            echo -e "${YELLOW}Desktop wallpaper unchanged — run as $SUDO_USER:${NC} $0 --desktop ${theme_name}"
+            echo -e "${YELLOW}Desktop wallpaper unchanged. Without sudo, run:${NC} $0 --desktop ${theme_name}"
         else
             echo -e "${YELLOW}Desktop wallpaper unchanged — no $bg_image to use${NC}"
         fi
