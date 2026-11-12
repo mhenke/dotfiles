@@ -70,3 +70,7 @@ opencode/.config/opencode/oh-my-opencode-slim/reflections/
 
 # Playwright MCP session artifacts
 .playwright-mcp/
+
+# Wallpaper runtime state (derived; rewritten on every wallpaper change)
+hypr/.config/hypr/wallpaper_effects/.wallpaper_current
+hypr/.config/hypr/wallpaper_effects/.wallpaper_modified
