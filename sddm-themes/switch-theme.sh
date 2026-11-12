@@ -94,9 +94,13 @@ if [ "$1" = "--desktop" ]; then
         exit 1
     fi
     image=$(grep "^Background=" "$config" | cut -d'"' -f2 | sed 's|Backgrounds/||')
+    # prefer the curated copy, fall back to the theme's own background (same picture, LFS-managed)
     wallpaper=$(find "$USER_HOME/Pictures/wallpapers" -maxdepth 2 -name "$image" -print -quit)
     if [ -z "$wallpaper" ]; then
-        echo "No desktop copy of $image in ~/Pictures/wallpapers — login screen only."
+        wallpaper="$BACKGROUNDS_DIR/$image"
+    fi
+    if [ ! -f "$wallpaper" ]; then
+        echo "No image for $image in ~/Pictures/wallpapers or $BACKGROUNDS_DIR — login screen only."
         exit 1
     fi
     monitor=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')
@@ -192,6 +196,15 @@ apply_theme() {
 
     echo -e "${GREEN}✓ Theme applied successfully!${NC}"
     echo -e "${BLUE}The new theme will appear on next login/logout${NC}"
+
+    if [ -n "$SUDO_USER" ]; then
+        bg_image=$(grep "^Background=" "$config_file" | cut -d'"' -f2 | sed 's|Backgrounds/||')
+        if [ -f "$USER_HOME/Pictures/wallpapers/$bg_image" ] || [ -f "$BACKGROUNDS_DIR/$bg_image" ]; then
+            echo -e "${YELLOW}Desktop wallpaper unchanged — run as $SUDO_USER:${NC} $0 --desktop ${theme_name}"
+        else
+            echo -e "${YELLOW}Desktop wallpaper unchanged — no $bg_image to use${NC}"
+        fi
+    fi
 }
 
 # Main script

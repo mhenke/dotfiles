@@ -115,8 +115,8 @@ _Avoid_: title, name
 **Look**:
 A login-screen variant plus the same image on the desktop, applied by one
 command. The surfaces stay independent underneath; a look is a deliberate
-shortcut across two of them, and it only exists when the wallpaper folder holds
-a file matching the variant's background name.
+shortcut across two of them, using the variant's own background image when the
+wallpaper folder holds no copy.
 _Avoid_: theme, preset, mode
 
 **Palette**:
