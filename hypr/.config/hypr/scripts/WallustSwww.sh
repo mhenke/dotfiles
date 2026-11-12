@@ -26,8 +26,12 @@ if [ -f "$cache_file" ]; then
     if ln -sf "$wallpaper_path" "$HOME/.config/rofi/.current_wallpaper"; then
         ln_success=true  # Set the flag to true upon successful execution
     fi
-    # copy the wallpaper for wallpaper effects
-	cp -r "$wallpaper_path" "$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
+    # link, never copy: cp would write through the symlink chain and overwrite the wallpaper itself.
+    # Skip the effects output, which is derived from this pointer: pointing at it makes every
+    # later convert/cp read and write one file, so effects stack and "No Effects" cannot restore.
+	if [ "$wallpaper_path" != "$(realpath -m "$HOME/.config/hypr/wallpaper_effects/.wallpaper_modified")" ]; then
+		ln -sfn "$wallpaper_path" "$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
+	fi
 fi
 
 # Check the flag before executing further commands
