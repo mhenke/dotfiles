@@ -83,9 +83,8 @@ _Avoid_: screen, workspace
 
 **Lock screen**:
 The hyprlock overlay in front of a running session, dismissed by re-entering
-credentials. It paints the selected wallpaper and ignores wallpaper effects, so
-it differs from the desktop while an effect is applied; video wallpapers are not
-representable and leave the last image in place.
+credentials. It paints a copy of the last applied wallpaper, so it ignores
+wallpaper effects and lags behind video wallpapers.
 _Avoid_: login screen, screensaver
 
 **Login screen**:
