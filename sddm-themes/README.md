@@ -63,6 +63,16 @@ Features:
 - Backup of previous theme
 - Updates both system files and dotfiles
 
+**Rofi menu** — bound to `SUPER+CTRL+L`, no terminal needed:
+
+```bash
+./switch-theme.sh --menu     # pick a variant; opens your default terminal for the sudo prompt
+./switch-theme.sh --items    # just print the list, formatted "HEADER (slug)"
+```
+
+`--menu` reads the terminal from `$term` in `hypr/.config/hypr/UserConfigs/01-UserDefaults.conf`,
+matching the other Hyprland menus, and sends a notification when the switch lands.
+
 ### 2. install-theme.sh (New System Setup)
 **Install theme on a new system** or fresh SDDM installation:
 ```bash

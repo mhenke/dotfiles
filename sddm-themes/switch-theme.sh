@@ -48,6 +48,37 @@ if [ "$1" = "--list" ] || [ "$1" = "-l" ]; then
     exit 0
 fi
 
+# Rofi menu (no sudo): pick a variant, then apply it in a terminal so sudo can prompt.
+# Items read "HEADER (slug)": the header is what you recognise, the slug is the identifier.
+list_items() {
+    local config name header
+    for config in "$CONFIGS_DIR"/theme-*.conf; do
+        [ -f "$config" ] || continue
+        name=$(basename "$config" .conf)
+        name=${name#theme-}
+        header=$(grep "^HeaderText=" "$config" | cut -d'"' -f2)
+        printf '%s (%s)\n' "$header" "$name"
+    done
+}
+
+if [ "$1" = "--items" ]; then
+    list_items
+    exit 0
+fi
+
+if [ "$1" = "--menu" ]; then
+    choice=$(list_items | rofi -dmenu -i -p "SDDM login theme") || exit 0
+    [ -n "$choice" ] || exit 0
+    theme_name=${choice##*\(}
+    theme_name=${theme_name%\)}
+
+    # honour the terminal declared in the Hyprland user defaults, as the upstream menus do
+    terminal=$(grep -E '^\$term *=' "$USER_HOME/.config/hypr/UserConfigs/01-UserDefaults.conf" 2>/dev/null | sed 's/.*= *//; s/ *#.*//')
+    script=$(readlink -f "$0")
+    # the terminal closes when the command returns, so report both outcomes
+    exec "${terminal:-ghostty}" -e bash -c "if sudo '$script' '$theme_name'; then notify-send -i '$HOME/.config/swaync/images/ja.png' SDDM 'Login theme: $theme_name'; else notify-send -u critical SDDM 'Login theme switch failed'; fi"
+fi
+
 # Check if running with sudo
 if [ "$EUID" -ne 0 ]; then
     echo -e "${RED}Error: This script must be run with sudo${NC}"

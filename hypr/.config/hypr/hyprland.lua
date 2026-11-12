@@ -452,6 +452,7 @@ hl.bind(mainMod .. " + ALT + M",   hl.dsp.exec_cmd(userScriptsDir .. "/MirrorDis
 
 hl.bind(mainMod .. " + V",         hl.dsp.layout("togglesplit"))
 hl.bind(mainMod .. " + L",         hl.dsp.exec_cmd(scriptsDir .. "/LockScreen.sh"))
+hl.bind(mainMod .. " + CTRL + L",  hl.dsp.exec_cmd(home .. "/dotfiles/sddm-themes/switch-theme.sh --menu"))
 hl.bind(mainMod .. " + SHIFT + E", hl.dsp.exec_cmd(scriptsDir .. "/Wlogout.sh"))
 hl.bind(mainMod .. " + SHIFT + H", hl.dsp.exec_cmd(scriptsDir .. "/Kool_Quick_Settings.sh"))
 hl.bind(mainMod .. " + SHIFT + X", hl.dsp.exec_cmd("xfce4-settings-manager"))
