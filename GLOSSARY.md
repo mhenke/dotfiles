@@ -67,3 +67,66 @@ _Avoid_: validated, verified, clean
 `./verify-setup.sh`, the repo's own readiness check. Its warnings are advisory
 and its exit status is what matters.
 _Avoid_: verifier, readiness check, preflight
+
+### Display surfaces
+
+**Display surface**:
+One of the places the workstation paints a full-screen image: desktop, lock
+screen, login screen, logout screen. Each surface is configured independently;
+changing one never implies another.
+_Avoid_: screen, wallpaper screen, monitor
+
+**Desktop**:
+The Hyprland session after login. The only surface on which wallpaper and
+palette are live.
+_Avoid_: screen, workspace
+
+**Lock screen**:
+The hyprlock overlay in front of a running session, dismissed by re-entering
+credentials. It paints the selected wallpaper and ignores wallpaper effects, so
+it differs from the desktop while an effect is applied; video wallpapers are not
+representable and leave the last image in place.
+_Avoid_: login screen, screensaver
+
+**Login screen**:
+The SDDM greeter that appears before any session exists; it authenticates the
+user and selects the session type.
+_Avoid_: lock screen, boot screen, desktop
+
+### Appearance
+
+**Wallpaper**:
+The image painted on one display surface. Unqualified it is ambiguous, so name
+the surface: desktop wallpaper and login screen wallpaper are switched by
+different tools and drift apart.
+_Avoid_: background, bg, theme
+
+**SDDM theme variant**:
+One complete login-screen appearance — background image, main and accent colors,
+header text, form position — selected by slug such as `lofi-cafe` or
+`mecha-nostalgia`. The slug is the name; the header text is content, so
+"VIBE CODE HAVEN" is `lofi-cafe`, not a variant called *vibe coding haven*.
+_Avoid_: theme, login theme, preset, skin
+
+**Header text**:
+The greeting line a login-screen variant draws. It is display copy, never an
+identifier.
+_Avoid_: title, name
+
+**Palette**:
+The color set derived from the current desktop wallpaper and pushed into
+terminal, bar, launcher, and notification styling. Regenerated when the wallpaper
+is applied; independent of any SDDM theme variant.
+_Avoid_: theme, colorscheme, wallpaper colors
+
+**Mode**:
+Light or Dark — the workstation-wide brightness posture that swaps palette
+variant, GTK and icon appearance, and bar/launcher styling. It changes neither
+the desktop wallpaper nor the login screen.
+_Avoid_: theme, color mode, appearance profile
+
+**Theme**:
+Unusable unqualified here: it names at least five independent things — SDDM
+theme variant, palette, mode, GTK/Qt appearance, terminal/launcher styling. Say
+which.
+_Avoid_: theme (bare)
