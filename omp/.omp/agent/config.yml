@@ -6,7 +6,7 @@ modelRoles:
   oracle: omniroute/oracle
   skeptic: omniroute/skeptic
   web: web/exa
-  default: commandcode/z-ai/glm-5.3-flash:max
+  default: openai-codex/gpt-6.1-sol:high
 disabledProviders:
   - llama.cpp
   - lm-studio

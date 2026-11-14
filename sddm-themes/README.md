@@ -4,14 +4,14 @@
 Custom SDDM themes with multiple pre-configured theme variants. **All configs and backgrounds are version controlled in this dotfiles repository** for easy backup, restoration, and deployment across machines.
 
 **Everything is in dotfiles:**
-- ✓ All 6 theme configuration files (`configs/*.conf`)
-- ✓ All 6 background images (`Backgrounds/*.png`) - 37MB via Git LFS
+- ✓ All 8 theme configuration files (`configs/*.conf`)
+- ✓ All 8 background images (`Backgrounds/*.png`) via Git LFS
 - ✓ Theme switcher script (`switch-theme.sh`)
 - ✓ Fully documented configs with inline comments
 
 **Current Setup:**
-- **simple-sddm** - JaKooLit's theme with 6 custom backgrounds
-- **6 pre-configured theme variants** - Each optimized for its background with custom colors, headers, and layouts
+- **simple-sddm** - JaKooLit's theme with 8 custom backgrounds
+- **8 pre-configured theme variants** - Each optimized for its background with custom colors, headers, and layouts
 - **Theme switcher script** - Easy switching between themes
 - **Version controlled** - Track changes, sync across machines, never lose configurations
 
@@ -21,14 +21,16 @@ Custom SDDM themes with multiple pre-configured theme variants. **All configs an
 ┌─────────────────────────────────────────────────────────────┐
 │ YOUR DOTFILES (Source of Truth)                             │
 │ ~/dotfiles/sddm-themes/simple-sddm/                         │
-│ ├── Backgrounds/          (6 PNG files, Git LFS tracked)    │
-│ └── configs/              (6 theme configs + active)        │
+│ ├── Backgrounds/          (8 PNG files, Git LFS tracked)    │
+│ └── configs/              (8 theme configs + active)        │
 │     ├── theme-staircase.conf                                │
 │     ├── theme-it-guy.conf                                   │
 │     ├── theme-mecha-nostalgia.conf                          │
 │     ├── theme-space-nebula.conf                             │
 │     ├── theme-lofi-cafe.conf                                │
 │     ├── theme-path.conf                                     │
+│     ├── theme-dark-window.conf                             │
+│     ├── theme-fantasy-japanese-street.conf                  │
 │     └── theme.conf        (current active config)           │
 └─────────────────────────────────────────────────────────────┘
                             │
@@ -71,11 +73,20 @@ Features:
 ./switch-theme.sh --desktop lofi-cafe   # paint the same image on the desktop (no sudo)
 ```
 
+Dark Window: `sudo ./switch-theme.sh dark-window` applies the login theme;
+`./switch-theme.sh --desktop dark-window` also sets its desktop and lock-screen background.
+The header is **AFTER HOURS CODE**, with a right-side form and soft green accents.
+
+Fantasy Japanese Street: `sudo ./switch-theme.sh fantasy-japanese-street` applies the login theme;
+`./switch-theme.sh --desktop fantasy-japanese-street` sets the desktop and lock-screen background.
+The header is **PROMPTS AFTER DARK**, with a left-side form and coral accents.
+
 `--menu` does both: it applies the login variant, then calls `--desktop` for the same slug.
 `--desktop` takes the variant's `Background=` filename, prefers a copy in `~/Pictures/wallpapers`,
 otherwise uses the theme's own `Backgrounds/` copy, sets it with swww, then runs the upstream
 `WallustSwww.sh` for the palette and the lock-screen pointer. Only an image missing from both
 places reports `(no desktop image)`.
+Hyprlock uses its own clock/password layout; SDDM's `HeaderText` appears only on the login screen.
 
 `--menu` reads the terminal from `$term` in `hypr/.config/hypr/UserConfigs/01-UserDefaults.conf`,
 matching the other Hyprland menus, and sends a notification when the switch lands.
@@ -121,18 +132,20 @@ git push
 
 ### simple-sddm
 - **Base**: https://github.com/JaKooLit/simple-sddm
-- **Images**: 5 backgrounds (37MB, Git LFS)
+- **Images**: 8 backgrounds via Git LFS
 - **Modified**: theme.conf with custom settings
 
 **Backgrounds & Theme Configs:**
 | File | Size | Config | Header | Colors | Style |
 |------|------|--------|--------|--------|-------|
-| Staircase.png | 6.5MB | theme-staircase.conf | "MEMBERS ONLY" | Purple/White | Professional, modern |
-| IT_guy.png | 1.8MB | theme-it-guy.conf | "ACCESS TERMINAL" | Bright Green | Hacker, cyberpunk |
-| Mecha-Nostalgia.png | 1.7MB | theme-mecha-nostalgia.conf | "PLAYER 1 START" | Pink/Cyan | Retro gaming, 80s |
-| Space-Nebula.png | 27MB | theme-space-nebula.conf | "MISSION CONTROL" | Orange/White | Space exploration |
-| Lofi-Cafe2.png | 7.5MB | theme-lofi-cafe.conf | "CHILL VIBES ONLY" | Warm Orange/Cream | Cozy, relaxed |
-| path.png | 318KB | theme-path.conf | "Welcome" | Blue/White | Simple, minimal |
+| Staircase.png | 6.5MB | theme-staircase.conf | "ENTER BUILD MODE" | Purple/White | Professional, modern |
+| IT_guy.png | 1.8MB | theme-it-guy.conf | "HUMAN + MACHINE" | Bright Green | Hacker, cyberpunk |
+| Mecha-Nostalgia.png | 1.7MB | theme-mecha-nostalgia.conf | "BUILD. RUN. REPEAT." | Pink/Cyan | Retro gaming, 80s |
+| Space-Nebula.png | 27MB | theme-space-nebula.conf | "PROMPT TO LAUNCH" | Orange/White | Space exploration |
+| Lofi-Cafe2.png | 7.5MB | theme-lofi-cafe.conf | "VIBE CODE HAVEN" | Warm Orange/Cream | Cozy, relaxed |
+| path.png | 318KB | theme-path.conf | "IDEAS INTO CODE" | Blue/White | Simple, minimal |
+| Dark_window.png | 5.8MB | theme-dark-window.conf | "AFTER HOURS CODE" | Soft Green/Pale | Late-night coding |
+| Fantasy-Japanese-Street.png | 8.6MB | theme-fantasy-japanese-street.conf | "PROMPTS AFTER DARK" | Coral/Pale | Lantern-lit AI coding |
 
 All theme configs are stored in `simple-sddm/configs/` with full documentation and comments.
 
@@ -193,15 +206,17 @@ git push
 
 ## Switch Between Theme Variants
 
-**Everything is in your dotfiles** - all 6 theme configs are version controlled in:
+**Everything is in your dotfiles** - all 8 theme configs are version controlled in:
 ```
 ~/dotfiles/sddm-themes/simple-sddm/configs/
-├── theme-staircase.conf       (purple, "MEMBERS ONLY")
-├── theme-it-guy.conf          (green, "ACCESS TERMINAL")
-├── theme-mecha-nostalgia.conf (pink/cyan, "PLAYER 1 START")
-├── theme-space-nebula.conf    (orange, "MISSION CONTROL")
-├── theme-lofi-cafe.conf       (warm orange, "CHILL VIBES ONLY")
-├── theme-path.conf            (blue, "Welcome")
+├── theme-staircase.conf       (purple, "ENTER BUILD MODE")
+├── theme-it-guy.conf          (green, "HUMAN + MACHINE")
+├── theme-mecha-nostalgia.conf (pink/cyan, "BUILD. RUN. REPEAT.")
+├── theme-space-nebula.conf    (orange, "PROMPT TO LAUNCH")
+├── theme-lofi-cafe.conf       (warm orange, "VIBE CODE HAVEN")
+├── theme-path.conf            (blue, "IDEAS INTO CODE")
+├── theme-dark-window.conf     (soft green, "AFTER HOURS CODE")
+├── theme-fantasy-japanese-street.conf (coral, "PROMPTS AFTER DARK")
 └── theme.conf                 (symlink/copy of current active theme)
 ```
 
@@ -213,7 +228,7 @@ cd ~/dotfiles/sddm-themes
 ./switch-theme.sh --list    # or -l
 ```
 
-Shows all 6 themes with their headers, backgrounds, and color schemes.
+Shows all 8 themes with their headers, backgrounds, and color schemes.
 
 **Interactive mode** - Select from a menu:
 ```bash
@@ -228,6 +243,8 @@ sudo ./switch-theme.sh mecha-nostalgia
 sudo ./switch-theme.sh space-nebula
 sudo ./switch-theme.sh lofi-cafe
 sudo ./switch-theme.sh path
+sudo ./switch-theme.sh dark-window
+sudo ./switch-theme.sh fantasy-japanese-street
 ```
 
 The script will:

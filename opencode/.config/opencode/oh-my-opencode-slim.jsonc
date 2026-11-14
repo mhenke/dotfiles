@@ -1,7 +1,7 @@
 {
   "$schema": "https://unpkg.com/oh-my-opencode-slim@latest/oh-my-opencode-slim.schema.json",
   "compactSidebar": true,
-  "preset": "copilot",
+  "preset": "balanced",
   "disabled_agents": [],
   "image_routing": "auto",
   "autoUpdate": true,
@@ -15,9 +15,11 @@
     "balanced": {
       "orchestrator": {
         "model": [
-          "opencode/glm-5.3-flash-free",
-          "opencode/beam-free",
-          "omniroute/orchestrator"
+          {"id": "opencode/glm-5.3-flash-free", "variant": "high"},
+          "opencode/mimo-v2.6-flash-free",
+          "omniroute/orchestrator",
+          {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
+          {"id": "opencode/glm-5.3-flash", "variant": "high"}
         ],
         "temperature": 0.4,
         "skills": [
@@ -31,7 +33,9 @@
       "oracle": {
         "model": [
           "opencode/big-pickle",
-          "omniroute/oracle"
+          {"id": "omniroute/oracle", "variant": "high"},
+          {"id": "commandcode/gpt-6.1-sol", "variant": "high"},
+          {"id": "opencode/gpt-6.1-sol", "variant": "high"}
         ],
         "temperature": 0.4,
         "skills": [
@@ -42,17 +46,20 @@
       "designer": {
         "model": [
           "opencode/mimo-v2.6-flash-free",
-          "omniroute/designer"
+          {"id": "omniroute/designer", "variant": "low"},
+          {"id": "commandcode/google/gemini-4-argon", "variant": "medium"},
+          {"id": "opencode/gemini-4-argon", "variant": "medium"}
         ],
         "temperature": 0.3,
-        "variant": "xhigh",
         "skills": [],
         "mcps": []
       },
       "explorer": {
         "model": [
           "opencode/nemotron-3.5-lightning-free",
-          "omniroute/explorer"
+          "omniroute/explorer",
+          {"id": "commandcode/gpt-6-luna", "variant": "low"},
+          {"id": "opencode/gpt-6-luna", "variant": "low"}
         ],
         "temperature": 0.2,
         "skills": [],
@@ -60,9 +67,11 @@
       },
       "fixer": {
         "model": [
-          "opencode/deepseek-v4.1-flash-free",
+          {"id": "opencode/deepseek-v4.1-flash-free", "variant": "low"},
           "opencode/mimo-v2.6-flash-free",
-          "omniroute/fixer"
+          {"id": "omniroute/fixer", "variant": "low"},
+          {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "low"},
+          {"id": "opencode/deepseek-v4.1-flash", "variant": "low"}
         ],
         "temperature": 0.2,
         "skills": [],
@@ -71,7 +80,9 @@
       "observer": {
         "model": [
           "opencode/mimo-v2.6-flash-free",
-          "omniroute/observer"
+          "omniroute/observer",
+          {"id": "commandcode/gpt-6-luna", "variant": "low"},
+          {"id": "opencode/gpt-6-luna", "variant": "low"}
         ],
         "temperature": 0.2,
         "skills": [],
@@ -79,16 +90,19 @@
       },
       "council": {
         "model": [
-          "opencode/glm-5.3-flash-free",
+          {"id": "opencode/glm-5.3-flash-free", "variant": "high"},
           "opencode/mimo-v2.6-flash-free",
-          "omniroute/orchestrator"
+          {"id": "omniroute/council", "variant": "medium"},
+          {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
+          {"id": "opencode/glm-5.3-flash", "variant": "high"}
         ]
       },
       "skeptic": {
         "model": [
-          "opencode/deepseek-v4.1-flash-free",
-          "opencode/nemotron-3-ultra-free",
-          "omniroute/skeptic"
+          {"id": "opencode/deepseek-v4.1-flash-free", "variant": "high"},
+          {"id": "omniroute/skeptic", "variant": "low"},
+          {"id": "commandcode/claude-sonnet-5-5", "variant": "high"},
+          {"id": "opencode/claude-sonnet-5-5", "variant": "high"}
         ]
       }
     },
@@ -208,7 +222,7 @@
     },
     "copilot": {
       "orchestrator": {
-        "model": "github-copilot/claude-haiku-5.5",
+        "model": "github-copilot/claude-sonnet-5.5",
         "skills": [
           "*"
         ],
@@ -242,8 +256,8 @@
         "variant": "medium"
       },
       "fixer": {
-        "model": "github-copilot/gpt-6-luna",
-        "variant": "high",
+        "model": "github-copilot/gpt-6.1-terra",
+        "variant": "medium",
         "skills": [],
         "mcps": []
       },
@@ -259,6 +273,53 @@
       },
       "skeptic": {
         "model": "github-copilot/claude-sonnet-5.5",
+        "variant": "high"
+      }
+    },
+    // Keep this team on the OpenAI subscription; no cross-provider fallbacks.
+    "openai": {
+      "orchestrator": {
+        "model": "openai/gpt-6.1-sol",
+        "variant": "medium",
+        "skills": ["*"],
+        "mcps": ["*", "!context7"]
+      },
+      "oracle": {
+        "model": "openai/gpt-6.1-sol",
+        "variant": "high",
+        "skills": ["simplify"],
+        "mcps": []
+      },
+      "explorer": {
+        "model": "openai/gpt-6-luna",
+        "variant": "low",
+        "skills": [],
+        "mcps": ["context7", "gh_grep"]
+      },
+      "designer": {
+        "model": "openai/gpt-6-luna",
+        "variant": "medium",
+        "skills": [],
+        "mcps": []
+      },
+      "fixer": {
+        "model": "openai/gpt-6.1-sol",
+        "variant": "low",
+        "skills": [],
+        "mcps": []
+      },
+      "observer": {
+        "model": "openai/gpt-6-luna",
+        "variant": "low",
+        "skills": [],
+        "mcps": []
+      },
+      "council": {
+        "model": "openai/gpt-6.1-sol",
+        "variant": "high"
+      },
+      "skeptic": {
+        "model": "openai/gpt-6.1-sol",
         "variant": "high"
       }
     },
@@ -375,22 +436,27 @@
         "alpha": {
           "model": [
             "opencode/big-pickle",
-            "omniroute/oracle"
+            {"id": "omniroute/oracle", "variant": "high"},
+            {"id": "commandcode/gpt-6.1-sol", "variant": "high"},
+            {"id": "opencode/gpt-6.1-sol", "variant": "high"}
           ],
           "fallback_models": []
         },
         "beta": {
           "model": [
-            "opencode/deepseek-v4.1-flash-free",
-            "opencode/nemotron-3-ultra-free",
-            "omniroute/skeptic"
+            {"id": "opencode/deepseek-v4.1-flash-free", "variant": "high"},
+            {"id": "omniroute/skeptic", "variant": "low"},
+            {"id": "commandcode/claude-sonnet-5-5", "variant": "high"},
+            {"id": "opencode/claude-sonnet-5-5", "variant": "high"}
           ],
           "fallback_models": []
         },
         "gamma": {
           "model": [
             "opencode/mimo-v2.6-flash-free",
-            "omniroute/observer"
+            "omniroute/observer",
+            {"id": "commandcode/gpt-6-luna", "variant": "low"},
+            {"id": "opencode/gpt-6-luna", "variant": "low"}
           ],
           "fallback_models": []
         }
@@ -435,6 +501,20 @@
           "variant": "high"
         }
       },
+      "openai": {
+        "alpha": {
+          "model": "openai/gpt-6.1-sol",
+          "variant": "high"
+        },
+        "beta": {
+          "model": "openai/gpt-6.1-terra",
+          "variant": "high"
+        },
+        "gamma": {
+          "model": "openai/gpt-6-luna",
+          "variant": "high"
+        }
+      },
       "kimi-k3": {
         "alpha": {
           "model": [
@@ -459,7 +539,7 @@
         }
       }
     },
-    "default_preset": "copilot"
+    "default_preset": "balanced"
   },
   "websearch": {
     "provider": "exa"

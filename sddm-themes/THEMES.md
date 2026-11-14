@@ -8,7 +8,7 @@ Custom theme configurations for each background image in the simple-sddm theme. 
 ### 1. Staircase (Default)
 - **Config**: `theme-staircase.conf`
 - **Background**: `Staircase.png` (6.5MB)
-- **Header**: "MEMBERS ONLY"
+- **Header**: "ENTER BUILD MODE"
 - **Colors**: Purple accent (#7287fd), white text
 - **Form Position**: Left
 - **Style**: Professional, modern
@@ -16,7 +16,7 @@ Custom theme configurations for each background image in the simple-sddm theme. 
 ### 2. IT Guy / Hacker
 - **Config**: `theme-it-guy.conf`
 - **Background**: `IT_guy.png` (1.8MB)
-- **Header**: "ACCESS TERMINAL"
+- **Header**: "HUMAN + MACHINE"
 - **Colors**: Bright green (#00ff88) - terminal/hacker aesthetic
 - **Form Position**: Right
 - **Style**: Cyberpunk, tech-focused
@@ -24,7 +24,7 @@ Custom theme configurations for each background image in the simple-sddm theme. 
 ### 3. Mecha Nostalgia
 - **Config**: `theme-mecha-nostalgia.conf`
 - **Background**: `Mecha-Nostalgia.png` (1.7MB)
-- **Header**: "PLAYER 1 START"
+- **Header**: "BUILD. RUN. REPEAT."
 - **Colors**: Pink/magenta (#ff66cc) with cyan accent (#00d9ff)
 - **Form Position**: Right
 - **Time Format**: 12-hour (AM/PM)
@@ -33,7 +33,7 @@ Custom theme configurations for each background image in the simple-sddm theme. 
 ### 4. Space Nebula
 - **Config**: `theme-space-nebula.conf`
 - **Background**: `Space-Nebula.png` (27MB)
-- **Header**: "MISSION CONTROL"
+- **Header**: "PROMPT TO LAUNCH"
 - **Colors**: Orange accent (#ff8844), white text
 - **Form Position**: Right
 - **Time Format**: 12-hour (AM/PM)
@@ -42,7 +42,7 @@ Custom theme configurations for each background image in the simple-sddm theme. 
 ### 5. Lofi Cafe
 - **Config**: `theme-lofi-cafe.conf`
 - **Background**: `Lofi-Cafe2.png` (7.5MB)
-- **Header**: "CHILL VIBES ONLY"
+- **Header**: "VIBE CODE HAVEN"
 - **Colors**: Warm orange (#ff9966), cream text (#ffeedd)
 - **Form Position**: Left
 - **Style**: Cozy, relaxed, lofi aesthetic
@@ -50,10 +50,26 @@ Custom theme configurations for each background image in the simple-sddm theme. 
 ### 6. Path (Minimal)
 - **Config**: `theme-path.conf`
 - **Background**: `path.png` (318KB)
-- **Header**: "Welcome"
+- **Header**: "IDEAS INTO CODE"
 - **Colors**: Blue accent (#5599ff), white text
 - **Form Position**: Center
 - **Style**: Simple, clean, minimal
+
+### 7. Dark Window
+- **Config**: `theme-dark-window.conf`
+- **Background**: `Dark_window.png` (5.8MB)
+- **Header**: "AFTER HOURS CODE"
+- **Colors**: Soft green accent (#75d99a), pale text (#e6f2ed)
+- **Form Position**: Right, leaving the aurora-lit window visible
+- **Style**: Quiet, late-night coding
+
+### 8. Fantasy Japanese Street
+- **Config**: `theme-fantasy-japanese-street.conf`
+- **Background**: `Fantasy-Japanese-Street.png` (8.6MB)
+- **Header**: "PROMPTS AFTER DARK"
+- **Colors**: Coral accent (#ff795c), pale text (#f4e9e6), dark navy form
+- **Form Position**: Left, leaving the illuminated street visible
+- **Style**: Lantern-lit, late-night AI coding
 
 ## Switching Themes
 
@@ -73,6 +89,8 @@ sudo ./switch-theme.sh mecha-nostalgia
 sudo ./switch-theme.sh space-nebula
 sudo ./switch-theme.sh lofi-cafe
 sudo ./switch-theme.sh path
+sudo ./switch-theme.sh dark-window
+sudo ./switch-theme.sh fantasy-japanese-street
 ```
 
 The script will:
@@ -186,7 +204,7 @@ SDDM uses Qt color names and hex codes. Test changes in the config file and relo
 
 ## Git LFS Note
 
-Background images use Git LFS (37MB total). The switch script handles copying from dotfiles, so ensure:
+Background images use Git LFS. The switch script handles copying from dotfiles, so ensure:
 ```bash
 git lfs pull
 ```
