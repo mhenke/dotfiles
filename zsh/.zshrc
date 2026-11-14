@@ -160,8 +160,9 @@ export OPENCODE_LOG_LEVEL=DEBUG
 
 eval "$(atuin init zsh)"
 
-# Shared oh-my-opencode-slim code graph (see omos-graphify wrapper)
-export GRAPHIFY_OUT="$HOME/.graphify/oh-my-opencode-slim"
+# Graphify: no global GRAPHIFY_OUT — it wins over cwd, so a bare `graphify` run in any
+# repo wrote into one project's store. Repos use ./graphify-out/; the omos-graphify
+# wrapper (see omos-* skills) sets GRAPHIFY_OUT per call for the shared slim graph.
 
 
 # Node 24 from ~/.local/opt via ~/.local/bin symlinks (no nvm)

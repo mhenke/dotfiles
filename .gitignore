@@ -74,3 +74,9 @@ opencode/.config/opencode/oh-my-opencode-slim/reflections/
 # Wallpaper runtime state (derived; rewritten on every wallpaper change)
 hypr/.config/hypr/wallpaper_effects/.wallpaper_current
 hypr/.config/hypr/wallpaper_effects/.wallpaper_modified
+
+# wallust generated outputs (rewritten on every palette change)
+cava/.config/cava/config
+hypr/.config/hypr/wallust/wallust-hyprland.conf
+kitty/.config/kitty/kitty-themes/01-Wallust.conf
+waybar/.config/waybar/wallust/colors-waybar.css
