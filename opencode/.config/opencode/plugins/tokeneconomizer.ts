@@ -1,0 +1,1 @@
+/home/mhenke/Projects/TokenEconomizer/plugin/opencode/tokeneconomizer.ts
