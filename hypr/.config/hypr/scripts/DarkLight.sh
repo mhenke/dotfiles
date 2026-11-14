@@ -29,19 +29,11 @@ done
 # Initialize swww if needed
 swww query || swww-daemon --format xrgb
 
-# Set swww options
-swww="swww img"
-effect="--transition-bezier .43,1.19,1,.4 --transition-fps 60 --transition-type grow --transition-pos 0.925,0.977 --transition-duration 2"
-
 # Determine current theme mode
 if [ "$(cat $HOME/.cache/.theme_mode)" = "Light" ]; then
     next_mode="Dark"
-    # Logic for Dark mode
-    wallpaper_path="$dark_wallpapers"
 else
     next_mode="Light"
-    # Logic for Light mode
-    wallpaper_path="$light_wallpapers"
 fi
 
 # Function to update theme mode for the next cycle
@@ -61,24 +53,7 @@ else
     sed -i 's/^palette = .*/palette = "'"$pallete_light"'"/' "$wallust_config" 
 fi
 
-# Function to set Waybar style
-set_waybar_style() {
-    theme="$1"
-    waybar_styles="$HOME/.config/waybar/style"
-    waybar_style_link="$HOME/.config/waybar/style.css"
-    style_prefix="\\[${theme}\\].*\\.css$"
-
-    style_file=$(find -L "$waybar_styles" -maxdepth 1 -type f -regex ".*$style_prefix" | shuf -n 1)
-
-    if [ -n "$style_file" ]; then
-        ln -sf "$style_file" "$waybar_style_link"
-    else
-        echo "Style file not found for $theme theme."
-    fi
-}
-
 # Call the function after determining the mode
-set_waybar_style "$next_mode"
 notify_user "$next_mode"
 
 
@@ -119,15 +94,7 @@ for pid_kitty in $(pidof kitty); do
     kill -SIGUSR1 "$pid_kitty"
 done
 
-# Set Dynamic Wallpaper for Dark or Light Mode
-if [ "$next_mode" = "Dark" ]; then
-    next_wallpaper="$(find -L "${dark_wallpapers}" -type f \( -iname "*.jpg" -o -iname "*.png" \) -print0 | shuf -n1 -z | xargs -0)"
-else
-    next_wallpaper="$(find -L "${light_wallpapers}" -type f \( -iname "*.jpg" -o -iname "*.png" \) -print0 | shuf -n1 -z | xargs -0)"
-fi
-
-# Update wallpaper using swww command
-$swww "${next_wallpaper}" $effect
+# Theme toggle leaves the wallpaper alone; use WallpaperSelect.sh to change it.
 
 
 # Set Kvantum Manager theme & QT5/QT6 settings
