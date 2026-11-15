@@ -10,7 +10,8 @@ ADR-0005 ordered chains by role capability and split the pools by intent: Copilo
 
 Four measurements taken 2026-11-15 show the pools are not interchangeable, and that ADR-0005's doctrine misallocated them.
 
-1. **Call volume is extremely uneven.** Over 148,484 assistant messages, orchestrator alone is 43.3%, `build` 16.6%, fixer 12.8%; oracle 5.8%, explorer 5.6%, designer 4.4%, skeptic 2.0%, council 1.2%. Since the head runs nearly every call, the head assignment *is* the allocation.
+1. **Call volume is extremely uneven.** Over 66,000 assistant messages in `session_message`, orchestrator alone is 47.0%, fixer 18.8%, designer 9.1%; oracle 7.4%, skeptic 6.8%, explorer 3.2%. Since the head runs nearly every call, the head assignment *is* the allocation.
+   The volume must be read from `session_message`, not `message`. OpenCode dual-wrote to both tables from the v2 switch on 2026-08-14 until its last legacy write on 2026-10-13, so `message` carries 40,094 exact-timestamp duplicates *and* stops a month early — 148,484 messages over 209 days, inflating volume while hiding recent activity.
 
 2. **OpenAI is metered in messages and burns fast.** Sampled every hour: 6% → 37% → 64% → 84% → 91% of the 5-hour window in four hours, roughly 31%/hour, while the weekly window stayed at 15%. A pool that drains in four hours cannot host the role that is 43% of traffic. ADR-0005 put five judgment roles on it, two of which are volume roles.
 

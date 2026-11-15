@@ -29,8 +29,13 @@ pool metered in messages cannot absorb a role that is half the traffic.
 
 Call volume, measured 2026-11-15 from `session_message` in
 `~/.local/share/opencode/opencode.db` — 66,000 assistant messages over 92 days
-(715/day, 21,743/month). **Never measure from the `message` table: it is the
-legacy schema, frozen 2026-10-13, and reports a month of activity as absent.**
+(715/day, 21,743/month).
+
+**Never measure from the `message` table.** It is the OpenCode v1 schema. After
+the v2 switch (2026-08-14) OpenCode **dual-wrote** to both tables until the last
+legacy write on 2026-10-13, so `message` holds 40,094 exact-timestamp duplicates
+of `session_message` rows *and* stops a month short. Counting it reports 148,484
+messages over 209 days, inflating volume and understating recency.
 
 | Role | Share | Calls/mo | Tier |
 |---|---|---|---|
