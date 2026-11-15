@@ -25,9 +25,10 @@ Four measurements taken 2026-11-15 show the pools are not interchangeable, and t
 
 **Assign each role's head by its call volume measured against the headroom of each pool's limiter.**
 
-- **Volume roles head a cheap, deep pool.** Orchestrator, at 9,353 calls/month, heads `github-copilot/gpt-6-luna` (0.30 credits/call) with `commandcode/z-ai/glm-5.3-flash` behind it. Fixer heads a free Zen model with CommandCode behind it. OpenAI never appears on a volume role, including as a fallback.
+- **Volume roles head a cheap, deep pool.** Orchestrator, at 10,229 calls/month, heads `commandcode/z-ai/glm-5.3-flash` — dollar-metered, so its traffic spends ~$15/month of balance instead of the credit pool — with `github-copilot/gpt-6-luna` behind it. Fixer heads a free Zen model with CommandCode behind it. OpenAI never appears on a volume role, including as a fallback.
 - **Judgment roles split by call count.** Oracle (1,257 calls) and council (257) head `openai/gpt-6.1-sol`; its message window stays near full because the volume is low.
-- **Copilot takes the roles whose call count its budget can afford.** `gpt-6-luna` heads orchestrator (10,229 calls/mo, 0.13/call = 1,330 credits) and observer; `gpt-6.1-sol` heads designer (1,985 calls, 4,486 credits); `claude-sonnet-5.5` heads skeptic (1,488 calls, 3,318 credits). Total 9,173 of 20,000 (46%). Frontier goes only where monthly calls stay under 2,000.
+- **Copilot takes the roles whose call count its budget can afford.** `gpt-6-luna` heads observer; `gpt-6.1-sol` heads designer (1,985 calls, 4,486 credits); `claude-sonnet-5.5` heads skeptic (1,488 calls, 3,318 credits). Total 7,843 of 20,000 (39%). Frontier goes only where monthly calls stay under 2,000.
+  Orchestrator is deliberately *not* on Copilot: its 10,229 calls at the next Copilot tier, `gpt-6.1-terra`, would cost 11,661 credits — 98% of the month for one role. Spending that traffic on the dollar-metered pool buys a stronger model and a cheaper budget position at once.
 - **Skeptic heads Copilot, not OpenAI**, so the council's three heads stay distinct and the adversarial seat runs on a different provider from the seats it challenges.
 - **Mechanical roles** — explorer, observer — head free or cheap, for bounded, images-capable work.
 - **Chains are three entries**: head, one alternate pool, one paygo anchor.

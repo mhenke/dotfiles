@@ -424,8 +424,8 @@
     "subscription": {
       "orchestrator": {
         "model": [
-          {"id": "github-copilot/gpt-6-luna", "variant": "high"},
           {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
+          {"id": "github-copilot/gpt-6-luna", "variant": "high"},
           {"id": "opencode/gpt-6-luna", "variant": "high"}
         ],
         "temperature": 0.4,

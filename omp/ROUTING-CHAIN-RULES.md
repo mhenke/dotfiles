@@ -65,7 +65,8 @@ a volume role are only compatible when the per-call price is small.
   answer, at the cost of the pool that can afford it.
 - **Copilot is a monthly credit budget.** 20,000 credits at $0.01 = $200, reset 00:00 UTC on the first, no rollover. GitHub's billing CSV is the source of truth for it; the preset's own chains are cheap and the overrun hides outside them.
   Measured credits per call from the CSV joined to call counts: `gpt-6-luna` 0.13, `claude-haiku-5.5` 0.45, `claude-sonnet-5.5` 2.23, `gpt-6.1-sol` 2.26, `claude-opus-5.5` 6.33, `kimi-k3` 20.28.
-  The preset as configured draws **9,173 credits/month (46%)**: orchestrator 10,229 calls on Luna (1,330), designer 1,985 on Sol (4,486), skeptic 1,488 on Sonnet (3,318), observer (39). Frontier sits only where monthly call counts are under 2,000; the 47%-of-traffic role heads the cheapest model.
+  The preset as configured draws **7,843 credits/month (39%)**: designer 1,985 calls on Sol (4,486), skeptic 1,488 on Sonnet (3,318), observer (39). Frontier sits only where monthly call counts are under 2,000.
+  Orchestrator heads `commandcode/z-ai/glm-5.3-flash` instead, at ~$15/month of CommandCode dollars for its 10,229 calls, with Copilot Luna behind it. That is a stronger reasoning model than Luna and a cheaper budget position, because it spends the dollar-metered pool rather than the credit-metered one. Copilot's own tier above Luna is not affordable: `gpt-6.1-terra` for orchestrator alone is 11,661 credits, 98% of the month.
   The exhaustion came from elsewhere: Opus 5.5 (5,686), the Code Review model (3,950) and Kimi K3 (3,387) took **65% of the month in 12 days**, and no preset chain contains any of them. Excess came from other clients and from explicit session overrides that pin a model regardless of the chain.
 - **CommandCode takes boosted models only.** GLM-5.3 Flash and DeepSeek V4.1
   Flash carry $100 allowances at 0.15/1M. The $10 premium tier — GPT-6.1 Sol,
