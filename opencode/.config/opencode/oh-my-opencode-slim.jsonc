@@ -455,8 +455,8 @@
       },
       "designer": {
         "model": [
-          {"id": "github-copilot/gpt-6.1-sol", "variant": "medium"},
-          {"id": "commandcode/meta/muse-spark-1.3-contributor", "variant": "medium"},
+          {"id": "github-copilot/gpt-6.1-sol", "variant": "high"},
+          {"id": "commandcode/meta/muse-spark-1.3-contributor", "variant": "high"},
           {"id": "opencode/gpt-6-luna", "variant": "low"}
         ],
         "temperature": 0.3,
@@ -492,8 +492,8 @@
       },
       "skeptic": {
         "model": [
-          {"id": "github-copilot/claude-sonnet-5.5", "variant": "high"},
-          {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "high"},
+          {"id": "github-copilot/claude-sonnet-5.5", "variant": "medium"},
+          {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "medium"},
           {"id": "deepseek/deepseek-flash", "variant": "low"}
         ]
       }
@@ -615,8 +615,8 @@
         },
         "beta": {
           "model": [
-            {"id": "github-copilot/claude-sonnet-5.5", "variant": "high"},
-            {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "high"},
+            {"id": "github-copilot/claude-sonnet-5.5", "variant": "medium"},
+            {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "medium"},
             {"id": "deepseek/deepseek-flash", "variant": "low"}
           ],
           "fallback_models": []

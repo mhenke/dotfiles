@@ -82,6 +82,19 @@ Whole-history counts mislead on their own. Orchestrator shows 68 distinct models
 
 A role's cost is its monthly calls times its model's price, so a monthly pool and a volume role are only compatible when the per-call price is small.
 
+Variants follow the same split, measured by what the role *produces*: 67% of all assistant calls are tool-call continuations and 23% carry no finish marker at all. Sorted by role, the split separates judgment from mechanics.
+
+| Role | Tool calls | Prose turns | Deliberation |
+|---|---|---|---|
+| designer | 283 | 5,742 | **95%** |
+| orchestrator | 21,279 | 9,770 | 31% |
+| fixer | 8,674 | 3,705 | 30% |
+| explorer | 1,746 | 334 | 16% |
+| oracle | 4,425 | 465 | 10% |
+| skeptic | 4,230 | 288 | 6% |
+
+Designer is the one role that is genuinely deliberation, so its head takes `high`; oracle and skeptic are 90–94% tool round-trips, so theirs take `medium` — a frontier model per file-read is overpaying. The no-finish rows were checked rather than assumed: designer's are 5,718 prose turns against 9 toolish, so the 95% is real, not an artifact of missing markers.
+
 ## Provider economics, measured 2026-11-15
 
 Check live figures with `omp usage --json --provider <id> --redact`; per-model Copilot detail comes from GitHub's billing CSV export, which is its source of truth.
