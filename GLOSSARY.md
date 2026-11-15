@@ -139,9 +139,8 @@ _Avoid_: theme (bare)
 ### Agent routing
 
 **Preset**:
-A named set of per-agent model chains in
-`opencode/.config/opencode/oh-my-opencode-slim.jsonc`. `subscription` is the
-synthesized-subscription team; `balanced` is the older default.
+A named set of per-agent **chains**. `subscription` is the synthesized-subscription
+team; `balanced` is the older default.
 _Avoid_: profile, config, team
 
 **Chain**:
@@ -162,9 +161,14 @@ _Avoid_: last resort, paygo fallback, backup
 
 **Pool**:
 One provider's shared allowance: Copilot's monthly AI credits, OpenAI's 5-hour
-and weekly windows, CommandCode's credit balance. A pool is spent by every model
-on it at once — its rolling windows are pool-wide, and a per-model allowance is a
-**ceiling on that model's draw**, never a separate budget. Three $20 allowances
-do not make $60. CommandCode measures a pool in credits, where one credit is a
-usage-value unit worth more dollars on a larger-allowance model.
+and weekly windows, CommandCode's credit balance. Every model on it spends the
+same pool at once — a per-model allowance is a **ceiling on that model's draw**,
+never a separate budget, so three $20 allowances do not make $60.
 _Avoid_: quota, budget, plan (unqualified); per-model budget
+
+**Allowance**:
+A per-model ceiling on how much of a **pool** that one model may consume. Sized
+per model (CommandCode ranges $10–$100), it constrains a model rather than
+funding it: the pool remains the only budget, which is why a cheaper model
+stretches a month and a larger allowance on an expensive one does not.
+_Avoid_: per-model budget, sub-quota, separate pool
