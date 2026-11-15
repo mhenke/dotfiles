@@ -17,7 +17,6 @@
         "model": [
           {"id": "opencode/glm-5.3-flash-free", "variant": "high"},
           "opencode/mimo-v2.6-flash-free",
-          "omniroute/orchestrator",
           {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
           {"id": "opencode/glm-5.3-flash", "variant": "high"}
         ],
@@ -33,7 +32,6 @@
       "oracle": {
         "model": [
           "opencode/big-pickle",
-          {"id": "omniroute/oracle", "variant": "high"},
           {"id": "commandcode/gpt-6.1-sol", "variant": "high"},
           {"id": "opencode/gpt-6.1-sol", "variant": "high"}
         ],
@@ -46,7 +44,6 @@
       "designer": {
         "model": [
           "opencode/mimo-v2.6-flash-free",
-          {"id": "omniroute/designer", "variant": "low"},
           {"id": "commandcode/google/gemini-4-argon", "variant": "medium"},
           {"id": "opencode/gemini-4-argon", "variant": "medium"}
         ],
@@ -57,7 +54,6 @@
       "explorer": {
         "model": [
           "opencode/nemotron-3.5-lightning-free",
-          "omniroute/explorer",
           {"id": "commandcode/gpt-6-luna", "variant": "low"},
           {"id": "opencode/gpt-6-luna", "variant": "low"}
         ],
@@ -69,7 +65,6 @@
         "model": [
           {"id": "opencode/deepseek-v4.1-flash-free", "variant": "low"},
           "opencode/mimo-v2.6-flash-free",
-          {"id": "omniroute/fixer", "variant": "low"},
           {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "low"},
           {"id": "opencode/deepseek-v4.1-flash", "variant": "low"}
         ],
@@ -80,7 +75,6 @@
       "observer": {
         "model": [
           "opencode/mimo-v2.6-flash-free",
-          "omniroute/observer",
           {"id": "commandcode/gpt-6-luna", "variant": "low"},
           {"id": "opencode/gpt-6-luna", "variant": "low"}
         ],
@@ -92,7 +86,6 @@
         "model": [
           {"id": "opencode/glm-5.3-flash-free", "variant": "high"},
           "opencode/mimo-v2.6-flash-free",
-          {"id": "omniroute/council", "variant": "medium"},
           {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
           {"id": "opencode/glm-5.3-flash", "variant": "high"}
         ]
@@ -100,7 +93,6 @@
       "skeptic": {
         "model": [
           {"id": "opencode/deepseek-v4.1-flash-free", "variant": "high"},
-          {"id": "omniroute/skeptic", "variant": "low"},
           {"id": "commandcode/claude-sonnet-5-5", "variant": "high"},
           {"id": "opencode/claude-sonnet-5-5", "variant": "high"}
         ]
@@ -428,6 +420,104 @@
         "temperature": 1,
         "variant": "max"
       }
+    },
+    "subscription": {
+      "orchestrator": {
+        "model": [
+          {"id": "openai/gpt-6.1-sol", "variant": "high"},
+          {"id": "github-copilot/gpt-6.1-sol", "variant": "high"},
+          {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
+          {"id": "opencode/glm-5.3-flash-free", "variant": "high"},
+          "opencode/mimo-v2.6-flash-free",
+          {"id": "opencode/gpt-6-luna", "variant": "low"}
+        ],
+        "temperature": 0.4,
+        "skills": ["*"],
+        "mcps": ["*", "!context7"]
+      },
+      "oracle": {
+        "model": [
+          {"id": "openai/gpt-6.1-sol", "variant": "high"},
+          {"id": "github-copilot/gpt-6.1-sol", "variant": "high"},
+          {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
+          "opencode/big-pickle",
+          {"id": "opencode/glm-5.3-flash-free", "variant": "high"},
+          {"id": "opencode/gpt-6-luna", "variant": "high"}
+        ],
+        "temperature": 0.4,
+        "skills": ["simplify"],
+        "mcps": []
+      },
+      "explorer": {
+        "model": [
+          "opencode/nemotron-3.5-lightning-free",
+          "opencode/mimo-v2.6-flash-free",
+          {"id": "commandcode/gpt-6-luna", "variant": "low"},
+          {"id": "github-copilot/gpt-6-luna", "variant": "low"},
+          {"id": "openai/gpt-6-luna", "variant": "low"},
+          {"id": "opencode/gpt-6-luna", "variant": "low"}
+        ],
+        "temperature": 0.2,
+        "skills": [],
+        "mcps": []
+      },
+      "designer": {
+        "model": [
+          {"id": "openai/gpt-6.1-sol", "variant": "medium"},
+          {"id": "github-copilot/gemini-4-argon", "variant": "medium"},
+          {"id": "commandcode/google/gemini-3.8-flash", "variant": "medium"},
+          "opencode/mimo-v2.6-flash-free",
+          {"id": "opencode/gpt-6-luna", "variant": "low"}
+        ],
+        "temperature": 0.3,
+        "skills": [],
+        "mcps": []
+      },
+      "fixer": {
+        "model": [
+          {"id": "opencode/deepseek-v4.1-flash-free", "variant": "low"},
+          "opencode/mimo-v2.6-flash-free",
+          {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "low"},
+          {"id": "github-copilot/gpt-6.1-terra", "variant": "low"},
+          {"id": "openai/gpt-6.1-terra", "variant": "low"},
+          {"id": "opencode/gpt-6-luna", "variant": "low"}
+        ],
+        "temperature": 0.2,
+        "skills": [],
+        "mcps": []
+      },
+      "observer": {
+        "model": [
+          {"id": "github-copilot/gpt-6-luna", "variant": "low"},
+          {"id": "openai/gpt-6-luna", "variant": "low"},
+          {"id": "commandcode/gpt-6-luna", "variant": "low"},
+          "opencode/mimo-v2.6-flash-free",
+          "opencode/minimax-m3.1-flash-free",
+          {"id": "opencode/gpt-6-luna", "variant": "low"}
+        ],
+        "temperature": 0.2,
+        "skills": [],
+        "mcps": []
+      },
+      "council": {
+        "model": [
+          {"id": "openai/gpt-6.1-sol", "variant": "high"},
+          {"id": "github-copilot/claude-sonnet-5.5", "variant": "high"},
+          {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
+          {"id": "opencode/glm-5.3-flash-free", "variant": "high"},
+          "opencode/mimo-v2.6-flash-free",
+          {"id": "opencode/gpt-6-luna", "variant": "low"}
+        ]
+      },
+      "skeptic": {
+        "model": [
+          {"id": "openai/gpt-6.1-sol", "variant": "high"},
+          {"id": "github-copilot/claude-sonnet-5.5", "variant": "high"},
+          {"id": "commandcode/zai-org/GLM-5.3", "variant": "high"},
+          {"id": "opencode/deepseek-v4.1-flash-free", "variant": "high"},
+          {"id": "deepseek/deepseek-flash", "variant": "low"}
+        ]
+      }
     }
   },
   "council": {
@@ -436,7 +526,6 @@
         "alpha": {
           "model": [
             "opencode/big-pickle",
-            {"id": "omniroute/oracle", "variant": "high"},
             {"id": "commandcode/gpt-6.1-sol", "variant": "high"},
             {"id": "opencode/gpt-6.1-sol", "variant": "high"}
           ],
@@ -445,7 +534,6 @@
         "beta": {
           "model": [
             {"id": "opencode/deepseek-v4.1-flash-free", "variant": "high"},
-            {"id": "omniroute/skeptic", "variant": "low"},
             {"id": "commandcode/claude-sonnet-5-5", "variant": "high"},
             {"id": "opencode/claude-sonnet-5-5", "variant": "high"}
           ],
@@ -454,7 +542,6 @@
         "gamma": {
           "model": [
             "opencode/mimo-v2.6-flash-free",
-            "omniroute/observer",
             {"id": "commandcode/gpt-6-luna", "variant": "low"},
             {"id": "opencode/gpt-6-luna", "variant": "low"}
           ],
@@ -536,6 +623,40 @@
           ],
           "fallback_models": [],
           "variant": "max"
+        }
+      },
+      "subscription": {
+        "alpha": {
+          "model": [
+            {"id": "openai/gpt-6.1-sol", "variant": "high"},
+            {"id": "github-copilot/gpt-6.1-sol", "variant": "high"},
+            {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
+            "opencode/big-pickle",
+            {"id": "opencode/glm-5.3-flash-free", "variant": "high"},
+            {"id": "opencode/gpt-6-luna", "variant": "high"}
+          ],
+          "fallback_models": []
+        },
+        "beta": {
+          "model": [
+            {"id": "openai/gpt-6.1-sol", "variant": "high"},
+            {"id": "github-copilot/claude-sonnet-5.5", "variant": "high"},
+            {"id": "commandcode/zai-org/GLM-5.3", "variant": "high"},
+            {"id": "opencode/deepseek-v4.1-flash-free", "variant": "high"},
+            {"id": "deepseek/deepseek-flash", "variant": "low"}
+          ],
+          "fallback_models": []
+        },
+        "gamma": {
+          "model": [
+            {"id": "github-copilot/gpt-6-luna", "variant": "low"},
+            {"id": "openai/gpt-6-luna", "variant": "low"},
+            {"id": "commandcode/gpt-6-luna", "variant": "low"},
+            "opencode/mimo-v2.6-flash-free",
+            "opencode/minimax-m3.1-flash-free",
+            {"id": "opencode/gpt-6-luna", "variant": "low"}
+          ],
+          "fallback_models": []
         }
       }
     },

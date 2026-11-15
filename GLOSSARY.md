@@ -136,3 +136,32 @@ Unusable unqualified here: it names at least five independent things — SDDM
 theme variant, palette, mode, GTK/Qt appearance, terminal/launcher styling. Say
 which.
 _Avoid_: theme (bare)
+### Agent routing
+
+**Preset**:
+A named set of per-agent model chains in
+`opencode/.config/opencode/oh-my-opencode-slim.jsonc`. `subscription` is the
+synthesized-subscription team; `balanced` is the older default.
+_Avoid_: profile, config, team
+
+**Chain**:
+One agent's ordered model list. Entries are tried top to bottom and the chain
+advances only on failure, so the first entry — the head — runs nearly every
+call.
+_Avoid_: fallback list, cascade, stack
+
+**Head**:
+The first model in a chain. It decides what the agent actually runs on; every
+later entry is failure insurance.
+_Avoid_: primary, default model
+
+**Anchor**:
+The single metered entry at a chain's end, paid per token — Zen `opencode/<paid-id>`
+or `deepseek/<id>`. It keeps the chain alive after every pooled tier is spent.
+_Avoid_: last resort, paygo fallback, backup
+
+**Pool**:
+One provider's shared allowance: Copilot's monthly AI credits, OpenAI's 5-hour
+and weekly windows, CommandCode's credit balance. Pools are billed and exhausted
+independently, so a chain aims to reach every one.
+_Avoid_: quota, budget, plan (unqualified)

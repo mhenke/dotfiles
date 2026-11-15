@@ -1,8 +1,14 @@
 # ADR-0001: Balanced Preset Model Selection for oh-my-opencode-slim
 
+> **Superseded by [ADR-0005](0005-chain-order-by-capability.md) on 2026-11-14.**
+> This ADR describes the OpenCode Go era and a free-first rule that no longer
+> holds. Read it for history, not for the current routing design. The Go
+> subscription is gone, `opencode-go/*` models no longer exist, and chains now
+> lead with the model the role needs rather than a free one.
+
 ## Status
 
-Accepted
+Superseded by ADR-0005 (2026-11-14). Originally accepted.
 
 ## Context
 
