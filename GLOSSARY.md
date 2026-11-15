@@ -144,16 +144,24 @@ team; `balanced` is the older default.
 _Avoid_: profile, config, team
 
 **Chain**:
-One agent's ordered model list. Entries are tried top to bottom and the chain
-advances only on failure, so the first entry — the head — runs nearly every
-call.
-_Avoid_: fallback list, cascade, stack
+One agent's ordered model list. It advances only on failure. What the list *is*
+depends on the agent: for a **subagent** it is a head plus fallbacks, because the
+first entry becomes that agent's launch model; for the **orchestrator** it is a
+fallback list only, because its live session model leads instead.
+_Avoid_: fallback list, cascade, stack (unqualified)
 
 **Head**:
-The first model in a chain — but it binds only for a **subagent**, whose head is
-copied to its launch model. The **orchestrator** has no head: its session model
-leads and the chain backs it, so slot 0 is only the first fallback.
+The first model in a **chain**, and it binds only when the agent's model is set
+from the chain — which is true of subagents and never of the orchestrator, whose
+session model leads and whose chain is consulted on failure. A "head" chosen for
+the orchestrator in a preset therefore changes nothing until something fails.
 _Avoid_: primary, default model
+
+**Session model**:
+The model a live conversation is actually running, chosen by `/model`, by the
+global default, or inherited by a delegated agent. It outranks any **head**, and
+is the only thing that decides what the orchestrator spends.
+_Avoid_: current model, runtime model
 
 **Anchor**:
 The single metered entry at a chain's end, paid per token — Zen `opencode/<paid-id>`

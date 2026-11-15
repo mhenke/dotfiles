@@ -23,20 +23,28 @@ Three models with $20 allowances do not give $60. They share the pool, each indi
 
 The consequence drives everything below: **compare models by cost per call, because every call comes from the same pool.** A cheaper model stretches it; a bigger allowance on an expensive model creates no more.
 
-## Pools outrun the traffic
+## Two spend layers
 
-Every pool here is "use it or lose it", but they cannot all be spent — measured 20,450 calls/month against each pool's capacity at a viable model:
+Copilot's pool is consumed by **two independent paths**, and only one is this preset. Measured 2026-11-15:
 
-| Pool | Capacity | vs traffic |
+| Path | Calls/mo | Copilot credits | Controlled by |
+|---|---|---|---|
+| Orchestrator | 13,841 | **11,785 (59%)** | `opencode.json` model + `/model` |
+| Subagent chains | 11,549 | 7,843 (39%) | **this preset** |
+| | | **19,628 = 98%** | |
+
+So the preset's own chains are under half the bill, and the orchestrator is the larger consumer despite having no head. Its last-seven-day mix was `claude-haiku-5.5` 80.9%, `claude-opus-5.5` 7.7%, `glm-5.3-flash-free` 5.5%. Opus at 6.33 credits/call is **6,746 credits, 34% of the monthly pool, for 7.7% of calls** — the single largest line item anywhere.
+
+Only **53% of traffic is allocatable** by a preset: 34,951 of 66,000 calls are subagents, or 11,549/month. Any capacity math against the full 20,450 overstates what a chain can reach.
+
+| Pool | Capacity at a viable model | vs 11,549 allocatable |
 |---|---|---|
-| Copilot @ `gpt-6.1-terra` | 17,544 calls | **0.9×** — saturable |
-| Copilot @ `gpt-6-luna` | 153,846 calls | 7.5× |
-| OpenAI Pro @ `gpt-6.1-sol` | 132,333 calls | 6.5× |
-| CommandCode @ `glm-5.3-flash` | 70,922 calls | 3.5× |
+| Copilot @ `gpt-6.1-terra` | 17,544 calls | 1.5× |
+| Copilot @ `gpt-6-luna` | 153,846 calls | 13× |
+| OpenAI Pro @ `gpt-6.1-sol` | 132,333 calls | 11× |
+| CommandCode @ `glm-5.3-flash` | 70,922 calls | 6× |
 
-Only Copilot at its expensive end can be filled, and that is arithmetic rather than preference: burning 20,000 credits on this call volume requires models near 1 cr/call. Together the pools supply ~212,000 calls against 20,450 of traffic — **10× oversupplied**.
-
-So the honest framing is not "spend every pool" but **which pool to leave unused**. Expiring credits cost nothing already prepaid; the real choice is the model quality each allocation buys. Prefer the arrangement that puts the strongest model in the highest-volume role, then let the remaining pools act as failure insurance.
+The paid pools supply ~374,000 calls against 11,549 the preset can direct — **32× oversupplied**. So the framing is not "spend every pool" but **which pool to leave unused**, and expiring prepaid credits cost nothing. Prefer the arrangement that puts the strongest model on the least mechanical work, and let the rest act as failure insurance.
 
 ## Chain order
 
@@ -51,7 +59,7 @@ Subagents are different: they are ephemeral, so `config.model` is set to the arr
 Order by what the role needs:
 
 - **Judgment roles** — oracle, council, skeptic, designer — lead frontier. Few calls each, and quality changes the answer.
-- **Volume roles** — orchestrator, fixer — lead a cheap model on a deep allowance. They carry the traffic, and a frontier head would drain a message window in hours.
+- **Volume roles** — fixer, build — lead a cheap model on a deep allowance. They carry the traffic, and a frontier head would drain a message window in hours.
 - **Mechanical roles** — explorer, observer — lead free or near-free; the work is bounded.
 - **One paygo anchor last**, the cheapest model that still fits the role.
 
@@ -63,7 +71,7 @@ Classify per endpoint, not per provider: Zen serves free and paid ids, and Comma
 
 Three entries per chain: head, one alternate pool, one anchor. Longer tails are unreachable when the head runs most calls, and the paid-pool exclusion rule makes a fourth entry repeat a provider that is already out.
 
-Orchestrator is the deliberate exception, at four: `copilot/gpt-6.1-terra` → `openai/gpt-6.1-sol` → `commandcode/z-ai/glm-5.3-flash` → `opencode/gpt-6-luna`. At 49% of traffic it is the only chain whose descent is likely to reach a third entry, and each hop is a distinct provider, so none is excluded by a predecessor's failure. The CommandCode entry sits before the anchor rather than after Copilot so a Copilot exhaustion lands on a frontier model first.
+Orchestrator is the deliberate exception, at four: `copilot/gpt-6.1-terra` → `openai/gpt-6.1-sol` → `commandcode/z-ai/glm-5.3-flash` → `opencode/gpt-6-luna`. Because its array is a fallback list, these are the four places the session model lands *after* a failure, in order. Each hop is a distinct provider, so a predecessor's failure excludes none of the rest, and a Copilot exhaustion lands on frontier rather than degrading to free.
 
 ## Assigning heads by volume
 
@@ -73,7 +81,7 @@ Measured 2026-11-15 from `session_message` — 66,000 assistant messages over 92
 
 | Role | Share | Calls/mo | Tier |
 |---|---|---|---|
-| orchestrator | 47.0% | 10,229 | volume |
+| orchestrator | 47.0% | 10,229 | *not preset-governed* |
 | fixer | 18.8% | 4,078 | volume |
 | designer | 9.1% | 1,985 | judgment |
 | oracle | 7.4% | 1,611 | judgment |
@@ -84,7 +92,7 @@ Measured 2026-11-15 from `session_message` — 66,000 assistant messages over 92
 
 **Measure from `session_message`, never `message`.** `message` is the OpenCode v1 schema: after the v2 switch on 2026-08-14 OpenCode dual-wrote to both until its last legacy write on 2026-10-13, so it holds 40,094 exact-timestamp duplicates *and* stops a month short — 148,484 messages over 209 days, inflating volume while hiding recent activity.
 
-Whole-history counts mislead on their own. Orchestrator shows 68 distinct models with a 15.4% top share, which looks like the head is powerless; per day it concentrates at 63–100%. Check concentration per day before concluding a head is not deciding.
+Whole-history counts mislead on their own. Orchestrator shows 68 distinct models with a 15.4% top share; per day it concentrates at 63–100%. Check concentration per day before concluding a chain is not deciding — though for the orchestrator the explanation is the missing head, not churn.
 
 A role's cost is its monthly calls times its model's price, so a monthly pool and a volume role are only compatible when the per-call price is small.
 
@@ -93,7 +101,7 @@ Variants follow what the role is *for*, not its turn structure. Designer is 95% 
 | Role | Tool calls | Prose turns | Variant |
 |---|---|---|---|
 | designer | 283 | 5,742 | high |
-| orchestrator | 21,279 | 9,770 | high |
+| orchestrator | 21,279 | 9,770 | *session-set* |
 | oracle | 4,425 | 465 | high |
 | skeptic | 4,230 | 288 | high |
 | fixer | 8,674 | 3,705 | low |
@@ -110,7 +118,7 @@ Check live figures with `omp usage --json --provider <id> --redact`; per-model C
   So a $20 cap is generous on a cheap model: at 0.00086/call it covers ~23,000 calls before binding, well beyond the low-volume visual roles it serves. `muse-spark-1.3-contributor` heads observer and backs designer; the $100-allowance DeepSeek and GLM Flash models carry the traffic-heavy slots. A $10 premium model in a slot is the worst pick: same retail price, a tenth of the cap.
 - **Copilot Max** — 20,000 credits at $0.01 = $200 in one pool, reset 00:00 UTC on the first, no rollover. **Exhausted until 2026-12-01**: $200.00 gross of $200. Credits per call from the CSV: `gpt-6-luna` 0.13, `claude-haiku-5.5` 0.45, `claude-sonnet-5.5` 2.23, `gpt-6.1-sol` 2.26, `claude-opus-5.5` 6.33, `kimi-k3` 20.28.
   The preset draws **7,843 credits/month (39%)**: designer 1,985 calls on Sol (4,486), skeptic 1,488 on Sonnet (3,318). Observer sits on CommandCode instead.
-  Orchestrator deliberately avoids Copilot: its 10,229 calls at the tier above Luna, `gpt-6.1-terra`, would cost 11,661 credits — 98% of the month for one role. On CommandCode's GLM Flash the same traffic is ~$14.
+  The orchestrator adds **11,785 (59%)** from outside the preset, taking the pool to 98% when both run. `claude-opus-5.5` is 6,746 of that — 34% of the month for 7.7% of orchestrator calls. Pointing the orchestrator at a cheaper model is therefore the highest-leverage Copilot saving available, and it is a one-line change in `opencode.json`, not a chain edit.
   What exhausted the pool was elsewhere: Opus 5.5 (5,686), the Code Review model (3,950) and Kimi K3 (3,387) took **65% of the month in 12 days**, and no chain contains any of them. Overrun comes from other clients and from session overrides that pin a model regardless of the chain.
 - **OpenAI Plus** — $20/mo sharing one 5-hour and one 7-day window with Codex and ChatGPT Work, metered in messages. Measured burn: 6% → 91% of the 5-hour window in four hours (~31%/hour) while the weekly stayed at 15%. **Never put OpenAI on a volume role, not even as a fallback.** Fast mode burns 2.5×. Judgment roles only, where the few calls each keep it near full.
 - **Paygo** — Zen bills per request at catalog rates, DeepSeek direct at its own. Cheapest capable Zen: `gpt-6-luna` 0.10/0.50, `glm-5.3-flash` 0.15/0.50. `deepseek-flash` 0.15/0.60 is a separate provider, so it survives a Zen outage.
