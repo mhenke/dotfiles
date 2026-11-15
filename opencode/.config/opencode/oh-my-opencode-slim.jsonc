@@ -424,8 +424,8 @@
     "subscription": {
       "orchestrator": {
         "model": [
+          {"id": "github-copilot/gpt-6-luna", "variant": "high"},
           {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
-          {"id": "opencode/glm-5.3-flash-free", "variant": "high"},
           {"id": "opencode/gpt-6-luna", "variant": "high"}
         ],
         "temperature": 0.4,
@@ -454,7 +454,7 @@
       },
       "designer": {
         "model": [
-          {"id": "openai/gpt-6.1-sol", "variant": "medium"},
+          {"id": "github-copilot/gpt-6.1-sol", "variant": "medium"},
           {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "medium"},
           {"id": "opencode/gpt-6-luna", "variant": "low"}
         ],
@@ -474,8 +474,8 @@
       },
       "observer": {
         "model": [
+          {"id": "github-copilot/gpt-6-luna", "variant": "low"},
           "opencode/mimo-v2.6-flash-free",
-          {"id": "commandcode/gpt-6-luna", "variant": "low"},
           {"id": "opencode/gpt-6-luna", "variant": "low"}
         ],
         "temperature": 0.2,
@@ -491,8 +491,8 @@
       },
       "skeptic": {
         "model": [
+          {"id": "github-copilot/claude-sonnet-5.5", "variant": "high"},
           {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "high"},
-          {"id": "openai/gpt-6.1-sol", "variant": "high"},
           {"id": "deepseek/deepseek-flash", "variant": "low"}
         ]
       }
@@ -614,16 +614,16 @@
         },
         "beta": {
           "model": [
+            {"id": "github-copilot/claude-sonnet-5.5", "variant": "high"},
             {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "high"},
-            {"id": "openai/gpt-6.1-sol", "variant": "high"},
             {"id": "deepseek/deepseek-flash", "variant": "low"}
           ],
           "fallback_models": []
         },
         "gamma": {
           "model": [
+            {"id": "github-copilot/gpt-6-luna", "variant": "low"},
             "opencode/mimo-v2.6-flash-free",
-            {"id": "commandcode/gpt-6-luna", "variant": "low"},
             {"id": "opencode/gpt-6-luna", "variant": "low"}
           ],
           "fallback_models": []

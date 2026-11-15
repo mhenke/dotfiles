@@ -1,4 +1,4 @@
-# ADR-0006: Assign Heads by Call Volume Against Each Pool's Limiter
+# ADR-0006: Size the Monthly Budget, Then Assign Heads by Call Volume
 
 ## Status
 
@@ -14,7 +14,7 @@ Four measurements taken 2026-11-15 show the pools are not interchangeable, and t
 
 2. **OpenAI is metered in messages and burns fast.** Sampled every hour: 6% → 37% → 64% → 84% → 91% of the 5-hour window in four hours, roughly 31%/hour, while the weekly window stayed at 15%. A pool that drains in four hours cannot host the role that is 43% of traffic. ADR-0005 put five judgment roles on it, two of which are volume roles.
 
-3. **Copilot prices its models in credits, and the spread is 20×.** From GitHub's billing export: 20,000 credits at $0.01 = $200. Output tokens per credit dollar — Luna 326k, Haiku 5.5 128k, Sonnet 5.5 28k, Sol 14.8k, Opus 5.5 9.6k. Gross reached $200.00 of $200 before the December reset. ADR-0005's "use the model that best fits the role" put Sol and Sonnet there, at 20× the credit cost for the same budget.
+3. **Copilot is a monthly credit budget, and the per-call spread is 20×.** From GitHub's billing export: 20,000 credits at $0.01 = $200, reset on the first with no rollover. Credits per call — `gpt-6-luna` 0.30, `claude-haiku-5.5` 0.36, `gpt-6.1-sol` 2.14, `claude-sonnet-5.5` 2.16, `claude-opus-5.5` 5.40. ADR-0005 said "use the model that best fits the role", which put Sol and Sonnet behind five judgment roles — 26,254 credits, **131% of the month**. That, not the pool's size, is what exhausted it on 14 November.
 
 4. **CommandCode is the deepest pool, not the scarcest.** 15,728 requests and 2.2B tokens against a weekly limit of 30% and a monthly 38%, with $43.48 of balance left — tens of thousands of further calls at ~$0.0015 each. ADR-0005 treated it as a pool to ration.
 
@@ -22,12 +22,14 @@ Four measurements taken 2026-11-15 show the pools are not interchangeable, and t
 
 **Assign each role's head by its call volume measured against the headroom of each pool's limiter.**
 
-- **Volume roles** — orchestrator, fixer — head on a deep, cheap pool: CommandCode `z-ai/glm-5.3-flash` at 0.15/0.50, or a free Zen model for the mechanical end. OpenAI never appears on a volume role, including as a fallback.
-- **Judgment roles** — oracle, designer, council — head on `openai/gpt-6.1-sol`. Few calls each, close to full windows, and the quality changes the answer.
-- **Skeptic** heads on `commandcode/deepseek/deepseek-v4.1-flash` rather than OpenAI, so the council's three heads stay distinct and the adversarial seat runs on a different provider from the seats it challenges.
-- **Mechanical roles** — explorer, observer — head free, for images-capable cheap work.
-- **Copilot carries no slot** while its credits are exhausted; when it resets it returns as a cheap-tier alternate only (`claude-haiku-5.5`, `gpt-6-luna`), never a frontier model.
+- **Volume roles head a cheap, deep pool.** Orchestrator, at 9,353 calls/month, heads `github-copilot/gpt-6-luna` (0.30 credits/call) with `commandcode/z-ai/glm-5.3-flash` behind it. Fixer heads a free Zen model with CommandCode behind it. OpenAI never appears on a volume role, including as a fallback.
+- **Judgment roles split by call count.** Oracle (1,257 calls) and council (257) head `openai/gpt-6.1-sol`; its message window stays near full because the volume is low.
+- **Copilot takes the roles whose call count its budget can afford.** `gpt-6-luna` heads orchestrator and observer at 0.30/call; `gpt-6.1-sol` heads designer and `claude-sonnet-5.5` heads skeptic, where 956 and 441 calls/month keep the frontier price affordable. The allocation draws 5,804 of 20,000 credits (29%), so it survives the whole cycle.
+- **Skeptic heads Copilot, not OpenAI**, so the council's three heads stay distinct and the adversarial seat runs on a different provider from the seats it challenges.
+- **Mechanical roles** — explorer, observer — head free or cheap, for bounded, images-capable work.
 - **Chains are three entries**: head, one alternate pool, one paygo anchor.
+
+A preset is static configuration for a whole billing cycle, so head assignments must be affordable on the cycle's average, not on one exhausted day.
 
 The one-entry-per-paid-provider rule from ADR-0005 stands; this ADR changes *which* provider heads *which* role, not how a descent works.
 
@@ -35,7 +37,7 @@ The one-entry-per-paid-provider rule from ADR-0005 stands; this ADR changes *whi
 
 - **Keep ADR-0005's split (Copilot/OpenAI quality, CommandCode reach).** Rejected: measured OpenAI burn rate shows it cannot carry five roles, and Copilot's credit spread makes frontier models there 20× expensive.
 - **Head every role on CommandCode's boosted models.** Rejected: it is the deepest pool, but concentrating all roles on one provider leaves the whole team dependent on a $10/mo plan's 5-hour window.
-- **Keep Copilot on roles and accept failed round-trips until 1 December.** Rejected: a spent allowance excludes the provider for the remaining descent, so each Copilot head burns a request to fail immediately for three weeks.
+- **Drop Copilot until it resets.** Rejected: a preset is static configuration for a whole billing cycle, so removing Copilot to match one exhausted day leaves the renewed pool idle all of December. The correct response to exhaustion is to size the per-call price so the budget lasts the cycle.
 - **Retain six-entry chains as deeper insurance.** Rejected: with the head running most calls, a fourth entry is unreachable, and a repeated paid provider is unreachable by the exclusion rule.
 
 ## Consequences
@@ -49,13 +51,13 @@ The one-entry-per-paid-provider rule from ADR-0005 stands; this ADR changes *whi
 
 ### Negative
 
-- Orchestrator leaves frontier quality for `glm-5.3-flash`; some answers will be weaker than Sol's. This is the deliberate trade for not exhausting OpenAI before noon.
-- The whole team now depends on CommandCode, a $10/mo plan whose 5-hour window is one pool.
+- Orchestrator heads `gpt-6-luna` rather than a frontier model; some answers will be weaker than Sol's. This is the deliberate trade for a monthly budget that lasts the cycle — the same calls at Sol cost 20,015 credits, the entire month for one role.
+- Three roles now head on Copilot, so a Copilot chargeback or plan change breaks the largest traffic share until the chains are re-pointed.
 
 ### Risks
 
-- **CommandCode 5-hour exhaustion now degrades the whole team**, not one role. The free-Zen second entry absorbs it, but at a quality cost.
-- **Copilot returns on 2026-12-01** and these chains carry no slot for it; the preset needs revisiting then, or the renewed pool idles.
+- **Copilot is exhausted until 2026-12-01**, so the orchestrator, designer, skeptic and observer heads all fail over for the rest of this cycle. That is the cost of keeping the allocation correct for the other 29 days; the alternative stranded the pool every December.
+- **Credits-per-call figures come from one 11-day window.** A change in prompt length or output verbosity moves them, and orchestrator at 9,353 calls/month is the number the whole budget rests on.
 - The volume shares come from one 148k-message history and will drift. OpenAI's cost curve may be judged harshly if part of that burn was a single heavy session.
 - No live failover was exercised; ordering rests on the fallback implementation's semantics, not on observed quota errors.
 
