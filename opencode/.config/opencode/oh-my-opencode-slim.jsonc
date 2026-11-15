@@ -492,8 +492,8 @@
       },
       "skeptic": {
         "model": [
-          {"id": "github-copilot/claude-sonnet-5.5", "variant": "medium"},
-          {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "medium"},
+          {"id": "github-copilot/claude-sonnet-5.5", "variant": "high"},
+          {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "high"},
           {"id": "deepseek/deepseek-flash", "variant": "low"}
         ]
       }
@@ -615,8 +615,8 @@
         },
         "beta": {
           "model": [
-            {"id": "github-copilot/claude-sonnet-5.5", "variant": "medium"},
-            {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "medium"},
+            {"id": "github-copilot/claude-sonnet-5.5", "variant": "high"},
+            {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "high"},
             {"id": "deepseek/deepseek-flash", "variant": "low"}
           ],
           "fallback_models": []

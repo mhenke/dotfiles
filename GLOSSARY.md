@@ -150,8 +150,9 @@ call.
 _Avoid_: fallback list, cascade, stack
 
 **Head**:
-The first model in a chain. It decides what the agent actually runs on; every
-later entry is failure insurance.
+The first model in a chain — but it binds only for a **subagent**, whose head is
+copied to its launch model. The **orchestrator** has no head: its session model
+leads and the chain backs it, so slot 0 is only the first fallback.
 _Avoid_: primary, default model
 
 **Anchor**:

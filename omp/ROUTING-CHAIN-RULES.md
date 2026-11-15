@@ -40,7 +40,13 @@ So the honest framing is not "spend every pool" but **which pool to leave unused
 
 ## Chain order
 
-A chain advances only when the current entry **fails** — error, rate limit, or exhausted allowance. Never for being better. **The head decides what runs:** it executes almost every call, so the tail is insurance.
+A chain advances only when the current entry **fails** — error, rate limit, or exhausted allowance. Never for being better.
+
+**The orchestrator has no head.** Its array is a fallback list only, and this is deliberate upstream (`src/agents/index.ts:203`, #9100e59 / #639): `config.model` stays undefined for the orchestrator so a live `/model` selection survives the plugin re-inits that fire on every subagent dispatch. `foreground-fallback` then lets the session model lead the descent, with the configured entries backing it (`index.ts:4439`).
+
+So for the orchestrator, **the session model decides what runs**; slot 0 is the first thing tried after it fails. Choosing an orchestrator "head" in the preset changes nothing until a failure. Measured over the last month, its actual models were `copilot/claude-haiku-5.5` 42.3%, `xiaomi/mimo-v2.6-pro` 19.6%, `beam-free` 15.0% — none of them a configured entry.
+
+Subagents are different: they are ephemeral, so `config.model` is set to the array's first entry at launch and the rest stay as the fallback chain (`src/agents/registry.ts:174`). **Their heads bind.**
 
 Order by what the role needs:
 
@@ -61,7 +67,7 @@ Orchestrator is the deliberate exception, at four: `copilot/gpt-6.1-terra` → `
 
 ## Assigning heads by volume
 
-The head decides spend, so head assignment *is* the allocation. Assign by call volume against each pool's limiter: a pool metered in messages cannot absorb a role that is half the traffic.
+For a subagent, the head decides spend, so head assignment *is* the allocation. Assign by call volume against each pool's limiter: a pool metered in messages cannot absorb a role that is half the traffic. The orchestrator is the exception — the session model spends, not the chain (see above), so its allocation is decided by whatever `opencode.json` or `/model` selects.
 
 Measured 2026-11-15 from `session_message` — 66,000 assistant messages over 92 days (21,743/month).
 
@@ -82,18 +88,18 @@ Whole-history counts mislead on their own. Orchestrator shows 68 distinct models
 
 A role's cost is its monthly calls times its model's price, so a monthly pool and a volume role are only compatible when the per-call price is small.
 
-Variants follow the same split, measured by what the role *produces*: 67% of all assistant calls are tool-call continuations and 23% carry no finish marker at all. Sorted by role, the split separates judgment from mechanics.
+Variants follow what the role is *for*, not its turn structure. Designer is 95% prose turns (5,742 against 283 tool calls), so its head takes `high`. Oracle and skeptic are 90–94% tool calls, but those calls are the evidence-gathering of a verdict the user deliberately invoked — an oracle asked to review something reads many files and answers once. Counting turns against them would price the working that makes the verdict good, so they take `high` too.
 
-| Role | Tool calls | Prose turns | Deliberation |
+| Role | Tool calls | Prose turns | Variant |
 |---|---|---|---|
-| designer | 283 | 5,742 | **95%** |
-| orchestrator | 21,279 | 9,770 | 31% |
-| fixer | 8,674 | 3,705 | 30% |
-| explorer | 1,746 | 334 | 16% |
-| oracle | 4,425 | 465 | 10% |
-| skeptic | 4,230 | 288 | 6% |
+| designer | 283 | 5,742 | high |
+| orchestrator | 21,279 | 9,770 | high |
+| oracle | 4,425 | 465 | high |
+| skeptic | 4,230 | 288 | high |
+| fixer | 8,674 | 3,705 | low |
+| explorer | 1,746 | 334 | default |
 
-Designer is the one role that is genuinely deliberation, so its head takes `high`; oracle and skeptic are 90–94% tool round-trips, so theirs take `medium` — a frontier model per file-read is overpaying. The no-finish rows were checked rather than assumed: designer's are 5,718 prose turns against 9 toolish, so the 95% is real, not an artifact of missing markers.
+The no-finish rows were checked rather than assumed: designer's are 5,718 prose against 9 toolish, so the prose share is real, not an artifact of missing markers.
 
 ## Provider economics, measured 2026-11-15
 
