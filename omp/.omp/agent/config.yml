@@ -1,12 +1,12 @@
 modelRoles:
-  scout: omniroute/explorer
-  librarian: omniroute/librarian
-  designer: omniroute/designer
-  task: omniroute/explorer
-  oracle: omniroute/oracle
-  skeptic: omniroute/skeptic
+  scout: commandcode/Qwen/Qwen3.8-Flash
+  librarian: commandcode/Qwen/Qwen3.8-Flash
+  designer: commandcode/google/gemini-4-argon
+  task: commandcode/Qwen/Qwen3.8-Flash
+  oracle: commandcode/gpt-6.1-sol
+  skeptic: commandcode/claude-sonnet-5-5
   web: web/exa
-  default: openai-codex/gpt-6.1-sol:high
+  default: commandcode/deepseek/deepseek-v4.1-flash:max
 disabledProviders:
   - llama.cpp
   - lm-studio
@@ -21,19 +21,19 @@ retry:
   fallbackRevertPolicy: cooldown-expiry
   fallbackChains:
     default:
-      - omniroute/orchestrator
+      - commandcode/z-ai/glm-5.3-flash
     skeptic:
-      - omniroute/skeptic
+      - commandcode/claude-sonnet-5-5
     scout:
-      - omniroute/explorer
+      - commandcode/Qwen/Qwen3.8-Flash
     task:
-      - omniroute/explorer
+      - commandcode/Qwen/Qwen3.8-Flash
     librarian:
-      - omniroute/librarian
+      - commandcode/Qwen/Qwen3.8-Flash
     designer:
-      - omniroute/designer
+      - commandcode/google/gemini-4-argon
     oracle:
-      - omniroute/oracle
+      - commandcode/gpt-6.1-sol
     web:
       - web/perplexity
       - google-gemini-cli/gemini-2.5-flash
