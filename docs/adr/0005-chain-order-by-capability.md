@@ -2,7 +2,7 @@
 
 ## Status
 
-Accepted 2026-11-14. Supersedes [ADR-0001](0001-balanced-preset-model-selection.md).
+Accepted 2026-11-14. Supersedes [ADR-0001](0001-balanced-preset-model-selection.md). Spend doctrine amended by [ADR-0006](0006-heads-assigned-by-call-volume.md).
 
 ## Context
 

@@ -163,5 +163,6 @@ _Avoid_: last resort, paygo fallback, backup
 **Pool**:
 One provider's shared allowance: Copilot's monthly AI credits, OpenAI's 5-hour
 and weekly windows, CommandCode's credit balance. Pools are billed and exhausted
-independently, so a chain aims to reach every one.
+independently. A chain carries one entry per paid pool, but which pools a role
+reaches is decided by its **head** — the tail rarely runs.
 _Avoid_: quota, budget, plan (unqualified)

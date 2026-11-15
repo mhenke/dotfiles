@@ -10,8 +10,9 @@ A chain advances only when the current entry **fails** — error, rate limit, or
 
 Order by what the role needs:
 
-- **Judgment roles** — orchestrator, oracle, council, skeptic, designer — lead with the model that produces the best result: frontier quality, fewer retries, less churn. A stronger model that avoids one rework loop beats a free model that needs three.
-- **Mechanical roles** — explorer, observer, fixer — lead with a capable cheap model, since the work is bounded and a frontier head buys little.
+- **Judgment roles** — oracle, council, skeptic, designer — lead with the model that produces the best result: frontier quality, fewer retries, less churn. A stronger model that avoids one rework loop beats a free model that needs three. These roles are few calls, so they can afford the message-metered pool.
+- **Volume roles** — orchestrator, fixer — lead with a capable cheap model on a deep allowance, since they run most of the traffic and a frontier head would drain a message window in hours.
+- **Mechanical roles** — explorer, observer — lead with a free model; the work is bounded and a paid head buys little.
 - **One paygo anchor last**, chosen as the cheapest model that still fits the role.
 
 **Repetition follows the failure mode.** A spent allowance (`quota exceeded`, `usage limit reached`) excludes the failing provider for the rest of the descent, so a paid provider earns **one** entry: a second Copilot or OpenAI slot is unreachable. Free-tier exhaustion (`Free usage exceeded`) is classified as permanent billing instead — it fails over immediately and excludes nothing — so **free entries repeat freely**. Free Zen, free Zen, then the Zen paygo anchor is a valid shape and a cheap one.
@@ -22,28 +23,62 @@ Classify per endpoint, not per provider: Zen serves free and paid ids, and Comma
 
 ## Spend doctrine
 
-Each pool is spent by a different rule. Both aim at **quality** — the model that best does the job this agent performs. They differ only in how much weight the price carries.
+Which pool a role consumes is decided by its **head**, so the head is the only
+allocation lever. Assign heads by call volume against each pool's limiter — a
+pool metered in messages cannot absorb a role that is half the traffic.
 
-- **Copilot and OpenAI: quality.** Both arrived as gifts, so their cost to us is zero; put the model that best does this agent's job in these slots, favouring the better model over the cheaper one. Quality here means fit and strength for the role, not a higher reasoning setting. Burning these pools fast is fine when the role justifies it — frontier quality, better results, less churn and rework — since a wasted allowance is worth less than a worse answer. The one guard is pace: 20,000 credits and one 5-hour window do not survive a day of indiscriminate frontier calls, so a chain reaches these tiers instead of starting on them.
-- **CommandCode: stretch.** $10 buys $100 of credits, so every credit must reach as far as possible. Prefer a boosted model (GLM-5.3 Flash, DeepSeek V4.1 Flash, GLM-5.3) over a $10-allowance premium one, and prefer the cheap model over the strong one wherever the role still succeeds.
-- **Paygo: last resort.** A metered entry exists to keep the chain alive when every pooled tier is exhausted, so pick the cheapest model that still fits the role.
+Call volume, measured 2026-11-15 over 148,484 assistant messages:
 
-Because Copilot and OpenAI buy quality while CommandCode buys reach, the same role can carry a frontier model on one and a budget model on another. That is intended, not an inconsistency.
+| Role | Share | Tier |
+|---|---|---|
+| orchestrator | 43.3% | volume |
+| build | 16.6% | volume |
+| fixer | 12.8% | volume |
+| oracle | 5.8% | judgment |
+| explorer | 5.6% | mechanical |
+| designer | 4.4% | judgment |
+| skeptic | 2.0% | judgment |
+| council | 1.2% | judgment |
+
+- **Volume tier heads a cheap deep pool.** CommandCode at $0.15/1M with $43 of
+  remaining balance absorbs tens of thousands of calls; OpenAI's message window
+  cannot. Measured: OpenAI burned 6% → 91% of its 5-hour window in four hours
+  (~31%/hour). Never put OpenAI on a volume role, not even as a fallback.
+- **Judgment tier spends OpenAI.** Its limits stay close to full (weekly 85%
+  left) and the roles are few calls each. Frontier quality where it changes the
+  answer, at the cost of the pool that can afford it.
+- **Copilot is retail only.** 20,000 credits = $200 at $0.01/credit. Measured
+  output per credit dollar: Luna 326k, Haiku 5.5 128k, Sonnet 5.5 28k, Sol 14.8k,
+  Opus 5.5 9.6k. Cheap tier only — a frontier model there burns 20× the credits
+  for the same budget. The pool hit **$200.00 gross of $200 before 2026-12-01**,
+  so it carries no slot until it resets.
+- **CommandCode takes boosted models only.** GLM-5.3 Flash and DeepSeek V4.1
+  Flash carry $100 allowances at 0.15/1M. The $10 premium tier — GPT-6.1 Sol,
+  Claude Sonnet 5.5 — is the same retail price for a tenth of the allowance;
+  `zai-org/GLM-5.3` ($70) and `google/gemini-3.8-flash` ($40) are also worse per
+  credit than the two boosted models.
+- **Paygo anchors the chain.** Cheapest model that still fits: Zen `gpt-6-luna`
+  0.10/0.50, or DeepSeek direct `deepseek-flash` 0.15/0.60 — a separate provider,
+  so it survives a Zen outage.
+
+Three entries per chain: head, one alternate pool, one anchor. Longer tails are
+unreachable when the head runs most calls, and the paid-pool exclusion rule means
+a fourth entry repeats a provider that is already out.
 
 ## Council
 
-The council agent synthesizes; seats alpha/beta/gamma mirror oracle/skeptic/observer. Keep the council preset name in step with the active preset. Two constraints:
+The council agent synthesizes; seats alpha/beta/gamma mirror oracle/skeptic/observer, byte-identical. Keep the council preset name in step with the active preset. Two constraints:
 
 - Every model in the observer chain handles images.
-- Oracle, skeptic, and observer hold **disjoint** models, anchor included. This compares those three chains only.
+- Oracle, skeptic, and observer take **distinct heads**, so the three verdicts do not rest on one model. Full disjointness is unreachable: three roles of three entries over four usable pools would need nine distinct models and only effort-balance allows one paid entry per provider. Distinct heads is the part that matters.
 
-## Provider economics, 2026-11-14
+## Provider economics, measured 2026-11-15
 
-The reasoning behind the model picks. Check live figures with `omp usage --json --provider <id> --redact`.
+The reasoning behind the model picks. Check live figures with `omp usage --json --provider <id> --redact`; per-model Copilot detail comes from GitHub's billing CSV export.
 
-- **CommandCode GOAT** — $10/mo against $100 of credits, and the per-model allowances are **not** additive. GLM-5.3 Flash and DeepSeek V4.1 Flash carry $100 each, GLM-5.3 $70, Gemini 3.8 Flash $40; premium models — GPT-6.1 Sol, Claude Sonnet 5.5 — carry $10. Put a boosted model in a CommandCode slot. Gemini 4 Argon is not on GOAT.
-- **Copilot Max** — $100/mo, 20,000 AI credits monthly: 10,000 base plus a variable flex allotment, reset 00:00 UTC on the first with no rollover. Token-priced; legacy PRU multipliers do not apply.
-- **OpenAI Plus** — $20/mo sharing one 5-hour and one 7-day window with Codex and ChatGPT Work. Fast mode burns 2.5×. API-organization credits are Pro and Business only.
+- **CommandCode GOAT** — $10/mo against $100 of credits, and the per-model allowances are **not** additive. GLM-5.3 Flash and DeepSeek V4.1 Flash carry $100 each, GLM-5.3 $70, Gemini 3.8 Flash $40; premium models — GPT-6.1 Sol, Claude Sonnet 5.5 — carry $10. Put a boosted model in a CommandCode slot. Gemini 4 Argon is not on GOAT. Measured 2026-11-15: 15,728 requests, 2.2B tokens, weekly limit 30%, monthly 38%, balance $43.48 — the deepest headroom of any pool.
+- **Copilot Max** — $100/mo, 20,000 AI credits monthly at $0.01/credit = $200 gross, reset 00:00 UTC on the first with no rollover. Measured 2026-11-15: $200.00 gross of $200, **exhausted** until 2026-12-01. Token-priced; legacy PRU multipliers do not apply.
+- **OpenAI Plus** — $20/mo sharing one 5-hour and one 7-day window with Codex and ChatGPT Work. Measured burn 6% → 91% of the 5-hour window in four hours (~31%/hour) while the weekly stayed at 15%. Fast mode burns 2.5×. API-organization credits are Pro and Business only.
 - **Paygo** — Zen bills per request at catalog rates, DeepSeek direct at its own. Cheapest capable Zen: `gpt-6-luna` and `claude-haiku-5-5` at 0.10/0.50 per 1M, `glm-5.3-flash` at 0.15/0.50.
 
 ## Model evidence
