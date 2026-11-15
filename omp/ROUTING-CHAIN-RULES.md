@@ -27,19 +27,26 @@ Which pool a role consumes is decided by its **head**, so the head is the only
 allocation lever. Assign heads by call volume against each pool's limiter — a
 pool metered in messages cannot absorb a role that is half the traffic.
 
-Call volume, measured 2026-11-15 over 148,484 assistant messages across 209 days
-(710 calls/day, 19,844/month):
+Call volume, measured 2026-11-15 from `session_message` in
+`~/.local/share/opencode/opencode.db` — 66,000 assistant messages over 92 days
+(715/day, 21,743/month). **Never measure from the `message` table: it is the
+legacy schema, frozen 2026-10-13, and reports a month of activity as absent.**
 
 | Role | Share | Calls/mo | Tier |
 |---|---|---|---|
-| orchestrator | 43.3% | 9,353 | volume |
-| build | 16.6% | 3,589 | volume |
-| fixer | 12.8% | 2,771 | volume |
-| oracle | 5.8% | 1,257 | judgment |
-| explorer | 5.6% | 1,220 | mechanical |
-| designer | 4.4% | 956 | judgment |
-| skeptic | 2.0% | 441 | judgment |
-| council | 1.2% | 257 | judgment |
+| orchestrator | 47.0% | 10,229 | volume |
+| fixer | 18.8% | 4,078 | volume |
+| designer | 9.1% | 1,985 | judgment |
+| oracle | 7.4% | 1,611 | judgment |
+| skeptic | 6.8% | 1,488 | judgment |
+| explorer | 3.2% | 685 | mechanical |
+| build | 3.0% | 648 | volume |
+| councillor | 1.7% | 374 | judgment |
+
+Whole-history counts are misleading on their own: orchestrator shows 68 distinct
+models, top one 15.4%. Per day it concentrates at 63–100%, so that spread is
+config churn over 92 days, not per-call drift. Check concentration per day before
+concluding a head is not deciding.
 
 A role's cost is its monthly calls times its model's price, so a monthly pool and
 a volume role are only compatible when the per-call price is small.
@@ -51,9 +58,10 @@ a volume role are only compatible when the per-call price is small.
 - **Judgment tier spends OpenAI.** Its limits stay close to full (weekly 85%
   left) and the roles are few calls each. Frontier quality where it changes the
   answer, at the cost of the pool that can afford it.
-- **Copilot is a monthly credit budget.** 20,000 credits at $0.01 = $200, reset 00:00 UTC on the first, no rollover. A preset is static, so the budget must last the whole cycle — designing around a mid-month exhaustion strands the pool for every remaining day. Measured credits per call: `gpt-6-luna` 0.30, `claude-haiku-5.5` 0.36, `gpt-6.1-sol` 2.14, `claude-sonnet-5.5` 2.16, `claude-opus-5.5` 5.40.
-  The spread means **volume roles head cheap and low-volume roles head frontier**: orchestrator's 9,353 calls/month at Luna cost 2,806 credits, while the same calls at Sol would cost 20,015 — the entire budget for one role. The current allocation draws 5,804 of 20,000 (29%), leaving 71% spare.
-  The previous design put frontier models on five judgment roles: 26,254 credits, 131% of the month. That is what exhausted the pool by 14 November, not the pool's size.
+- **Copilot is a monthly credit budget.** 20,000 credits at $0.01 = $200, reset 00:00 UTC on the first, no rollover. GitHub's billing CSV is the source of truth for it; the preset's own chains are cheap and the overrun hides outside them.
+  Measured credits per call from the CSV joined to call counts: `gpt-6-luna` 0.13, `claude-haiku-5.5` 0.45, `claude-sonnet-5.5` 2.23, `gpt-6.1-sol` 2.26, `claude-opus-5.5` 6.33, `kimi-k3` 20.28.
+  The preset as configured draws **9,173 credits/month (46%)**: orchestrator 10,229 calls on Luna (1,330), designer 1,985 on Sol (4,486), skeptic 1,488 on Sonnet (3,318), observer (39). Frontier sits only where monthly call counts are under 2,000; the 47%-of-traffic role heads the cheapest model.
+  The exhaustion came from elsewhere: Opus 5.5 (5,686), the Code Review model (3,950) and Kimi K3 (3,387) took **65% of the month in 12 days**, and no preset chain contains any of them. Excess came from other clients and from explicit session overrides that pin a model regardless of the chain.
 - **CommandCode takes boosted models only.** GLM-5.3 Flash and DeepSeek V4.1
   Flash carry $100 allowances at 0.15/1M. The $10 premium tier — GPT-6.1 Sol,
   Claude Sonnet 5.5 — is the same retail price for a tenth of the allowance;
