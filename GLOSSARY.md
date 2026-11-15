@@ -165,5 +165,6 @@ One provider's shared allowance: Copilot's monthly AI credits, OpenAI's 5-hour
 and weekly windows, CommandCode's credit balance. A pool is spent by every model
 on it at once — its rolling windows are pool-wide, and a per-model allowance is a
 **ceiling on that model's draw**, never a separate budget. Three $20 allowances
-do not make $60.
+do not make $60. CommandCode measures a pool in credits, where one credit is a
+usage-value unit worth more dollars on a larger-allowance model.
 _Avoid_: quota, budget, plan (unqualified); per-model budget

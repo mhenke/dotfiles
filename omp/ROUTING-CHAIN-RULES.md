@@ -8,20 +8,22 @@ Chain design for the OMOS `subscription` and `balanced` presets and their counci
 
 **A provider's credits form ONE shared pool. A per-model allowance is a ceiling on what that model may draw from it, never a separate budget.**
 
-This is the single most misread thing about CommandCode, Copilot and OpenAI, and getting it wrong multiplies the apparent budget. Concretely, for CommandCode GOAT:
+This is the single most misread thing about CommandCode, Copilot and OpenAI, and reading it the other way multiplies the apparent budget. CommandCode GOAT, in the provider's own words: *"you can use 14 credits in any 5 hours and 35 in any 7 days, no matter which models you mix … and all the slices add up to one plan."* Its calculator adds: *"every allowance draws on one shared pool."*
 
 | | Amount | Scope |
 |---|---|---|
-| Monthly credits | up to $100 | **one pool**, shared by every model |
-| 5-hour window | up to $20 | **pool-wide**, not per model |
-| Weekly window | up to $50 | **pool-wide**, not per model |
-| Per-model allowance | $10–$100 | **a cap** on that model's draw from the pool |
+| Monthly pool | 70 credits | **one pool**, shared by every model |
+| 5-hour window | 14 credits | **pool-wide**, not per model |
+| Weekly window | 35 credits | **pool-wide**, not per model |
+| Per-model allowance | $10–$100 | **a ceiling** on that model's draw |
 
-Three models with $20 allowances do not give $60. They share the same $100 pool, and each is individually capped at $20. The rolling windows are dollar amounts of the whole pool, so a burst on any model consumes the same 5-hour budget.
+A credit is a usage-value unit, so its dollar worth depends on the model's allowance: 14 credits is $20 of usage on a $100-allowance model and $14 on a $70 one. That is why `omp usage` reports `used 10.55 / limit 35` — credits, not dollars.
 
-Identical shape elsewhere: Copilot's 20,000 credits are one monthly pool with per-model credit prices drawing from it; OpenAI's 5-hour and weekly windows are message counts across all models. A "limit" on a model is always a cap, and a "window" is always pool-wide.
+Three models with $20 allowances do not give $60. They draw on the same pool, and each is individually capped. A burst on any model consumes the same 5-hour budget.
 
-The practical consequence: **compare models by cost per call, because every call comes out of the same pool.** A cheaper model stretches the pool; a bigger allowance on an expensive model does not buy extra pool.
+Same shape elsewhere: Copilot's 20,000 credits are one monthly pool with per-model prices drawing from it; OpenAI's 5-hour and weekly windows are message counts across all models. A limit on a model is a cap; a window is pool-wide.
+
+Practical consequence: **compare models by cost per call, because every call comes from the same pool.** A cheaper model stretches the pool; a bigger allowance on an expensive model does not create more of it.
 
 ## Chain order
 
@@ -88,20 +90,18 @@ a volume role are only compatible when the per-call price is small.
   Orchestrator heads `commandcode/z-ai/glm-5.3-flash` instead, at ~$14/month of CommandCode dollars for its 10,229 calls (0.00141/call), with Copilot Luna behind it. That is a stronger reasoning model than Luna and a cheaper budget position, because it spends the dollar-metered pool rather than the credit-metered one. Copilot's own tier above Luna is not affordable: `gpt-6.1-terra` for orchestrator alone is 11,661 credits, 98% of the month.
   The exhaustion came from elsewhere: Opus 5.5 (5,686), the Code Review model (3,950) and Kimi K3 (3,387) took **65% of the month in 12 days**, and no preset chain contains any of them. Excess came from other clients and from explicit session overrides that pin a model regardless of the chain.
 - **CommandCode: one shared pool, per-model allowances as a ceiling.**
-  $10/mo buys up to $100 of credits, drawn from a **single shared pool**. The
-  rolling windows are pool-wide, not per model: $20 of usage in any 5 hours,
-  $50 in any 7 days, $100 per month. A per-model allowance (DeepSeek V4.1 Flash
+  $10/mo buys a 70-credit pool, paced 14 credits per 5 hours and 35 per week (see
+  *Two meters* above). Per-model allowances are the ceilings: DeepSeek V4.1 Flash
   and GLM-5.3 Flash $100, `meta/muse-spark-1.3-contributor` $20, GLM-5.3 $70,
-  Gemini 3.8 Flash $40, premium GPT-6.1 Sol and Claude Sonnet 5.5 $10) caps what
-  that model may draw — it does not grant separate budget. Three $20 models do
-  not add up to $60; they share the same $100 and each is individually capped.
+  Gemini 3.8 Flash $40, premium GPT-6.1 Sol and Claude Sonnet 5.5 $10.
   Choose on cost per call, since every call hits the same pool. Measured on our
   traffic: `muse-spark-1.3-contributor` $0.00086, `deepseek-v4.1-flash`
   $0.00088, `z-ai/glm-5.3-flash` $0.00141. The cache-read price drives it —
   $0.002/M for Muse Contributor against $0.003 for DeepSeek and $0.030 for GLM
   Flash — and agent loops are cache-dominated.
   A $20 cap is generous when the model is that cheap: at 0.00086/call it covers
-  ~23,000 calls a month, far more than the low-volume visual roles it serves.
+  ~23,000 calls of its own before the cap binds, far more than the low-volume
+  visual roles it serves, and the shared pool still paces the whole team.
   So `muse-spark-1.3-contributor` heads observer and backs designer, while the
   $100-allowance DeepSeek and GLM Flash models carry the traffic-heavy slots.
   Never put a $10 premium model in a slot: same retail price, a tenth of the cap.
