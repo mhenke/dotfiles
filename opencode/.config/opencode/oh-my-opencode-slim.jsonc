@@ -11,6 +11,18 @@
     "layout": "main-vertical"
   },
   "scoringEngineVersion": "v2",
+  "agents": {
+    "archon": {
+      "model": [
+        {"id": "github-copilot/claude-opus-5.5", "variant": "high"},
+        {"id": "openai/gpt-6-astra", "variant": "high"},
+        {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
+        {"id": "opencode/gpt-6-luna", "variant": "high"}
+      ],
+      "temperature": 0.2,
+      "description": "Escalation tier for problems the normal agents could not settle: an architecture call that keeps getting reverted, a review that keeps missing the same class of bug, or a quality ceiling worth spending Opus on. Invoked deliberately, never left as the default."
+    }
+  },
   "presets": {
     "balanced": {
       "orchestrator": {

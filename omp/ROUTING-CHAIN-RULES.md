@@ -123,6 +123,22 @@ Check live figures with `omp usage --json --provider <id> --redact`; per-model C
 - **OpenAI Plus** — $20/mo sharing one 5-hour and one 7-day window with Codex and ChatGPT Work, metered in messages. Measured burn: 6% → 91% of the 5-hour window in four hours (~31%/hour) while the weekly stayed at 15%. **Never put OpenAI on a volume role, not even as a fallback.** Fast mode burns 2.5×. Judgment roles only, where the few calls each keep it near full.
 - **Paygo** — Zen bills per request at catalog rates, DeepSeek direct at its own. Cheapest capable Zen: `gpt-6-luna` 0.10/0.50, `glm-5.3-flash` 0.15/0.50. `deepseek-flash` 0.15/0.60 is a separate provider, so it survives a Zen outage.
 
+## Custom agents
+
+A custom agent needs three things, and skipping any one makes it silently inert:
+
+1. An entry in the **top-level `agents` record** of the slim config — not inside a preset. `agents.<name>` keys that are neither a built-in name nor an alias are treated as new agents (`src/config/utils.ts:79`).
+2. A **`model` array**. Without one the agent is skipped with a warning, unless `inheritModelFrom` is set (`src/agents/index.ts:1188`).
+3. A **prompt file** at `<config dir>/oh-my-opencode-slim/<name>.md`, or a preset-scoped `<config dir>/oh-my-opencode-slim/<preset>/<name>.md` which wins (`src/config/loader.ts:1078`). The directory is literally named `oh-my-opencode-slim`.
+
+Confirm with `opencode api GET /api/agent` and look for the agent's resolved `model`. A schema pass alone proves nothing — the config validates whether or not the agent is ever built.
+
+### `archon`
+
+The escalation tier, invoked deliberately rather than by default: `github-copilot/claude-opus-5.5` → `openai/gpt-6-astra` → `commandcode/z-ai/glm-5.3-flash` → `opencode/gpt-6-luna`, all at `high`.
+
+It exists because a frontier model left pinned as the session default spends the pool on ordinary turns. Measured 2026-11-15: Opus on orchestrator was 7.7% of its calls but **6,746 credits, 34% of the monthly pool**. The same model, reached on purpose for a decision that smaller agents could not settle, is worth that price; idling on it is not. Astra takes the OpenAI slot as the highest tier there, noting `gpt-6.1-sol` has the larger context (628k against 400k) when length matters more than depth.
+
 ## Council
 
 The council agent synthesizes; seats alpha/beta/gamma mirror oracle/skeptic/observer, byte-identical. Keep the council preset name in step with the active preset. Two constraints:

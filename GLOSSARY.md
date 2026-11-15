@@ -163,6 +163,12 @@ global default, or inherited by a delegated agent. It outranks any **head**, and
 is the only thing that decides what the orchestrator spends.
 _Avoid_: current model, runtime model
 
+**Escalation**:
+Reaching for the most expensive model on purpose, for a decision the cheaper
+agents could not settle. An escalation is invoked, never left running: the same
+model idling as a session default spends the pool on ordinary turns.
+_Avoid_: upgrade, fallback, promotion
+
 **Anchor**:
 The single metered entry at a chain's end, paid per token — Zen `opencode/<paid-id>`
 or `deepseek/<id>`. It keeps the chain alive after every pooled tier is spent.
