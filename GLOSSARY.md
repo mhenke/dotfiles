@@ -162,7 +162,8 @@ _Avoid_: last resort, paygo fallback, backup
 
 **Pool**:
 One provider's shared allowance: Copilot's monthly AI credits, OpenAI's 5-hour
-and weekly windows, CommandCode's credit balance. Pools are billed and exhausted
-independently. A chain carries one entry per paid pool, but which pools a role
-reaches is decided by its **head** — the tail rarely runs.
-_Avoid_: quota, budget, plan (unqualified)
+and weekly windows, CommandCode's credit balance. A pool is spent by every model
+on it at once — its rolling windows are pool-wide, and a per-model allowance is a
+**ceiling on that model's draw**, never a separate budget. Three $20 allowances
+do not make $60.
+_Avoid_: quota, budget, plan (unqualified); per-model budget

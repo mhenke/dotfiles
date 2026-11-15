@@ -455,7 +455,7 @@
       "designer": {
         "model": [
           {"id": "github-copilot/gpt-6.1-sol", "variant": "medium"},
-          {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "medium"},
+          {"id": "commandcode/meta/muse-spark-1.3-contributor", "variant": "medium"},
           {"id": "opencode/gpt-6-luna", "variant": "low"}
         ],
         "temperature": 0.3,
@@ -474,8 +474,8 @@
       },
       "observer": {
         "model": [
+          {"id": "commandcode/meta/muse-spark-1.3-contributor", "variant": "low"},
           {"id": "github-copilot/gpt-6-luna", "variant": "low"},
-          "opencode/mimo-v2.6-flash-free",
           {"id": "opencode/gpt-6-luna", "variant": "low"}
         ],
         "temperature": 0.2,
@@ -622,8 +622,8 @@
         },
         "gamma": {
           "model": [
+            {"id": "commandcode/meta/muse-spark-1.3-contributor", "variant": "low"},
             {"id": "github-copilot/gpt-6-luna", "variant": "low"},
-            "opencode/mimo-v2.6-flash-free",
             {"id": "opencode/gpt-6-luna", "variant": "low"}
           ],
           "fallback_models": []
