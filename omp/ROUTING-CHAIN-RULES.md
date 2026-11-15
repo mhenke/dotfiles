@@ -125,26 +125,26 @@ Check live figures with `omp usage --json --provider <id> --redact`; per-model C
 
 ## Custom agents
 
-A custom agent needs three things; skipping any one leaves it silently inert or unregistered:
+A custom agent needs **four** things. The first three make it exist; the fourth makes it reachable.
 
 | Requirement | Where | Failure without it |
 |---|---|---|
-| `agents.<name>` entry | **top-level** `agents` record, not inside a preset | never inferred as custom (`src/config/utils.ts:79`) |
-| `model` array | same entry | agent skipped, warning only (`src/agents/index.ts:1188`) |
-| prompt file | `<config dir>/oh-my-opencode-slim/<name>.md` | agent runs with no system prompt |
+| `agents.<name>` entry | **top-level** `agents` record | never inferred as custom (`src/config/utils.ts:79`) |
+| `model` | same entry | agent skipped, warning only (`src/agents/index.ts:1188`) |
+| prompt file | `<config dir>/oh-my-opencode-slim/<name>.md` | runs with no system prompt |
+| `orchestratorPrompt` | same entry, or the preset entry | **the orchestrator never delegates to it** |
 
-The prompt directory is literally named `oh-my-opencode-slim` (`src/config/loader.ts:105`). A preset-scoped `<name>.md` under a preset subdirectory wins over the root one.
+That fourth one is easy to miss because nothing errors. `orchestratorPrompt` is what renders into the orchestrator's `<Agents>` routing block (`src/agents/index.ts:1489`), and the block lists only agents that supply one. An agent with a model and a prompt but no `orchestratorPrompt` registers, appears in `/api/agent`, and is never chosen.
 
-Upstream docs confirm the record: *"`agents.<customAgent>.model` — Required for custom agents inferred from unknown `agents` keys"* (`docs/configuration.md:335`).
+Verify by grepping the live prompt, not the config:
 
-**Two checks, because a schema pass proves neither.** `opencode reload` accepting the file only validates shape. Then:
+```bash
+opencode api GET /api/agent   | jq -r '.. | objects | select(.name=="orchestrator") | .system'   | grep -oE '^@[a-z-]+' | sort -u
+```
 
-- `opencode api GET /api/agent` must list the agent with a resolved `model`.
-- The same response's **`system`** field (not `prompt`) must carry the prompt text.
+Every dispatchable agent must appear. A schema pass proves nothing: it validates whether or not the agent is ever built, and says nothing about wiring.
 
-`skeptic` is a working counter-example to the record rule: it appears only as a preset key, yet registers as a `subagent` with its prompt loaded. Legal, but inconsistent with `archon`, so treat the top-level record as the convention and a preset-only key as the exception.
-
-Prompts use four labelled sections in this order, matching the built-ins in `src/agents/role-prompts.ts`: a `You are <Name> - <appositive>.` line, then **Role**, **Capabilities**, **Behavior**, **Constraints**.
+The block starts with `@<name>` and carries the shape the built-ins use: a lane line, a role line, `**Delegate when:**`, and `**Do not delegate when:**`.
 
 ### `archon`
 

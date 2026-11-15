@@ -20,7 +20,8 @@
         {"id": "opencode/gpt-6-luna", "variant": "high"}
       ],
       "temperature": 0.2,
-      "description": "Escalation tier for problems the normal agents could not settle: an architecture call that keeps getting reverted, a review that keeps missing the same class of bug, or a quality ceiling worth spending Opus on. Invoked deliberately, never left as the default."
+      "description": "Escalation tier for the decisions cheaper agents could not settle",
+      "orchestratorPrompt": "@archon\n- Lane: Escalation. The most expensive reasoning available, so reach for it rarely.\n- Role: Settle what the specialists could not. Architecture calls that keep getting reverted, reviews missing the same class of bug, trade-offs a cheaper model deferred.\n- **Delegate when:** two or more fix attempts have failed on the same problem • a long-term architecture decision is genuinely contested • the cost of being wrong clearly exceeds the cost of one frontier call.\n- **Do not delegate when:** routine or time-sensitive work • the problem fits @oracle or @skeptic directly • mechanical execution, which belongs to @fixer.'"
     }
   },
   "presets": {
@@ -107,7 +108,8 @@
           {"id": "opencode/deepseek-v4.1-flash-free", "variant": "high"},
           {"id": "commandcode/claude-sonnet-5-5", "variant": "high"},
           {"id": "opencode/claude-sonnet-5-5", "variant": "high"}
-        ]
+        ],
+        "orchestratorPrompt": "@skeptic\n- Lane: Adversarial review of a proposal before it earns a greenlight.\n- Role: Stress-test the idea, not its author. Steel-man it, name the failure conditions, compare realistic effort to assumed effort, then render a verdict.\n- **Delegate when:** a plan or architecture needs a go/no-go • an assumption is load-bearing and unproven • the user asks whether something is worth doing.\n- **Do not delegate when:** the proposal is already settled • the task is execution rather than judgement • a correctness review of shipped code, which belongs to @oracle."
       }
     },
     "nvidia-free": {
@@ -188,7 +190,8 @@
           "nvidia/mistralai/mistral-medium-3.5-128b",
           "nvidia/nvidia/nvidia-nemotron-nano-9b-v2"
         ],
-        "variant": "max"
+        "variant": "max",
+        "orchestratorPrompt": "@skeptic\n- Lane: Adversarial review of a proposal before it earns a greenlight.\n- Role: Stress-test the idea, not its author. Steel-man it, name the failure conditions, compare realistic effort to assumed effort, then render a verdict.\n- **Delegate when:** a plan or architecture needs a go/no-go • an assumption is load-bearing and unproven • the user asks whether something is worth doing.\n- **Do not delegate when:** the proposal is already settled • the task is execution rather than judgement • a correctness review of shipped code, which belongs to @oracle."
       }
     },
     "opencode-zen-free": {
@@ -221,7 +224,8 @@
       "skeptic": {
         "model": [
           "opencode/big-pickle"
-        ]
+        ],
+        "orchestratorPrompt": "@skeptic\n- Lane: Adversarial review of a proposal before it earns a greenlight.\n- Role: Stress-test the idea, not its author. Steel-man it, name the failure conditions, compare realistic effort to assumed effort, then render a verdict.\n- **Delegate when:** a plan or architecture needs a go/no-go • an assumption is load-bearing and unproven • the user asks whether something is worth doing.\n- **Do not delegate when:** the proposal is already settled • the task is execution rather than judgement • a correctness review of shipped code, which belongs to @oracle."
       }
     },
     "copilot": {
@@ -277,7 +281,8 @@
       },
       "skeptic": {
         "model": "github-copilot/claude-sonnet-5.5",
-        "variant": "high"
+        "variant": "high",
+        "orchestratorPrompt": "@skeptic\n- Lane: Adversarial review of a proposal before it earns a greenlight.\n- Role: Stress-test the idea, not its author. Steel-man it, name the failure conditions, compare realistic effort to assumed effort, then render a verdict.\n- **Delegate when:** a plan or architecture needs a go/no-go • an assumption is load-bearing and unproven • the user asks whether something is worth doing.\n- **Do not delegate when:** the proposal is already settled • the task is execution rather than judgement • a correctness review of shipped code, which belongs to @oracle."
       }
     },
     // Keep this team on the OpenAI subscription; no cross-provider fallbacks.
@@ -324,7 +329,8 @@
       },
       "skeptic": {
         "model": "openai/gpt-6.1-sol",
-        "variant": "high"
+        "variant": "high",
+        "orchestratorPrompt": "@skeptic\n- Lane: Adversarial review of a proposal before it earns a greenlight.\n- Role: Stress-test the idea, not its author. Steel-man it, name the failure conditions, compare realistic effort to assumed effort, then render a verdict.\n- **Delegate when:** a plan or architecture needs a go/no-go • an assumption is load-bearing and unproven • the user asks whether something is worth doing.\n- **Do not delegate when:** the proposal is already settled • the task is execution rather than judgement • a correctness review of shipped code, which belongs to @oracle."
       }
     },
     "z-ai": {
@@ -366,7 +372,8 @@
       "skeptic": {
         "model": [
           "nvidia/z-ai/glm-5.3"
-        ]
+        ],
+        "orchestratorPrompt": "@skeptic\n- Lane: Adversarial review of a proposal before it earns a greenlight.\n- Role: Stress-test the idea, not its author. Steel-man it, name the failure conditions, compare realistic effort to assumed effort, then render a verdict.\n- **Delegate when:** a plan or architecture needs a go/no-go • an assumption is load-bearing and unproven • the user asks whether something is worth doing.\n- **Do not delegate when:** the proposal is already settled • the task is execution rather than judgement • a correctness review of shipped code, which belongs to @oracle."
       }
     },
     "kimi-k3": {
@@ -430,7 +437,8 @@
       "skeptic": {
         "model": "github-copilot/kimi-k3",
         "temperature": 1,
-        "variant": "max"
+        "variant": "max",
+        "orchestratorPrompt": "@skeptic\n- Lane: Adversarial review of a proposal before it earns a greenlight.\n- Role: Stress-test the idea, not its author. Steel-man it, name the failure conditions, compare realistic effort to assumed effort, then render a verdict.\n- **Delegate when:** a plan or architecture needs a go/no-go • an assumption is load-bearing and unproven • the user asks whether something is worth doing.\n- **Do not delegate when:** the proposal is already settled • the task is execution rather than judgement • a correctness review of shipped code, which belongs to @oracle."
       }
     },
     "subscription": {
@@ -507,7 +515,8 @@
           {"id": "github-copilot/claude-sonnet-5.5", "variant": "high"},
           {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "high"},
           {"id": "deepseek/deepseek-flash", "variant": "low"}
-        ]
+        ],
+        "orchestratorPrompt": "@skeptic\n- Lane: Adversarial review of a proposal before it earns a greenlight.\n- Role: Stress-test the idea, not its author. Steel-man it, name the failure conditions, compare realistic effort to assumed effort, then render a verdict.\n- **Delegate when:** a plan or architecture needs a go/no-go • an assumption is load-bearing and unproven • the user asks whether something is worth doing.\n- **Do not delegate when:** the proposal is already settled • the task is execution rather than judgement • a correctness review of shipped code, which belongs to @oracle."
       }
     }
   },

@@ -163,6 +163,13 @@ global default, or inherited by a delegated agent. It outranks any **head**, and
 is the only thing that decides what the orchestrator spends.
 _Avoid_: current model, runtime model
 
+**Roster**:
+The orchestrator's list of agents it may delegate to, rendered into its prompt
+from each agent's `orchestratorPrompt`. An agent registers and runs without being
+on the roster; it is simply never chosen. Being reachable is a separate fact from
+existing.
+_Avoid_: registry, agent list, catalog
+
 **Escalation**:
 Reaching for the most expensive model on purpose, for a decision the cheaper
 agents could not settle. An escalation is invoked, never left running: the same
