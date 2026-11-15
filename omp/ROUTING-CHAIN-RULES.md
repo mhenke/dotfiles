@@ -23,6 +23,21 @@ Three models with $20 allowances do not give $60. They share the pool, each indi
 
 The consequence drives everything below: **compare models by cost per call, because every call comes from the same pool.** A cheaper model stretches it; a bigger allowance on an expensive model creates no more.
 
+## Pools outrun the traffic
+
+Every pool here is "use it or lose it", but they cannot all be spent — measured 20,450 calls/month against each pool's capacity at a viable model:
+
+| Pool | Capacity | vs traffic |
+|---|---|---|
+| Copilot @ `gpt-6.1-terra` | 17,544 calls | **0.9×** — saturable |
+| Copilot @ `gpt-6-luna` | 153,846 calls | 7.5× |
+| OpenAI Pro @ `gpt-6.1-sol` | 132,333 calls | 6.5× |
+| CommandCode @ `glm-5.3-flash` | 70,922 calls | 3.5× |
+
+Only Copilot at its expensive end can be filled, and that is arithmetic rather than preference: burning 20,000 credits on this call volume requires models near 1 cr/call. Together the pools supply ~212,000 calls against 20,450 of traffic — **10× oversupplied**.
+
+So the honest framing is not "spend every pool" but **which pool to leave unused**. Expiring credits cost nothing already prepaid; the real choice is the model quality each allocation buys. Prefer the arrangement that puts the strongest model in the highest-volume role, then let the remaining pools act as failure insurance.
+
 ## Chain order
 
 A chain advances only when the current entry **fails** — error, rate limit, or exhausted allowance. Never for being better. **The head decides what runs:** it executes almost every call, so the tail is insurance.
@@ -41,6 +56,8 @@ Both semantics come from `oh-my-opencode-slim/src/hooks/foreground-fallback/inde
 Classify per endpoint, not per provider: Zen serves free and paid ids, and CommandCode keeps zero-credit `:free` endpoints beside allowance-consuming ones.
 
 Three entries per chain: head, one alternate pool, one anchor. Longer tails are unreachable when the head runs most calls, and the paid-pool exclusion rule makes a fourth entry repeat a provider that is already out.
+
+Orchestrator is the deliberate exception, at four: `copilot/gpt-6.1-terra` → `openai/gpt-6.1-sol` → `commandcode/z-ai/glm-5.3-flash` → `opencode/gpt-6-luna`. At 49% of traffic it is the only chain whose descent is likely to reach a third entry, and each hop is a distinct provider, so none is excluded by a predecessor's failure. The CommandCode entry sits before the anchor rather than after Copilot so a Copilot exhaustion lands on a frontier model first.
 
 ## Assigning heads by volume
 
