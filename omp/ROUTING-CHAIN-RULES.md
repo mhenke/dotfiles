@@ -125,13 +125,26 @@ Check live figures with `omp usage --json --provider <id> --redact`; per-model C
 
 ## Custom agents
 
-A custom agent needs three things, and skipping any one makes it silently inert:
+A custom agent needs three things; skipping any one leaves it silently inert or unregistered:
 
-1. An entry in the **top-level `agents` record** of the slim config — not inside a preset. `agents.<name>` keys that are neither a built-in name nor an alias are treated as new agents (`src/config/utils.ts:79`).
-2. A **`model` array**. Without one the agent is skipped with a warning, unless `inheritModelFrom` is set (`src/agents/index.ts:1188`).
-3. A **prompt file** at `<config dir>/oh-my-opencode-slim/<name>.md`, or a preset-scoped `<config dir>/oh-my-opencode-slim/<preset>/<name>.md` which wins (`src/config/loader.ts:1078`). The directory is literally named `oh-my-opencode-slim`.
+| Requirement | Where | Failure without it |
+|---|---|---|
+| `agents.<name>` entry | **top-level** `agents` record, not inside a preset | never inferred as custom (`src/config/utils.ts:79`) |
+| `model` array | same entry | agent skipped, warning only (`src/agents/index.ts:1188`) |
+| prompt file | `<config dir>/oh-my-opencode-slim/<name>.md` | agent runs with no system prompt |
 
-Confirm with `opencode api GET /api/agent` and look for the agent's resolved `model`. A schema pass alone proves nothing — the config validates whether or not the agent is ever built.
+The prompt directory is literally named `oh-my-opencode-slim` (`src/config/loader.ts:105`). A preset-scoped `<name>.md` under a preset subdirectory wins over the root one.
+
+Upstream docs confirm the record: *"`agents.<customAgent>.model` — Required for custom agents inferred from unknown `agents` keys"* (`docs/configuration.md:335`).
+
+**Two checks, because a schema pass proves neither.** `opencode reload` accepting the file only validates shape. Then:
+
+- `opencode api GET /api/agent` must list the agent with a resolved `model`.
+- The same response's **`system`** field (not `prompt`) must carry the prompt text.
+
+`skeptic` is a working counter-example to the record rule: it appears only as a preset key, yet registers as a `subagent` with its prompt loaded. Legal, but inconsistent with `archon`, so treat the top-level record as the convention and a preset-only key as the exception.
+
+Prompts use four labelled sections in this order, matching the built-ins in `src/agents/role-prompts.ts`: a `You are <Name> - <appositive>.` line, then **Role**, **Capabilities**, **Behavior**, **Constraints**.
 
 ### `archon`
 
