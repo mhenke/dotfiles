@@ -164,11 +164,17 @@ is the only thing that decides what the orchestrator spends.
 _Avoid_: current model, runtime model
 
 **Roster**:
-The orchestrator's list of agents it may delegate to, rendered into its prompt
-from each agent's `orchestratorPrompt`. An agent registers and runs without being
-on the roster; it is simply never chosen. Being reachable is a separate fact from
-existing.
+The orchestrator's list of agents it may delegate to. An agent registers and runs
+without being on it; the orchestrator simply never chooses it. Being reachable is
+a separate fact from existing.
 _Avoid_: registry, agent list, catalog
+
+**Invoked**:
+An agent reached on purpose with `@name` rather than delegated to by the
+orchestrator. Keeping an agent invoked-only is a choice about who spends it, not
+a limitation: the escalation tier and the skeptic are paid for when the user
+decides a decision is worth the price.
+_Avoid_: manual, direct, ad-hoc
 
 **Escalation**:
 Reaching for the most expensive model on purpose, for a decision the cheaper

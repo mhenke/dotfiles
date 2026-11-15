@@ -125,30 +125,43 @@ Check live figures with `omp usage --json --provider <id> --redact`; per-model C
 
 ## Custom agents
 
-A custom agent needs **four** things. The first three make it exist; the fourth makes it reachable.
+A custom agent needs three things to exist, and `orchestratorPrompt` decides whether the orchestrator can reach it. Both are deliberate choices, not one best practice:
 
 | Requirement | Where | Failure without it |
 |---|---|---|
 | `agents.<name>` entry | **top-level** `agents` record | never inferred as custom (`src/config/utils.ts:79`) |
 | `model` | same entry | agent skipped, warning only (`src/agents/index.ts:1188`) |
 | prompt file | `<config dir>/oh-my-opencode-slim/<name>.md` | runs with no system prompt |
-| `orchestratorPrompt` | same entry, or the preset entry | **the orchestrator never delegates to it** |
 
-That fourth one is easy to miss because nothing errors. `orchestratorPrompt` is what renders into the orchestrator's `<Agents>` routing block (`src/agents/index.ts:1489`), and the block lists only agents that supply one. An agent with a model and a prompt but no `orchestratorPrompt` registers, appears in `/api/agent`, and is never chosen.
+**`orchestratorPrompt` puts an agent on the roster.** It renders into the orchestrator's `<Agents>` block (`src/agents/index.ts:1489`), and a block lists only agents that supply one. Omit it and the agent registers, runs, and is never chosen — reachable only when the user invokes it with `@name`.
 
-Verify by grepping the live prompt, not the config:
+That is the right shape for an agent the user reaches for deliberately. It is the wrong shape for one meant to be delegated to.
 
-```bash
-opencode api GET /api/agent   | jq -r '.. | objects | select(.name=="orchestrator") | .system'   | grep -oE '^@[a-z-]+' | sort -u
+**Blocking delegation as well, not just hiding it.** Omitting `orchestratorPrompt` keeps the agent out of the prompt but leaves the `task` tool able to call it. Add it to the orchestrator's allowlist to make the refusal structural:
+
+```jsonc
+"agents": {
+  "orchestrator": {
+    "subagents": ["explorer", "oracle", "designer", "fixer", "observer", "council"]
+  }
+}
 ```
 
-Every dispatchable agent must appear. A schema pass proves nothing: it validates whether or not the agent is ever built, and says nothing about wiring.
+The list compiles into the `task` permission stance and renders the scoped catalog (`src/agents/index.ts:1396`). Anything absent is not delegatable, whatever the prompt says.
 
-The block starts with `@<name>` and carries the shape the built-ins use: a lane line, a role line, `**Delegate when:**`, and `**Do not delegate when:**`.
+Verify from the live prompt, never from the config:
+
+```bash
+opencode api GET /api/agent \
+  | jq -r '.. | objects | select(.name=="orchestrator") | .system' \
+  | grep -oE '^@[a-z-]+' | sort -u
+```
+
+A schema pass proves nothing: it validates whether or not the agent is built, and says nothing about wiring.
 
 ### `archon`
 
-The escalation tier, invoked deliberately rather than by default: `github-copilot/claude-opus-5.5` → `openai/gpt-6-astra` → `commandcode/z-ai/glm-5.3-flash` → `opencode/gpt-6-luna`, all at `high`.
+The escalation tier, off the roster and invoked only with `@archon`: `github-copilot/claude-opus-5.5` → `openai/gpt-6-astra` → `commandcode/z-ai/glm-5.3-flash` → `opencode/gpt-6-luna`, all at `high`.
 
 It exists because a frontier model left pinned as the session default spends the pool on ordinary turns. Measured 2026-11-15: Opus on orchestrator was 7.7% of its calls but **6,746 credits, 34% of the monthly pool**. The same model, reached on purpose for a decision that smaller agents could not settle, is worth that price; idling on it is not. Astra takes the OpenAI slot as the highest tier there, noting `gpt-6.1-sol` has the larger context (628k against 400k) when length matters more than depth.
 
