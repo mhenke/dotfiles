@@ -51,6 +51,10 @@ hosts.yml
 
 # Custom additions for sensitive files and local configurations
 *.local
+# `*.local` also matches a directory named .local; the omp stow package tracks one wrapper there
+!omp/.local/
+!omp/.local/bin/
+!omp/.local/bin/omp-te
 .npmrc
 .env
 .env.*

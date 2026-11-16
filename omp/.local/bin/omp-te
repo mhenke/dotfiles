@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Omp lacks Pi's --no-mcp flag; use isolated settings with the user's credential database.
+set -euo pipefail
+agent_dir=$(mktemp -d "${TMPDIR:-/tmp}/te-omp.XXXXXXXX")
+trap 'rm -rf "$agent_dir"' EXIT
+for f in auth.json models.yml agent.db; do
+  [[ -f "$HOME/.omp/agent/$f" ]] || { echo "Missing omp $f" >&2; exit 1; }
+  ln -s "$HOME/.omp/agent/$f" "$agent_dir/$f"
+done
+printf 'mcp:\n  enableProjectConfig: false\n' > "$agent_dir/config.yml"
+export PI_CODING_AGENT_DIR="$agent_dir"
+unset OMP_PROFILE PI_PROFILE PI_CONFIG_DIR PI_CONFIG_FILES
+args=()
+while (($#)); do
+  case "$1" in
+    --) args+=("$@"); break ;;
+    --no-prompt-templates|--offline|--no-mcp) ;;
+    *) args+=("$1") ;;
+  esac
+  shift
+done
+omp "${args[@]}"
