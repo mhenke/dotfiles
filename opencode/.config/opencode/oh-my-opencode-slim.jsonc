@@ -630,6 +630,7 @@
           "model": [
             {"id": "openai/gpt-6.1-sol", "variant": "high"},
             {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
+            {"id": "opencode/big-pickle"},
             {"id": "opencode/gpt-6-luna", "variant": "high"}
           ],
           "fallback_models": []
@@ -638,6 +639,7 @@
           "model": [
             {"id": "github-copilot/claude-sonnet-5.5", "variant": "high"},
             {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "high"},
+            {"id": "opencode/deepseek-v4.1-flash-free"},
             {"id": "deepseek/deepseek-flash", "variant": "low"}
           ],
           "fallback_models": []
@@ -646,6 +648,7 @@
           "model": [
             {"id": "commandcode/meta/muse-spark-1.3-contributor", "variant": "low"},
             {"id": "github-copilot/gpt-6-luna", "variant": "low"},
+            {"id": "opencode/mimo-v2.6-flash-free"},
             {"id": "opencode/gpt-6-luna", "variant": "low"}
           ],
           "fallback_models": []
