@@ -26,7 +26,7 @@ That last point decides the design. Optimising a chain's tail optimises the part
 
 **Repetition follows the failure mode**, not a diversity rule:
 
-- A spent allowance (`quota exceeded`, `usage limit reached`) excludes the failing provider for the rest of the descent, so a paid provider earns exactly one entry.
+- A spent allowance (`quota exceeded`, `usage limit reached`) excludes the failing provider for the rest of the descent, so a subscription provider earns exactly one entry.
 - Free-tier exhaustion (`Free usage exceeded`) is classified as permanent billing — it fails over immediately and excludes nothing — so free entries may repeat, including free Zen before a Zen anchor.
 
 **Spend doctrine differs per pool.** Copilot and OpenAI buy quality: use the model that best fits the role and accept fast burn when the role justifies it. CommandCode buys reach: prefer boosted models (GLM-5.3 Flash, DeepSeek V4.1 Flash carry $100 each) over $10-allowance premium models.
@@ -35,7 +35,7 @@ That last point decides the design. Optimising a chain's tail optimises the part
 
 - **Keep free-first (ADR-0001, updated for current models).** Rejected: the measurement shows the head decides what runs, so free-first puts the weakest model in the only position that reliably executes.
 - **Order by price, cheapest first.** Rejected: a cheap model that fails and retries costs more than a capable one that succeeds once.
-- **Maximise provider diversity per hop.** Rejected: the chain is failure-driven, not capability-driven, so a repeated free entry buys a retry while a repeated paid provider buys nothing.
+- **Maximise provider diversity per hop.** Rejected: the chain is failure-driven, not capability-driven, so a repeated free entry buys a retry while a repeated subscription provider buys nothing.
 
 ## Consequences
 

@@ -44,7 +44,7 @@ Only **53% of traffic is allocatable** by a preset: 34,951 of 66,000 calls are s
 | OpenAI Pro @ `gpt-6.1-sol` | 132,333 calls | 11× |
 | CommandCode @ `glm-5.3-flash` | 70,922 calls | 6× |
 
-The paid pools supply ~374,000 calls against 11,549 the preset can direct — **32× oversupplied**. So the framing is not "spend every pool" but **which pool to leave unused**, and expiring prepaid credits cost nothing. Prefer the arrangement that puts the strongest model on the least mechanical work, and let the rest act as failure insurance.
+The subscription pools supply ~374,000 calls against 11,549 the preset can direct — **32× oversupplied**. So the framing is not "spend every pool" but **which pool to leave unused**, and expiring prepaid credits cost nothing. Prefer the arrangement that puts the strongest model on the least mechanical work, and let the rest act as failure insurance.
 
 ## Chain order
 
@@ -63,13 +63,13 @@ Order by what the role needs:
 - **Mechanical roles** — explorer, observer — lead free or near-free; the work is bounded.
 - **One paygo anchor last**, the cheapest model that still fits the role.
 
-**Repetition follows the failure mode.** A spent allowance (`quota exceeded`, `usage limit reached`) excludes the failing provider for the rest of the descent, so a paid provider earns **one** entry: a second Copilot or OpenAI slot is unreachable. Free-tier exhaustion (`Free usage exceeded`) is classified as permanent billing instead — it fails over immediately and excludes nothing — so **free entries repeat freely**. Free Zen, free Zen, then the Zen paygo anchor is a valid shape and a cheap one.
+**Repetition follows the failure mode.** A spent allowance (`quota exceeded`, `usage limit reached`) excludes the failing provider for the rest of the descent, so a subscription provider earns **one** entry: a second Copilot or OpenAI slot is unreachable. Free-tier exhaustion (`Free usage exceeded`) is classified as permanent billing instead — it fails over immediately and excludes nothing — so **free entries repeat freely**. Free Zen, free Zen, then the Zen paygo anchor is a valid shape and a cheap one.
 
 Both semantics come from `oh-my-opencode-slim/src/hooks/foreground-fallback/index.ts`.
 
 Classify per endpoint, not per provider: Zen serves free and paid ids, and CommandCode keeps zero-credit `:free` endpoints beside allowance-consuming ones.
 
-Three entries per chain: head, one alternate pool, one anchor. Longer tails are unreachable when the head runs most calls, and the paid-pool exclusion rule makes a fourth entry repeat a provider that is already out.
+Three entries per chain: head, one alternate pool, one anchor. Longer tails are unreachable when the head runs most calls, and the subscription-pool exclusion rule makes a fourth entry repeat a provider that is already out.
 
 Orchestrator is the deliberate exception, at four: `copilot/gpt-6.1-terra` → `openai/gpt-6.1-sol` → `commandcode/z-ai/glm-5.3-flash` → `opencode/gpt-6-luna`. Because its array is a fallback list, these are the four places the session model lands *after* a failure, in order. Each hop is a distinct provider, so a predecessor's failure excludes none of the rest, and a Copilot exhaustion lands on frontier rather than degrading to free.
 
@@ -170,7 +170,7 @@ It exists because a frontier model left pinned as the session default spends the
 The council agent synthesizes; seats alpha/beta/gamma mirror oracle/skeptic/observer, byte-identical. Keep the council preset name in step with the active preset. Two constraints:
 
 - Every model in the observer chain handles images.
-- Oracle, skeptic, and observer take **distinct heads**, so the three verdicts do not rest on one model. Full disjointness is unreachable: three roles of three entries over four usable pools needs nine distinct models, while the paid-entry rule allows one per provider. Distinct heads is the part that matters.
+- Oracle, skeptic, and observer take **distinct heads**, so the three verdicts do not rest on one model. Full disjointness is unreachable: three roles of three entries over four usable pools needs nine distinct models, while the one-entry-per-subscription-provider rule allows one per provider. Distinct heads is the part that matters.
 
 ## Model evidence
 

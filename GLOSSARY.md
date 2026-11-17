@@ -200,3 +200,22 @@ per model (CommandCode ranges $10–$100), it constrains a model rather than
 funding it: the pool remains the only budget, which is why a cheaper model
 stretches a month and a larger allowance on an expensive one does not.
 _Avoid_: per-model budget, sub-quota, separate pool
+
+**Subscription provider**:
+A provider whose models draw on a finite **pool** that resets on a window —
+Copilot monthly, OpenAI's 5-hour and weekly, CommandCode's credit balance.
+Spending it excludes the provider for the rest of a **descent**, which is why it
+earns one entry per **chain**: a second entry from the same pool is unreachable.
+_Avoid_: paid provider, paid pool, quota provider
+
+**Metered provider**:
+A provider billed per token with no pool to exhaust — Zen paygo and DeepSeek.
+It never excludes itself, so it is what an **Anchor** is made of. Cost per call
+is the only constraint; there is no allowance to spend.
+_Avoid_: paygo, paid provider, per-token provider
+
+**Free tier**:
+Models billed to nobody. Their exhaustion is classified as a billing failure,
+not a spent allowance: it fails over and excludes nothing, so free entries
+repeat freely in one chain.
+_Avoid_: free provider, free plan

@@ -35,14 +35,14 @@ Four measurements taken 2026-11-15 show the pools are not interchangeable, and t
 
 A preset is static configuration for a whole billing cycle, so head assignments must be affordable on the cycle's average, not on one exhausted day.
 
-The one-entry-per-paid-provider rule from ADR-0005 stands; this ADR changes *which* provider heads *which* role, not how a descent works.
+The one-entry-per-subscription-provider rule from ADR-0005 stands; this ADR changes *which* provider heads *which* role, not how a descent works.
 
 ## Alternatives Considered
 
 - **Keep ADR-0005's split (Copilot/OpenAI quality, CommandCode reach).** Rejected: measured OpenAI burn rate shows it cannot carry five roles, and Copilot's credit spread makes frontier models there 20× expensive.
 - **Head every role on CommandCode's boosted models.** Rejected: it is the deepest pool, but concentrating all roles on one provider leaves the whole team dependent on a $10/mo plan's 5-hour window.
 - **Drop Copilot until it resets.** Rejected: a preset is static configuration for a whole billing cycle, so removing Copilot to match one exhausted day leaves the renewed pool idle all of December. The correct response to exhaustion is to size the per-call price so the budget lasts the cycle.
-- **Retain six-entry chains as deeper insurance.** Rejected: with the head running most calls, a fourth entry is unreachable, and a repeated paid provider is unreachable by the exclusion rule.
+- **Retain six-entry chains as deeper insurance.** Rejected: with the head running most calls, a fourth entry is unreachable, and a repeated subscription provider is unreachable by the exclusion rule.
 
 ## Consequences
 
