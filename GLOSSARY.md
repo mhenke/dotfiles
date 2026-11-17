@@ -217,5 +217,8 @@ _Avoid_: paygo, paid provider, per-token provider
 **Free tier**:
 Models billed to nobody. Their exhaustion is classified as a billing failure,
 not a spent allowance: it fails over and excludes nothing, so free entries
-repeat freely in one chain.
+repeat freely in one chain. Free tier is a **cost shield**, and where it sits
+says which cost it shields: before the metered anchor it protects real money;
+in a head position it protects the subscription pools as well, at the price of
+a weaker answer.
 _Avoid_: free provider, free plan

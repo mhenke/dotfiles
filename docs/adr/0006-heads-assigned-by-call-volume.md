@@ -4,6 +4,13 @@
 
 Accepted 2026-11-15. Amends [ADR-0005](0005-chain-order-by-capability.md), whose spend doctrine it replaces.
 
+> **Partly out of date as of 2026-11-17.** The rule — assign heads by call
+> volume — still holds. The individual assignments in this ADR do not: the
+> orchestrator has since headed Copilot, and chains now carry a free entry
+> before the metered anchor (head → subscription → free tier → metered), so the
+> "three entries" line below is wrong. [ROUTING-CHAIN-RULES.md](../../omp/ROUTING-CHAIN-RULES.md)
+> is authoritative for the current chains.
+
 ## Context
 
 ADR-0005 ordered chains by role capability and split the pools by intent: Copilot and OpenAI "buy quality" and should be spent freely, CommandCode "buys reach" and should be stretched. That split assumed the pools were interchangeable, differing only in how much we cared about the price.

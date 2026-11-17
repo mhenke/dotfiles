@@ -442,6 +442,7 @@
           {"id": "github-copilot/gpt-6.1-terra", "variant": "high"},
           {"id": "openai/gpt-6.1-sol", "variant": "high"},
           {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
+          {"id": "opencode/big-pickle"},
           {"id": "opencode/gpt-6-luna", "variant": "high"}
         ],
         "temperature": 0.4,
@@ -452,6 +453,7 @@
         "model": [
           {"id": "openai/gpt-6.1-sol", "variant": "high"},
           {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
+          {"id": "opencode/big-pickle"},
           {"id": "opencode/gpt-6-luna", "variant": "high"}
         ],
         "temperature": 0.4,
@@ -472,6 +474,7 @@
         "model": [
           {"id": "github-copilot/gpt-6.1-sol", "variant": "high"},
           {"id": "commandcode/meta/muse-spark-1.3-contributor", "variant": "high"},
+          {"id": "opencode/glm-5.3-flash-free"},
           {"id": "opencode/gpt-6-luna", "variant": "low"}
         ],
         "temperature": 0.3,
@@ -492,6 +495,7 @@
         "model": [
           {"id": "commandcode/meta/muse-spark-1.3-contributor", "variant": "low"},
           {"id": "github-copilot/gpt-6-luna", "variant": "low"},
+          {"id": "opencode/mimo-v2.6-flash-free"},
           {"id": "opencode/gpt-6-luna", "variant": "low"}
         ],
         "temperature": 0.2,
@@ -502,6 +506,7 @@
         "model": [
           {"id": "openai/gpt-6.1-sol", "variant": "high"},
           {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
+          {"id": "opencode/glm-5.3-flash-free"},
           {"id": "opencode/gpt-6-luna", "variant": "high"}
         ]
       },
@@ -509,6 +514,7 @@
         "model": [
           {"id": "github-copilot/claude-sonnet-5.5", "variant": "high"},
           {"id": "commandcode/deepseek/deepseek-v4.1-flash", "variant": "high"},
+          {"id": "opencode/deepseek-v4.1-flash-free"},
           {"id": "deepseek/deepseek-flash", "variant": "low"}
         ]
       }

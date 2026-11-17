@@ -61,7 +61,7 @@ Order by what the role needs:
 - **Judgment roles** — oracle, council, skeptic, designer — lead frontier. Few calls each, and quality changes the answer.
 - **Volume roles** — fixer, build — lead a cheap model on a deep allowance. They carry the traffic, and a frontier head would drain a message window in hours.
 - **Mechanical roles** — explorer, observer — lead free or near-free; the work is bounded.
-- **One paygo anchor last**, the cheapest model that still fits the role.
+- **One metered anchor last**, preceded by a free entry, so the only per-token entry is reached solely when the free tier has already failed.
 
 **Repetition follows the failure mode.** A spent allowance (`quota exceeded`, `usage limit reached`) excludes the failing provider for the rest of the descent, so a subscription provider earns **one** entry: a second Copilot or OpenAI slot is unreachable. Free-tier exhaustion (`Free usage exceeded`) is classified as permanent billing instead — it fails over immediately and excludes nothing — so **free entries repeat freely**. Free Zen, free Zen, then the Zen paygo anchor is a valid shape and a cheap one.
 
@@ -69,9 +69,13 @@ Both semantics come from `oh-my-opencode-slim/src/hooks/foreground-fallback/inde
 
 Classify per endpoint, not per provider: Zen serves free and paid ids, and CommandCode keeps zero-credit `:free` endpoints beside allowance-consuming ones.
 
-Three entries per chain: head, one alternate pool, one anchor. Longer tails are unreachable when the head runs most calls, and the subscription-pool exclusion rule makes a fourth entry repeat a provider that is already out.
+Four entries per chain, in cost order after the head: **head → subscription alternate → free tier → metered anchor.**
 
-Orchestrator is the deliberate exception, at four: `copilot/gpt-6.1-terra` → `openai/gpt-6.1-sol` → `commandcode/z-ai/glm-5.3-flash` → `opencode/gpt-6-luna`. Because its array is a fallback list, these are the four places the session model lands *after* a failure, in order. Each hop is a distinct provider, so a predecessor's failure excludes none of the rest, and a Copilot exhaustion lands on frontier rather than degrading to free.
+The order is the point. A head that suits the role runs nearly every call. Behind it, subscription pools are already paid for, so they go next. Free entries cost nothing and exist to keep work off the metered pool — an entry is only reached after everything ahead of it fails, so a free step there is free insurance that pays for itself the first time a subscription pool is spent. The metered anchor is last because it is the only entry that bills per token.
+
+**Free tier is a cost shield, and its position says which cost it shields.** Immediately before the metered anchor it protects real money. At the head of a mechanical role — explorer, fixer — it protects the subscription pools as well, because the traffic never reaches a paid tier at all. That is the whole difference between the presets: `subscription` pays for judgment heads and shields the tail; `balanced` heads everything on free, so it minimises subscription spend too and accepts weaker answers.
+
+What free tier must not do is head a judgment role. Measured over 65,774 steps, free-first left subscriptions at 18.7% of steps while the head ran nearly everything — the weakest model sat in the only position that reliably executes.
 
 ## Assigning heads by volume
 
