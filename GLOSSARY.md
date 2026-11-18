@@ -210,11 +210,32 @@ one.
 _Avoid_: preset (when the seats are meant), council config
 
 **Chain**:
-One agent's ordered model list. It advances only on failure. What the list *is*
-depends on the agent: for a **subagent** it is a head plus fallbacks, because the
-first entry becomes that agent's launch model; for the **orchestrator** it is a
-fallback list only, because its live session model leads instead.
+One agent's ordered model list. It advances when the current entry fails in a way
+another entry could survive — the model is spent, unavailable, or refusing work it
+could do elsewhere. A failure every entry would reproduce, such as a malformed
+request, stops the chain instead. What the list *is* depends on the agent: for a
+**subagent** it is a head plus fallbacks, because the first entry becomes that
+agent's launch model; for the **orchestrator** it is a fallback list only, because
+its live session model leads instead.
 _Avoid_: fallback list, cascade, stack (unqualified)
+
+**Model setting**:
+A value an agent sends with every request — `temperature`, `variant` — not a
+property of the chain. The same value goes to whichever model runs, and models
+treat it one of three ways: they **honour** it, they ignore it silently, or they
+**reject** it. Configuration cannot express the difference, so a chain is only as
+permissive as its strictest model, and a setting must satisfy every entry it may
+reach.
+_Avoid_: parameter, option, config
+
+**Rejected setting**:
+A model refusing a **model setting** the agent always sends, answered as a
+validation error. This is a hard error rather than a **chain** failure: no provider
+is excluded and no fallback runs, because the next entry would refuse the same
+request. The remedy is to send the setting only where it is honoured. Distinct from
+an *inert* setting, which the model accepts and ignores, and from a **spent
+allowance**, which advances the chain.
+_Avoid_: config error, invalid request
 
 **Head**:
 The first model in a **chain**, and it binds only when the agent's model is set
