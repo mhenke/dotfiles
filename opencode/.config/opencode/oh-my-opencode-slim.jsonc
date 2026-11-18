@@ -22,7 +22,6 @@
         {"id": "commandcode/z-ai/glm-5.3-flash", "variant": "high"},
         {"id": "opencode/gpt-6-luna", "variant": "high"}
       ],
-      "temperature": 0.2,
       "description": "Escalation tier for the decisions cheaper agents could not settle"
     }
   },
@@ -445,7 +444,6 @@
           {"id": "opencode/big-pickle"},
           {"id": "opencode/gpt-6-luna", "variant": "high"}
         ],
-        "temperature": 0.4,
         "skills": ["*"],
         "mcps": ["*", "!context7"]
       },
@@ -456,7 +454,6 @@
           {"id": "opencode/big-pickle"},
           {"id": "opencode/gpt-6-luna", "variant": "high"}
         ],
-        "temperature": 0.4,
         "skills": ["simplify"],
         "mcps": []
       },
@@ -477,7 +474,6 @@
           {"id": "opencode/glm-5.3-flash-free"},
           {"id": "opencode/gpt-6-luna", "variant": "low"}
         ],
-        "temperature": 0.3,
         "skills": [],
         "mcps": []
       },
