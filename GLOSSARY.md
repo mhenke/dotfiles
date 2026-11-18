@@ -102,27 +102,68 @@ _Avoid_: background, bg, theme
 
 **SDDM theme variant**:
 One complete login-screen appearance — background image, main and accent colors,
-header text, form position — selected by slug such as `lofi-cafe` or
-`mecha-nostalgia`. The slug is the name; the header text is content, so
-"VIBE CODE HAVEN" is `lofi-cafe`, not a variant called *vibe coding haven*.
+header text, form position — selected by slug such as `lofi-chill-room2` or
+`staircase`. The slug is the name; the header text is content, so
+"VIBE CODE HAVEN" is `lofi-chill-room2`, not a variant called *vibe coding haven*.
 _Avoid_: theme, login theme, preset, skin
 
 **Header text**:
-The greeting line a login-screen variant draws. It is display copy, never an
-identifier.
+The greeting or slogan shared by a look's login and lock screens. It is display
+copy, never an identifier.
 _Avoid_: title, name
 
 **Look**:
-A login-screen variant plus the same image on the desktop, applied by one
-command. The surfaces stay independent underneath; a look is a deliberate
-shortcut across two of them, using the variant's own background image when the
-wallpaper folder holds no copy.
+A coordinated appearance spanning the login screen, lock screen, and desktop,
+with a matching image and complementary colors. Applying a look selects these
+appearances together without making the display surfaces interchangeable.
 _Avoid_: theme, preset, mode
 
+### Startup & placement
+
+**Autostart entry**:
+One line in `Startup_Apps.conf` that launches something at session start.
+It runs once per boot; a window rule in the entry applies to the **first**
+window the app maps, and later launches of the same app join the running
+instance instead, landing on whatever workspace is focused.
+_Avoid_: startup command, startup app
+
+**Workspace placement**:
+The bracket prefix on an autostart entry — `[workspace N silent]` — that
+decides which workspace a first window opens on, without focusing it. It
+binds at window-map time; it does not follow later launches of the same app.
+_Avoid_: workspace rule (that means the `workspace =` lines), assignment
+
+**Monitor-bound workspace**:
+A workspace whose `workspaces.conf` entry pins it to a named monitor. When
+that monitor is absent the workspace still exists — it falls back to a
+connected display, which is how autostart keeps working across dock states.
+_Avoid_: workspace rule, monitor assignment
+
+**Monitor profile**:
+One saved monitor-and-workspace arrangement — `laptop-only`, `docked-dual`,
+`default` — that can be applied wholesale. Applying a profile rewrites the
+live monitor and workspace files and reloads Hyprland.
+_Avoid_: layout, mode, display setup
+
+**Active config**:
+The one file Hyprland actually parses at session start — currently
+`hyprland.lua`, chosen because the `.conf` format is being removed. There is
+exactly one; the other candidate config is dead. Editing the dead one has no
+effect and is a real trap, since both still live side by side.
+_Avoid_: main config, primary config, config file (unqualified)
+
+**Retired config**:
+`hyprland.conf`: parses nothing anymore. It still reads like the config of
+record — its `source=` lines list every user file — but the active config
+duplicates the paths that matter (startup apps, environment, monitors,
+workspaces, keybinds). Kept for reference during the lua migration; do not
+edit it expecting change.
+_Avoid_: old config, backup config
+
 **Palette**:
-The color set derived from the current desktop wallpaper and pushed into
-terminal, bar, launcher, and notification styling. Regenerated when the wallpaper
-is applied; independent of any SDDM theme variant.
+The desktop and application color set associated with a wallpaper and mode.
+Each wallpaper has its own palette, which can be reused; login- and lock-screen
+colors are separate choices.
 _Avoid_: theme, colorscheme, wallpaper colors
 
 **Mode**:
@@ -140,8 +181,33 @@ _Avoid_: theme (bare)
 
 **Preset**:
 A named set of per-agent **chains**. `subscription` is the synthesized-subscription
-team; `balanced` is the older default.
+team; `balanced` is the older default. The word covers two independent selections:
+a preset chooses the **roles**, and a **council preset** chooses the **seats**.
+They are chosen separately and can name different presets at once, so the seats do
+not follow the roles.
 _Avoid_: profile, config, team
+
+**Role**:
+One agent's slot in a **preset** — orchestrator, oracle, designer. A role is
+configuration; the **agent** of the same name is the thing that runs. The same
+name can be both, and a role can stay in use while its agent is off the
+**roster**, reached only because it is **invoked**.
+_Avoid_: agent (when the slot is meant), persona
+
+**Seat**:
+A councillor's slot in a **council preset** — alpha, beta, gamma. A seat is the
+council's counterpart of a **role**, and the two are kept in step by convention
+rather than by configuration: alpha mirrors oracle, beta mirrors skeptic, gamma
+mirrors observer. Nothing enforces it, so a change to a role's **chain** has to
+be mirrored in its seat or the two silently disagree.
+_Avoid_: councillor (when the slot is meant), member
+
+**Council preset**:
+A named set of **seats**, selected independently of the **preset** that supplies
+the **roles**. `subscription` exists as both, and picking one without the other
+leaves the council running another preset's seats while the roles run the new
+one.
+_Avoid_: preset (when the seats are meant), council config
 
 **Chain**:
 One agent's ordered model list. It advances only on failure. What the list *is*
@@ -153,8 +219,9 @@ _Avoid_: fallback list, cascade, stack (unqualified)
 **Head**:
 The first model in a **chain**, and it binds only when the agent's model is set
 from the chain — which is true of subagents and never of the orchestrator, whose
-session model leads and whose chain is consulted on failure. A "head" chosen for
-the orchestrator in a preset therefore changes nothing until something fails.
+**session model** leads and whose chain is consulted on failure. An orchestrator
+entry is therefore never a head, whatever position it occupies. Calling the first
+one a head is what makes its array look like a running model.
 _Avoid_: primary, default model
 
 **Session model**:

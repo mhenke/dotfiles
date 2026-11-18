@@ -6,7 +6,7 @@ Accepted 2026-11-15. Amends [ADR-0005](0005-chain-order-by-capability.md), whose
 
 > **Partly out of date as of 2026-11-17.** The rule — assign heads by call
 > volume — still holds. The individual assignments in this ADR do not: the
-> orchestrator has since headed Copilot, and chains now carry a free entry
+> orchestrator's first chain entry has since been Copilot, and chains now carry a free entry
 > before the metered anchor (head → subscription → free tier → metered), so the
 > "three entries" line below is wrong. [ROUTING-CHAIN-RULES.md](../../omp/ROUTING-CHAIN-RULES.md)
 > is authoritative for the current chains.

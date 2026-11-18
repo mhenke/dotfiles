@@ -52,7 +52,7 @@ A chain advances only when the current entry **fails** — error, rate limit, or
 
 **The orchestrator has no head.** Its array is a fallback list only, and this is deliberate upstream (`src/agents/index.ts:203`, #9100e59 / #639): `config.model` stays undefined for the orchestrator so a live `/model` selection survives the plugin re-inits that fire on every subagent dispatch. `foreground-fallback` then lets the session model lead the descent, with the configured entries backing it (`index.ts:4439`).
 
-So for the orchestrator, **the session model decides what runs**; slot 0 is the first thing tried after it fails. Choosing an orchestrator "head" in the preset changes nothing until a failure. Measured over the last month, its actual models were `copilot/claude-haiku-5.5` 42.3%, `xiaomi/mimo-v2.6-pro` 19.6%, `beam-free` 15.0% — none of them a configured entry.
+So for the orchestrator, **the session model decides what runs**; slot 0 is the first thing tried after it fails. Setting that first entry changes nothing until a failure. Measured over the last month, its actual models were `copilot/claude-haiku-5.5` 42.3%, `xiaomi/mimo-v2.6-pro` 19.6%, `beam-free` 15.0% — none of them a configured entry.
 
 Subagents are different: they are ephemeral, so `config.model` is set to the array's first entry at launch and the rest stay as the fallback chain (`src/agents/registry.ts:174`). **Their heads bind.**
 
