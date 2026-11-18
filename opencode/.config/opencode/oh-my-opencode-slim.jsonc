@@ -49,7 +49,6 @@
           {"id": "commandcode/gpt-6.1-sol", "variant": "high"},
           {"id": "opencode/gpt-6.1-sol", "variant": "high"}
         ],
-        "temperature": 0.4,
         "skills": [
           "simplify"
         ],
@@ -61,7 +60,6 @@
           {"id": "commandcode/google/gemini-4-argon", "variant": "medium"},
           {"id": "opencode/gemini-4-argon", "variant": "medium"}
         ],
-        "temperature": 0.3,
         "skills": [],
         "mcps": []
       },
@@ -374,7 +372,6 @@
     "kimi-k3": {
       "orchestrator": {
         "model": "github-copilot/kimi-k3",
-        "temperature": 1,
         "variant": "max",
         "skills": [
           "*"
@@ -386,7 +383,6 @@
       },
       "oracle": {
         "model": "github-copilot/kimi-k3",
-        "temperature": 1,
         "variant": "max",
         "skills": [
           "simplify"
@@ -395,7 +391,6 @@
       },
       "explorer": {
         "model": "github-copilot/kimi-k3",
-        "temperature": 1,
         "variant": "max",
         "skills": [],
         "mcps": [
@@ -405,33 +400,28 @@
       },
       "designer": {
         "model": "github-copilot/kimi-k3",
-        "temperature": 1,
         "variant": "max",
         "skills": [],
         "mcps": []
       },
       "fixer": {
         "model": "github-copilot/kimi-k3",
-        "temperature": 1,
         "variant": "max",
         "skills": [],
         "mcps": []
       },
       "observer": {
         "model": "github-copilot/kimi-k3",
-        "temperature": 1,
         "variant": "max",
         "skills": [],
         "mcps": []
       },
       "council": {
         "model": "github-copilot/kimi-k3",
-        "temperature": 1,
         "variant": "max"
       },
       "skeptic": {
         "model": "github-copilot/kimi-k3",
-        "temperature": 1,
         "variant": "max"
       }
     },
