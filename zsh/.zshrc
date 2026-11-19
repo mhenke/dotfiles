@@ -71,6 +71,16 @@ alias cpaste='~/bin/clip2path'
 alias monitor-switch='~/.config/hypr/scripts/monitor-switch.sh'
 alias monitor-profiles='~/.config/hypr/scripts/MonitorProfiles.sh'
 
+# Apply the login theme before matching the desktop and lock screen.
+function theme() {
+    if (( $# != 1 )) || [[ -z "$1" || "$1" == -* ]]; then
+        print -u2 'Usage: theme <name> (list: ~/dotfiles/sddm-themes/switch-theme.sh --list)'
+        return 2
+    fi
+    local switcher="$HOME/dotfiles/sddm-themes/switch-theme.sh"
+    sudo "$switcher" "$1" && "$switcher" --desktop "$1"
+}
+
 export PATH=$HOME/.local/bin:$PATH
 
 . "$HOME/.local/bin/env"

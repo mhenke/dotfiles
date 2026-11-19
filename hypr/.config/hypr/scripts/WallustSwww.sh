@@ -1,39 +1,38 @@
 #!/bin/bash
 # /* ---- 💫 https://github.com/JaKooLit 💫 ---- */  ##
-# Wallust Colors for current wallpaper
+# Resolve image identity before replacing pointers, including on startup reloads.
 
-# Define the path to the swww cache directory
-cache_dir="$HOME/.cache/swww/"
-
-# Get a list of monitor outputs
-monitor_outputs=($(ls "$cache_dir"))
-
-# Initialize a flag to determine if the ln command was executed
-ln_success=false
-
-# Get current focused monitor
 current_monitor=$(hyprctl monitors | awk '/^Monitor/{name=$2} /focused: yes/{print name}')
-echo $current_monitor
-# Construct the full path to the cache file
-cache_file="$cache_dir$current_monitor"
-echo $cache_file
-# Check if the cache file exists for the current monitor output
-if [ -f "$cache_file" ]; then
-    # Get the wallpaper path from the cache file
-    wallpaper_path=$(grep -v 'Lanczos3' "$cache_file" | head -n 1)
-    echo $wallpaper_path
-    # symlink the wallpaper to the location Rofi can access
-    if ln -sf "$wallpaper_path" "$HOME/.config/rofi/.current_wallpaper"; then
-        ln_success=true  # Set the flag to true upon successful execution
-    fi
-    # copy the wallpaper for wallpaper effects
-	cp -r "$wallpaper_path" "$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
+cache_file="$HOME/.cache/swww/$current_monitor"
+if [ -z "$current_monitor" ] || [ ! -f "$cache_file" ]; then
+    echo "No wallpaper cache for the focused monitor" >&2
+    exit 1
 fi
 
-# Check the flag before executing further commands
-if [ "$ln_success" = true ]; then
-    # execute wallust
-	echo 'about to execute wallust'
-    # execute wallust skipping tty and terminal changes
-    wallust run "$wallpaper_path" -s &
+wallpaper_path=$(grep -v 'Lanczos3' "$cache_file" | head -n 1)
+wallpaper_path=$(readlink -f "$wallpaper_path") || exit 1
+if [ ! -f "$wallpaper_path" ]; then
+    echo "Wallpaper does not exist: $wallpaper_path" >&2
+    exit 1
 fi
+
+replace_pointer() {
+    local pointer="$1" staged
+    staged=$(mktemp "$pointer.XXXXXX") || return 1
+    if ln -sfn "$wallpaper_path" "$staged" && mv -Tf "$staged" "$pointer"; then
+        return 0
+    fi
+    rm -f "$staged"
+    return 1
+}
+
+replace_pointer "$HOME/.config/rofi/.current_wallpaper" || exit 1
+lock_pointer="$HOME/.config/hypr/wallpaper_effects/.wallpaper_current"
+if [ "$wallpaper_path" != "$lock_pointer" ]; then
+    replace_pointer "$lock_pointer" || exit 1
+fi
+
+# Curated lock colors must land even if desktop palette generation fails.
+python3 "$HOME/dotfiles/sddm-themes/lock-theme.py" "$wallpaper_path" || exit 1
+# Use the same backend every time so Wallust can reuse each image's cached palette.
+wallust run "$wallpaper_path" -s -b fastresize

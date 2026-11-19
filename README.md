@@ -71,7 +71,7 @@ Only the 21 packages in `scripts/setup-stow.sh` `PACKAGES` are linked. Intention
 ## Making Changes
 
 ```bash
-vim ~/dotfiles/hypr/.config/hypr/hyprland.conf  # live via symlink — test immediately
+vim ~/dotfiles/hypr/.config/hypr/hyprland.lua  # active config (ADR-0007); hyprland.conf is retired
 cd ~/dotfiles
 ./scripts/backup-system.sh   # refresh manifests if packages changed
 git add hypr/ && git commit -m "Update Hyprland keybindings" && git push

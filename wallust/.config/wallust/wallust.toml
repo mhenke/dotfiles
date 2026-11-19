@@ -31,7 +31,8 @@ palette = "dark16"
 #  2 - 10     Perceptible at a glance.
 #  11 - 49    Colors are more similar than opposite
 #  100        Colors are exact opposite
-threshold = 11
+# unset on purpose: wallust searches the best fit per image; a fixed 11 collapses
+# low-contrast wallpapers (e.g. path.png) to <2 colors and fails "Not enough colors!"
 
 [templates]
 cava.template = 'colors-cava'

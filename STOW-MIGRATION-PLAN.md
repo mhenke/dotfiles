@@ -1,5 +1,9 @@
 # GNU Stow Migration Plan: Hyprland + LLM Optimizations
 
+> **Historical planning doc (2025-10-25).** Commands below predate the lua
+> config migration — `hyprland.lua` is the active config, `hyprland.conf` is
+> retired (see `docs/adr/0007-hyprland-lua-active-config.md`).
+
 **Date**: October 25, 2025
 **System**: Linux Mint 22.1 / Ubuntu 24.04
 **Migration**: i3wm → Hyprland + XFCE + LLM Stack

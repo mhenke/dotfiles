@@ -75,7 +75,7 @@ if [ "$1" = "--menu" ]; then
     terminal=$(grep -E '^\$term *=' "$USER_HOME/.config/hypr/UserConfigs/01-UserDefaults.conf" 2>/dev/null | sed 's/.*= *//; s/ *#.*//')
     script=$(readlink -f "$0")
     # the terminal closes when the command returns, so report both outcomes
-    exec "${terminal:-ghostty}" -e bash -c "if sudo '$script' '$theme_name'; then '$script' --desktop '$theme_name' && notify-send -i '$HOME/.config/swaync/images/ja.png' SDDM 'Login + desktop: $theme_name' || notify-send -i '$HOME/.config/swaync/images/ja.png' SDDM 'Login screen: $theme_name (no desktop image)'; else notify-send -u critical SDDM 'Login theme switch failed'; fi"
+    exec "${terminal:-ghostty}" -e bash -c "if sudo '$script' '$theme_name'; then '$script' --desktop '$theme_name' && notify-send -i '$HOME/.config/swaync/images/ja.png' SDDM 'Login + desktop: $theme_name' || notify-send -i '$HOME/.config/swaync/images/ja.png' SDDM 'Login applied; desktop update incomplete: $theme_name'; else notify-send -u critical SDDM 'Login theme switch failed'; fi"
 fi
 
 # Desktop side of the same look (no sudo): paint the variant's own image, recolor, repoint the lock screen.
@@ -94,19 +94,15 @@ if [ "$1" = "--desktop" ]; then
         exit 1
     fi
     image=$(grep "^Background=" "$config" | cut -d'"' -f2 | sed 's|Backgrounds/||')
-    # prefer the curated copy, fall back to the theme's own background (same picture, LFS-managed)
-    wallpaper=$(find "$USER_HOME/Pictures/wallpapers" -maxdepth 2 -name "$image" -print -quit)
-    if [ -z "$wallpaper" ]; then
-        wallpaper="$BACKGROUNDS_DIR/$image"
-    fi
+    wallpaper="$BACKGROUNDS_DIR/$image"
     if [ ! -f "$wallpaper" ]; then
-        echo "No image for $image in ~/Pictures/wallpapers or $BACKGROUNDS_DIR — login screen only."
+        echo "Missing catalog background: $wallpaper"
         exit 1
     fi
     monitor=$(hyprctl monitors -j | jq -r '.[] | select(.focused) | .name')
     swww query > /dev/null 2>&1 || { swww-daemon --format xrgb & sleep 1; }
-    swww img -o "$monitor" "$wallpaper" --transition-fps 30 --transition-type any --transition-duration 1 --transition-bezier .43,1.19,1,.4
-    "$USER_HOME/.config/hypr/scripts/WallustSwww.sh"
+    swww img -o "$monitor" "$wallpaper" --transition-fps 30 --transition-type any --transition-duration 1 --transition-bezier .43,1.19,1,.4 || exit 1
+    "$USER_HOME/.config/hypr/scripts/WallustSwww.sh" || exit 1
     echo "Desktop wallpaper: $wallpaper"
     exit 0
 fi
@@ -199,7 +195,7 @@ apply_theme() {
 
     if [ -n "$SUDO_USER" ]; then
         bg_image=$(grep "^Background=" "$config_file" | cut -d'"' -f2 | sed 's|Backgrounds/||')
-        if [ -f "$USER_HOME/Pictures/wallpapers/$bg_image" ] || [ -f "$BACKGROUNDS_DIR/$bg_image" ]; then
+        if [ -f "$BACKGROUNDS_DIR/$bg_image" ]; then
             echo -e "${YELLOW}Desktop wallpaper unchanged. Without sudo, run:${NC} $0 --desktop ${theme_name}"
         else
             echo -e "${YELLOW}Desktop wallpaper unchanged — no $bg_image to use${NC}"

@@ -129,8 +129,9 @@ cd ~/dotfiles
 
 1. **Edit configs in ~/dotfiles/** (they're symlinked to actual locations)
    ```bash
-   # Edit Hyprland config
-   vim ~/dotfiles/hypr/.config/hypr/hyprland.conf
+   # Edit Hyprland config (hyprland.lua is the active config — ADR-0007;
+   # hyprland.conf is retired and parsing nothing)
+   vim ~/dotfiles/hypr/.config/hypr/hyprland.lua
 
    # Changes are immediately active (symlinked!)
    # Reload: Super+Shift+R (Hyprland) or restart service

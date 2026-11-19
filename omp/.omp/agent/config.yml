@@ -6,7 +6,7 @@ modelRoles:
   oracle: commandcode/gpt-6.1-sol
   skeptic: commandcode/claude-sonnet-5-5
   web: web/exa
-  default: commandcode/deepseek/deepseek-v4.1-flash:max
+  default: openai-codex/gpt-6.1-sol:max
 disabledProviders:
   - llama.cpp
   - lm-studio
