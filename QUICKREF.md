@@ -43,11 +43,11 @@ dual               # Both screens (external above laptop)
 
 ### System Maintenance
 ```bash
-update             # Full system update:
-                   # sudo dpkg --configure -a &&
-                   # sudo apt update -y &&
-                   # sudo apt upgrade -y &&
-                   # sudo apt autoremove -y
+update             # ~/bin/update-system.sh: system and app updates
+                   # RTK: install only when the latest stable version differs
+                   # Global skills: npx --yes skills@latest update -y -g
+                   # TokenEconomizer: rebase local OMP fix onto upstream main
+                   #                 rebuild/reinstall Antigravity after a successful pull
 ```
 
 ### Better Defaults (if installed)
